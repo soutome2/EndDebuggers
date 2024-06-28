@@ -11,6 +11,12 @@ public class AceController {
 		return "cInput";
 		
 	}
+	
+	@GetMapping("/AceServiceUserLogin")
+	public String GetUserLogin(){
+		return "login";
+		
+	}
 
 }
 
