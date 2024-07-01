@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,11 @@ public class AceController {
 
 	}
 	
+	@GetMapping("/Reserve")
+	public String GetReserve() {
+		return "reserveInput";
+	}
+	
 	@GetMapping("/Register")
 	public String showCustomerForm(Model model) {
         model.addAttribute("cInputForm", new CInputForm());
@@ -56,9 +62,11 @@ public class AceController {
 
 		if (!result.hasErrors()) {
 			String cid = loginForm.getCid();
+			Optional<Customer> opt = customerRepository.findById(cid);
+			Customer customer = opt.get();
+			session.setAttribute("cname",customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(cid);
 			mv.addObject("reserveList", list);
-			mv.addObject("cname", "佐々木希");
 			mv.setViewName("customer");
 			return mv;
 		} else {
@@ -67,34 +75,38 @@ public class AceController {
 		}
 	}
 
-	@PostMapping("/Customer2")
-	public ModelAndView PostCustomer(@ModelAttribute OInputForm oInputForm, ModelAndView mv) {
-		Reserve reserve = new Reserve();
-		reserve = oInputForm.getEntity();
-		reserveRepository.saveAndFlush(reserve);
-		
-		mv.setViewName("home");
-		return mv;
+	@PostMapping("/Complete")
+	public String PostCustomer(@ModelAttribute OInputForm oInputForm, BindingResult result, ModelAndView mv) {
+		if (!result.hasErrors()) {
+			Reserve reserve = new Reserve();
+			reserve = oInputForm.getEntity();
+			reserveRepository.saveAndFlush(reserve);
+			return "complete";
+		} else {
+			return "reserveInput";
+		}
 
 	}
 	
-	@PostMapping("/Complete")
+	@PostMapping("/setCustomer")
 	public String PostComplete(@ModelAttribute CInputForm cInputForm, BindingResult result) {
 		if (!result.hasErrors()) {
+			String cname = cInputForm.getCname();
+			session.setAttribute("cid", cname);
 			Customer customer = cInputForm.getEntity();
 			customerRepository.saveAndFlush(customer);
-			return "complete";
+			return "redirect:/Reserve";
 		} else {
 			return "customerInput";
 		}
 	}
 
 
-	@PostMapping("/Reserve")
+	@PostMapping("/setEname")
 	public String PostReserve(@RequestParam("ename") String ename) {
 		session.setAttribute("ename", ename);
 
-		return "reserveInput";
+		return "redirect:/Reserve";
 
 	}
 
