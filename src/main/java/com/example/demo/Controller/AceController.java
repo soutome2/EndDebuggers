@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AceController {
 	
 	@GetMapping("/AceService")
-	public String GetAceService(){
-		return "cInput";
+	public String GetAceServiceHome(){
+		return "home";
 		
 	}
 	
@@ -17,6 +17,8 @@ public class AceController {
 		return "login";
 		
 	}
+	
+
 
 }
 
