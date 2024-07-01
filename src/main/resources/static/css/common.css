@@ -1,4 +1,12 @@
 @charset "UTF-8";
+
+.header {
+	margin: 0 0 40px 0;
+	padding: 20px;
+	background-color: #34495E;
+	color: #fff;
+}
+
 body {
 	margin: 0;
 	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
