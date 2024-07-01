@@ -32,6 +32,9 @@ public class ReserveCustomer {
 	@Column(name = "reserveid")
 	private Integer reserveid;
 	
+	@Column(name = "ename")
+	private String ename;
+	
 	@Column(name = "reservedate")
 	private Date reservedate;
 	

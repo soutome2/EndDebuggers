@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class OInputForm {
 
-	 Integer reserveid;
-	 String  cid ;
-	 String ename;
-	 Date reservedate; 
-	 Time reservetime;
-	 String detail;
+	 private Integer reserveid;
+	 private String  cid ;
+	 private String ename;
+	 private Date reservedate; 
+	 private Time reservetime;
+	 private String detail;
 }

@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class CInputForm{
-	String cId;
-	String password;
-	String cName;
-	String tel;
-	String mailaddress;
+	private String cid;
+	private String password;
+	private String cname;
+	private String tel;
+	private String mailaddress;
 }

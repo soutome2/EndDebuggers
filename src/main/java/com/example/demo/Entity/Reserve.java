@@ -22,8 +22,8 @@ public class Reserve {
 	@Column(name = "cid")
 	private String cid;
 	
-	@Column(name = "cname")
-	private String cname;
+	@Column(name = "ename")
+	private String ename;
 	
 	@Column(name = "reservedate")
 	private Date reservedate;

@@ -11,8 +11,9 @@ import com.example.demo.Entity.ReserveCustomer;
 public interface ReserveCustomerRepository extends JpaRepository<ReserveCustomer, String>{
 
 	
-	@Query(value="SELECT cid,cname,password,tel,mailaddress,reserveid,"
+	@Query(value="SELECT cid,cname,password,tel,mailaddress,reserveid,ename,"
 			+ "reservedate,reservetime,detail"
-			+ "JOIN t_reserve using(cid) WHERE cid=:cid",nativeQuery = true)
+			+ "FROM t_reserve"
+			+ "JOIN m_customer using(cid) WHERE cid=:cid",nativeQuery = true)
 	List<ReserveCustomer>findAIIBycustomerId(@Param("cid") String cid);
 }
