@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AceController {
 	
-	@GetMapping("/AceService")
-	public String GetAceServiceHome(){
+	@GetMapping("/")
+	public String GetHome(){
 		return "home";
 		
 	}
 	
-	@GetMapping("/AceServiceUserLogin")
+	@GetMapping("/Login")
 	public String GetUserLogin(){
 		return "login";
 		
