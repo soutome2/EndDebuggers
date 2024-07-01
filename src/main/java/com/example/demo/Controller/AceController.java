@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Entity.Reserve;
 import com.example.demo.Entity.ReserveCustomer;
 import com.example.demo.Form.LoginForm;
+import com.example.demo.Form.OInputForm;
 import com.example.demo.Repository.ReserveCustomerRepository;
+import com.example.demo.Repository.ReserveRepository;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -22,7 +25,8 @@ import lombok.AllArgsConstructor;
 public class AceController {
 	private final ReserveCustomerRepository reserveCustomerRepository;
 	private final HttpSession session;
-
+	private final ReserveRepository reserveRepository;
+	
 	@GetMapping("/")
 	public String GetHome() {
 		return "home";
@@ -51,6 +55,19 @@ public class AceController {
 			return mv;
 		}
 	}
+
+	@PostMapping("/Customer2")
+	public ModelAndView PostCustomer(@ModelAttribute OInputForm oInputForm, ModelAndView mv) {
+		Reserve reserve = new Reserve();
+		reserve = oInputForm.getEntity();
+		reserveRepository.saveAndFlush(reserve);
+		
+		mv.setViewName("home");
+		return mv;
+
+	}
+
+
 
 	@PostMapping("/Reserve")
 	public String PostReserve(@RequestParam("ename") String ename) {

@@ -1,7 +1,7 @@
 package com.example.demo.Entity;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,10 +36,10 @@ public class ReserveCustomer {
 	private String ename;
 	
 	@Column(name = "reservedate")
-	private Date reservedate;
+	private LocalDate reservedate;
 	
 	@Column(name = "reservetime")
-	private Time reservetime;
+	private LocalTime reservetime;
 	
 	@Column(name = "detail")
 	private String detail;
