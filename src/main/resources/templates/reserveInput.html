@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -41,11 +41,12 @@
 			</nav>
 
 		</div>
-	
+
 </head>
 
 <body>
-	<h1>予約登録</h1>
+	
+	<h1 th:text="${session.ename}+さんの予約登録ページ"></h1>
 	<form action="/check" method="post">
 		ID: <input type="text" name="cid">
 		パスワード: <input type="password" name="password">
@@ -55,7 +56,7 @@
 		<input type="submit" value="送信">
 	</form>
 
-	
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
