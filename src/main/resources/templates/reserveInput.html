@@ -53,7 +53,7 @@
 		日付: <input type="date" name="reservedate">
 		時間: <input type="time" id="time" name="reservetime" step="3600" required>
 		予約内容: <input type="text" name="detail">
-		<input type="hidden" name="ename" value="${session.ename}">
+		<input type="hidden" name="ename" th:value="${session.ename}">
 		<input type="submit" value="送信">
 	</form>
 
