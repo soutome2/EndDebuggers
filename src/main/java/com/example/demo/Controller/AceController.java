@@ -28,9 +28,9 @@ import lombok.AllArgsConstructor;
 @Controller
 public class AceController {
 	private final CustomerRepository customerRepository;
+	private final ReserveRepository reserveRepository;
 	private final ReserveCustomerRepository reserveCustomerRepository;
 	private final HttpSession session;
-	private final ReserveRepository reserveRepository;
 	
 	@GetMapping("/")
 	public String GetHome() {
