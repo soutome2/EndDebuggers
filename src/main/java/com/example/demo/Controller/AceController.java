@@ -3,7 +3,6 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Entity.Customer;
 import com.example.demo.Entity.Reserve;
 import com.example.demo.Entity.ReserveCustomer;
-import com.example.demo.Form.CInputForm;
+import com.example.demo.Form.CustomerInputForm;
 import com.example.demo.Form.LoginForm;
-import com.example.demo.Form.OInputForm;
+import com.example.demo.Form.ReserveInputForm;
 import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReserveRepository;
@@ -48,14 +48,12 @@ public class AceController {
 	}
 
 	@GetMapping("/Reserve")
-	public String GetReserve(Model model) {
-		model.addAttribute("oInputForm", new OInputForm());
+	public String GetReserve(ReserveInputForm reserveInputForm) {
 		return "reserveInput";
 	}
 
 	@GetMapping("/Register")
-	public String showCustomerForm(Model model) {
-		model.addAttribute("cInputForm", new CInputForm());
+	public String showCustomerForm(CustomerInputForm customerInputForm) {
 		return "customerInput";
 	}
 
@@ -78,30 +76,28 @@ public class AceController {
 	}
 
 	@PostMapping("/Complete")
-	public String PostCustomer(@ModelAttribute @Validated OInputForm oInputForm, BindingResult result,
+	public ModelAndView PostCustomer(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result, RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
-		LoginForm loginForm = new LoginForm();
-		loginForm.setCid(oInputForm.getCid());
-		loginForm.setPassword(oInputForm.getPassword());
-		customerService.getByCid(loginForm, result);
+		customerService.getByCid(reserveInputForm, result);
 
 		if (!result.hasErrors()) {
-			Reserve reserve = new Reserve();
-			reserve = oInputForm.getEntity();
+			Reserve reserve = reserveInputForm.getEntity();
 			reserveRepository.saveAndFlush(reserve);
-			return "complete";
+			mv.setViewName("complete");
+			return mv;
 		} else {
-			return "redirect:/Reserve";
+			mv.setViewName("reserveInput");
+			return mv;
 		}
 
 	}
 
 	@PostMapping("/setCustomer")
-	public String PostComplete(@ModelAttribute CInputForm cInputForm, BindingResult result) {
+	public String PostComplete(@ModelAttribute CustomerInputForm customerInputForm, BindingResult result) {
 		if (!result.hasErrors()) {
-			String cname = cInputForm.getCname();
+			String cname = customerInputForm.getCname();
 			session.setAttribute("cid", cname);
-			Customer customer = cInputForm.getEntity();
+			Customer customer = customerInputForm.getEntity();
 			customerRepository.saveAndFlush(customer);
 			return "redirect:/Reserve";
 		} else {

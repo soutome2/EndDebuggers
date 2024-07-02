@@ -8,20 +8,21 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class CInputForm{
+public class CustomerInputForm {
+
 	@NotBlank(message = "利用者IDを入力して下さい")
 	private String cid;
-	
-	@NotBlank(message = "利用者IDを入力して下さい")
+
+	@NotBlank(message = "パスワードを入力して下さい")
 	private String password;
-	
-	@NotBlank(message = "利用者IDを入力して下さい")
+
+	@NotBlank(message = "名前を入力して下さい")
 	private String cname;
 	
-	@NotBlank(message = "利用者IDを入力して下さい")
+	@NotBlank(message = "電話番号を入力して下さい")
 	private String tel;
 	
-	@NotBlank(message = "利用者IDを入力して下さい")
+	@NotBlank(message = "メールアドレスを入力して下さい")
 	private String mailaddress;
 	
 	public Customer getEntity() {
@@ -35,4 +36,5 @@ public class CInputForm{
 		
 		return customer;
 	}
+
 }
