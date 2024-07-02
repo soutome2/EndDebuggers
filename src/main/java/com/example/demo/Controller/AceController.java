@@ -117,17 +117,18 @@ public class AceController {
 			int daysDifference = (int) ChronoUnit.DAYS.between(startDate, reserveDate);
 			int timeDifference = (int) ChronoUnit.HOURS.between(startTime, reserveTime);
 
+			System.out.println("OK");
 			System.out.println(startDate);
 			System.out.println(reserveDate);
 			System.out.println(daysDifference);
 
 			System.out.println(timeDifference);
 
-			if (reserveDate.isBefore(LocalDate.now()) || dateRange < ChronoUnit.DAYS.between(startDate, reserveDate)) {
+			if (daysDifference<0|| dateRange <daysDifference) {
 				continue;
 			}
-
-			if (timeDifference < 0 || daysDifference < 0) {
+			
+			if (timeDifference<0|| timeRange <timeDifference) {
 				continue;
 			}
 
