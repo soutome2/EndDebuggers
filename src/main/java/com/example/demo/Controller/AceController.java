@@ -60,7 +60,7 @@ public class AceController {
 		}
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 		int dateRange = 7;
-		int timeRange = 10;
+		int timeRange = 9;
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
@@ -125,6 +125,11 @@ public class AceController {
 			if (reserveDate.isBefore(LocalDate.now()) || dateRange < ChronoUnit.DAYS.between(startDate, reserveDate)) {
 				continue;
 			}
+			
+			if (timeDifference<0||daysDifference<0) {
+				continue;
+			}
+
 
 			matrix.get(timeDifference).set(daysDifference, 1);
 
