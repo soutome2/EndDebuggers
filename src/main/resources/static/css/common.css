@@ -19,6 +19,13 @@ p {
 h2 {
 	margin: 10px 20px;
 }
+
+.cross{
+	color: red;
+}
+.circle{
+	color: blue;
+}
 .tableData{
 	text-align: center;
 	
@@ -167,4 +174,16 @@ td {
 
 th {
 	background: #EEE;
+}
+
+
+.btn-outline-primary {
+    background-color: rgb(27, 184, 27); 
+    color: #fff; 
+}
+
+
+.btn-outline-primary:hover {
+    background-color: rgb(255, 255, 128); 
+    color: rgb(0, 0, 0); 
 }
