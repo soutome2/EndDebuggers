@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="container">
-		
+
 		<br>
 		<table>
 			<thead>
@@ -91,9 +91,21 @@
 				</tr>
 				<tr>
 					<th>時間</th>
-					<td><input name="reservetime" type="time" step="3600" class="width-middle"
-							th:value="*{reservetime}">
+					<td><input name="reservetime" type="time" list="time-list" min="10:00" max="19:00" step="3600"
+							class="width-middle" th:value="*{reservetime}">
 						<span th:if="${#fields.hasErrors('reservetime')}" th:errors="*{reservetime}"></span>
+						<datalist id="time-list">
+							<option value="10:00"></option>
+							<option value="11:00"></option>
+							<option value="12:00"></option>
+							<option value="13:00"></option>
+							<option value="14:00"></option>
+							<option value="15:00"></option>
+							<option value="16:00"></option>
+							<option value="17:00"></option>
+							<option value="18:00"></option>
+							<option value="19:00"></option>
+						</datalist>
 					</td>
 				</tr>
 				<tr>
