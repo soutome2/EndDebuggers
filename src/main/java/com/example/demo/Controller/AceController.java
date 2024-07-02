@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,6 @@ public class AceController {
 				continue;
 			}
 
-
 			matrix.get(timeDifference).set(daysDifference, 1);
 
 		}
@@ -140,12 +140,19 @@ public class AceController {
 		for (List<Integer> row : matrix) {
 			System.out.println(row);
 		}
-		
-		mv.addObject("reserveInputForm", reserveInputForm);
 
-		mv.addObject("matrix", matrix);
-		mv.addObject("dateList", dateList);
-		mv.addObject("timeList", timeList);
+		//日数処理
+		String min = startDate.format(DateTimeFormatter.ISO_DATE);
+		String max = endDate.format(DateTimeFormatter.ISO_DATE);
+
+		mv.addObject("reserveInputForm", reserveInputForm);
+		
+		session.setAttribute("matrix", matrix);
+		session.setAttribute("dateList", dateList);
+		session.setAttribute("timeList", timeList);
+		session.setAttribute("min", min);
+		session.setAttribute("max", max);
+
 		mv.setViewName("reserveInput");
 
 		return mv;
@@ -164,7 +171,8 @@ public class AceController {
 
 		if (!result.hasErrors()) {
 			session.setAttribute("cname", customer.getCname());
-			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(customer.getCid());
+			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
+			System.out.println(list);
 			mv.addObject("reserveList", list);
 			mv.setViewName("customer");
 			return mv;
