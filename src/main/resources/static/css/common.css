@@ -16,8 +16,20 @@ p {
 	background-color: #34495E;
 	color: #fff;
 }*/
+
 h2 {
 	margin: 10px 20px;
+	border-bottom: 2px solid rgb(27, 184, 27); 
+    display: inline-block;
+}
+
+h3{
+	margin: 15px 25px;
+	
+}
+
+h4{
+	margin: 20px 30px
 }
 
 .cross{
@@ -132,15 +144,21 @@ h2 {
 	margin: 10px 0;
 }
 
+.bodyid{
+	margin-left: auto; 
+}
+
 #headNumber {
-	background-color: lightblue;
-	text-align: center;
-	color: blue;
+	border: 2px solid rgb(27, 184, 27);
+    color: rgb(27, 184, 27); 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    display: inline-block; 
 }
 
 #headText {
 
-	color: blue;
+	color: rgb(0, 0, 0);
 }
 
 input[type="submit"],
