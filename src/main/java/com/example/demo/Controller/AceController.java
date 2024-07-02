@@ -116,6 +116,7 @@ public class AceController {
 			int daysDifference = (int) ChronoUnit.DAYS.between(startDate, reserveDate);
 			int timeDifference = (int) ChronoUnit.HOURS.between(startTime, reserveTime);
 
+			System.out.println("OK");
 			System.out.println(startDate);
 			System.out.println(reserveDate);
 			System.out.println(daysDifference);
