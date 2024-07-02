@@ -122,11 +122,11 @@ public class AceController {
 
 			System.out.println(timeDifference);
 
-			if (reserveDate.isBefore(LocalDate.now()) || dateRange < ChronoUnit.DAYS.between(startDate, reserveDate)) {
+			if (daysDifference<0|| dateRange <daysDifference) {
 				continue;
 			}
 			
-			if (timeDifference<0||daysDifference<0) {
+			if (timeDifference<0|| timeRange <timeDifference) {
 				continue;
 			}
 
