@@ -19,6 +19,10 @@ p {
 h2 {
 	margin: 10px 20px;
 }
+.tableData{
+	text-align: center;
+	
+}
 
 .width-large {
 	width: 300px;
