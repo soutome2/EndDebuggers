@@ -5,9 +5,11 @@ body {
 	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	color: #333;
 }
+
 p {
 	margin: 20px 20px;
 }
+
 /*h1 {
 	margin: 0 0 40px 0;
 	padding: 20px;
@@ -17,26 +19,32 @@ p {
 h2 {
 	margin: 10px 20px;
 }
-.width-large{
-	width:300px;	
+
+.width-large {
+	width: 300px;
 }
-.width-middle{
-	width:150px;	
+
+.width-middle {
+	width: 150px;
 }
-.width-small{
-	width:80px;	
+
+.width-small {
+	width: 80px;
 }
 
 .controlbox {
 	margin: 20px 20px;
-	height:100%;
+	height: 100%;
 }
 
-.controlbox .button, .button-red{
+.controlbox .button,
+.button-red {
 	margin-top: 10px;
 	margin-right: 10px;
 }
-.button, .button-red {
+
+.button,
+.button-red {
 	background-color: #95A5A6;
 	background-image: none;
 	border: 1px solid transparent;
@@ -57,39 +65,47 @@ h2 {
 	-webkit-border-radius: 4px;
 	-webkit-user-select: none;
 }
-.atten{
+
+.atten {
 	color: red;
 }
+
 .button:hover {
 	background-color: #647071;
 }
-.button-red{
+
+.button-red {
 	background-color: #e74c3c;
 }
-.button-red:hover{
+
+.button-red:hover {
 	background-color: #c0392b;
 }
-#footer{
+
+#footer {
 	margin: 40px 0 0 0;
 	padding: 20px;
 	color: #FFF;
 	border-top: 1px solid #333333;
 }
-#reserve_control{
+
+#reserve_control {
 	margin: 30px 20px;
-	padding:0;
+	padding: 0;
 }
-#reserve_control p{
+
+#reserve_control p {
 	margin: 20px 0 0 0;
-	color:#e74c3c;
-	font-weight:bold;
+	color: #e74c3c;
+	font-weight: bold;
 }
-#errormsg{
+
+#errormsg {
 	margin: 0px 20px;
 	padding: 0 20px 0 0;
-    color: #C0392B;
+	color: #C0392B;
 	display: inline-block;
-    background-color: #f2dede;
+	background-color: #f2dede;
 	background-image: none;
 	border: 1px solid #C0392B;
 	border-radius: 4px;
@@ -100,30 +116,51 @@ h2 {
 	-webkit-border-radius: 4px;
 	-webkit-user-select: none;
 }
-#errormsg ul{
-	margin:10px 0;	
+
+#errormsg ul {
+	margin: 10px 0;
 }
-input[type="submit"], input[type="reset"]{
-	font-size:1em;
+
+#headNumber {
+	background-color: lightblue;
+	text-align: center;
+	color: blue;
 }
-a{
+
+#headText {
+
+	color: blue;
+}
+
+input[type="submit"],
+input[type="reset"] {
+	font-size: 1em;
+}
+
+a {
 	text-decoration: none;
 	color: #333;
 }
-a:hover{
-	text-decoration:underline;
+
+a:hover {
+	text-decoration: underline;
 }
-a.button{
-	text-decoration:none;
+
+a.button {
+	text-decoration: none;
 }
+
 table {
 	border-collapse: collapse;
 	margin: 0 20px;
 }
-th, td {
+
+th,
+td {
 	padding: 5px 15px;
 	border: 1px solid #999;
 }
+
 th {
 	background: #EEE;
 }
