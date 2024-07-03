@@ -189,6 +189,7 @@ public class AceController {
 		if (!result.hasErrors()) {
 			Reserve reserve = reserveInputForm.getEntity();
 			reserveRepository.saveAndFlush(reserve);
+			mv.addObject("reserveInputForm", reserveInputForm);
 			mv.setViewName("complete");
 			return mv;
 		} else {
@@ -232,7 +233,7 @@ public class AceController {
 	}
 
 	@PostMapping("/Reservetime")
-	public ModelAndView PostReserveComplete(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
+	public ModelAndView PostReserveTime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
 			@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
@@ -241,7 +242,8 @@ public class AceController {
 		if (!result.hasErrors()) {
 			Reserve reserve = reserveInputForm.getEntity();
 			reserveRepository.saveAndFlush(reserve);
-			mv.setViewName("complete");
+			redirectAttributes.addFlashAttribute("reserveInputForm", reserveInputForm);
+			mv.setViewName("redirect:/ReserveComplete");
 			return mv;
 		} else {
 
@@ -252,6 +254,13 @@ public class AceController {
 			return mv;
 		}
 
+	}
+
+	@GetMapping("/ReserveComplete")
+	public ModelAndView PostReserveComplete(@ModelAttribute ReserveInputForm reserveInputForm, ModelAndView mv) {
+		mv.addObject("reserveInputForm", reserveInputForm);
+		mv.setViewName("complete");
+		return mv;
 	}
 
 }
