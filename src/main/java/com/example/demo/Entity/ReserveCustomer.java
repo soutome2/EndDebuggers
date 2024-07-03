@@ -7,13 +7,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
-
 @Entity
 @Data
-
 public class ReserveCustomer {
 	
-	@Id
 	@Column(name = "cid")
 	private String cid;
 	
@@ -29,6 +26,7 @@ public class ReserveCustomer {
 	@Column(name = "mailaddress")
 	private String mailaddress;
 	
+	@Id
 	@Column(name = "reserveid")
 	private Integer reserveid;
 	

@@ -59,7 +59,9 @@
 					<!-- 各セルに対して、条件によって表示を変える -->
 					<td th:each="date, colIndex : ${session.dateList}" class="tableData">
 						<!-- matrix のデータを表示する -->
-						<span class="circle" th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">〇</span>
+						<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
+							<a href="/Login" class="circle"> 〇</a>
+						</span>
 						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
 						<!-- 他の値に対する条件表示も必要であれば追加 -->
 					</td>

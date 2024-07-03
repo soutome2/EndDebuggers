@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data; 
+import lombok.Data;
 
 @Entity
 @Table(name = "t_reserve")
@@ -18,22 +18,25 @@ import lombok.Data;
 public class Reserve {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reserveid")
 	private Integer reserveid;
-	
+
 	@Column(name = "cid")
 	private String cid;
-	
+
 	@Column(name = "ename")
 	private String ename;
-	
+
 	@Column(name = "reservedate")
 	private LocalDate reservedate;
-	
+
 	@Column(name = "reservetime")
 	private LocalTime reservetime;
-	
+
 	@Column(name = "detail")
 	private String detail;
+
+
+
 }
