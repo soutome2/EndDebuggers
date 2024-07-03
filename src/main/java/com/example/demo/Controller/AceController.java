@@ -183,7 +183,7 @@ public class AceController {
 	}
 
 	@PostMapping("/Complete")
-	public ModelAndView PostCustomer(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
+	public ModelAndView PostComplete(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		customerService.getByCid(reserveInputForm, result);
@@ -201,7 +201,7 @@ public class AceController {
 	}
 
 	@PostMapping("/setCustomer")
-	public String PostComplete(@ModelAttribute CustomerInputForm customerInputForm, BindingResult result) {
+	public String PostSetCustomer(@ModelAttribute CustomerInputForm customerInputForm, BindingResult result) {
 		if (!result.hasErrors()) {
 			String cname = customerInputForm.getCname();
 			session.setAttribute("cid", cname);
@@ -218,6 +218,36 @@ public class AceController {
 		session.setAttribute("ename", ename);
 
 		return "redirect:/Reserve";
+
+	}
+	
+	@GetMapping("/Reservetime")
+	public ModelAndView GetReservetime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time, ReserveInputForm reserveInputForm, ModelAndView mv) {
+		
+
+		mv.addObject("reserveInputForm", reserveInputForm);
+		mv.addObject("time", time);
+		mv.addObject("date", date);
+		mv.setViewName("reservetime");
+
+		return mv;
+	}
+	
+	@PostMapping("/ReserveComplete")
+	public ModelAndView PostReserveComplete(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
+			RedirectAttributes redirectAttributes,
+			ModelAndView mv) {
+		customerService.getByCid(reserveInputForm, result);
+
+		if (!result.hasErrors()) {
+			Reserve reserve = reserveInputForm.getEntity();
+			reserveRepository.saveAndFlush(reserve);
+			mv.setViewName("complete");
+			return mv;
+		} else {
+			mv.setViewName("reservetime");
+			return mv;
+		}
 
 	}
 
