@@ -66,7 +66,7 @@ public class AceController {
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
-		LocalTime endTime = startTime.plusHours(timeRange);
+		
 
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
@@ -220,8 +220,10 @@ public class AceController {
 	}
 
 	@GetMapping("/Reservetime")
+
 	public ModelAndView GetReservetime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
 			ReserveInputForm reserveInputForm, ModelAndView mv) {
+
 
 		mv.addObject("reserveInputForm", reserveInputForm);
 		mv.addObject("time", time);
