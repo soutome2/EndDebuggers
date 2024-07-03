@@ -21,12 +21,22 @@ public class CustomerService {
 	private final CustomerRepository customerRepository;
 
 	public Customer getByCid(LoginForm loginForm, BindingResult result) {
+		
+		if (loginForm.getCid().trim().isEmpty() || loginForm.getCid().trim().equals(" ")) {
+			return null;
+		}
 
 		Optional<Customer> opt = customerRepository.findById(loginForm.getCid());
 
 		if (opt.isEmpty()) {
 			result.addError(new FieldError(
 					result.getObjectName(), "cid", "存在しない利用者IDです。"));
+			return null;
+		}
+
+		if (loginForm.getPassword().trim().isEmpty() || loginForm.getPassword().trim().equals(" ")) {
+			result.addError(new FieldError(
+					result.getObjectName(), "password", "パスワードを入力して下さい。"));
 			return null;
 		}
 
@@ -37,7 +47,7 @@ public class CustomerService {
 		String storedPassword = check.getPassword();
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
+		
 		// パスワードを比較して認証する
 		if (!encoder.matches(rawPassword, storedPassword)) {
 			result.addError(new FieldError(
@@ -49,12 +59,23 @@ public class CustomerService {
 	}
 
 	public Customer getByCid(ReserveInputForm reserveInputForm, BindingResult result) {
+		
+		String cid = reserveInputForm.getCid();
+		if (cid == null || cid.trim().isEmpty() || cid.trim().equals(" ")) {
+		    return null;
+		}
 
 		Optional<Customer> opt = customerRepository.findById(reserveInputForm.getCid());
 
 		if (opt.isEmpty()) {
 			result.addError(new FieldError(
 					result.getObjectName(), "cid", "存在しない利用者IDです。"));
+			return null;
+		}
+		
+		if (reserveInputForm.getPassword().trim().isEmpty() || reserveInputForm.getPassword().trim().equals(" ")) {
+			result.addError(new FieldError(
+					result.getObjectName(), "password", "パスワードを入力して下さい。"));
 			return null;
 		}
 
