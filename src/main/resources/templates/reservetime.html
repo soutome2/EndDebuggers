@@ -50,7 +50,7 @@
 		<form th:action="@{/Reservetime(date=${date}, time=${time})}" method="post" th:object="${reserveInputForm}">
 			<table>
 				<tr>
-					<th>利用者ID*</th>
+					<th class="tableHead1">利用者ID*</th>
 					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
@@ -59,13 +59,13 @@
 				IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
 
 				<tr>
-					<th>パスワード*</th>
+					<th class="tableHead1">パスワード*</th>
 					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
 						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>相談内容</th>
+					<th class="tableHead1">相談内容</th>
 					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
 							th:value="*{detail}">
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>

@@ -43,35 +43,35 @@
 	<div class="container">
 		<br>
 
-		<h1>ユーザー登録画面</h1>
+		<h3>ユーザー登録画面</h3>
 		<form action="setCustomer" method="post" th:object="${customerInputForm}">
 			<table>
 				<tr>
-					<th>利用者ID*</th>
+					<th class="tableHead1">利用者ID*</th>
 					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>パスワード*</th>
+					<th class="tableHead1">パスワード*</th>
 					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
 						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>名前*</th>
+					<th class="tableHead1">名前*</th>
 					<td><input name="cname" type="text" class="width-middle" th:value="*{cname}">
 						<span th:if="${#fields.hasErrors('cname')}" th:errors="*{cname}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>電話番号</th>
+					<th class="tableHead1">電話番号</th>
 					<td><input name="tel" type="text" class="width-middle" th:value="*{tel}">
 						<span th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>メールアドレス</th>
+					<th class="tableHead1">メールアドレス</th>
 					<td><input name="mailaddress" type="text" id="emailInput" class="width-middle"
 							th:value="*{mailaddress}">
 						<span th:if="${#fields.hasErrors('mailaddress')}" th:errors="*{mailaddress}"></span>
