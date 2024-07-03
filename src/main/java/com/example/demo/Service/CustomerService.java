@@ -96,5 +96,43 @@ public class CustomerService {
 		return check;
 
 	}
+	
+	/*public Customer setCustomer(CustomerInputForm customerInputForm, BindingResult result) {
+
+		if (loginForm.getCid().trim().isEmpty() || loginForm.getCid().trim().equals(" ")) {
+			return null;
+		}
+
+		Optional<Customer> opt = customerRepository.findById(loginForm.getCid());
+
+		if (opt.isEmpty()) {
+			result.addError(new FieldError(
+					result.getObjectName(), "cid", "存在しない利用者IDです。"));
+			return null;
+		}
+
+		if (loginForm.getPassword().trim().isEmpty() || loginForm.getPassword().trim().equals(" ")) {
+			result.addError(new FieldError(
+					result.getObjectName(), "password", "パスワードを入力して下さい。"));
+			return null;
+		}
+
+		String rawPassword = loginForm.getPassword(); // ユーザーが入力した平文のパスワード
+
+		// データベースから取得したハッシュ化されたパスワード
+		Customer check = opt.get();
+		String storedPassword = check.getPassword();
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		// パスワードを比較して認証する
+		if (!encoder.matches(rawPassword, storedPassword)) {
+			result.addError(new FieldError(
+					result.getObjectName(), "password", "パスワードが合致しません。"));
+			return null;
+		}
+		return check;
+
+	}*/
 
 }
