@@ -11,14 +11,13 @@ import lombok.Data;
 @Data
 public class ReserveInputForm {
 
-	@NotBlank(message = "登録済みの利用者IDを入力して下さい")
+	@NotBlank(message = "登録済みの利用者IDを入力して下さい。")
 	private String cid;
 
 	private String ename;
 
-	@NotBlank(message = "登録したパスワードを入力して下さい")
 	private String password;
-
+	
 	private LocalDate reservedate;
 
 	private LocalTime reservetime;

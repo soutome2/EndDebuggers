@@ -44,32 +44,8 @@
 		<br>
 		
 		<h1 th:text="${session.ename} + 'さんの予約登録ページ'"></h1>
-		<table>
-			<thead>
-				<tr>
-					<th></th> <!-- 空のセルを作成 -->
-					<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-					<th th:each="date : ${session.dateList}" th:text="${date}"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- 時間のリストを基に縦軸の行を生成 -->
-				<tr th:each="time, rowIndex : ${session.timeList}">
-					<td th:text="${time}"></td> <!-- 時間を表示 -->
-					<!-- 各セルに対して、条件によって表示を変える -->
-					<td th:each="date, colIndex : ${session.dateList}" class="tableData">
-						<!-- matrix のデータを表示する -->
-						<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-							<a th:href="@{/Reservetime(date=${date}, time=${time})}" class="circle">〇</a>
-						</span>
-						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
-						<!-- 他の値に対する条件表示も必要であれば追加 -->
-					</td>
-				</tr>
-			</tbody>
-		</table>
 		<br>
-		<form action="Complete" method="post" th:object="${reserveInputForm}">
+		<form action="ReserveComplete" method="post" th:object="${reserveInputForm}">
 			<table>
 				<tr>
 					<th>利用者ID*</th>
@@ -87,31 +63,6 @@
 					</td>
 				</tr>
 				<tr>
-					<th>日付</th>
-					<td><input name="reservedate" type="date" th:min="${session.min}" th:max="${session.max}" class="width-middle" th:value="*{reservedate}">
-						<span th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></span>
-					</td>
-				</tr>
-				<tr>
-					<th>時間</th>
-					<td><input name="reservetime" type="time" list="time-list" min="10:00" max="19:00" step="3600"
-							class="width-middle" th:value="*{reservetime}">
-						<span th:if="${#fields.hasErrors('reservetime')}" th:errors="*{reservetime}"></span>
-						<datalist id="time-list">
-							<option value="10:00"></option>
-							<option value="11:00"></option>
-							<option value="12:00"></option>
-							<option value="13:00"></option>
-							<option value="14:00"></option>
-							<option value="15:00"></option>
-							<option value="16:00"></option>
-							<option value="17:00"></option>
-							<option value="18:00"></option>
-							<option value="19:00"></option>
-						</datalist>
-					</td>
-				</tr>
-				<tr>
 					<th>相談内容</th>
 					<td><input name="detail" type="text" class="width-middle" th:value="*{detail}">
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
@@ -119,6 +70,8 @@
 				</tr>
 			</table>
 			<input type="hidden" name="ename" th:value="${session.ename}">
+			<input type="hidden" name="reservetime" th:value="${time}">
+			<input type="hidden" name="reservedate" th:value="${date}">
 			<div class="controlbox">
 				<input type="submit" value="送信" class="button">
 				<input type="reset" value="リセット" class="button">
