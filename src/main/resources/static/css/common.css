@@ -25,11 +25,23 @@ h2 {
 
 h3{
 	margin: 15px 25px;
-	
 }
 
+.bordered-h3 {
+    display: inline-block;
+    padding-bottom: 5px; /* 下線とテキストの間隔を調整するために追加 */
+    width: auto; /* 線の長さを自動にする */
+    border-bottom: 2px solid rgb(27, 184, 27); /* デフォルトの線の設定 */
+}
+
+.bordered-h3.short {
+    border-bottom: none; /* 文字列が7文字以上の場合は線を非表示 */
+}
+
+
 h4{
-	margin: 20px 30px
+	margin: 20px 30px;
+	text-align: left;
 }
 
 .cross{
@@ -93,6 +105,7 @@ h4{
 	color: red;
 }
 
+
 .button:hover {
 	background-color: #647071;
 }
@@ -144,17 +157,26 @@ h4{
 	margin: 10px 0;
 }
 
+.gray-background {
+    background-color: rgb(242, 242, 242); /* グレーの背景色 */
+    padding: 20px; /* 必要に応じて余白を追加 */
+}
+
+.white-background {
+    background-color: #ffffff; /* 白の背景色 */
+    padding: 20px; /* 必要に応じて余白を追加 */
+}
 .bodyid{
 	margin-left: auto; 
 }
 
-#headNumber {
+/*#headNumber {
 	border: 2px solid rgb(27, 184, 27);
     color: rgb(27, 184, 27); 
     padding: 5px 10px; 
     border-radius: 4px; 
     display: inline-block; 
-}
+}*/
 
 #headText {
 
