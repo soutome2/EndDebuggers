@@ -209,7 +209,7 @@ public class AceController {
 			session.setAttribute("cid", cname);
 			Customer customer = customerInputForm.getEntity();
 			customerRepository.saveAndFlush(customer);
-			return "redirect:/Reserve";
+			return "userRegistrationComplete";
 		} else {
 			return "customerInput";
 		}
