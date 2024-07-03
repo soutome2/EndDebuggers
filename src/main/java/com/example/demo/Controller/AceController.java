@@ -59,7 +59,7 @@ public class AceController {
 		if (enameObject != null) {
 			enameString = enameObject.toString(); // toString()メソッドでStringに変換
 		}
-		
+
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 		int dateRange = 7;
 		int timeRange = 9;
@@ -121,11 +121,11 @@ public class AceController {
 
 			System.out.println(timeDifference);
 
-			if (daysDifference<0|| dateRange <daysDifference) {
+			if (daysDifference < 0 || dateRange < daysDifference) {
 				continue;
 			}
-			
-			if (timeDifference<0|| timeRange <timeDifference) {
+
+			if (timeDifference < 0 || timeRange < timeDifference) {
 				continue;
 			}
 
@@ -136,7 +136,7 @@ public class AceController {
 		// 二重リストの内容を出力（確認用）
 		for (List<Integer> row : matrix) {
 			System.out.println(row);
-			
+
 		}
 
 		//日数処理
@@ -144,7 +144,7 @@ public class AceController {
 		String max = endDate.format(DateTimeFormatter.ISO_DATE);
 
 		mv.addObject("reserveInputForm", reserveInputForm);
-		
+
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
 		session.setAttribute("timeList", timeList);
@@ -218,10 +218,10 @@ public class AceController {
 		return "redirect:/Reserve";
 
 	}
-	
+
 	@GetMapping("/Reservetime")
-	public ModelAndView GetReservetime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time, ReserveInputForm reserveInputForm, ModelAndView mv) {
-		
+	public ModelAndView GetReservetime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
+			ReserveInputForm reserveInputForm, ModelAndView mv) {
 
 		mv.addObject("reserveInputForm", reserveInputForm);
 		mv.addObject("time", time);
@@ -230,9 +230,10 @@ public class AceController {
 
 		return mv;
 	}
-	
-	@PostMapping("/ReserveComplete")
-	public ModelAndView PostReserveComplete(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
+
+	@PostMapping("/Reservetime")
+	public ModelAndView PostReserveComplete(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
+			@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		customerService.getByCid(reserveInputForm, result);
@@ -243,6 +244,10 @@ public class AceController {
 			mv.setViewName("complete");
 			return mv;
 		} else {
+
+			mv.addObject("reserveInputForm", reserveInputForm);
+			mv.addObject("time", time);
+			mv.addObject("date", date);
 			mv.setViewName("reservetime");
 			return mv;
 		}

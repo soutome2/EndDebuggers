@@ -42,7 +42,7 @@
 	<div class="container">
 
 		<br>
-		
+
 		<h1 th:text="${session.ename} + 'さんの予約登録ページ'"></h1>
 		<table>
 			<thead>
@@ -88,7 +88,8 @@
 				</tr>
 				<tr>
 					<th>日付</th>
-					<td><input name="reservedate" type="date" th:min="${session.min}" th:max="${session.max}" class="width-middle" th:value="*{reservedate}">
+					<td><input name="reservedate" type="date" th:min="${session.min}" th:max="${session.max}"
+							class="width-middle" th:value="*{reservedate}">
 						<span th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></span>
 					</td>
 				</tr>
@@ -113,7 +114,8 @@
 				</tr>
 				<tr>
 					<th>相談内容</th>
-					<td><input name="detail" type="text" class="width-middle" th:value="*{detail}">
+					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
+							th:value="*{detail}">
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>
