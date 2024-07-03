@@ -50,10 +50,10 @@
 	<div id="contents">
 		<table>
 			<tr>
-				<th>日付</th>
-				<th>時間</th>
-				<th>担当者名</th>
-				<th>相談内容</th>
+				<th class="tableHead2">日付</th>
+				<th class="tableHead2">時間</th>
+				<th class="tableHead2">担当者名</th>
+				<th class="tableHead2">相談内容</th>
 			</tr>
 			<tr th:each="reserve:${reserveList}">
 				<td th:text="${reserve.reservedate}"></td>

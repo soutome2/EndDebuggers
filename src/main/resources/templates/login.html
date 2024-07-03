@@ -38,13 +38,13 @@
 		<form action="Customer" method="post" th:object="${loginForm}">
 			<table>
 				<tr>
-					<th>利用者ID*</th>
+					<th class="tableHead1">利用者ID*</th>
 					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
 				</tr>
 				<tr>
-					<th>パスワード*</th>
+					<th class="tableHead1">パスワード*</th>
 					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
 						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 					</td>
