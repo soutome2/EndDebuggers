@@ -59,6 +59,7 @@ public class AceController {
 		if (enameObject != null) {
 			enameString = enameObject.toString(); // toString()メソッドでStringに変換
 		}
+		
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 		int dateRange = 7;
 		int timeRange = 9;
@@ -66,10 +67,6 @@ public class AceController {
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
 		LocalTime endTime = startTime.plusHours(timeRange);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(startTime);
-		System.out.println(endTime);
 
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
@@ -139,6 +136,7 @@ public class AceController {
 		// 二重リストの内容を出力（確認用）
 		for (List<Integer> row : matrix) {
 			System.out.println(row);
+			
 		}
 
 		//日数処理
