@@ -45,7 +45,7 @@
 
 		<br>
 		
-		<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
+		<h3 th:text="${session.ename} + 'の空き状況'"></h3>
 
 		<table>
 			<thead>
@@ -74,7 +74,7 @@
 		<br>
 		<form action="Complete" method="post" th:object="${reserveInputForm}">
 			<table>
-				<tr>
+				<!--<tr>
 					<th>利用者ID*</th>
 					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
@@ -120,7 +120,7 @@
 					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
 							th:value="*{detail}">
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
-					</td>
+					</td>-->
 				</tr>
 			</table>
 			<input type="hidden" name="ename" th:value="${session.ename}">

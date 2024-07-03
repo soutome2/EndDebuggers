@@ -72,7 +72,7 @@
 				</tr>
 				<tr>
 					<th>メールアドレス</th>
-					<td><input name="mailaddress" type="email" id="emailInput" class="width-middle"
+					<td><input name="mailaddress" type="text" id="emailInput" class="width-middle"
 							th:value="*{mailaddress}">
 						<span th:if="${#fields.hasErrors('mailaddress')}" th:errors="*{mailaddress}"></span>
 					</td>

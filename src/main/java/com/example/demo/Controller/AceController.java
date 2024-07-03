@@ -201,6 +201,9 @@ public class AceController {
 
 	@PostMapping("/setCustomer")
 	public String PostSetCustomer(@ModelAttribute @Validated CustomerInputForm customerInputForm, BindingResult result) {
+		
+		customerService.setCustomer(customerInputForm, result);
+		
 		if (!result.hasErrors()) {
 			String cname = customerInputForm.getCname();
 			session.setAttribute("cid", cname);
