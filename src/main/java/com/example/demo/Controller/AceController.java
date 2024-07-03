@@ -61,22 +61,28 @@ public class AceController {
 		}
 
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
+		
+		//表示する日数の幅と時間の幅のパラメーター
 		int dateRange = 7;
 		int timeRange = 9;
+		
+		//開始終了日時　開始時刻
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
 		
-
+		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
 		List<LocalTime> timeList = new ArrayList<>();
-
+		
+		//今日からdaterange分の日付けリスト 2024/07/03～2024/07/10
 		for (int i = 0; i < dateRange + 1; i++) {
 			LocalDate currentDate = startDate.plusDays(i);
 			dateList.add(currentDate);
 		}
-
+		
+		//10時から19時までの時間リスト
 		for (int j = 0; j < timeRange + 1; j++) {
 			LocalTime currentTime = startTime.plusHours(j);
 			timeList.add(currentTime);
