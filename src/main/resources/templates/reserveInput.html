@@ -30,7 +30,9 @@
 
 						<ul class="navbar-nav mb-2 mb-sm-0">
 							<li class="nav-item">
+
 								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+
 							</li>
 						</ul>
 					</div>
@@ -48,9 +50,9 @@
 		<table>
 			<thead>
 				<tr>
-					<th></th> <!-- 空のセルを作成 -->
+					<th class="tableHead1"></th> <!-- 空のセルを作成 -->
 					<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-					<th th:each="date : ${session.dateList}" th:text="${date}"></th>
+					<th class="tableHead2" th:each="date : ${session.dateList}" th:text="${date}"></th>
 				</tr>
 			</thead>
 			<tbody>
