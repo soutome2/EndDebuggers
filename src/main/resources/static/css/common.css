@@ -19,40 +19,46 @@ p {
 
 h2 {
 	margin: 10px 20px;
-	border-bottom: 2px solid rgb(27, 184, 27); 
-    display: inline-block;
+	border-bottom: 2px solid rgb(27, 184, 27);
+	display: inline-block;
 }
 
-h3{
+h3 {
 	margin: 15px 25px;
 }
 
 .bordered-h3 {
-    display: inline-block;
-    padding-bottom: 5px; /* 下線とテキストの間隔を調整するために追加 */
-    width: auto; /* 線の長さを自動にする */
-    border-bottom: 2px solid rgb(27, 184, 27); /* デフォルトの線の設定 */
+	display: inline-block;
+	padding-bottom: 5px;
+	/* 下線とテキストの間隔を調整するために追加 */
+	width: auto;
+	/* 線の長さを自動にする */
+	border-bottom: 2px solid rgb(27, 184, 27);
+	/* デフォルトの線の設定 */
 }
 
 .bordered-h3.short {
-    border-bottom: none; /* 文字列が7文字以上の場合は線を非表示 */
+	border-bottom: none;
+	/* 文字列が7文字以上の場合は線を非表示 */
 }
 
 
-h4{
+h4 {
 	margin: 20px 30px;
 	text-align: left;
 }
 
-.cross{
+.cross {
 	color: red;
 }
-.circle{
+
+.circle {
 	color: blue;
 }
-.tableData{
+
+.tableData {
 	text-align: center;
-	
+
 }
 
 .width-large {
@@ -158,16 +164,21 @@ h4{
 }
 
 .gray-background {
-    background-color: rgb(242, 242, 242); /* グレーの背景色 */
-    padding: 20px; /* 必要に応じて余白を追加 */
+	background-color: rgb(242, 242, 242);
+	/* グレーの背景色 */
+	padding: 20px;
+	/* 必要に応じて余白を追加 */
 }
 
 .white-background {
-    background-color: #ffffff; /* 白の背景色 */
-    padding: 20px; /* 必要に応じて余白を追加 */
+	background-color: #ffffff;
+	/* 白の背景色 */
+	padding: 20px;
+	/* 必要に応じて余白を追加 */
 }
-.bodyid{
-	margin-left: auto; 
+
+.bodyid {
+	margin-left: auto;
 }
 
 /*#headNumber {
@@ -218,12 +229,27 @@ th {
 
 
 .btn-outline-primary {
-    background-color: rgb(27, 184, 27); 
-    color: #fff; 
+	background-color: rgb(27, 184, 27);
+	border-color: rgb(27, 184, 27);
+	color: #fff;
 }
 
 
 .btn-outline-primary:hover {
-    background-color: rgb(255, 255, 128); 
-    color: rgb(0, 0, 0); 
+	background-color: rgb(255, 255, 128);
+	border-color: rgb(0, 0, 0);
+	color: rgb(0, 0, 0);
+}
+
+.btn-primary-custom {
+	background-color: rgb(29, 199, 29);
+	border-color: rgb(29, 199, 29);
+	color: #fff;
+}
+
+.btn-primary-custom:hover {
+	background-color: rgb(0, 81, 0);
+	border-color: rgb(0, 81, 0);
+	color: rgb(255, 255, 255);
+	
 }
