@@ -14,7 +14,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-sm navbar-light bg-light">
 				<div class="container">
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
 						aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
 
 						<ul class="navbar-nav mb-2 mb-sm-0">
 							<li class="nav-item">
-								<a href="/Login" class="nav-link active" aria-current="page">Login</a>
+								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
 							</li>
 						</ul>
 					</div>
@@ -42,10 +42,12 @@
 	<div class="container">
 
 		<br>
+
 		
-		<h1 th:text="${session.ename} + 'さんの予約登録ページ'"></h1>
+		<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
+
 		<br>
-		<form action="ReserveComplete" method="post" th:object="${reserveInputForm}">
+		<form th:action="@{/Reservetime(date=${date}, time=${time})}" method="post" th:object="${reserveInputForm}">
 			<table>
 				<tr>
 					<th>利用者ID*</th>
@@ -64,7 +66,8 @@
 				</tr>
 				<tr>
 					<th>相談内容</th>
-					<td><input name="detail" type="text" class="width-middle" th:value="*{detail}">
+					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
+							th:value="*{detail}">
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>
