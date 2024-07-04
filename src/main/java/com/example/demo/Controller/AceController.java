@@ -283,4 +283,17 @@ public class AceController {
 		return mv;
 	}
 
+
+@PostMapping("/cancelComplete")
+public ModelAndView PostReserveComplete(@RequestParam("reserveid") Integer reserveid,ModelAndView mv) {
+	Reserve deleteReserve = reserveRepository.findByReserveid(reserveid);
+	System.out.println(deleteReserve);
+	String stringReserveID = String.valueOf(reserveid);
+	System.out.println(stringReserveID);
+	System.out.println("OK");
+	mv.addObject("reserveid",reserveid);
+	mv.setViewName("cancelComplete");
+	return mv;
+}
+
 }
