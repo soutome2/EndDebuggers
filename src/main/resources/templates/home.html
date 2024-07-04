@@ -49,12 +49,13 @@
 		<div class="container-fluid" id="bodyid">
 			<div class="row mt-3">
 				<h2>Ace社コンシェルジュデスクサ―ビス</h2>
-				
+
 				<div class="image-container">
-				<img th:src="@{/img/foodstuff.jpg}"alt="野菜" width="1800" height="250" class="main-view__main-visual">
-				<div class="overlay-text">豊かな生活を支援します</div>
+					<img th:src="@{/img/foodstuff.jpg}" alt="野菜" width="1800" height="250"
+						class="main-view__main-visual">
+					<div class="overlay-text">豊かな生活を支援します</div>
 				</div>
-				
+
 				<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
 					新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
 					ぜひご利用ください!</p>
@@ -64,120 +65,142 @@
 				<h3 class="bordered-h3">ご相談内容一覧</h3>
 			</div>
 
-			<div class="row mt-3  gray-background">
+			<div class="gray-background">
 				<div class="col-1" id="headNumber">
 				</div>
 				<div id="headText">
-					<h4 class="left-align">不動産</h4class="left-align">
+					<h4 class="left-align">不動産</h4>
 				</div>
 
-				<p>
-					土地や住宅の売買、賃貸、管理の専門知識が豊富で、
-					特に住宅ローンや資産運用のアドバイスに定評がある。
-					顧客のニーズに合わせた最適な不動産戦略を提案し、多くの顧客から信頼を得ている。
-				</p>
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+					<div class="col mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+						</div>
+						<p>土地や住宅の売買</p>
+					</div>
+
+					<!-- 2枚目の画像 -->
+					<div class="col mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+						</div>
+						<p>賃貸</p>
+					</div>
+
+					<!-- 3枚目の画像 -->
+					<div class="col mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+						</div>
+						<p>管理</p>
+					</div>
+				</div>
+
+
 				<form action="/setEname" method="post">
 					<input type="hidden" name="ename" value="田中太郎">
 					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 				</form>
 			</div>
-
-			<div class="row mt-3 white-background">
-				<div class="col-1" id="headNumber">
-
-				</div>
-				<div id="headText">
-					<h4 class="left-align">おうちの修繕のスーパーバイザー (佐藤花子)</h4>
-				</div>
-
-
-				<p>不動産のスーパーバイザー
-					建築士資格を持ち、20年以上のリフォーム業界経験がある。
-					住宅の修繕やリフォームの設計から施工までを一貫してサポート。
-					省エネ改修やバリアフリーリフォームなど、最新の技術とトレンドに詳しい。
-					細部にまでこだわる丁寧な仕事が評判。
-				</p>
-				<form action="/setEname" method="post">
-					<input type="hidden" name="ename" value="佐藤花子">
-					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-				</form>
-			</div>
-
-			<div class="row mt-3 gray-background">
-				<div class="col-1" id="headNumber">
-				</div>
-				<div id="headText">
-					<h4 class="left-align">介護のスーパーバイザー (鈴木一郎)</h4>
-				</div>
-
-
-
-				<p>介護福祉士として25年のキャリアを持つ。
-					高齢者ケアや施設運営の専門知識が豊富で、
-					認知症ケアや在宅介護の支援に力を入れている。
-					利用者とその家族に寄り添ったサポートを提供し、多くの実績を持つ。
-					常に新しい介護技術の習得に努めている。
-				</p>
-				<form action="/setEname" method="post">
-					<input type="hidden" name="ename" value="鈴木一郎">
-					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-				</form>
-			</div>
-
-			<div class="row mt-3 white-background">
-
-				<div class="col-1" id="headNumber">
-
-				</div>
-				<div id="headText">
-					<h4 class="left-align">終活・相続のスーパーバイザー (高橋美咲)</h4>
-				</div>
-
-				<p>
-					ファイナンシャルプランナー資格を持ち、
-					15年以上の経験を誇る。
-					終活や相続に関する法的・財務的なアドバイスが専門。遺言書作成や相続税対策、
-					財産分割の相談に応じ、クライアントの意思を尊重したプランを提案。
-					安心して終活を進められるようサポート。
-				</p>
-				<form action="/setEname" method="post">
-					<input type="hidden" name="ename" value="高橋美咲">
-					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-				</form>
-			</div>
-
-			<div class="row mt-3 gray-background">
-				<div class="col-1" id="headNumber">
-
-				</div>
-				<div id="headText">
-					<h4 class="left-align">金融のスーパーバイザー
-						(中村健太)</h4>
-				</div>
-
-				<p>
-					保険業界で20年以上の経験を持ち、
-					特に自動車保険や生命保険の分野に精通。
-					クライアントのライフスタイルに合わせた保険商品の提案や見直しを行い、
-					最適な保障を提供。
-					金融商品についても幅広い知識を持ち、
-					資産運用やリスク管理のアドバイスも行っている。
-				</p>
-				<form action="/setEname" method="post">
-					<input type="hidden" name="ename" value="中村健太">
-					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-				</form>
-			</div>
-
-
-
-
-
 		</div>
 
+		<div class="row mt-3 white-background">
+			<div class="col-1" id="headNumber">
+
+			</div>
+			<div id="headText">
+				<h4 class="left-align">おうちの修繕のスーパーバイザー (佐藤花子)</h4>
+			</div>
+
+
+			<p>不動産のスーパーバイザー
+				建築士資格を持ち、20年以上のリフォーム業界経験がある。
+				住宅の修繕やリフォームの設計から施工までを一貫してサポート。
+				省エネ改修やバリアフリーリフォームなど、最新の技術とトレンドに詳しい。
+				細部にまでこだわる丁寧な仕事が評判。
+			</p>
+			<form action="/setEname" method="post">
+				<input type="hidden" name="ename" value="佐藤花子">
+				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+			</form>
+		</div>
+
+		<div class="row mt-3 gray-background">
+			<div class="col-1" id="headNumber">
+			</div>
+			<div id="headText">
+				<h4 class="left-align">介護のスーパーバイザー (鈴木一郎)</h4>
+			</div>
+
+
+
+			<p>介護福祉士として25年のキャリアを持つ。
+				高齢者ケアや施設運営の専門知識が豊富で、
+				認知症ケアや在宅介護の支援に力を入れている。
+				利用者とその家族に寄り添ったサポートを提供し、多くの実績を持つ。
+				常に新しい介護技術の習得に努めている。
+			</p>
+			<form action="/setEname" method="post">
+				<input type="hidden" name="ename" value="鈴木一郎">
+				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+			</form>
+		</div>
+
+		<div class="row mt-3 white-background">
+
+			<div class="col-1" id="headNumber">
+
+			</div>
+			<div id="headText">
+				<h4 class="left-align">終活・相続のスーパーバイザー (高橋美咲)</h4>
+			</div>
+
+			<p>
+				ファイナンシャルプランナー資格を持ち、
+				15年以上の経験を誇る。
+				終活や相続に関する法的・財務的なアドバイスが専門。遺言書作成や相続税対策、
+				財産分割の相談に応じ、クライアントの意思を尊重したプランを提案。
+				安心して終活を進められるようサポート。
+			</p>
+			<form action="/setEname" method="post">
+				<input type="hidden" name="ename" value="高橋美咲">
+				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+			</form>
+		</div>
+
+		<div class="row mt-3 gray-background">
+			<div class="col-1" id="headNumber">
+
+			</div>
+			<div id="headText">
+				<h4 class="left-align">金融のスーパーバイザー
+					(中村健太)</h4>
+			</div>
+
+			<p>
+				保険業界で20年以上の経験を持ち、
+				特に自動車保険や生命保険の分野に精通。
+				クライアントのライフスタイルに合わせた保険商品の提案や見直しを行い、
+				最適な保障を提供。
+				金融商品についても幅広い知識を持ち、
+				資産運用やリスク管理のアドバイスも行っている。
+			</p>
+			<form action="/setEname" method="post">
+				<input type="hidden" name="ename" value="中村健太">
+				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+			</form>
+		</div>
+
+
+
+
+
 	</div>
-	
-	
+
+	</div>
+
+
 	//footer
 	<div class="footer_foot">
 		<small class="footer_copy">
