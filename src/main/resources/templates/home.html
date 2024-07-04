@@ -120,79 +120,259 @@
 			</div>
 		</div>
 
-		<div class="row mt-3 white-background">
-			<div class="col-1" id="headNumber">
 
+		<div class="white-background">
+			<div class="col-1" id="headNumber">
 			</div>
 			<div id="headText">
-				<h4 class="left-align">おうちの修繕のスーパーバイザー (佐藤花子)</h4>
+				<h4 class="left-align">おうちの修繕</h4>
+			</div>
+
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+				<div class="mb-3">
+					<div class="image-container">
+						<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+					</div>
+					<p>住宅の修繕とリフォームの設計</p>
+					<ul>
+						<li>既存住宅の老朽化対策として、構造物の補強と耐震改修の設計を行います。</li>
+						<li>インテリアのリフォーム計画を立案し、空間効率を最大化するデザイン提案をします。</li>
+						<li>ユーザーのライフスタイルに合わせたカスタムメイドの収納設計を提案します。</li>
+					</ul>
+				</div>
+
+				<!-- 2枚目の画像 -->
+				<div class="mb-3">
+					<div class="image-container">
+						<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+					</div>
+					<p>施工の一貫したサポート</p>
+					<ul>
+						<li>施工チームの統括と現場管理を行い、工事の進捗状況を確認します。</li>
+						<li>品質管理の基準に従って、施工中の品質チェックと調整を行います。</li>
+						<li>施工完了後のアフターケアや問題解決に対応します。</li>
+					</ul>
+				</div>
+
+				<!-- 3枚目の画像 -->
+				<div class="mb-3">
+					<div class="image-container">
+						<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+					</div>
+					<p>最新技術とトレンドに精通した特殊なリフォーム</p>
+					<ul>
+						<li>省エネ改修の専門家として、エネルギー効率の高い暖房設備や断熱材の導入を提案します。</li>
+						<li>バリアフリーリフォームのプランを立案し、高齢者や身体障害者向けの設備を設置します。</li>
+						<li>インテリアデザインにおいて、最新の素材とカラーパレットを活用して空間の魅力を最大化します。</li>
+					</ul>
+				</div>
 			</div>
 
 
-			<p>不動産のスーパーバイザー
-				建築士資格を持ち、20年以上のリフォーム業界経験がある。
-				住宅の修繕やリフォームの設計から施工までを一貫してサポート。
-				省エネ改修やバリアフリーリフォームなど、最新の技術とトレンドに詳しい。
-				細部にまでこだわる丁寧な仕事が評判。
-			</p>
 			<form action="/setEname" method="post">
 				<input type="hidden" name="ename" value="佐藤花子">
 				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 			</form>
 		</div>
+	</div>
 
-		<div class="row mt-3 gray-background">
-			<div class="col-1" id="headNumber">
+
+	<div class="gray-background">
+		<div class="col-1" id="headNumber">
+		</div>
+		<div id="headText">
+			<h4 class="left-align">介護</h4>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+				</div>
+				<p>高齢者ケアと在宅介護の支援</p>
+				<ul>
+					<li>在宅での高齢者の生活支援を提供し、日常生活のアセスメントとケアプランを立案します。</li>
+					<li>家族と協力して、高齢者の安全と健康管理に関する相談に応じます。</li>
+					<li>身体的なケアと同時に、社会的および精神的なサポートも提供し、高齢者の生活の質を向上させます。</li>
+				</ul>
 			</div>
-			<div id="headText">
-				<h4 class="left-align">介護のスーパーバイザー (鈴木一郎)</h4>
+
+			<!-- 2枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+				</div>
+				<p>認知症ケアと家族支援</p>
+				<ul>
+					<li>認知症患者およびその家族に対して、認知症に関する教育とアドバイスを提供します。</li>
+					<li>家庭内での認知症患者の行動管理について、家族と共に戦略を策定します。</li>
+					<li>認知症に特化したコミュニティのサポートグループの運営や参加を推奨し、家族の負担を軽減します。</li>
+				</ul>
 			</div>
 
+			<!-- 3枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+				</div>
+				<p>施設運営と介護サービスの改善</p>
+				<ul>
+					<li>介護施設の運営者やスタッフに対して、最新の介護技術とベストプラクティスを教育します。</li>
+					<li>施設内のケアプランの見直しと改善を行い、利用者の満足度と生活の質を向上させます。</li>
+					<li>介護施設の安全性と健康環境の向上に向けたアドバイスを提供し、施設全体の運営をサポートします。</li>
+				</ul>
+			</div>
+		</div>
 
 
+		<form action="/setEname" method="post">
+			<input type="hidden" name="ename" value="鈴木一郎">
+			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+		</form>
+	</div>
+	</div>
+
+
+	<div class="white-background">
+		<div class="col-1" id="headNumber">
+		</div>
+		<div id="headText">
+			<h4 class="left-align">終活・相続</h4>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+				</div>
+				<p>終活と遺言書作成</p>
+				<ul>
+					<li>クライアントの意向に基づいて、遺言書の作成と法的な助言を提供します。</li>
+					<li>財産や資産の整理を行い、将来のための財務プランを立案します。</li>
+					<li>遺言書の内容や相続に関する法的手続きについて、詳細な説明とアドバイスを行います。</li>
+				</ul>
+			</div>
+
+			<!-- 2枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+				</div>
+				<p>相続税対策と財産分割</p>
+				<ul>
+					<li>相続税の計画と対策を立て、クライアントの財産を最適化します。</li>
+					<li>財産分割のアドバイスと実務的なサポートを提供し、家族間の円満な相続を促進します。</li>
+					<li>相続に伴う法的なリスクや財政的な影響について評価し、最善の解決策を提案します。</li>
+				</ul>
+			</div>
+
+			<!-- 3枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+				</div>
+				<p>財務プランニングと将来のセキュリティ</p>
+				<ul>
+					<li>クライアントのライフゴールに基づいた総合的な財務プランを策定します。</li>
+					<li>退職後の資産運用や収入管理の計画を立て、将来のセキュリティを確保します。</li>
+					<li>不測の事態に備えた保険や投資に関する助言を提供し、財務的な安全性を強化します。</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<form action="/setEname" method="post">
+			<input type="hidden" name="ename" value="高橋美咲">
+			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+		</form>
+	</div>
+	</div>
+
+
+	<div class="gray-background">
+		<div class="col-1" id="headNumber">
+		</div>
+		<div id="headText">
+			<h4 class="left-align">金融・保険</h4>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+				</div>
+				<p>自動車保険の見直しと提案</p>
+				<ul>
+					<li>クライアントの自動車の使用状況や保険ニーズを評価し、最適な自動車保険商品を提案します。</li>
+					<li>保険料の見直しや保障内容の調整を行い、コスト効率の良い保険プランを提供します。</li>
+					<li>事故対応や補償内容に関する質問に対して、明確で分かりやすい説明を行います。</li>
+				</ul>
+			</div>
+
+			<!-- 2枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+				</div>
+				<p>生命保険の選定と計画</p>
+				<ul>
+					<li>クライアントの家族構成や将来のライフプランに合わせて、適切な生命保険商品を選定します。</li>
+					<li>資産保護や教育資金の準備など、ライフイベントに応じた生命保険の計画を立案します。</li>
+					<li>保険金の受け取り方法や税務上のメリットについて、詳細なアドバイスを提供します。</li>
+				</ul>
+			</div>
+
+			<!-- 3枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+				</div>
+				<p>資産運用とリスク管理の戦略</p>
+				<ul>
+					<li>クライアントの資産状況とリスク許容度を考慮し、資産運用の戦略を策定します。</li>
+					<li>投資商品やリスク分散の方法について、専門的なアドバイスと市場の動向に関する情報提供を行います。</li>
+					<li>金利やインフレーションの影響を考慮した資産保全のアドバイスを提供し、クライアントの財務的な安全性を確保します。</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<form action="/setEname" method="post">
+			<input type="hidden" name="ename" value="中村健太">
+			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+		</form>
+	</div>
+	</div>
+
+
+	<!--
+		
+		土地や住宅の売買、賃貸、管理の専門知識が豊富で、 特に住宅ローンや資産運用のアドバイスに定評がある。 
+		顧客のニーズに合わせた最適な不動産戦略を提案し、多くの顧客から信頼を得ている。
+		
+		(佐藤花子)
+		<p>不動産のスーパーバイザー
+				建築士資格を持ち、20年以上のリフォーム業界経験がある。
+				住宅の修繕やリフォームの設計から施工までを一貫してサポート。
+				省エネ改修やバリアフリーリフォームなど、最新の技術とトレンドに詳しい。
+				細部にまでこだわる丁寧な仕事が評判。
+			</p>
+		介護のスーパーバイザー (鈴木一郎)
 			<p>介護福祉士として25年のキャリアを持つ。
 				高齢者ケアや施設運営の専門知識が豊富で、
 				認知症ケアや在宅介護の支援に力を入れている。
 				利用者とその家族に寄り添ったサポートを提供し、多くの実績を持つ。
 				常に新しい介護技術の習得に努めている。
 			</p>
-			<form action="/setEname" method="post">
-				<input type="hidden" name="ename" value="鈴木一郎">
-				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-			</form>
-		</div>
-
-		<div class="row mt-3 white-background">
-
-			<div class="col-1" id="headNumber">
-
-			</div>
-			<div id="headText">
-				<h4 class="left-align">終活・相続のスーパーバイザー (高橋美咲)</h4>
-			</div>
-
-			<p>
+		終活・相続のスーパーバイザー (高橋美咲)
+		<p>
 				ファイナンシャルプランナー資格を持ち、
 				15年以上の経験を誇る。
 				終活や相続に関する法的・財務的なアドバイスが専門。遺言書作成や相続税対策、
 				財産分割の相談に応じ、クライアントの意思を尊重したプランを提案。
 				安心して終活を進められるようサポート。
 			</p>
-			<form action="/setEname" method="post">
-				<input type="hidden" name="ename" value="高橋美咲">
-				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-			</form>
-		</div>
-
-		<div class="row mt-3 gray-background">
-			<div class="col-1" id="headNumber">
-
-			</div>
-			<div id="headText">
-				<h4 class="left-align">金融のスーパーバイザー
-					(中村健太)</h4>
-			</div>
-
+			金融のスーパーバイザー(中村健太)
 			<p>
 				保険業界で20年以上の経験を持ち、
 				特に自動車保険や生命保険の分野に精通。
@@ -201,11 +381,7 @@
 				金融商品についても幅広い知識を持ち、
 				資産運用やリスク管理のアドバイスも行っている。
 			</p>
-			<form action="/setEname" method="post">
-				<input type="hidden" name="ename" value="中村健太">
-				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-			</form>
-		</div>
+			>-->
 
 
 
