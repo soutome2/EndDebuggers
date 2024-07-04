@@ -295,6 +295,12 @@ th {
     
 }
 
+.main-view__main-visual {
+    width: 100%; /* 幅を100%に設定 */
+    height: auto; /* 高さは自動調整 */
+    /* 他のスタイルを追加 */
+}
+
 .overlay-text {
     position: absolute;
     top: 50%; /* 上部の中央に配置するために50%から開始 */
