@@ -275,3 +275,23 @@ th {
 .tableHead2 {
 	background-color: rgb(202, 255, 202);
 }
+
+
+
+.footer {
+    font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif;
+}
+
+.footer_foot {
+    background: #000;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 10px;
+    min-height: 60px;
+    padding: 22px;
+    text-align: center;
+}
+
+.footer_copy {
+    color: rgb(255, 255, 255);
+}
