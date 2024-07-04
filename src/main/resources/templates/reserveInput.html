@@ -63,7 +63,11 @@
 					<td th:each="date, colIndex : ${session.dateList}" class="tableData">
 						<!-- matrix のデータを表示する -->
 						<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-							<a th:href="@{/Reservetime(date=${date}, time=${time})}" class="circle">〇</a>
+							<form action="Reservetime" method="post">
+								<input type="hidden" name="date" th:value="${date}">
+								<input type="hidden" name="time" th:value="${time}">
+								<button type="submit" class="circle">〇</button>
+							</form>
 						</span>
 						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
 						<!-- 他の値に対する条件表示も必要であれば追加 -->

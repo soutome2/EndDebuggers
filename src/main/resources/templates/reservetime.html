@@ -47,7 +47,7 @@
 		<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
 
 		<br>
-		<form th:action="@{/Reservetime(date=${date}, time=${time})}" method="post" th:object="${reserveInputForm}">
+		<form th:action="Reservetime" method="post" th:object="${reserveInputForm}">
 			<table>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
@@ -73,8 +73,8 @@
 				</tr>
 			</table>
 			<input type="hidden" name="ename" th:value="${session.ename}">
-			<input type="hidden" name="reservetime" th:value="${time}">
 			<input type="hidden" name="reservedate" th:value="${date}">
+			<input type="hidden" name="reservetime" th:value="${time}">
 			<div class="controlbox">
 				<input type="submit" value="送信" class="button">
 				<input type="reset" value="リセット" class="button">

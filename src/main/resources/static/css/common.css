@@ -53,7 +53,21 @@ h4 {
 }
 
 .circle {
+	background: none;
+	border: none;
 	color: blue;
+	/* リンクの色にしたい色を指定 */
+	cursor: pointer;
+	/* ホバー時にポインターを表示 */
+	padding: 0;
+	/* ボタンの余白を消す */
+	display: inline;
+	/* インライン要素にすることでテキストに合わせたサイズになる */
+	transition: transform 0.2s ease; /* 変化を滑らかにするためのトランジション */
+}
+
+.circle:hover {
+    transform: scale(1.1); /* 1.1倍に拡大 */
 }
 
 .tableData {
@@ -251,13 +265,13 @@ th {
 	background-color: rgb(0, 81, 0);
 	border-color: rgb(0, 81, 0);
 	color: rgb(255, 255, 255);
-	
+
 }
 
-.tableHead1{
+.tableHead1 {
 	background-color: rgb(233, 252, 247);
 }
 
-.tableHead2{
+.tableHead2 {
 	background-color: rgb(202, 255, 202);
 }

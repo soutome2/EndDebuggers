@@ -66,7 +66,6 @@ public class AceController {
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
-		
 
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
@@ -200,10 +199,11 @@ public class AceController {
 	}
 
 	@PostMapping("/setCustomer")
-	public String PostSetCustomer(@ModelAttribute @Validated CustomerInputForm customerInputForm, BindingResult result) {
-		
+	public String PostSetCustomer(@ModelAttribute @Validated CustomerInputForm customerInputForm,
+			BindingResult result) {
+
 		customerService.setCustomer(customerInputForm, result);
-		
+
 		if (!result.hasErrors()) {
 			String cname = customerInputForm.getCname();
 			session.setAttribute("cid", cname);
@@ -223,22 +223,8 @@ public class AceController {
 
 	}
 
-	@GetMapping("/Reservetime")
-
-	public ModelAndView GetReservetime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
-			ReserveInputForm reserveInputForm, ModelAndView mv) {
-
-
-		mv.addObject("reserveInputForm", reserveInputForm);
-		mv.addObject("time", time);
-		mv.addObject("date", date);
-		mv.setViewName("reservetime");
-
-		return mv;
-	}
-
 	@PostMapping("/Reservetime")
-	public ModelAndView PostReserveTime(@RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time,
+	public ModelAndView PostReserveTime(
 			@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
@@ -253,8 +239,8 @@ public class AceController {
 		} else {
 
 			mv.addObject("reserveInputForm", reserveInputForm);
-			mv.addObject("time", time);
-			mv.addObject("date", date);
+			mv.addObject("time", reserveInputForm.getReservetime());
+			mv.addObject("date", reserveInputForm.getReservedate());
 			mv.setViewName("reservetime");
 			return mv;
 		}
