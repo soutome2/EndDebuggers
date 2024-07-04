@@ -290,7 +290,7 @@ public class AceController {
 	public ModelAndView PostReserveComplete(@RequestParam("reserveid") Integer reserveid, ModelAndView mv) {
 		Reserve deleteReserve = reserveRepository.findByReserveid(reserveid);
 		reserveRepository.deleteByReserveid(reserveid);
-		mv.addObject("reserve", deleteReserve);
+		mv.addObject("deleteReserve", deleteReserve);
 		mv.setViewName("cancelComplete");
 		return mv;
 	}

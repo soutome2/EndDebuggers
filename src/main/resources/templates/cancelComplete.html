@@ -47,15 +47,27 @@
 
 		<br>
 		<h3>以下の予約をキャンセルしました</h3><br>
-		<form action="Customer" method="post" th:object="${reserve}">
-			予約ID：<span th:text="*{reserveid}"></span><br>
-			担当者：<span th:text="*{ename}"></span><br>
-			予約日時：<span th:text="*{reservedate}+' '+*{reservetime}"></span><br>
-			相談内容：<span th:text="*{detail}"></span><br>
+		<form action="Customer" method="post" th:object="${deleteReserve}">
+			<table>
+				<tr>
+					<th class="tableHead2">予約ID</th>
+					<th class="tableHead2">担当者</th>
+					<th class="tableHead2">予約日時</th>
+					<th class="tableHead2">相談内容</th>
+				</tr>
+				<tr>
+					<th><span th:text="*{reserveid}"></span></th>
+					<th><span th:text="*{ename}"></span>
+					<th><span th:text="*{reservedate}+' '+*{reservetime}"></span></th>
+					<th><span th:text="*{detail}"></span></th>
+				</tr>
+			</table>
+			<br><br>
 			<input type="hidden" name="cid" th:value="${session.cid}">
-			<input type="hidden" name="password" th:value="${session.password}"><br>
+			<input type="hidden" name="password" th:value="${session.password}">
 			<input type="submit" value="戻る" class="button">
 		</form>
+
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
