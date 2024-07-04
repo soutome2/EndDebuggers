@@ -277,6 +277,25 @@ th {
 }
 
 
+.image-container {
+    position: relative;
+    width: 100%;
+    max-width: 1900px; /* 画像の幅に合わせて調整 */
+    
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%; /* 上部の中央に配置するために50%から開始 */
+    right: 50%; 
+    transform: translate(50%, -50%); /* 右中央に移動するための変換 */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    font-size: 18px;
+    color: #000;
+}
+
+
 
 .footer {
     font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif;
@@ -295,3 +314,4 @@ th {
 .footer_copy {
     color: rgb(255, 255, 255);
 }
+
