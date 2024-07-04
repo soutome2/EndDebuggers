@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Service.CustomerService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -74,12 +76,19 @@ public class AceController {
 		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
+		List<String> headDateList = new ArrayList<>();
 		List<LocalTime> timeList = new ArrayList<>();
 
 		//今日からdaterange分の日付けリスト 2024/07/03～2024/07/10
 		for (int i = 0; i < dateRange + 1; i++) {
 			LocalDate currentDate = startDate.plusDays(i);
 			dateList.add(currentDate);
+
+			// DateTimeFormatter を使って指定された形式でフォーマットする
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d(E)", Locale.JAPAN);
+			String formattedDate = currentDate.format(formatter);
+			headDateList.add(formattedDate);
+
 		}
 
 		//10時から19時までの時間リスト
@@ -153,6 +162,7 @@ public class AceController {
 
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
+		session.setAttribute("headDateList", headDateList);
 		session.setAttribute("timeList", timeList);
 		session.setAttribute("min", min);
 		session.setAttribute("max", max);
@@ -244,7 +254,8 @@ public class AceController {
 	}
 
 	@PostMapping("/ReserveError")
-	public ModelAndView PostReserveTime(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
+	public ModelAndView PostReserveTime(@ModelAttribute @Validated ReserveInputForm reserveInputForm,
+			BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		customerService.getByCid(reserveInputForm, result);
@@ -254,7 +265,6 @@ public class AceController {
 			reserveRepository.saveAndFlush(reserve);
 			redirectAttributes.addFlashAttribute("reserveInputForm", reserveInputForm);
 			mv.setViewName("redirect:/ReserveComplete");
-			System.out.println("入ってる");
 			return mv;
 		} else {
 
@@ -274,18 +284,15 @@ public class AceController {
 		mv.setViewName("complete");
 		return mv;
 	}
-
-
-@PostMapping("/cancelComplete")
-public ModelAndView PostReserveComplete(@RequestParam("reserveid") Integer reserveid,ModelAndView mv) {
-	Reserve deleteReserve = reserveRepository.findByReserveid(reserveid);
-	System.out.println(deleteReserve);
-	String stringReserveID = String.valueOf(reserveid);
-	System.out.println(stringReserveID);
-	System.out.println("OK");
-	mv.addObject("reserveid",reserveid);
-	mv.setViewName("cancelComplete");
-	return mv;
-}
+	
+	@Transactional
+	@PostMapping("/cancelComplete")
+	public ModelAndView PostReserveComplete(@RequestParam("reserveid") Integer reserveid, ModelAndView mv) {
+		Reserve deleteReserve = reserveRepository.findByReserveid(reserveid);
+		reserveRepository.deleteByReserveid(reserveid);
+		mv.addObject("reserveid", deleteReserve.getReserveid());
+		mv.setViewName("cancelComplete");
+		return mv;
+	}
 
 }

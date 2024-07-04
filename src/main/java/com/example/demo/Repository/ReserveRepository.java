@@ -10,4 +10,5 @@ public interface ReserveRepository extends JpaRepository<Reserve,Integer>{
 	public List<Reserve> findAllByEname(String ename);
 	public List<Reserve> findAllByCid(String cid);
 	public Reserve findByReserveid(Integer reserveid);
+	public void deleteByReserveid(Integer reserveid);
 }

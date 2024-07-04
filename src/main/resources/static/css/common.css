@@ -49,7 +49,18 @@ h4 {
 }
 
 .cross {
-	color: red;
+	background: none;
+    border: none;
+    color: red; /* リンクの色にしたい色を指定 */
+    text-decoration: none; /* リンクの下線を消す */
+    cursor: pointer; /* ホバー時にポインターを表示 */
+    padding: 0; /* ボタンの余白を消す */
+    display: inline-block; /* インラインブロック要素にすることでテキストに合わせたサイズになる */
+    transition: transform 0.2s ease; /* 変化を滑らかにするためのトランジション */
+}
+
+.cross:hover {
+    transform: scale(1.1); /* 1.1倍に拡大 */
 }
 
 .circle {

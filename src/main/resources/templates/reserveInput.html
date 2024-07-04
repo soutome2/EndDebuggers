@@ -42,7 +42,6 @@
 	</div>
 
 	<div class="container">
-	
 		<br>
 
 		<h3 th:text="${session.ename} + 'の空き状況'"></h3>
@@ -52,7 +51,7 @@
 				<tr>
 					<th class="tableHead1"></th> <!-- 空のセルを作成 -->
 					<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-					<th class="tableHead1" th:each="date : ${session.dateList}" th:text="${date}"></th>
+					<th class="tableHead1" th:each="head : ${session.headDateList}" th:text="${head}"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,7 +68,9 @@
 								<button type="submit" class="circle">〇</button>
 							</form>
 						</span>
-						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
+						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">
+							×
+						</span>
 						<!-- 他の値に対する条件表示も必要であれば追加 -->
 					</td>
 				</tr>
