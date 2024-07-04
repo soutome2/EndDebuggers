@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -74,12 +75,19 @@ public class AceController {
 		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
+		List<String> headDateList = new ArrayList<>();
 		List<LocalTime> timeList = new ArrayList<>();
 
 		//今日からdaterange分の日付けリスト 2024/07/03～2024/07/10
 		for (int i = 0; i < dateRange + 1; i++) {
 			LocalDate currentDate = startDate.plusDays(i);
 			dateList.add(currentDate);
+			
+			// DateTimeFormatter を使って指定された形式でフォーマットする
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d(E)", Locale.JAPAN);
+	        String formattedDate = currentDate.format(formatter);
+			headDateList.add(formattedDate);
+			
 		}
 
 		//10時から19時までの時間リスト
@@ -153,6 +161,7 @@ public class AceController {
 
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
+		session.setAttribute("headDateList", headDateList);
 		session.setAttribute("timeList", timeList);
 		session.setAttribute("min", min);
 		session.setAttribute("max", max);
@@ -254,7 +263,6 @@ public class AceController {
 			reserveRepository.saveAndFlush(reserve);
 			redirectAttributes.addFlashAttribute("reserveInputForm", reserveInputForm);
 			mv.setViewName("redirect:/ReserveComplete");
-			System.out.println("入ってる");
 			return mv;
 		} else {
 
