@@ -47,8 +47,21 @@
 
 		<br>
 		<h3>以下の予約をキャンセルしました</h3><br>
-		予約ID：<span th:text="${reserveid}"></span><br>
-		
+		<table>
+			<tr>
+				<th class="tableHead2">日付</th>
+				<th class="tableHead2">時間</th>
+				<th class="tableHead2">担当者名</th>
+				<th class="tableHead2">相談内容</th>
+			</tr>
+			<tr >
+				<td th:text="${deleteReserve.reservedate}"></td>
+				<td th:text="${deleteReserve.reservetime}"></td>
+				<td th:text="${deleteReserve.ename}"></td>
+				<td th:text="${deleteReserve.detail}"></td>
+			</tr>
+		</table>
+
 
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
