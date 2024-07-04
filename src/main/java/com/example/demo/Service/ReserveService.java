@@ -1,10 +1,12 @@
 package com.example.demo.Service;
 
-import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
+import com.example.demo.Entity.Reserve;
 import com.example.demo.Form.ReserveInputForm;
 import com.example.demo.Repository.ReserveRepository;
 
@@ -16,10 +18,16 @@ public class ReserveService {
 
 	private final ReserveRepository reserveRepository;
 
-	public void getByCid(ReserveInputForm reserveInputForm, BindingResult result) {
+	public void getByDateTime(ReserveInputForm reserveInputForm, BindingResult result) {
+		
+		Optional<Reserve> opt = reserveRepository.findByReservedateAndReservetime(reserveInputForm.getReservedate(), reserveInputForm.getReservetime());
 
-		LocalDate reservedate = reserveInputForm.getReservedate();
-		System.out.println(reservedate);
+		if (!opt.isEmpty()) {
+			result.addError(new FieldError(
+					result.getObjectName(), "reservedate", "予約がいっぱいです"));
+			return;
+		}
+		
 		return;
 
 	}

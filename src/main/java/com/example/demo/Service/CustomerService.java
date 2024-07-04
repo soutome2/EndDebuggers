@@ -13,6 +13,7 @@ import com.example.demo.Form.LoginForm;
 import com.example.demo.Form.ReserveInputForm;
 import com.example.demo.Repository.CustomerRepository;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,6 +21,7 @@ import lombok.AllArgsConstructor;
 public class CustomerService {
 
 	private final CustomerRepository customerRepository;
+	private final HttpSession session;
 
 	public Customer getByCid(LoginForm loginForm, BindingResult result) {
 
@@ -55,6 +57,10 @@ public class CustomerService {
 					result.getObjectName(), "password", "パスワードが合致しません"));
 			return null;
 		}
+		
+
+		session.setAttribute("cid", loginForm.getCid());
+		session.setAttribute("password", loginForm.getPassword());
 		return check;
 
 	}

@@ -28,6 +28,7 @@ import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.ReserveService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -40,6 +41,7 @@ public class AceController {
 	private final ReserveRepository reserveRepository;
 	private final ReserveCustomerRepository reserveCustomerRepository;
 	private final CustomerService customerService;
+	private final ReserveService reserveService;
 	private final HttpSession session;
 
 	@GetMapping("/")
@@ -244,10 +246,10 @@ public class AceController {
 	public ModelAndView PostReserveTime(@RequestParam LocalDate date, @RequestParam LocalTime time,
 			ReserveInputForm reserveInputForm,
 			ModelAndView mv) {
-
+		
+		reserveInputForm.setReservedate(date);
+		reserveInputForm.setReservetime(time);
 		mv.addObject("reserveInputForm", reserveInputForm);
-		mv.addObject("time", time);
-		mv.addObject("date", date);
 		mv.setViewName("reservetime");
 		return mv;
 
@@ -259,6 +261,7 @@ public class AceController {
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		customerService.getByCid(reserveInputForm, result);
+		reserveService.getByDateTime(reserveInputForm, result);
 
 		if (!result.hasErrors()) {
 			Reserve reserve = reserveInputForm.getEntity();
@@ -269,10 +272,7 @@ public class AceController {
 		} else {
 
 			mv.addObject("reserveInputForm", reserveInputForm);
-			mv.addObject("time", reserveInputForm.getReservetime());
-			mv.addObject("date", reserveInputForm.getReservedate());
 			mv.setViewName("reservetime");
-			System.out.println(result);
 			return mv;
 		}
 
@@ -284,13 +284,13 @@ public class AceController {
 		mv.setViewName("complete");
 		return mv;
 	}
-	
+
 	@Transactional
 	@PostMapping("/cancelComplete")
 	public ModelAndView PostReserveComplete(@RequestParam("reserveid") Integer reserveid, ModelAndView mv) {
 		Reserve deleteReserve = reserveRepository.findByReserveid(reserveid);
 		reserveRepository.deleteByReserveid(reserveid);
-		mv.addObject("reserveid", deleteReserve.getReserveid());
+		mv.addObject("reserve", deleteReserve);
 		mv.setViewName("cancelComplete");
 		return mv;
 	}

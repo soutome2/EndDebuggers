@@ -43,21 +43,24 @@
 
 		<br>
 
-		
-		<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
 
+		<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
+		<br>
+		IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
 		<br>
 		<form th:action="ReserveError" method="post" th:object="${reserveInputForm}">
 			<table>
+				<tr>
+					<th class="tableHead1">予約日時</th>
+					<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
+					<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></h4></td>
+				</tr>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
 					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
 				</tr>
-				<br>
-				IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
-
 				<tr>
 					<th class="tableHead1">パスワード*</th>
 					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
@@ -73,8 +76,8 @@
 				</tr>
 			</table>
 			<input type="hidden" name="ename" th:value="${session.ename}">
-			<input type="hidden" name="reservedate" th:value="${date}">
-			<input type="hidden" name="reservetime" th:value="${time}">
+			<input type="hidden" name="reservedate" th:value="*{reservedate}">
+			<input type="hidden" name="reservetime" th:value="*{reservetime}">
 			<div class="controlbox">
 				<input type="submit" value="送信" class="button">
 				<input type="reset" value="リセット" class="button">
