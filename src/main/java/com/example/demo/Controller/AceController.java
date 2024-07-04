@@ -61,11 +61,11 @@ public class AceController {
 		}
 
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
-		
+
 		//表示する日数の幅と時間の幅のパラメーター
 		int dateRange = 7;
 		int timeRange = 9;
-		
+
 		//開始終了日時　開始時刻
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
@@ -75,13 +75,13 @@ public class AceController {
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
 		List<LocalTime> timeList = new ArrayList<>();
-		
+
 		//今日からdaterange分の日付けリスト 2024/07/03～2024/07/10
 		for (int i = 0; i < dateRange + 1; i++) {
 			LocalDate currentDate = startDate.plusDays(i);
 			dateList.add(currentDate);
 		}
-		
+
 		//10時から19時までの時間リスト
 		for (int j = 0; j < timeRange + 1; j++) {
 			LocalTime currentTime = startTime.plusHours(j);
@@ -231,8 +231,20 @@ public class AceController {
 	}
 
 	@PostMapping("/Reservetime")
-	public ModelAndView PostReserveTime(
-			@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
+	public ModelAndView PostReserveTime(@RequestParam LocalDate date, @RequestParam LocalTime time,
+			ReserveInputForm reserveInputForm,
+			ModelAndView mv) {
+
+		mv.addObject("reserveInputForm", reserveInputForm);
+		mv.addObject("time", time);
+		mv.addObject("date", date);
+		mv.setViewName("reservetime");
+		return mv;
+
+	}
+
+	@PostMapping("/ReserveError")
+	public ModelAndView PostReserveTime(@ModelAttribute @Validated ReserveInputForm reserveInputForm, BindingResult result,
 			RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		customerService.getByCid(reserveInputForm, result);
@@ -242,6 +254,7 @@ public class AceController {
 			reserveRepository.saveAndFlush(reserve);
 			redirectAttributes.addFlashAttribute("reserveInputForm", reserveInputForm);
 			mv.setViewName("redirect:/ReserveComplete");
+			System.out.println("入ってる");
 			return mv;
 		} else {
 
@@ -249,6 +262,7 @@ public class AceController {
 			mv.addObject("time", reserveInputForm.getReservetime());
 			mv.addObject("date", reserveInputForm.getReservedate());
 			mv.setViewName("reservetime");
+			System.out.println(result);
 			return mv;
 		}
 
