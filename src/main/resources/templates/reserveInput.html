@@ -43,8 +43,13 @@
 
 	<div class="container">
 		<br>
+		<div class="image-container">
+			<img th:src="${session.image}" th:alt="${session.ename}" width="300" height="300" class="img-fluid">
+		</div>
+		<br>
 
 		<h3 th:text="${session.ename} + 'の空き状況'"></h3>
+		
 
 		<table>
 			<thead>
