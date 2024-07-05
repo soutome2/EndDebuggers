@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.section::after {
+	background-image: url(/img/next.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+	content: "";
+	display: inline-block;
+	height: 8px;
+	margin-left: 8px;
+	margin-top: -3px;
+	-webkit-transition: opacity ease-out 0.3s;
+	transition: opacity ease-out 0.3s;
+	vertical-align: middle;
+	width: 8px;
+}
