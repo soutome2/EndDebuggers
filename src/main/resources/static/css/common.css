@@ -280,6 +280,21 @@ th {
 	color: rgb(255, 255, 255);
 
 }
+/*キャンセルボタン*/
+.btn-cancel {
+    background-color: transparent; /* 背景色を透明にする */
+    color: red; /* ボタンのテキスト色を赤にする */
+    border: none; /* ボーダーをなくす */
+    padding: 0; /* パディングを0にする */
+    cursor: pointer; /* ホバー時のカーソル形状 */
+    text-decoration: underline; /* テキストに下線を追加 */
+}
+
+.btn-cancel:hover {
+    color: darkred; /* ホバー時のテキスト色を変更 */
+}
+
+/**/
 
 .tableHead1 {
 	background-color: rgb(233, 252, 247);
