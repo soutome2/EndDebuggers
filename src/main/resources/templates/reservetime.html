@@ -59,7 +59,8 @@
 				<tr>
 					<th class="tableHead1">予約日時</th>
 					<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
-					<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></h4></td>
+						<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></h4>
+					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
@@ -75,8 +76,8 @@
 				</tr>
 				<tr>
 					<th class="tableHead1">相談内容</th>
-					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
-							th:value="*{detail}">
+					<td><textarea name="detail" type="text" class="width-middle" style="width: 300px; height: 80px;"
+							th:value="*{detail}"></textarea>
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>
