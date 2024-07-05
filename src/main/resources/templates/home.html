@@ -10,6 +10,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -41,143 +44,149 @@
 			</nav>
 
 		</div>
+	</div>
 
-</head>
 
-<body>
 	<div class="container-fluid" id="bodyid">
-		<div class="container-fluid" id="bodyid">
-			<div class="row mt-3">
-				<h2>Ace社コンシェルジュデスクサ―ビス</h2>
+		<div class="row mt-3">
+			<h2>Ace社コンシェルジュデスクサ―ビス</h2>
 
+
+			<div class="image-container">
+				<img th:src="@{/img/vegetable.jpeg}" alt="PC" class="main-view__main-visual desktop-image">
+				<img th:src="@{/img/vegetable.jpeg}" alt="スマホ" class="main-view__main-visual mobile-image">
+				<div class="overlay-text">豊かな生活を支援します</div>
+			</div>
+
+
+
+			<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
+				新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
+				ぜひご利用ください!</p>
+
+		</div>
+
+	</div>
+	<div class="row mt-3">
+		<br>
+		<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
+			新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
+			ぜひご利用ください!</p>
+	</div>
+
+	<div class="row mt-3 white-background gray-background">
+		<h3 class="bordered-h3">ご相談内容一覧</h3>
+	</div>
+
+	<div class="gray-background">
+		<div class="col-1" id="headNumber">
+		</div>
+		<div id="headText">
+			<h4 class="left-align">不動産</h4>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+			<div class="mb-3">
 				<div class="image-container">
-					<img th:src="@{/img/vegetable.jpeg}" alt="PC"
-						class="main-view__main-visual img-fluid desktop-image">
-					<img th:src="@{/img/vegetable.jpeg}" alt="スマホ"
-						class="main-view__main-visual img-fluid mobile-image">
-					<div class="overlay-text">豊かな生活を支援します</div>
+					<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
 				</div>
-
-
-
-				<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
-					新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
-					ぜひご利用ください!</p>
+				<p>住宅ローンのアドバイス</p>
+				<ul>
+					<li>住宅購入を検討している顧客に対し、最適な金利や返済プランを提案します。</li>
+					<li>各種金融機関の住宅ローン商品の比較や選定支援を行います。</li>
+					<li>ローンの審査基準や必要な書類の準備方法についてアドバイスします。</li>
+				</ul>
 			</div>
 
-			<div class="row mt-3 white-background gray-background">
-				<h3 class="bordered-h3">ご相談内容一覧</h3>
+			<!-- 2枚目の画像 -->
+			<div class="mb-3">
+				<div class="col-3 image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+				</div>
+				<div class="col-7">
+					<p>資産運用の戦略策定</p>
+					<ul>
+						<li>不動産投資や資産の増やし方に関する戦略を提案します。</li>
+						<li>リスク管理と収益最大化を目指したポートフォリオの構築について相談に乗ります。</li>
+						<li>長期的な資産価値の向上を目指すためのアドバイスを行います。</li>
+					</ul>
+				</div>
 			</div>
 
-			<div class="gray-background">
-				<div class="col-1" id="headNumber">
+			<!-- 3枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
 				</div>
-				<div id="headText">
-					<h4 class="left-align">不動産</h4>
-				</div>
-
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-					<div class="mb-3">
-						<div class="image-container">
-							<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-						</div>
-						<p>住宅ローンのアドバイス</p>
-						<ul>
-							<li>住宅購入を検討している顧客に対し、最適な金利や返済プランを提案します。</li>
-							<li>各種金融機関の住宅ローン商品の比較や選定支援を行います。</li>
-							<li>ローンの審査基準や必要な書類の準備方法についてアドバイスします。</li>
-						</ul>
-					</div>
-
-					<!-- 2枚目の画像 -->
-					<div class="mb-3">
-						<div class="image-container">
-							<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-						</div>
-						<p>資産運用の戦略策定</p>
-						<ul>
-							<li>不動産投資や資産の増やし方に関する戦略を提案します。</li>
-							<li>リスク管理と収益最大化を目指したポートフォリオの構築について相談に乗ります。</li>
-							<li>長期的な資産価値の向上を目指すためのアドバイスを行います。</li>
-						</ul>
-					</div>
-
-					<!-- 3枚目の画像 -->
-					<div class="mb-3">
-						<div class="image-container">
-							<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-						</div>
-						<p>不動産の売買・賃貸・管理に関する助言</p>
-						<ul>
-							<li>物件の売却・購入に際しての市場動向や価格設定の最適化をサポートします。</li>
-							<li>物件を賃貸する際の家賃設定や入居者の選定方法についてアドバイスします。</li>
-							<li>不動産資産の適切な管理方法やメンテナンス計画についてのコンサルティングを行います。</li>
-						</ul>
-					</div>
-				</div>
-
-
-				<form action="/setEname" method="post">
-					<input type="hidden" name="ename" value="田中太郎">
-					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-				</form>
+				<p>不動産の売買・賃貸・管理に関する助言</p>
+				<ul>
+					<li>物件の売却・購入に際しての市場動向や価格設定の最適化をサポートします。</li>
+					<li>物件を賃貸する際の家賃設定や入居者の選定方法についてアドバイスします。</li>
+					<li>不動産資産の適切な管理方法やメンテナンス計画についてのコンサルティングを行います。</li>
+				</ul>
 			</div>
 		</div>
 
 
-		<div class="white-background">
-			<div class="col-1" id="headNumber">
-			</div>
-			<div id="headText">
-				<h4 class="left-align">おうちの修繕</h4>
-			</div>
-
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-				<div class="mb-3">
-					<div class="image-container">
-						<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-					</div>
-					<p>住宅の修繕とリフォームの設計</p>
-					<ul>
-						<li>既存住宅の老朽化対策として、構造物の補強と耐震改修の設計を行います。</li>
-						<li>インテリアのリフォーム計画を立案し、空間効率を最大化するデザイン提案をします。</li>
-						<li>ユーザーのライフスタイルに合わせたカスタムメイドの収納設計を提案します。</li>
-					</ul>
-				</div>
-
-				<!-- 2枚目の画像 -->
-				<div class="mb-3">
-					<div class="image-container">
-						<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-					</div>
-					<p>施工の一貫したサポート</p>
-					<ul>
-						<li>施工チームの統括と現場管理を行い、工事の進捗状況を確認します。</li>
-						<li>品質管理の基準に従って、施工中の品質チェックと調整を行います。</li>
-						<li>施工完了後のアフターケアや問題解決に対応します。</li>
-					</ul>
-				</div>
-
-				<!-- 3枚目の画像 -->
-				<div class="mb-3">
-					<div class="image-container">
-						<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-					</div>
-					<p>最新技術とトレンドに精通した特殊なリフォーム</p>
-					<ul>
-						<li>省エネ改修の専門家として、エネルギー効率の高い暖房設備や断熱材の導入を提案します。</li>
-						<li>バリアフリーリフォームのプランを立案し、高齢者や身体障害者向けの設備を設置します。</li>
-						<li>インテリアデザインにおいて、最新の素材とカラーパレットを活用して空間の魅力を最大化します。</li>
-					</ul>
-				</div>
-			</div>
+		<form action="/setEname" method="post">
+			<input type="hidden" name="ename" value="田中太郎">
+			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+		</form>
+	</div>
 
 
-			<form action="/setEname" method="post">
-				<input type="hidden" name="ename" value="佐藤花子">
-				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-			</form>
+	<div class="white-background">
+		<div class="col-1" id="headNumber">
 		</div>
+		<div id="headText">
+			<h4 class="left-align">おうちの修繕</h4>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
+				</div>
+				<p>住宅の修繕とリフォームの設計</p>
+				<ul>
+					<li>既存住宅の老朽化対策として、構造物の補強と耐震改修の設計を行います。</li>
+					<li>インテリアのリフォーム計画を立案し、空間効率を最大化するデザイン提案をします。</li>
+					<li>ユーザーのライフスタイルに合わせたカスタムメイドの収納設計を提案します。</li>
+				</ul>
+			</div>
+
+			<!-- 2枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+				</div>
+				<p>施工の一貫したサポート</p>
+				<ul>
+					<li>施工チームの統括と現場管理を行い、工事の進捗状況を確認します。</li>
+					<li>品質管理の基準に従って、施工中の品質チェックと調整を行います。</li>
+					<li>施工完了後のアフターケアや問題解決に対応します。</li>
+				</ul>
+			</div>
+
+			<!-- 3枚目の画像 -->
+			<div class="mb-3">
+				<div class="image-container">
+					<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+				</div>
+				<p>最新技術とトレンドに精通した特殊なリフォーム</p>
+				<ul>
+					<li>省エネ改修の専門家として、エネルギー効率の高い暖房設備や断熱材の導入を提案します。</li>
+					<li>バリアフリーリフォームのプランを立案し、高齢者や身体障害者向けの設備を設置します。</li>
+					<li>インテリアデザインにおいて、最新の素材とカラーパレットを活用して空間の魅力を最大化します。</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<form action="/setEname" method="post">
+			<input type="hidden" name="ename" value="佐藤花子">
+			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+		</form>
 	</div>
 
 
@@ -234,7 +243,6 @@
 			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 		</form>
 	</div>
-	</div>
 
 
 	<div class="white-background">
@@ -289,7 +297,6 @@
 			<input type="hidden" name="ename" value="高橋美咲">
 			<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 		</form>
-	</div>
 	</div>
 
 
