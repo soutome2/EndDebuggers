@@ -299,9 +299,12 @@ th {
 }
 
 .main-view__main-visual {
-    width: 100%; /* 幅を100%に設定 */
-    height: 200px;; /* 高さは自動調整 */
-    /* 他のスタイルを追加 */
+	width: 100%;
+	/* 幅を100%に設定 */
+	height: 200px;
+	;
+	/* 高さは自動調整 */
+	/* 他のスタイルを追加 */
 }
 
 .overlay-text {
@@ -320,7 +323,7 @@ th {
 /* スマホサイズ（最大幅576px）の場合にのみ画像サイズを指定 */
 @media (max-width: 576px) {
 	.img-fluid {
-		
+
 		width: 40%;
 		height: 40%;
 		height: auto;
@@ -331,24 +334,45 @@ th {
 		position: relative;
 
 	}
+
+	/* テーブル全体のサイズ調整 */
+	.table-chenge {
+		font-size: 0.6rem;
+		/* 文字サイズを調整 */
+	}
+
+	/* セルのパディング調整 */
+	.table-chenge th,
+	.table-chenge td {
+		padding: 0.1rem;
+		/* セルのパディングを調整 */
+	}
+
+
 }
 
 /* デスクトップ向けスタイル */
 .desktop-image {
-    display: block; /* デスクトップ画像を表示 */
+	display: block;
+	/* デスクトップ画像を表示 */
 }
+
 .mobile-image {
-    display: none; /* デスクトップ用画像が表示されている場合、スマートフォン用画像は非表示 */
+	display: none;
+	/* デスクトップ用画像が表示されている場合、スマートフォン用画像は非表示 */
 }
 
 /* スマートフォン向けスタイル */
 @media (max-width: 767.98px) {
-    .desktop-image {
-        display: none; /* スマートフォンでは非表示 */
-    }
-    .mobile-image {
-        display: block; /* スマートフォン画像を表示 */
-    }
+	.desktop-image {
+		display: none;
+		/* スマートフォンでは非表示 */
+	}
+
+	.mobile-image {
+		display: block;
+		/* スマートフォン画像を表示 */
+	}
 }
 
 .footer {
