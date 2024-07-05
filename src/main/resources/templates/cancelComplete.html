@@ -28,7 +28,7 @@
 
 						<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
 							<li class="nav-item">
-								<a href="/" class="nav-link active" aria-current="page">Home</a>
+								<a href="/" class="nav-link" aria-current="page">Home</a>
 							</li>
 						</ul>
 
@@ -38,30 +38,34 @@
 							</li>
 						</ul>
 
+
 					</div>
 				</div>
 
 			</nav>
 
 		</div>
+	</div>
 
 		<br>
 		<h3>以下の予約をキャンセルしました</h3><br>
 		<form action="Customer" method="post" th:object="${deleteReserve}">
-			<table>
-				<tr>
-					<th class="tableHead2">予約ID</th>
-					<th class="tableHead2">担当者</th>
-					<th class="tableHead2">予約日時</th>
-					<th class="tableHead2">相談内容</th>
-				</tr>
-				<tr>
-					<th><span th:text="*{reserveid}"></span></th>
-					<th><span th:text="*{ename}"></span>
-					<th><span th:text="*{reservedate}+' '+*{reservetime}"></span></th>
-					<th><span th:text="*{detail}"></span></th>
-				</tr>
-			</table>
+			<div class="table-responsive">
+				<table>
+					<tr>
+						<th class="tableHead2">予約ID</th>
+						<th class="tableHead2">担当者</th>
+						<th class="tableHead2">予約日時</th>
+						<th class="tableHead2">相談内容</th>
+					</tr>
+					<tr>
+						<th><span th:text="*{reserveid}"></span></th>
+						<th><span th:text="*{ename}"></span>
+						<th><span th:text="*{reservedate}+' '+*{reservetime}"></span></th>
+						<th><span th:text="*{detail}"></span></th>
+					</tr>
+				</table>
+			</div>
 			<br><br>
 			<input type="hidden" name="cid" th:value="${session.cid}">
 			<input type="hidden" name="password" th:value="${session.password}">

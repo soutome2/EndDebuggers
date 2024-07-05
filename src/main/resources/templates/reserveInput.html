@@ -16,28 +16,32 @@
 		<div class="row">
 			<nav class="navbar navbar-expand-sm navbar-light bg-light">
 				<div class="container">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-						aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarContent">
-						<ul class="navbar-nav me-auto mb-2 mb-sm-0">
+
+						<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
 							<li class="nav-item">
-								<a href="/" class="nav-link active" aria-current="page">Home</a>
+								<a href="/" class="nav-link" aria-current="page">Home</a>
 							</li>
 						</ul>
 
 						<ul class="navbar-nav mb-2 mb-sm-0">
 							<li class="nav-item">
-
 								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
-
 							</li>
 						</ul>
+
+
 					</div>
 				</div>
+
 			</nav>
+
 		</div>
 	</div>
 
@@ -60,36 +64,38 @@
 		<h3 th:text="${session.ename} + 'の空き状況'"></h3>
 
 
-		<table>
-			<thead>
-				<tr>
-					<th class="tableHead1"></th> <!-- 空のセルを作成 -->
-					<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-					<th class="tableHead1" th:each="head : ${session.headDateList}" th:text="${head}"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- 時間のリストを基に縦軸の行を生成 -->
-				<tr th:each="time, rowIndex : ${session.timeList}">
-					<td th:text="${time}"></td> <!-- 時間を表示 -->
-					<!-- 各セルに対して、条件によって表示を変える -->
-					<td th:each="date, colIndex : ${session.dateList}" class="tableData">
-						<!-- matrix のデータを表示する -->
-						<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-							<form action="Reservetime" method="post">
-								<input type="hidden" name="date" th:value="${date}">
-								<input type="hidden" name="time" th:value="${time}">
-								<button type="submit" class="circle">〇</button>
-							</form>
-						</span>
-						<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">
-							×
-						</span>
-						<!-- 他の値に対する条件表示も必要であれば追加 -->
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class=" table-chenge">
+				<thead>
+					<tr>
+						<th class="tableHead1"></th> <!-- 空のセルを作成 -->
+						<!-- 日付のリストを基に横軸のヘッダーを生成 -->
+						<th class="tableHead1" th:each="head : ${session.headDateList}" th:text="${head}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- 時間のリストを基に縦軸の行を生成 -->
+					<tr th:each="time, rowIndex : ${session.timeList}">
+						<td th:text="${time}"></td> <!-- 時間を表示 -->
+						<!-- 各セルに対して、条件によって表示を変える -->
+						<td th:each="date, colIndex : ${session.dateList}" class="tableData">
+							<!-- matrix のデータを表示する -->
+							<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
+								<form action="Reservetime" method="post">
+									<input type="hidden" name="date" th:value="${date}">
+									<input type="hidden" name="time" th:value="${time}">
+									<button type="submit" class="circle">〇</button>
+								</form>
+							</span>
+							<span class="cross" th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">
+								×
+							</span>
+							<!-- 他の値に対する条件表示も必要であれば追加 -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<br>
 		<!--<form action="Complete" method="post" th:object="${reserveInputForm}">
 			<table>
