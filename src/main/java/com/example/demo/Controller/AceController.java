@@ -235,8 +235,9 @@ public class AceController {
 	}
 
 	@PostMapping("/setEname")
-	public String PostReserve(@RequestParam("ename") String ename) {
+	public String PostReserve(@RequestParam("ename") String ename, @RequestParam("image") String image) {
 		session.setAttribute("ename", ename);
+		session.setAttribute("image", image);
 
 		return "redirect:/Reserve";
 
