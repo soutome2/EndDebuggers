@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+
+.section {
+	text-align: center;
+}
+
 .section::after {
 	background-image: url(/img/arrow-right-circle.svg);
 	background-position: center;
@@ -14,3 +19,4 @@
 	vertical-align: middle;
 	width: 8px;
 }
+
