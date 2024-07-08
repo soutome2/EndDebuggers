@@ -17,7 +17,7 @@
 	<div class="wrapper">
 		<div class="content">
 			<div class="container-fluid">
-				<div class="row">
+				<div> class="row">
 					<nav class="navbar navbar-expand-sm navbar-light bg-light">
 						<div class="container">
 							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -40,31 +40,26 @@
 											aria-current="page">Login</a>
 									</li>
 								</ul>
-
-
 							</div>
 						</div>
-
 					</nav>
-
 				</div>
+				</nav>
 			</div>
 			<br>
 			<div class="container white-background">
 
 				<br>
-				<h3>以下の予約をキャンセルしました</h3><br>
+				<h3>以下の予約をキャンセルしました。</h3><br>
 				<form action="Customer" method="post" th:object="${deleteReserve}">
 					<div class="table-responsive">
 						<table>
 							<tr>
-								<th class="tableHead2">予約ID</th>
 								<th class="tableHead2">担当者</th>
 								<th class="tableHead2">予約日時</th>
 								<th class="tableHead2">相談内容</th>
 							</tr>
 							<tr>
-								<th><span th:text="*{reserveid}"></span></th>
 								<th><span th:text="*{ename}"></span>
 								<th><span th:text="*{reservedate}+' '+*{reservetime}"></span></th>
 								<th><span th:text="*{detail}"></span></th>
