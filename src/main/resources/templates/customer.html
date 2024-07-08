@@ -47,28 +47,36 @@
 		</div>
 	</div>
 	<br>
-	<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
-	<div id="contents" class="table-responsive">
-		<table>
-			<tr>
-				<th class="tableHead2">日付</th>
-				<th class="tableHead2">時間</th>
-				<th class="tableHead2">担当者名</th>
-				<th class="tableHead2">相談内容</th>
-				<th class="tableHead2">予約のキャンセル</th>
-			</tr>
-			<tr th:each="reserve:${reserveList}">
-				<td th:text="${reserve.reservedate}"></td>
-				<td th:text="${reserve.reservetime}"></td>
-				<td th:text="${reserve.ename}"></td>
-				<td th:text="${reserve.detail}"></td>
 
-				<td> <form action="/cancelComplete" method="post" >
-					<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
-					<button type="submit" class="btn-cancel">キャンセルする</button>
-				</form></td>
-			</tr>
-		</table>
+	<div class="container bg-light">
+		<br>
+		<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
+		<div id="contents" class="table-responsive">
+			<table>
+				<tr>
+					<th class="tableHead2">日付</th>
+					<th class="tableHead2">時間</th>
+					<th class="tableHead2">担当者名</th>
+					<th class="tableHead2">相談内容</th>
+					<th class="tableHead2">予約のキャンセル</th>
+				</tr>
+				<tr th:each="reserve:${reserveList}">
+					<td th:text="${reserve.reservedate}"></td>
+					<td th:text="${reserve.reservetime}"></td>
+					<td th:text="${reserve.ename}"></td>
+					<td th:text="${reserve.detail}"></td>
+
+					<td>
+						<form action="/cancelComplete" method="post">
+							<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
+							<button type="submit" class="btn-cancel">キャンセルする</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+		</div>
 	</div>
 
 
