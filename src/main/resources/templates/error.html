@@ -46,15 +46,26 @@
 
 		</div>
 	</div>
+	<br>
+	<div class="container white-background">
+		<br>
+		<div class="container">
+			<br>
+			<h1>Error</h1>
+			<p>申し訳ありませんが、予期しないエラーが発生しました。</p>
+			<p>ご迷惑をおかけして申し訳ありませんが、しばらくしてから再度お試しください。</p>
+			<br>
+			<p>エラー内容は以下の通りです。</p>
+			<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+			<br>
+			<br>
+		</div>
+	</div>
 
-	<div class="container">
-		<br>
-		<h1>Error</h1>
-		<p>申し訳ありませんが、予期しないエラーが発生しました。</p>
-		<p>ご迷惑をおかけして申し訳ありませんが、しばらくしてから再度お試しください。</p>
-		<br>
-		<p>エラー内容は以下の通りです。</p>
-		<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+	<div class="footer_chase">
+		<small class="footer_copy">
+			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+		</small>
 	</div>
 </body>
 
