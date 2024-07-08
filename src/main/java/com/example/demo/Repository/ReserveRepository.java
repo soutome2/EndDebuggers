@@ -12,7 +12,8 @@ import com.example.demo.Entity.Reserve;
 public interface ReserveRepository extends JpaRepository<Reserve,Integer>{
 	public List<Reserve> findAllByEname(String ename);
 	public List<Reserve> findAllByCid(String cid);
-	public Optional<Reserve> findByReservedateAndReservetime(LocalDate reserveDate, LocalTime reserveTime);
+	public Optional<Reserve> findByReservedateAndReservetimeAndEname(LocalDate reserveDate, LocalTime reserveTime, String ename);
+	public Optional<Reserve> findByReservedateAndReservetimeAndCid(LocalDate reserveDate, LocalTime reserveTime, String cid);
 	public Reserve findByReserveid(Integer reserveid);
 	public void deleteByReserveid(Integer reserveid);
 }

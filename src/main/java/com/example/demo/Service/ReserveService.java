@@ -20,11 +20,19 @@ public class ReserveService {
 
 	public void getByDateTime(ReserveInputForm reserveInputForm, BindingResult result) {
 		
-		Optional<Reserve> opt = reserveRepository.findByReservedateAndReservetime(reserveInputForm.getReservedate(), reserveInputForm.getReservetime());
-
-		if (!opt.isEmpty()) {
+		Optional<Reserve> optCid = reserveRepository.findByReservedateAndReservetimeAndCid(reserveInputForm.getReservedate(), reserveInputForm.getReservetime(), reserveInputForm.getCid());
+		
+		if (!optCid.isEmpty()) {
 			result.addError(new FieldError(
-					result.getObjectName(), "reservedate", "予約がいっぱいです"));
+					result.getObjectName(), "reservedate", "あなたはこの時間に別の予約が入っています"));
+			return;
+		}
+		
+		Optional<Reserve> optEname = reserveRepository.findByReservedateAndReservetimeAndEname(reserveInputForm.getReservedate(), reserveInputForm.getReservetime(), reserveInputForm.getEname());
+		
+		if (!optEname.isEmpty()) {
+			result.addError(new FieldError(
+					result.getObjectName(), "reservedate", "この時間の予約は締め切られました"));
 			return;
 		}
 		

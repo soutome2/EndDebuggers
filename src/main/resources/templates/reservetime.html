@@ -59,24 +59,26 @@
 				<tr>
 					<th class="tableHead1">予約日時</th>
 					<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
-					<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></h4></td>
+						<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></h4>
+					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
-					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
+					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="8">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">パスワード*</th>
-					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
+					<td><input name="password" type="password" class="width-middle" th:value="*{password}"
+							maxlength="20">
 						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">相談内容</th>
-					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
-							th:value="*{detail}">
+					<td><textarea name="detail" type="text" class="width-middle" style="width: 300px; height: 80px;"
+							maxlength="100">[[*{detail}]]</textarea>
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>
