@@ -4,6 +4,9 @@ body {
 	margin: 0;
 	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	color: #333;
+	background-image: url("../img/tree.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 p {
@@ -111,6 +114,13 @@ h4 {
 	margin-right: 10px;
 }
 
+
+.controlboxlog {
+
+	height: 100%;
+}
+
+
 .button,
 .button-red {
 	background-color: #95A5A6;
@@ -151,6 +161,21 @@ h4 {
 	background-color: #c0392b;
 }
 
+
+.loginBack {
+	background-image: url("../img/tree.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+
+}
+
+.loginPage {
+	background-color: white;
+	width: 500px;
+	height: 300fpx;
+}
+
 #footer {
 	margin: 40px 0 0 0;
 	padding: 20px;
@@ -167,6 +192,10 @@ h4 {
 	margin: 20px 0 0 0;
 	color: #e74c3c;
 	font-weight: bold;
+}
+
+.atten {
+	color: red;
 }
 
 #errormsg {
@@ -280,18 +309,26 @@ th {
 	color: rgb(255, 255, 255);
 
 }
+
 /*キャンセルボタン*/
 .btn-cancel {
-    background-color: transparent; /* 背景色を透明にする */
-    color: red; /* ボタンのテキスト色を赤にする */
-    border: none; /* ボーダーをなくす */
-    padding: 0; /* パディングを0にする */
-    cursor: pointer; /* ホバー時のカーソル形状 */
-    text-decoration: underline; /* テキストに下線を追加 */
+	background-color: transparent;
+	/* 背景色を透明にする */
+	color: red;
+	/* ボタンのテキスト色を赤にする */
+	border: none;
+	/* ボーダーをなくす */
+	padding: 0;
+	/* パディングを0にする */
+	cursor: pointer;
+	/* ホバー時のカーソル形状 */
+	text-decoration: underline;
+	/* テキストに下線を追加 */
 }
 
 .btn-cancel:hover {
-    color: darkred; /* ホバー時のテキスト色を変更 */
+	color: darkred;
+	/* ホバー時のテキスト色を変更 */
 }
 
 /**/

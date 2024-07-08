@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#loginPage{
+    background-image: url("../img/tree.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    
+}

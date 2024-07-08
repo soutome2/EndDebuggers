@@ -46,28 +46,30 @@
 
 		</div>
 	</div>
+	<br>
+
+	<div class="container bg-light">
+		<div class="container-fluid" id="bodyid">
+			<div class="row mt-3">
+				<br>
+				<h2>Ace社コンシェルジュデスクサ―ビス</h2>
 
 
-	<div class="container-fluid" id="bodyid">
-		<div class="row mt-3">
-			<h2>Ace社コンシェルジュデスクサ―ビス</h2>
+				<div class="image-container">
+					<img th:src="@{/img/vegetable.jpeg}" alt="PC" class="main-view__main-visual desktop-image">
+					<img th:src="@{/img/vegetable.jpeg}" alt="スマホ" class="main-view__main-visual mobile-image">
+					<div class="overlay-text">豊かな生活を支援します</div>
+				</div>
 
-
-			<div class="image-container">
-				<img th:src="@{/img/vegetable.jpeg}" alt="PC" class="main-view__main-visual desktop-image">
-				<img th:src="@{/img/vegetable.jpeg}" alt="スマホ" class="main-view__main-visual mobile-image">
-				<div class="overlay-text">豊かな生活を支援します</div>
+				<div>
+					<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
+						新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
+						ぜひご利用ください!</p>
+				</div>
 			</div>
 
-			<div>
-				<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
-					新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
-					ぜひご利用ください!</p>
-			</div>
 		</div>
-
 	</div>
-
 
 	<div class="row mt-3 white-background gray-background">
 		<h3 class="bordered-h3">ご相談内容一覧</h3>
@@ -127,9 +129,7 @@
 					</ul>
 				</div>
 			</div>
-
-
-			<form action="/setEname" method="post">
+			<form action=" /setEname" method="post">
 				<input type="hidden" name="ename" value="田中太郎">
 				<input type="hidden" name="furigana" value="(タナカ タロウ)">
 				<input type="hidden" name="referral" value="はじめまして、田中太郎と申します。
@@ -140,7 +140,6 @@
 				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 			</form>
 		</section>
-
 
 		<section class="white-background" id="おうちの修繕">
 			<div class="col-1" id="headNumber">
@@ -161,6 +160,7 @@
 						<li>ライフスタイルに合わせた収納設計の提案</li>
 					</ul>
 				</div>
+
 
 				<!-- 2枚目の画像 -->
 				<div class="mb-3">
@@ -188,8 +188,6 @@
 					</ul>
 				</div>
 			</div>
-
-
 			<form action="/setEname" method="post">
 				<input type="hidden" name="ename" value="佐藤花子">
 				<input type="hidden" name="furigana" value="(サトウ ハナコ)">
@@ -201,7 +199,6 @@
 				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 			</form>
 		</section>
-
 
 		<section class="gray-background" id="介護">
 			<div class="col-1" id="headNumber">
@@ -222,6 +219,7 @@
 						<li>身体的なケアや精神的なサポートの提供</li>
 					</ul>
 				</div>
+
 
 				<!-- 2枚目の画像 -->
 				<div class="mb-3">
@@ -249,15 +247,13 @@
 					</ul>
 				</div>
 			</div>
-
-
 			<form action="/setEname" method="post">
 				<input type="hidden" name="ename" value="鈴木一郎">
 				<input type="hidden" name="furigana" value="(スズキ イチロウ)">
 				<input type="hidden" name="referral" value="はじめまして、鈴木一郎です。
 				介護福祉士として25年のキャリアを持ち、
 				特に認知症ケアや在宅介護の支援に力を注いでいます。
-                用者とその家族に寄り添ったサポートを提供し、地域社会に貢献しています。
+                利用者とその家族に寄り添ったサポートを提供し、地域社会に貢献しています。
                 どうぞお気軽にご相談ください。">
 				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 			</form>
@@ -310,8 +306,6 @@
 					</ul>
 				</div>
 			</div>
-
-
 			<form action="/setEname" method="post">
 				<input type="hidden" name="ename" value="高橋美咲">
 				<input type="hidden" name="furigana" value="(タカハシ ミサキ)">
@@ -372,9 +366,7 @@
 					</ul>
 				</div>
 			</div>
-
-
-			<form action="/setEname" method="post">
+			<form action=" /setEname" method="post">
 				<input type="hidden" name="ename" value="中村健太">
 				<input type="hidden" name="furigana" value="(ナカムラ ケンタ)">
 				<input type="hidden" name="referral" value="はじめまして、中村健太です。
@@ -385,6 +377,7 @@
 				<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
 			</form>
 		</section>
+	</div>
 	</div>
 
 
