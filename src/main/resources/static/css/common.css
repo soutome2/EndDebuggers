@@ -468,8 +468,18 @@ th {
     z-index: 1000; /* 必要に応じてz-indexを設定（他の要素との重なり順を制御） */
 }
 
+.wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+.content {
+	flex: 1;
+}
 
 .footer_foot {
+	flex-shrink: 0; /* フッターがコンテンツより小さい場合に固定します */
 	background: #000;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
