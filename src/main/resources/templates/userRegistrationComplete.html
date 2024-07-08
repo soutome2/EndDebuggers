@@ -14,73 +14,79 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<nav class="navbar navbar-expand-sm navbar-light bg-light">
-				<div class="container">
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-						data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+	<div class="wrapper">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<nav class="navbar navbar-expand-sm navbar-light bg-light">
+						<div class="container">
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
 
-					<div class="collapse navbar-collapse" id="navbarContent">
+							<div class="collapse navbar-collapse" id="navbarContent">
 
-						<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-							<li class="nav-item">
-								<a href="/" class="nav-link" aria-current="page">Home</a>
-							</li>
-						</ul>
+								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+									<li class="nav-item">
+										<a href="/" class="nav-link" aria-current="page">Home</a>
+									</li>
+								</ul>
 
-						<ul class="navbar-nav mb-2 mb-sm-0">
-							<li class="nav-item">
-								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
-							</li>
-						</ul>
+								<ul class="navbar-nav mb-2 mb-sm-0">
+									<li class="nav-item">
+										<a href="/Login" class="nav-link, btn btn-outline-primary"
+											aria-current="page">Login</a>
+									</li>
+								</ul>
 
 
-					</div>
+							</div>
+						</div>
+
+					</nav>
+
 				</div>
+			</div>
+			<br>
+			<div class="container white-background">
+				<br>
+				<h3>以下の情報で登録が完了しました</h3><br>
 
-			</nav>
+				<table>
+					<tr>
+						<th class="tableHead2">ユーザーID</th>
+						<td><span th:text="${customerInputForm.cid}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">パスワード</th>
+						<td><span th:text="${customerInputForm.cname}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">電話番号</th>
+						<td><span th:text="${customerInputForm.tel}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">メールアドレス</th>
+						<td><span th:text="${customerInputForm.mailaddress}"></span></td>
+					</tr>
+				</table>
+				<br>
+				<br>
 
+				<a href="/Reserve" class="btn btn-primary-custom">予約ページに戻る</a>
+				<br>
+				<br>
+			</div>
 		</div>
-	</div>
-	<br>
-	<div class="container white-background">
-		<br>
-		<h3>以下の情報で登録が完了しました</h3><br>
-
-		<table>
-			<tr>
-				<th class="tableHead2">ユーザーID</th>
-				<td><span th:text="${customerInputForm.cid}"></span></td>
-			</tr>
-			<tr>
-				<th class="tableHead2">パスワード</th>
-				<td><span th:text="${customerInputForm.cname}"></span></td>
-			</tr>
-			<tr>
-				<th class="tableHead2">電話番号</th>
-				<td><span th:text="${customerInputForm.tel}"></span></td>
-			</tr>
-			<tr>
-				<th class="tableHead2">メールアドレス</th>
-				<td><span th:text="${customerInputForm.mailaddress}"></span></td>
-			</tr>
-		</table>
-		<br>
 		<br>
 
-		<a href="/Reserve" class="btn btn-primary-custom">予約ページに戻る</a>
-		<br>
-		<br>
-	</div>
-
-	<div class="footer_chase">
-		<small class="footer_copy">
-			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-		</small>
+		<div class="footer_foot">
+			<small class="footer_copy">
+				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+			</small>
+		</div>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

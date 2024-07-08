@@ -13,59 +13,60 @@
 </head>
 
 <body>
+	<div class="wrapper">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<nav class="navbar navbar-expand-sm navbar-light bg-light">
+						<div class="container">
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
 
-	<div class="container-fluid">
-		<div class="row">
-			<nav class="navbar navbar-expand-sm navbar-light bg-light">
-				<div class="container">
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-						data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+							<div class="collapse navbar-collapse" id="navbarContent">
 
-					<div class="collapse navbar-collapse" id="navbarContent">
+								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+									<li class="nav-item">
+										<a href="/" class="nav-link" aria-current="page">Home</a>
+									</li>
+								</ul>
 
-						<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-							<li class="nav-item">
-								<a href="/" class="nav-link" aria-current="page">Home</a>
-							</li>
-						</ul>
-
-						<ul class="navbar-nav mb-2 mb-sm-0">
-							<li class="nav-item">
-								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
-							</li>
-						</ul>
+								<ul class="navbar-nav mb-2 mb-sm-0">
+									<li class="nav-item">
+										<a href="/Login" class="nav-link, btn btn-outline-primary"
+											aria-current="page">Login</a>
+									</li>
+								</ul>
 
 
-					</div>
+							</div>
+						</div>
+
+					</nav>
+
 				</div>
-
-			</nav>
-
+			</div>
+			<br>
+			<div class="container white-background">
+				<br>
+				<h1>Error</h1>
+				<p>申し訳ありません、予期しないエラーが発生しました。</p>
+				<p>ご迷惑をおかけして申し訳ありませんが、しばらくしてから再度お試しください。</p>
+				<br>
+				<p>エラー内容は以下の通りです。</p>
+				<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+				<br>
+			</div>
 		</div>
-	</div>
-	<br>
-	<div class="container white-background">
 		<br>
-		<div class="container">
-			<br>
-			<h1>Error</h1>
-			<p>申し訳ありません、予期しないエラーが発生しました。</p>
-			<p>ご迷惑をおかけして申し訳ありませんが、しばらくしてから再度お試しください。</p>
-			<br>
-			<p>エラー内容は以下の通りです。</p>
-			<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
-			<br>
-			<br>
-		</div>
-	</div>
 
-	<div class="footer_chase">
-		<small class="footer_copy">
-			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-		</small>
+		<div class="footer_foot">
+			<small class="footer_copy">
+				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+			</small>
+		</div>
 	</div>
 </body>
 
