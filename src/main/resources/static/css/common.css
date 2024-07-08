@@ -454,9 +454,20 @@ th {
 	}
 }
 
-.footer {
-	font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif;
+.footer_chase{
+    position: fixed; /* フッターを固定位置に配置 */
+    bottom: 0; /* ページの下端に配置 */
+    width: 100%; /* 幅を100%に設定 */
+    background-color: #000; /* 背景色を設定 */
+    color: #fff; /* テキストの色を設定 */
+    text-align: center; /* テキストを中央揃えに設定 */
+    font-size: 10px; /* フォントサイズを設定 */
+    min-height: 60px; /* 最小の高さを設定 */
+    padding: 22px; /* 内側の余白を設定 */
+    font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif; /* フォントファミリーを設定 */
+    z-index: 1000; /* 必要に応じてz-indexを設定（他の要素との重なり順を制御） */
 }
+
 
 .footer_foot {
 	background: #000;
