@@ -2,7 +2,7 @@
 
 
 .section {
-    text-align: center;
+	text-align: center;
 }
 
 .section::after {
@@ -19,3 +19,4 @@
 	vertical-align: middle;
 	width: 8px;
 }
+
