@@ -57,13 +57,13 @@
 						<tr>
 							<th class="tableHead1" style="color: black;">利用者ID*</th>
 							<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
-								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}" class="atten"></span>
 							</td>
 						</tr>
 						<tr>
 							<th class="tableHead1" style="color: black;">パスワード*</th>
 							<td><input name="password" type="password" class="width-middle" th:value="*{password}">
-								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password} class="atten""></span>
 							</td>
 						</tr>
 					</table>
