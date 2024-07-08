@@ -60,9 +60,13 @@ public class AceController {
 	public ModelAndView GetReserve(ReserveInputForm reserveInputForm, ModelAndView mv) {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
-		if (enameObject != null) {
-			enameString = enameObject.toString(); // toString()メソッドでStringに変換
+		if (enameObject == null) {
+			mv.addObject("errorMessage", "Homeページで相談ジャンルを選択してください");
+			mv.setViewName("error");
+	        return mv;
 		}
+		
+		enameString = enameObject.toString(); // toString()メソッドでStringに変換
 
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 
