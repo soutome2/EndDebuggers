@@ -14,271 +14,252 @@
 </head>
 
 <body>
-	<div class="wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<nav class="navbar navbar-expand-sm navbar-light bg-light">
-					<div class="container">
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-							data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="navbar navbar-expand-sm navbar-light bg-light">
+				<div class="container">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-						<div class="collapse navbar-collapse" id="navbarContent">
+					<div class="collapse navbar-collapse" id="navbarContent">
 
-							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-								<li class="nav-item">
-									<a href="/" class="nav-link active" aria-current="page">Home</a>
-								</li>
-							</ul>
+						<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+							<li class="nav-item">
+								<a href="/" class="nav-link active" aria-current="page">Home</a>
+							</li>
+						</ul>
 
-							<ul class="navbar-nav mb-2 mb-sm-0">
-								<li class="nav-item">
-									<a href="/Login" class="nav-link, btn btn-outline-primary"
-										aria-current="page">Login</a>
-								</li>
-							</ul>
+						<ul class="navbar-nav mb-2 mb-sm-0">
+							<li class="nav-item">
+								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+							</li>
+						</ul>
 
 
-						</div>
-					</div>
-
-				</nav>
-
-			</div>
-		</div>
-		<br>
-
-		<div class="container white-background content">
-			<div class="container-fluid" id="bodyid">
-				<div class="row mt-3 white-background">
-					<br>
-					<h2>Ace社コンシェルジュデスクサ―ビス</h2>
-
-
-					<div class="image-container">
-						<img th:src="@{/img/vegetable.jpeg}" alt="PC" class="main-view__main-visual desktop-image">
-						<img th:src="@{/img/vegetable.jpeg}" alt="スマホ" class="main-view__main-visual mobile-image">
-						<div class="overlay-text">豊かな生活を支援します</div>
-					</div>
-
-					<div>
-						<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
-							新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
-							ぜひご利用ください!</p>
 					</div>
 				</div>
 
+			</nav>
+
+		</div>
+	</div>
+	<br>
+
+	<div class="container white-background">
+		<div class="container-fluid" id="bodyid">
+			<div class="row mt-3 white-background">
+				<br>
+				<h2>Ace社コンシェルジュデスクサ―ビス</h2>
+
+
+				<div class="image-container">
+					<img th:src="@{/img/vegetable.jpeg}" alt="PC" class="main-view__main-visual desktop-image">
+					<img th:src="@{/img/vegetable.jpeg}" alt="スマホ" class="main-view__main-visual mobile-image">
+					<div class="overlay-text">豊かな生活を支援します</div>
+				</div>
+
+				<div>
+					<p>全国に店舗数は約5200カ所あり、グループ従業員数は約10万人をほこるACE社は
+						新たに日常のちょっとした困りごとに対応できるコンシェルジュデスクを開設することになりました。
+						ぜひご利用ください!</p>
+				</div>
 			</div>
 
-			<div class="row mt-3 white-background gray-background">
-				<h3 class="bordered-h3">ご相談内容一覧</h3>
-			</div>
-			<div class="row white-background">
-				<a href="#不動産" class="section col-4">不動産</a>
-				<a href="#おうちの修繕" class="section col-4">おうちの修繕</a>
-				<a href="#介護" class="section col-4">介護</a>
-				<a href="#終活・相続" class="section col-6">終活・相続</a>
-				<a href="#金融・保険" class="section col-6">金融・保険</a>
-			</div>
+		</div>
 
-			<div class="container-fluid" id="bodyid">
-				<section class="gray-background" id="不動産">
-					<div class="col-1" id="headNumber">
-					</div>
-					<div id="headText">
-						<h4 class="left-align">不動産</h4>
-					</div>
+		<div class="row mt-3 white-background gray-background">
+			<h3 class="bordered-h3">ご相談内容一覧</h3>
+		</div>
+		<div class="row white-background">
+			<a href="#不動産" class="section col-4">不動産</a>
+			<a href="#おうちの修繕" class="section col-4">おうちの修繕</a>
+			<a href="#介護" class="section col-4">介護</a>
+			<a href="#終活・相続" class="section col-6">終活・相続</a>
+			<a href="#金融・保険" class="section col-6">金融・保険</a>
+		</div>
 
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/不動産/ローン.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-							</div>
-							<p>住宅ローンのアドバイス</p>
-							<ul>
-								<li>金利や返済プランの最適化提案</li>
-								<li>金融機関の住宅ローン商品比較・選定支援</li>
-								<li>審査基準や必要書類のアドバイス</li>
-							</ul>
+		<div class="container-fluid" id="bodyid">
+			<section class="gray-background" id="不動産">
+				<div class="col-1" id="headNumber">
+				</div>
+				<div id="headText">
+					<h4 class="left-align">不動産</h4>
+				</div>
+
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/不動産/ローン.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
 						</div>
+						<p>住宅ローンのアドバイス</p>
+						<ul>
+							<li>金利や返済プランの最適化提案</li>
+							<li>金融機関の住宅ローン商品比較・選定支援</li>
+							<li>審査基準や必要書類のアドバイス</li>
+						</ul>
+					</div>
+
+					<!-- 2枚目の画像 -->
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/不動産/資産運用.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+						</div>
+						<p>資産運用の戦略策定</p>
+						<ul>
+							<li>不動産投資の戦略提案</li>
+							<li>ポートフォリオのリスク管理と収益最大化の相談</li>
+							<li>長期的な資産価値の向上アドバイス</li>
+						</ul>
+					</div>
 
 					<!-- 3枚目の画像 -->
 					<div class="mb-3">
 						<div class="image-container">
-							<img th:src="@{/img/不動産/不動産売買.jpg}" alt="画像3" style="width: 300px; height: 225px;" class="img-fluid">
-
-						<!-- 2枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/不動産/資産運用.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-							</div>
-							<p>資産運用の戦略策定</p>
-							<ul>
-								<li>不動産投資の戦略提案</li>
-								<li>ポートフォリオのリスク管理と収益最大化の相談</li>
-								<li>長期的な資産価値の向上アドバイス</li>
-							</ul>
-
+							<img th:src="@{/img/不動産/不動産売買.jpg}" alt="画像3" style="width: 300px; height: 225px;"
+								class="img-fluid">
 						</div>
-
-						<!-- 3枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/不動産/不動産売買.jpg}" alt="画像3" width="300" height="300"
-									class="img-fluid">
-							</div>
-							<p>不動産の売買・賃貸・管理に関する助言</p>
-							<ul>
-								<li>不動産選択のアドバイス</li>
-								<li>最適な取引条件とリスク管理</li>
-								<li>顕在的な希望の発見アドバイス</li>
-							</ul>
-						</div>
+						<p>不動産の売買・賃貸・管理に関する助言</p>
+						<ul>
+							<li>不動産選択のアドバイス</li>
+							<li>最適な取引条件とリスク管理</li>
+							<li>顕在的な希望の発見アドバイス</li>
+						</ul>
 					</div>
-					<form action=" /setEname" method="post">
-						<input type="hidden" name="ename" value="田中太郎">
-						<input type="hidden" name="furigana" value="(タナカ タロウ)">
-						<input type="hidden" name="referral" value="はじめまして、田中太郎と申します。
+				</div>
+				<form action=" /setEname" method="post">
+					<input type="hidden" name="ename" value="田中太郎">
+					<input type="hidden" name="furigana" value="(タナカ タロウ)">
+					<input type="hidden" name="referral" value="はじめまして、田中太郎と申します。
 				不動産業界で30年以上の経験を持ち、土地や住宅の売買、賃貸、管理に精通しています。
 				お客様のニーズに合わせた最適な不動産戦略を提案いたしますので、
 				どんな些細なご相談でもお気軽にお声掛けください。">
 
-						<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-					</form>
-				</section>
+					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+				</form>
+			</section>
 
-				<section class="white-background" id="おうちの修繕">
-					<div class="col-1" id="headNumber">
-					</div>
-					<div id="headText">
-						<h4 class="left-align">おうちの修繕</h4>
-					</div>
+			<section class="white-background" id="おうちの修繕">
+				<div class="col-1" id="headNumber">
+				</div>
+				<div id="headText">
+					<h4 class="left-align">おうちの修繕</h4>
+				</div>
 
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/おうちの修繕/リフォーム.jpg}" alt="画像1" width="300" height="300"
-									class="img-fluid">
-							</div>
-							<p>住宅の修繕とリフォームの設計</p>
-							<ul>
-								<li>既存住宅の補強と耐震改修の設計</li>
-								<li>インテリアのリフォーム計画の立案</li>
-								<li>ライフスタイルに合わせた収納設計の提案</li>
-							</ul>
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/おうちの修繕/リフォーム.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
 						</div>
-
-
-						<!-- 2枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/おうちの修繕/施工管理.jpg}" alt="画像2" width="300" height="300"
-									class="img-fluid">
-							</div>
-							<p>施工の一貫したサポート</p>
-							<ul>
-								<li>工事の進捗状況の確認</li>
-								<li>施工中の品質チェックと調整</li>
-								<li>施工完了後のアフターケアや問題解決</li>
-							</ul>
-						</div>
-
-						<!-- 3枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/おうちの修繕/最新技術.jpg}" alt="画像3" width="300" height="300"
-									class="img-fluid">
-							</div>
-							<p>最新技術とトレンドに精通した特殊なリフォーム</p>
-							<ul>
-								<li>エネルギー効率の高い暖房設備などの提案</li>
-								<li>バリアフリーリフォームのプランを立案</li>
-								<li>最新の素材を活用して空間の魅力を最大化</li>
-							</ul>
-						</div>
+						<p>住宅の修繕とリフォームの設計</p>
+						<ul>
+							<li>既存住宅の補強と耐震改修の設計</li>
+							<li>インテリアのリフォーム計画の立案</li>
+							<li>ライフスタイルに合わせた収納設計の提案</li>
+						</ul>
 					</div>
-					<form action="/setEname" method="post">
-						<input type="hidden" name="ename" value="佐藤花子">
-						<input type="hidden" name="furigana" value="(サトウ ハナコ)">
-						<input type="hidden" name="referral" value="はじめまして、佐藤花子です。
+
+
+					<!-- 2枚目の画像 -->
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/おうちの修繕/施工管理.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+						</div>
+						<p>施工の一貫したサポート</p>
+						<ul>
+							<li>工事の進捗状況の確認</li>
+							<li>施工中の品質チェックと調整</li>
+							<li>施工完了後のアフターケアや問題解決</li>
+						</ul>
+					</div>
+
+					<!-- 3枚目の画像 -->
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/おうちの修繕/最新技術.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+						</div>
+						<p>最新技術とトレンドに精通した特殊なリフォーム</p>
+						<ul>
+							<li>エネルギー効率の高い暖房設備などの提案</li>
+							<li>バリアフリーリフォームのプランを立案</li>
+							<li>最新の素材を活用して空間の魅力を最大化</li>
+						</ul>
+					</div>
+				</div>
+				<form action="/setEname" method="post">
+					<input type="hidden" name="ename" value="佐藤花子">
+					<input type="hidden" name="furigana" value="(サトウ ハナコ)">
+					<input type="hidden" name="referral" value="はじめまして、佐藤花子です。
 				建築士の資格を持ち、20年以上のリフォーム業界で経験を積んでいます。
 				住宅の修繕やリフォームの設計から施工まで、幅広く対応しています。
 				特に省エネ改修やバリアフリーリフォームに精通しており、
 				お客様のニーズに合わせた提案を心がけています。ご相談はいつでもお気軽にどうぞ。">
-						<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-					</form>
-				</section>
+					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+				</form>
+			</section>
 
-				<section class="gray-background" id="介護">
-					<div class="col-1" id="headNumber">
-					</div>
-					<div id="headText">
-						<h4 class="left-align">介護</h4>
-					</div>
+			<section class="gray-background" id="介護">
+				<div class="col-1" id="headNumber">
+				</div>
+				<div id="headText">
+					<h4 class="left-align">介護</h4>
+				</div>
 
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/介護/在宅介護.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-							</div>
-							<p>高齢者ケアと在宅介護の支援</p>
-							<ul>
-								<li>日常生活のアセスメントとケアプランの立案。</li>
-								<li>高齢者の安全と健康管理に関する相談</li>
-								<li>身体的なケアや精神的なサポートの提供</li>
-							</ul>
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/介護/在宅介護.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
 						</div>
+						<p>高齢者ケアと在宅介護の支援</p>
+						<ul>
+							<li>日常生活のアセスメントとケアプランの立案。</li>
+							<li>高齢者の安全と健康管理に関する相談</li>
+							<li>身体的なケアや精神的なサポートの提供</li>
+						</ul>
+					</div>
 
-<<<<<<< HEAD
+
+					<!-- 2枚目の画像 -->
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/介護/認知症ケア.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
+						</div>
+						<p>認知症ケアと家族支援</p>
+						<ul>
+							<li>認知症に関する教育とアドバイス</li>
+							<li>家庭内での認知症患者の行動管理の戦略策定</li>
+							<li>認知症特化のコミュニティの運営や参加を推薦</li>
+						</ul>
+					</div>
+
 					<!-- 3枚目の画像 -->
 					<div class="mb-3">
 						<div class="image-container">
 							<img th:src="@{/img/介護/施設運営.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-=======
-
-						<!-- 2枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/介護/認知症ケア.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-							</div>
-							<p>認知症ケアと家族支援</p>
-							<ul>
-								<li>認知症に関する教育とアドバイス</li>
-								<li>家庭内での認知症患者の行動管理の戦略策定</li>
-								<li>認知症特化のコミュニティの運営や参加を推薦</li>
-							</ul>
->>>>>>> refs/remotes/origin/master
 						</div>
-
-						<!-- 3枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-							</div>
-							<p>施設運営と介護サービスの改善</p>
-							<ul>
-								<li>最新の介護技術とベストプラクティスを教育</li>
-								<li>施設内のケアプランの見直しと改善を提案</li>
-								<li>介護施設の安全性や環境の向上に向けた助言</li>
-							</ul>
-						</div>
+						<p>施設運営と介護サービスの改善</p>
+						<ul>
+							<li>最新の介護技術とベストプラクティスを教育</li>
+							<li>施設内のケアプランの見直しと改善を提案</li>
+							<li>介護施設の安全性や環境の向上に向けた助言</li>
+						</ul>
 					</div>
-					<form action="/setEname" method="post">
-						<input type="hidden" name="ename" value="鈴木一郎">
-						<input type="hidden" name="furigana" value="(スズキ イチロウ)">
-						<input type="hidden" name="referral" value="はじめまして、鈴木一郎です。
+				</div>
+				<form action="/setEname" method="post">
+					<input type="hidden" name="ename" value="鈴木一郎">
+					<input type="hidden" name="furigana" value="(スズキ イチロウ)">
+					<input type="hidden" name="referral" value="はじめまして、鈴木一郎です。
 				介護福祉士として25年のキャリアを持ち、
 				特に認知症ケアや在宅介護の支援に力を注いでいます。
                 利用者とその家族に寄り添ったサポートを提供し、地域社会に貢献しています。
                 どうぞお気軽にご相談ください。">
-						<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-					</form>
-				</section>
+					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+				</form>
+			</section>
 
 
-<<<<<<< HEAD
 			<section class="white-background" id="終活・相続">
 				<div class="col-1" id="headNumber">
 				</div>
@@ -289,7 +270,8 @@
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
 					<div class="mb-3">
 						<div class="image-container">
-							<img th:src="@{/img/終活/遺書.jpg}" alt="画像1" style="width: 300px; height: 200px;" class="img-fluid">
+							<img th:src="@{/img/終活/遺書.jpg}" alt="画像1" style="width: 300px; height: 200px;"
+								class="img-fluid">
 						</div>
 						<p>終活と遺言書作成</p>
 						<ul>
@@ -297,76 +279,48 @@
 							<li>財産や資産の整理、将来のため財務プランの立案</li>
 							<li>遺言書や相続に関する法的手続きの詳細な説明</li>
 						</ul>
-=======
-				<section class="white-background" id="終活・相続">
-					<div class="col-1" id="headNumber">
-					</div>
-					<div id="headText">
-						<h4 class="left-align">終活・相続</h4>
->>>>>>> refs/remotes/origin/master
 					</div>
 
-<<<<<<< HEAD
 					<!-- 2枚目の画像 -->
 					<div class="mb-3">
 						<div class="image-container">
 							<img th:src="@{/img/終活/遺産.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-=======
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-							</div>
-							<p>終活と遺言書作成</p>
-							<ul>
-								<li>遺言書の作成と法的な助言</li>
-								<li>財産や資産の整理、将来のため財務プランの立案</li>
-								<li>遺言書や相続に関する法的手続きの詳細な説明</li>
-							</ul>
->>>>>>> refs/remotes/origin/master
 						</div>
-
-						<!-- 2枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-							</div>
-							<p>相続税対策と財産分割</p>
-							<ul>
-								<li>相続税の計画と対策を立案</li>
-								<li>財産分割のアドバイスと実務的なサポートを提供</li>
-								<li>相続に伴うリスクや財政的な影響について評価</li>
-							</ul>
-						</div>
-
-						<!-- 3枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/終活/老後ライフ.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-							</div>
-							<p>財務プランニングと将来のセキュリティ</p>
-							<ul>
-								<li>ライフゴールに基づいた財務プランの策定</li>
-								<li>退職後の資産運用や収入管理の計画を立案</li>
-								<li>不測の事態に備えた保険や投資に関する助言</li>
-							</ul>
-						</div>
+						<p>相続税対策と財産分割</p>
+						<ul>
+							<li>相続税の計画と対策を立案</li>
+							<li>財産分割のアドバイスと実務的なサポートを提供</li>
+							<li>相続に伴うリスクや財政的な影響について評価</li>
+						</ul>
 					</div>
-					<form action="/setEname" method="post">
-						<input type="hidden" name="ename" value="高橋美咲">
-						<input type="hidden" name="furigana" value="(タカハシ ミサキ)">
-						<input type="hidden" name="referral" value="はじめまして、高橋美咲です。
+
+					<!-- 3枚目の画像 -->
+					<div class="mb-3">
+						<div class="image-container">
+							<img th:src="@{/img/終活/老後ライフ.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
+						</div>
+						<p>財務プランニングと将来のセキュリティ</p>
+						<ul>
+							<li>ライフゴールに基づいた財務プランの策定</li>
+							<li>退職後の資産運用や収入管理の計画を立案</li>
+							<li>不測の事態に備えた保険や投資に関する助言</li>
+						</ul>
+					</div>
+				</div>
+				<form action="/setEname" method="post">
+					<input type="hidden" name="ename" value="高橋美咲">
+					<input type="hidden" name="furigana" value="(タカハシ ミサキ)">
+					<input type="hidden" name="referral" value="はじめまして、高橋美咲です。
 				ファイナンシャルプランナー資格を持ち、終活や相続に特化した法的・
 				財務的なアドバイスを提供しています。遺言書作成や相続税対策、財産分割など、
 				クライアントのニーズに合わせたプランを提案し、実行をサポートしています。
 				安心と満足を最優先に考え、真摯に対応させていただきます。
 				ご相談やお悩みがございましたら、お気軽にご連絡ください。">
-						<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-					</form>
-				</section>
+					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+				</form>
+			</section>
 
 
-<<<<<<< HEAD
 			<section class="gray-background" id="金融・保険">
 				<div class="col-1" id="headNumber">
 				</div>
@@ -385,87 +339,52 @@
 							<li>保険料の見直しや保障内容の調整</li>
 							<li>事故対応や補償内容に関する説明</li>
 						</ul>
-=======
-				<section class="gray-background" id="金融・保険">
-					<div class="col-1" id="headNumber">
-					</div>
-					<div id="headText">
-						<h4 class="left-align">金融・保険</h4>
->>>>>>> refs/remotes/origin/master
 					</div>
 
-<<<<<<< HEAD
 					<!-- 2枚目の画像 -->
 					<div class="mb-3">
 						<div class="image-container">
 							<img th:src="@{/img/金融/生命保険.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-=======
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像1" width="300" height="300" class="img-fluid">
-							</div>
-							<p>自動車保険の見直しと提案</p>
-							<ul>
-								<li>保険ニーズを評価し自動車保険商品の提案</li>
-								<li>保険料の見直しや保障内容の調整</li>
-								<li>事故対応や補償内容に関する説明</li>
-							</ul>
->>>>>>> refs/remotes/origin/master
 						</div>
+						<p>生命保険の選定と計画</p>
+						<ul>
+							<li>ライフプランに合わせた生命保険商品を選定</li>
+							<li>ライフイベントに応じた生命保険の計画立案</li>
+							<li>保険金の受け取り方法や税務上のメリットの説明</li>
+						</ul>
+					</div>
 
-<<<<<<< HEAD
 					<!-- 3枚目の画像 -->
 					<div class="mb-3">
 						<div class="image-container">
 							<img th:src="@{/img/金融/資産運用.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-=======
-						<!-- 2枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像2" width="300" height="300" class="img-fluid">
-							</div>
-							<p>生命保険の選定と計画</p>
-							<ul>
-								<li>ライフプランに合わせた生命保険商品を選定</li>
-								<li>ライフイベントに応じた生命保険の計画立案</li>
-								<li>保険金の受け取り方法や税務上のメリットの説明</li>
-							</ul>
->>>>>>> refs/remotes/origin/master
 						</div>
-
-						<!-- 3枚目の画像 -->
-						<div class="mb-3">
-							<div class="image-container">
-								<img th:src="@{/img/green.jpg}" alt="画像3" width="300" height="300" class="img-fluid">
-							</div>
-							<p>資産運用とリスク管理の戦略</p>
-							<ul>
-								<li>資産運用の戦略を策定</li>
-								<li>リスク分散方法など専門的なアドバイス</li>
-								<li>金利を考慮した資産保全のアドバイス</li>
-							</ul>
-						</div>
+						<p>資産運用とリスク管理の戦略</p>
+						<ul>
+							<li>資産運用の戦略を策定</li>
+							<li>リスク分散方法など専門的なアドバイス</li>
+							<li>金利を考慮した資産保全のアドバイス</li>
+						</ul>
 					</div>
-					<form action=" /setEname" method="post">
-						<input type="hidden" name="ename" value="中村健太">
-						<input type="hidden" name="furigana" value="(ナカムラ ケンタ)">
-						<input type="hidden" name="referral" value="はじめまして、中村健太です。
+				</div>
+				<form action=" /setEname" method="post">
+					<input type="hidden" name="ename" value="中村健太">
+					<input type="hidden" name="furigana" value="(ナカムラ ケンタ)">
+					<input type="hidden" name="referral" value="はじめまして、中村健太です。
 				保険業界で20年以上の経験があり、特に自動車保険や生命保険に詳しいです。
 				クライアントのライフスタイルに合わせた最適な保険商品の提案や見直しを行って
 				います。資産運用やリスク管理についても幅広くサポートします。
 				ご相談やお問い合わせがございましたら、お気軽にどうぞ。">
-						<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
-					</form>
-				</section>
-			</div>
+					<input type="submit" value="ご相談はこちらから" class="btn btn-primary-custom">
+				</form>
+			</section>
 		</div>
-		<br>
+	</div>
 
 
-		<!--
+	<!--
 		
-		土地や住宅の売買、賃貸、管理の専門知識が豊富で、 特に住宅ローンや資産運用のアドバイスに定評がある。 
+		お土地や住宅の売買、賃貸、管理の専門知識が豊富で、 特に住宅ローンや資産運用のアドバイスに定評がある。 
 		顧客のニーズに合わせた最適な不動産戦略を提案し、多くの顧客から信頼を得ている。
 		
 		(佐藤花子)
@@ -501,12 +420,19 @@
 			</p>
 			>-->
 
-		<div class="footer_foot">
-			<small class="footer_copy">
-				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-			</small>
-		</div>
+
+
+
+
 	</div>
+
+	<div class="footer_foot">
+		<small class="footer_copy">
+			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+		</small>
+	</div>
+
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
