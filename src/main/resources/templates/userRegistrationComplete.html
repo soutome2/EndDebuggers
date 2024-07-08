@@ -50,10 +50,27 @@
 	<div class="container bg-light">
 		<br>
 		<h3>以下の情報で登録が完了しました</h3><br>
-		ユーザーID：<span th:text="${customerInputForm.cid}"></span><br>
-		ユーザー名：<span th:text="${customerInputForm.cname}"></span><br>
-		電話番号：<span th:text="${customerInputForm.tel}"></span><br>
-		メールアドレス：<span th:text="${customerInputForm.mailaddress}"></span><br>
+
+		<table>
+			<tr>
+				<th class="tableHead2">ユーザーID</th>
+				<td><span th:text="${customerInputForm.cid}"></span></td>
+			</tr>
+			<tr>
+				<th class="tableHead2">パスワード</th>
+				<td><span th:text="${customerInputForm.cname}"></span></td>
+			</tr>
+			<tr>
+				<th class="tableHead2">電話番号</th>
+				<td><span th:text="${customerInputForm.tel}"></span></td>
+			</tr>
+			<tr>
+				<th class="tableHead2">メールアドレス</th>
+				<td><span th:text="${customerInputForm.mailaddress}"></span></td>
+			</tr>
+		</table>
+		<br>
+		<br>
 
 		<a href="/Reserve" class="btn btn-primary-custom">予約ページに戻る</a>
 		<br>
