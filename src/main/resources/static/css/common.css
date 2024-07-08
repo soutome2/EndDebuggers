@@ -111,6 +111,13 @@ h4 {
 	margin-right: 10px;
 }
 
+
+.controlboxlog {
+	
+	height: 100%;
+}
+
+
 .button,
 .button-red {
 	background-color: #95A5A6;
@@ -149,6 +156,21 @@ h4 {
 
 .button-red:hover {
 	background-color: #c0392b;
+}
+
+
+.loginBack{
+    background-image: url("../img/tree.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    
+}
+
+.loginPage{
+	background-color: white;
+	 width: 500px;
+	 height: 300fpx;
 }
 
 #footer {

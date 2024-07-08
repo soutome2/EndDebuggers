@@ -78,7 +78,7 @@
 				<tr>
 					<th class="tableHead1">相談内容</th>
 					<td><textarea name="detail" type="text" class="width-middle" style="width: 300px; height: 80px;"
-							th:value="*{detail}" maxlength="101"></textarea>
+							maxlength="100">[[*{detail}]]</textarea>
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>

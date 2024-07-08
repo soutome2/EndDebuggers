@@ -60,9 +60,13 @@ public class AceController {
 	public ModelAndView GetReserve(ReserveInputForm reserveInputForm, ModelAndView mv) {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
-		if (enameObject != null) {
-			enameString = enameObject.toString(); // toString()メソッドでStringに変換
+		if (enameObject == null) {
+			mv.addObject("errorMessage", "Homeページで相談ジャンルを選択してください");
+			mv.setViewName("error");
+			return mv;
 		}
+
+		enameString = enameObject.toString(); // toString()メソッドでStringに変換
 
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 
@@ -235,7 +239,8 @@ public class AceController {
 	}
 
 	@PostMapping("/setEname")
-	public String PostReserve(@RequestParam("ename") String ename, @RequestParam("furigana") String furigana, @RequestParam("referral") String referral) {
+	public String PostReserve(@RequestParam("ename") String ename, @RequestParam("furigana") String furigana,
+			@RequestParam("referral") String referral) {
 		session.setAttribute("ename", ename);
 		session.setAttribute("furigana", furigana);
 		session.setAttribute("referral", referral);
@@ -247,7 +252,7 @@ public class AceController {
 	public ModelAndView PostReserveTime(@RequestParam LocalDate date, @RequestParam LocalTime time,
 			ReserveInputForm reserveInputForm,
 			ModelAndView mv) {
-		
+
 		reserveInputForm.setReservedate(date);
 		reserveInputForm.setReservetime(time);
 		mv.addObject("reserveInputForm", reserveInputForm);
