@@ -18,7 +18,7 @@ public class CustomerInputForm {
 	private String cid;
 
 	@NotBlank(message = "パスワードを入力して下さい")
-	@Size(max = 30, message = "設定可能なパスワードは30文字までです")
+	@Size(max = 20, message = "設定可能なパスワードは20文字までです")
 	private String password;
 
 	@NotBlank(message = "名前を入力して下さい")
@@ -31,6 +31,7 @@ public class CustomerInputForm {
 
 	@NotBlank(message = "メールアドレスを入力して下さい")
 	@Email(message = "正しい形式のメールアドレスを入力してください")
+	@Size(max = 254, message = "正しい形式のメールアドレスを入力してください")
 	private String mailaddress;
 
 	public Customer getEntity() {
