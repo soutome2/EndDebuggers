@@ -51,39 +51,39 @@
 		<br>
 		<p>ログイン情報を入力してください。</p>
 
-		<div class="row">
 
-			<div class="col-9">
-				<form action="Customer" method="post" th:object="${loginForm}">
-					<table>
-						<tr>
-							<th class="tableHead1" style="color: black;">利用者ID*</th>
-							<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
-								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}" class="atten"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1" style="color: black;">パスワード*</th>
-							<td><input name="password" type="password" class="width-middle" th:value="*{password}">
-								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password} class="
-									atten""></span>
-							</td>
-						</tr>
-					</table>
-			</div>
-		</div>
 
-		<div class="row ">
-			<div class="col-8 controlbox">
+		<form action="Customer" method="post" th:object="${loginForm}">
+			<table>
+				<tr>
+					<th class="tableHead1" style="color: black;">利用者ID*</th>
+					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
+						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}" class="atten"></span>
+					</td>
+				</tr>
+				<tr>
+					<th class="tableHead1" style="color: black;">パスワード*</th>
+					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password} class=" atten""></span>
+					</td>
+				</tr>
+			</table>
+
+
+
+
+			<div class="controlbox">
 
 				<input type="submit" value="送信" class="button">
 				<input type="reset" value="リセット" class="button">
 			</div>
-		</div>
+
 		</form>
 		<br>
 		<br>
 	</div>
+	
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
