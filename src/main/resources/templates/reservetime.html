@@ -64,20 +64,21 @@
 				</tr>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
-					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
+					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="8">
 						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">パスワード*</th>
-					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
+					<td><input name="password" type="password" class="width-middle" th:value="*{password}"
+							maxlength="20">
 						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 					</td>
 				</tr>
 				<tr>
 					<th class="tableHead1">相談内容</th>
 					<td><textarea name="detail" type="text" class="width-middle" style="width: 300px; height: 80px;"
-							th:value="*{detail}"></textarea>
+							th:value="*{detail}" maxlength="101"></textarea>
 						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 					</td>
 				</tr>

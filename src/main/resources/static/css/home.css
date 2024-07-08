@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .section::after {
-	background-image: url(/img/next.gif);
+	background-image: url(/img/arrow-right-circle.svg);
 	background-position: center;
 	background-repeat: no-repeat;
 	content: "";

@@ -14,6 +14,7 @@ public interface ReserveCustomerRepository extends JpaRepository<ReserveCustomer
 	@Query(value="SELECT cid,cname,password,tel,mailaddress,reserveid,ename,"
 			+ "reservedate,reservetime,detail "
 			+ "FROM m_customer "
-			+ "JOIN t_reserve using(cid) WHERE cid=:cid",nativeQuery = true)
+			+ "JOIN t_reserve using(cid) WHERE cid=:cid "
+			+ "ORDER BY reservedate ASC, reservetime ASC",nativeQuery = true)
 	List<ReserveCustomer> findAIIBycustomerId(@Param("cid") String cid);
 }
