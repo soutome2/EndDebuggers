@@ -64,7 +64,7 @@
 				<tr>
 					<th class="tableHead1" style="color: black;">パスワード*</th>
 					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
-						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password} class=" atten""></span>
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="atten"></span>
 					</td>
 				</tr>
 			</table>
