@@ -337,6 +337,19 @@ th {
 
 }
 
+.btn-logout{
+	background-color: red; /* 背景色を赤に設定 */
+    color: white; /* テキスト色を白に設定 */
+    border: none; /* ボーダーをなしに設定 */
+    padding: 10px 20px; /* パディングを設定 */
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+.btn-logout:hover{
+	 background-color: darkred;
+}
+
 /*キャンセルボタン*/
 .btn-cancel {
 	background-color: transparent;
