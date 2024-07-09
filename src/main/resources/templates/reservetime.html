@@ -86,12 +86,13 @@
 							</tr>
 							<tr>
 								<th class="tableHead1">相談内容</th>
-								<td><textarea name="detail" type="text" class="width-middle"
+								<td><textarea name="detail" type="text" class="width-middle" id="detailInput"
 										style="width: 300px; height: 80px;" maxlength="100">[[*{detail}]]</textarea>
 									<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
 								</td>
 							</tr>
 						</table>
+						<p>文字数: <span id="charCount"></span>/100</p>
 						<input type="hidden" name="ename" th:value="${session.ename}">
 						<input type="hidden" name="reservedate" th:value="*{reservedate}">
 						<input type="hidden" name="reservetime" th:value="*{reservetime}">
@@ -118,6 +119,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const initialDetail = document.getElementById("detailInput").value;
+			const charCountElement = document.getElementById("charCount");
+			charCountElement.textContent = initialDetail.length;
+
+			// textarea の入力変更時に文字数を更新する
+			document.getElementById("detailInput").addEventListener("input", function () {
+				charCountElement.textContent = this.value.length;
+			});
+		});
+	</script>
 </body>
 
 </html>
