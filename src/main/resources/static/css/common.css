@@ -189,12 +189,12 @@ h4 {
 	background-color: rgb(28, 183, 15);
 }
 
-.loginBack{
-    background-image: url("../img/tree.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-    }
+.loginBack {
+	background-image: url("../img/tree.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
 
 
 .loginPage {
@@ -454,32 +454,73 @@ th {
 	}
 }
 
-.footer_chase{
-    position: fixed; /* フッターを固定位置に配置 */
-    bottom: 0; /* ページの下端に配置 */
-    width: 100%; /* 幅を100%に設定 */
-    background-color: #000; /* 背景色を設定 */
-    color: #fff; /* テキストの色を設定 */
-    text-align: center; /* テキストを中央揃えに設定 */
-    font-size: 10px; /* フォントサイズを設定 */
-    min-height: 60px; /* 最小の高さを設定 */
-    padding: 22px; /* 内側の余白を設定 */
-    font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif; /* フォントファミリーを設定 */
-    z-index: 1000; /* 必要に応じてz-indexを設定（他の要素との重なり順を制御） */
+/*homeの写真サイズ変更2枚*/
+/* デスクトップ向けスタイル */
+@media (min-width: 768px) {
+    .mobile-image {
+        display: none;
+        /* デスクトップではスマートフォン用画像を非表示 */
+    }
+
+    .desktop-image {
+        display: block;
+        /* デスクトップ用画像を表示 */
+    }
+}
+
+/* スマートフォン向けスタイル */
+@media (max-width: 767.98px) {
+    .desktop-image {
+        display: none;
+        /* スマートフォンではデスクトップ用画像を非表示 */
+    }
+
+    .mobile-image {
+        display: block;
+        /* スマートフォン用画像を表示 */
+    }
+}
+
+/*ここまでhome写真変更コード*/
+
+.footer_chase {
+	position: fixed;
+	/* フッターを固定位置に配置 */
+	bottom: 0;
+	/* ページの下端に配置 */
+	width: 100%;
+	/* 幅を100%に設定 */
+	background-color: #000;
+	/* 背景色を設定 */
+	color: #fff;
+	/* テキストの色を設定 */
+	text-align: center;
+	/* テキストを中央揃えに設定 */
+	font-size: 10px;
+	/* フォントサイズを設定 */
+	min-height: 60px;
+	/* 最小の高さを設定 */
+	padding: 22px;
+	/* 内側の余白を設定 */
+	font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN", "Noto Serif Japanese", serif;
+	/* フォントファミリーを設定 */
+	z-index: 1000;
+	/* 必要に応じてz-indexを設定（他の要素との重なり順を制御） */
 }
 
 .wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
 
 .content {
 	flex: 1;
 }
 
 .footer_foot {
-	flex-shrink: 0; /* フッターがコンテンツより小さい場合に固定します */
+	flex-shrink: 0;
+	/* フッターがコンテンツより小さい場合に固定します */
 	background: #000;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
