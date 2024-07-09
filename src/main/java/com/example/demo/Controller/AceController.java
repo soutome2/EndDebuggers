@@ -61,7 +61,7 @@ public class AceController {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
 		if (enameObject == null) {
-			mv.addObject("errorMessage", "Homeページで相談ジャンルを選択してください");
+			mv.addObject("errorMessage", "Request method 'GET' is not supported");
 			mv.setViewName("error");
 			return mv;
 		}
