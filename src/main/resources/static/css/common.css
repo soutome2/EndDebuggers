@@ -358,6 +358,16 @@ th {
 	/* ホバー時のテキスト色を変更 */
 }
 
+.btn-image {
+    background-image: url('img/person-circle.svg'); /* 画像のパスを指定 */
+    background-size: cover; /* 画像をボタンに合わせて表示 */
+    width: 150px; /* ボタンの幅 */
+    height: 50px; /* ボタンの高さ */
+    border: none; /* ボタンの枠線をなくす */
+    cursor: pointer; /* マウスをボタンに重ねたときにポインターを変更 */
+    text-indent: -9999px; /* テキストを非表示にするための方法 */
+}
+
 /**/
 
 .tableHead1 {
