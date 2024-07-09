@@ -28,14 +28,14 @@
 
 								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
 									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">Home</a>
+										<a href="/" class="nav-link" aria-current="page">ホーム</a>
 									</li>
 								</ul>
 
 								<ul class="navbar-nav mb-2 mb-sm-0">
 									<li class="nav-item">
 										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
 										<form th:if="${session.cid} != null" action="/Customer" method="post">
 											<input type="hidden" name="cid" th:value="${session.cid}">
 											<input type="hidden" name="password" th:value="${session.password}">
@@ -81,7 +81,7 @@
 								</td>
 							</tr>
 							<tr>
-								<th class="tableHead1">予約者ID*</th>
+								<th class="tableHead1">予約者ID</th>
 								<td>
 									<input th:if="${session.cid} == null" name="cid" type="text" class="width-middle"
 										th:value="*{cid}" maxlength="8">
@@ -91,7 +91,7 @@
 								</td>
 							</tr>
 							<tr th:if="${session.cid} == null">
-								<th class="tableHead1">パスワード*</th>
+								<th class="tableHead1">パスワード</th>
 								<td>
 									<input name="password" type="password" class="width-middle" th:value="*{password}"
 										maxlength="20">
