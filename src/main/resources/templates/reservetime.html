@@ -66,7 +66,9 @@
 					<br>
 					<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
 					<br>
-					IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
+					<div th:if="${session.cid} == null" >
+						IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
+					</div>
 					<br>
 					<form th:action="ReserveError" method="post" th:object="${reserveInputForm}">
 						<table>
