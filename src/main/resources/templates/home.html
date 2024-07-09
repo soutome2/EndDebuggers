@@ -38,7 +38,7 @@
 								<form  th:if="${session.cid} != null" action="/Customer" method="post">
 									<input type="hidden" name="cid" th:value="${session.cid}">
 									<input type="hidden" name="password" th:value="${session.password}">
-									<button type="submit" class="btn-cancel">マイページ</button>
+									<button type="submit" class="nav-link, btn btn-outline-primary" >マイページ</button>
 								</form>
 								
 							</li>
