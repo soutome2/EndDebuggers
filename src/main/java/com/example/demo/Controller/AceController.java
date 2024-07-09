@@ -61,7 +61,7 @@ public class AceController {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
 		if (enameObject == null) {
-			mv.addObject("errorMessage", "Homeページで相談ジャンルを選択してください");
+			mv.addObject("errorMessage", "Request method 'GET' is not supported");
 			mv.setViewName("error");
 			return mv;
 		}
@@ -190,8 +190,9 @@ public class AceController {
 		Customer customer = customerService.getByCid(loginForm, result);
 
 		if (!result.hasErrors()) {
-			session.setAttribute("cname", customer.getCname());
-			session.setAttribute("cid", customer.getCid());
+			session.setAttribute("cid", loginForm.getCid());
+			session.setAttribute("password", loginForm.getPassword());
+			session.setAttribute("cname", customer.getCname());		
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
 			mv.addObject("reserveList", list);
@@ -305,6 +306,7 @@ public class AceController {
 	@PostMapping("/Logout")
 	public String PostLogout() {
 		session.removeAttribute("cid");
+		session.removeAttribute("password");
 		return "redirect:/";
 	}
 

@@ -34,8 +34,15 @@
 
 								<ul class="navbar-nav mb-2 mb-sm-0">
 									<li class="nav-item">
-										<a href="/Login" class="nav-link, btn btn-outline-primary"
-											aria-current="page">Login</a>
+										<a th:if="${session.cid} == null" href="/Login"
+											class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+										<form th:if="${session.cid} != null" action="/Customer" method="post">
+											<input type="hidden" name="cid" th:value="${session.cid}">
+											<input type="hidden" name="password" th:value="${session.password}">
+											<button type="submit"
+												class="nav-link, btn btn-outline-primary">マイページ</button>
+										</form>
+
 									</li>
 								</ul>
 
@@ -72,16 +79,26 @@
 								</td>
 							</tr>
 							<tr>
-								<th class="tableHead1">利用者ID*</th>
-								<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="8">
+								<th class="tableHead1">予約者ID*</th>
+								<td>
+									<input th:if="${session.cid} == null" name="cid" type="text" class="width-middle"
+										th:value="*{cid}" maxlength="8">
+									<span th:if="${session.cid} != null" th:text="${session.cid}"></span>
 									<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 								</td>
 							</tr>
-							<tr>
+							<tr th:if="${session.cid} == null">
 								<th class="tableHead1">パスワード*</th>
-								<td><input name="password" type="password" class="width-middle" th:value="*{password}"
+								<td>
+									<input name="password" type="password" class="width-middle" th:value="*{password}"
 										maxlength="20">
 									<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+								</td>
+							</tr>
+							<tr th:if="${session.cid} != null">
+								<th class="tableHead1">予約者名</th>
+								<td>
+									<span th:if="${session.cid} != null" th:text="${session.cname}"></span>
 								</td>
 							</tr>
 							<tr>
