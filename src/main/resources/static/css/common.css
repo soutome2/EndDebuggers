@@ -430,54 +430,39 @@ th {
 
 }
 
-/* デスクトップ向けスタイル */
+/*
 .desktop-image {
 	display: block;
-	/* デスクトップ画像を表示 */
 }
-
 .mobile-image {
 	display: none;
-	/* デスクトップ用画像が表示されている場合、スマートフォン用画像は非表示 */
+	
 }
-
-/* スマートフォン向けスタイル */
 @media (max-width: 767.98px) {
 	.desktop-image {
 		display: none;
-		/* スマートフォンでは非表示 */
 	}
-
 	.mobile-image {
 		display: block;
-		/* スマートフォン画像を表示 */
 	}
 }
+*/
 
 /*homeの写真サイズ変更2枚*/
-/* デスクトップ向けスタイル */
 @media (min-width: 768px) {
     .mobile-image {
         display: none;
-        /* デスクトップではスマートフォン用画像を非表示 */
     }
-
     .desktop-image {
         display: block;
-        /* デスクトップ用画像を表示 */
     }
 }
-
-/* スマートフォン向けスタイル */
 @media (max-width: 767.98px) {
     .desktop-image {
         display: none;
-        /* スマートフォンではデスクトップ用画像を非表示 */
     }
-
     .mobile-image {
         display: block;
-        /* スマートフォン用画像を表示 */
     }
 }
 
