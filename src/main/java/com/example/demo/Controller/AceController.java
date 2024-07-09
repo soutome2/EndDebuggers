@@ -232,7 +232,7 @@ public class AceController {
 		if (!result.hasErrors()) {
 			Customer customer = customerInputForm.getEntity();
 			session.setAttribute("cid", customer.getCid());
-			session.setAttribute("password", customer.getPassword());
+			session.setAttribute("password", customerInputForm.getPassword());
 			session.setAttribute("cname", customer.getCname());
 			customerRepository.saveAndFlush(customer);
 			return "userRegistrationComplete";
