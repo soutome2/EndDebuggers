@@ -26,14 +26,14 @@
 
 							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
 								<li class="nav-item">
-									<a href="/" class="nav-link" aria-current="page">Home</a>
+									<a href="/" class="nav-link" aria-current="page">ホーム</a>
 								</li>
 							</ul>
 
 							<ul class="navbar-nav mb-2 mb-sm-0">
 								<li class="nav-item">
 									<a th:if="${session.cid} == null" href="/Login"
-										class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+										class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
 									<form th:if="${session.cid} != null" action="/Customer" method="post">
 										<input type="hidden" name="cid" th:value="${session.cid}">
 										<input type="hidden" name="password" th:value="${session.password}">
