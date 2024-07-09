@@ -301,7 +301,7 @@ public class AceController {
 		mv.setViewName("cancelComplete");
 		return mv;
 	}
-	
+
 	@PostMapping("/Logout")
 	public String PostLogout() {
 		session.removeAttribute("cid");
