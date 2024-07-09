@@ -192,7 +192,7 @@ public class AceController {
 		if (!result.hasErrors()) {
 			session.setAttribute("cid", loginForm.getCid());
 			session.setAttribute("password", loginForm.getPassword());
-			session.setAttribute("cname", customer.getCname());		
+			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
 			mv.addObject("reserveList", list);
@@ -230,9 +230,10 @@ public class AceController {
 		customerService.setCustomer(customerInputForm, result);
 
 		if (!result.hasErrors()) {
-			String cname = customerInputForm.getCname();
-			session.setAttribute("cid", cname);
 			Customer customer = customerInputForm.getEntity();
+			session.setAttribute("cid", customer.getCid());
+			session.setAttribute("password", customer.getPassword());
+			session.setAttribute("cname", customer.getCname());
 			customerRepository.saveAndFlush(customer);
 			return "userRegistrationComplete";
 		} else {
