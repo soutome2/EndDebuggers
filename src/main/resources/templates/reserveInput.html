@@ -34,8 +34,15 @@
 
 								<ul class="navbar-nav mb-2 mb-sm-0">
 									<li class="nav-item">
-										<a href="/Login" class="nav-link, btn btn-outline-primary"
-											aria-current="page">Login</a>
+										<a th:if="${session.cid} == null" href="/Login"
+											class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+										<form th:if="${session.cid} != null" action="/Customer" method="post">
+											<input type="hidden" name="cid" th:value="${session.cid}">
+											<input type="hidden" name="password" th:value="${session.password}">
+											<button type="submit"
+												class="nav-link, btn btn-outline-primary">マイページ</button>
+										</form>
+
 									</li>
 								</ul>
 
@@ -57,7 +64,7 @@
 
 					<div class="row">
 						<div class="col-md-6 order-md-2">
-							
+
 							<div class="image-container">
 								<img th:src="@{'/img/person/'+${session.ename}+'.jfif'}" th:alt="${session.ename}"
 									width="300" height="300" class="img-fluid">
