@@ -34,7 +34,12 @@
 
 						<ul class="navbar-nav mb-2 mb-sm-0">
 							<li class="nav-item">
-								<a href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+								<a th:if="${session.cid} == null"  href="/Login" class="nav-link, btn btn-outline-primary" aria-current="page">Login</a>
+								<form  th:if="${session.cid} != null" action="/Customer" method="post">
+									<input type="hidden" name="cid" th:value="${session.cid}">
+									<button type="submit" class="btn-cancel">マイページ</button>
+								</form>
+								
 							</li>
 						</ul>
 

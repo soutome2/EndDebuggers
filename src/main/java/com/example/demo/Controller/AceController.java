@@ -191,6 +191,7 @@ public class AceController {
 
 		if (!result.hasErrors()) {
 			session.setAttribute("cname", customer.getCname());
+			session.setAttribute("cid", customer.getCid());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
 			mv.addObject("reserveList", list);
@@ -299,6 +300,12 @@ public class AceController {
 		mv.addObject("deleteReserve", deleteReserve);
 		mv.setViewName("cancelComplete");
 		return mv;
+	}
+
+	@PostMapping("/Logout")
+	public String PostLogout() {
+		session.removeAttribute("cid");
+		return "redirect:/";
 	}
 
 }
