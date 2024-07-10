@@ -73,7 +73,7 @@
 					</tr>
 					<tr>
 						<th class="tableHead1">担当者名</th>
-						<td><input name="ename" type="ename" class="width-middle" th:value="*{ename}" maxlength="21">
+						<td><input name="ename" type="text" class="width-middle" th:value="*{ename}" maxlength="21">
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
 					</tr>
