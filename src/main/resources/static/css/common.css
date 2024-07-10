@@ -531,3 +531,11 @@ th {
 .footer_copy {
 	color: rgb(255, 255, 255);
 }
+
+.pages-container {
+    display: flex; /* flexbox を使用して要素を横並びに配置 */
+}
+
+.page {
+    margin-right: 10px; /* 各ページフォームの間隔を調整 */
+}

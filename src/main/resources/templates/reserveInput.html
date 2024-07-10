@@ -127,11 +127,23 @@
 							</tbody>
 						</table>
 					</div>
+					<br>
+					<h4>利用者のレビュー</h4>
+					<br>
+					<div class="container-fluid" id="bodyid">
+						<div th:each="review:${reviewList}" class="gray-background" id="count">
+							<div id="headText">
+								<h4 class="left-align" th:text="${review.cid}"></h4>
+							</div>
+							<span class="left-align" th:text="${review.star}+" "+${review.title}"></span>
+							<span class="left-align" th:text="${review.comment}"></span>
+							<span class="left-align" th:text="${review.reviewdate}+'日の投稿です'"></span>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<br>
-		<!--<form action="Complete" method="post" th:object="${reserveInputForm}">
+			<br>
+			<!--<form action="Complete" method="post" th:object="${reserveInputForm}">
 			<table>
 				<tr>
 					<th class="tableHead1">利用者ID*</th>
@@ -189,16 +201,16 @@
 			</div>
 		</form>-->
 
-		<div class="footer_foot">
-			<small class="footer_copy">
-				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-			</small>
+			<div class="footer_foot">
+				<small class="footer_copy">
+					Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+				</small>
+			</div>
 		</div>
-	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
 </body>
 
 </html>
