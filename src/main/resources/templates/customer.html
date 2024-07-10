@@ -102,18 +102,16 @@
 					<div class="container-fluid" id="bodyid">
 						<h5 th:text="${session.cid}+'さんのレビュー一覧'"></h5>
 
-						<div th:if="${reviewlist == null}">
+						<div th:if="${reviewList == null}">
 							<p>まだレビューがありません</p>
 						</div>
 
 						<div th:each="review:${reviewList}" class="gray-background" id="count">
-							<div id="headText">
-								<h4 class="left-align" th:text="${review.cid}"></h4>
-							</div>
-							<span class="left-align" th:text="${review.ename}"></span>
-							<span class="left-align" th:text="${review.star}+" "+${review.title}"></span>
-							<span class="left-align" th:text="${review.comment}"></span>
-							<span class="left-align" th:text="${review.reviewdate}+'日の投稿です'"></span>
+							<span class="left-align" th:text="${review.ename}"></span><br>
+							<span class="left-align" th:text="${review.star}"></span>
+							<span class="left-align" th:text="${review.title}"></span><br>
+							<span class="left-align" th:text="${review.comment}"></span><br>
+							<span class="left-align" th:text="${review.reviewdate}+'の投稿です'"></span>
 							<form action="/ReviewDelete" method="post">
 								<input type="hidden" name="reviewid" th:value="${review.reviewid}">
 								<button type="submit" class="btn-cancel">削除</button>
