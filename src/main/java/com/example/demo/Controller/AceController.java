@@ -337,7 +337,7 @@ public class AceController {
 	@GetMapping("/ReviewComplete")
 	public ModelAndView ReviewComplete(@ModelAttribute ReviewInputForm reviewInputForm, ModelAndView mv) {
 		mv.addObject("reviewInputForm", reviewInputForm);
-		mv.setViewName("complete");
+		mv.setViewName("reviewComplete");
 		return mv;
 	}
 
