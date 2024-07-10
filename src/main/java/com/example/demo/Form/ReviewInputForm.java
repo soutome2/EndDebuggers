@@ -9,7 +9,7 @@ public class ReviewInputForm {
 
 	
 	private String cid;
-	private String cname;
+	private String ename;
 	private String title;
 	private String comment;
 	private Integer star;
@@ -18,7 +18,7 @@ public class ReviewInputForm {
 	public Review getEntity() {
 		Review review = new Review();
 		review.setCid(cid);
-		review.setCname(cname);
+		review.setEname(ename);
 		review.setTitle(title);
 		review.setComment(comment);
 		review.setStar(star);

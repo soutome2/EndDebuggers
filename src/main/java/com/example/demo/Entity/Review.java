@@ -22,8 +22,8 @@ public class Review {
 	@Column(name = "cid")
 	private String cid;
 	
-	@Column(name = "cname")
-	private String cname;
+	@Column(name = "ename")
+	private String ename;
 	
 	@Column(name = "reviewdate")
 	private LocalDate reviewdate;
