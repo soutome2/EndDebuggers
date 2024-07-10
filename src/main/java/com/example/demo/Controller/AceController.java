@@ -315,23 +315,28 @@ public class AceController {
 
 		if (!result.hasErrors()) {
 			Review review = reviewInputForm.getEntity();
+			LocalDate currentDate = LocalDate.now();
+			LocalTime currentTime = LocalTime.now();
+			review.setReviewdate(currentDate);
+			review.setReviewtime(currentTime);
 	
 			reviewRepository.saveAndFlush(review);
+
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
 			mv.setViewName("redirect:/ReviewComplete");
 			return mv;
 		} else {
 
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
-			mv.setViewName("redirect:/Reserve");
+			mv.setViewName("redirect:/ReviewInput");
 			return mv;
 		}
 
 	}
 
 	@GetMapping("/ReviewComplete")
-	public ModelAndView ReviewComplete(@ModelAttribute ReserveInputForm reserveInputForm, ModelAndView mv) {
-		mv.addObject("reserveInputForm", reserveInputForm);
+	public ModelAndView ReviewComplete(@ModelAttribute ReviewInputForm reviewInputForm, ModelAndView mv) {
+		mv.addObject("reviewInputForm", reviewInputForm);
 		mv.setViewName("complete");
 		return mv;
 	}

@@ -79,6 +79,12 @@
 						</td>
 					</tr>
 					<tr>
+						<th class="tableHead1">評価</th>
+						<td><input name="star" type="number" class="width-middle" th:value="*{star}" >
+							<span th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></span>
+						</td>
+					</tr>
+					<tr>
 						<th class="tableHead1">タイトル</th>
 						<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
 								maxlength="255">
