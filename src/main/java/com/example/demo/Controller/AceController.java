@@ -21,12 +21,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.Entity.Customer;
 import com.example.demo.Entity.Reserve;
 import com.example.demo.Entity.ReserveCustomer;
+import com.example.demo.Entity.Review;
 import com.example.demo.Form.CustomerInputForm;
 import com.example.demo.Form.LoginForm;
 import com.example.demo.Form.ReserveInputForm;
+import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReserveRepository;
+import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.ReserveService;
 
@@ -40,6 +43,7 @@ public class AceController {
 	private final CustomerRepository customerRepository;
 	private final ReserveRepository reserveRepository;
 	private final ReserveCustomerRepository reserveCustomerRepository;
+	private final ReviewRepository reviewRepository;
 	private final CustomerService customerService;
 	private final ReserveService reserveService;
 	private final HttpSession session;
@@ -57,7 +61,7 @@ public class AceController {
 	}
 
 	@GetMapping("/Reserve")
-	public ModelAndView GetReserve(ReserveInputForm reserveInputForm, ModelAndView mv) {
+	public ModelAndView GetReserve(ReserveInputForm reserveInputForm, ModelAndView mv,ReviewInputForm reviewInputForm) {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
 		if (enameObject == null) {
@@ -293,6 +297,41 @@ public class AceController {
 		mv.setViewName("complete");
 		return mv;
 	}
+	
+	
+	
+
+	@PostMapping("/ReviewError")
+	public ModelAndView ReviewError(@ModelAttribute @Validated ReviewInputForm reviewInputForm,
+			BindingResult result,
+			RedirectAttributes redirectAttributes,
+			ModelAndView mv) {
+	
+		if (!result.hasErrors()) {
+			Review review = reviewInputForm.getEntity();
+			reviewRepository.saveAndFlush(review);
+			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
+			mv.setViewName("redirect:/ReviewComplete");
+			return mv;
+		} else {
+
+			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
+			mv.setViewName("redirect:/Reserve");
+			return mv;
+		}
+
+	}
+
+	@GetMapping("/ReviewComplete")
+	public ModelAndView ReviewComplete(@ModelAttribute ReserveInputForm reserveInputForm, ModelAndView mv) {
+		mv.addObject("reserveInputForm", reserveInputForm);
+		mv.setViewName("complete");
+		return mv;
+	}
+	
+	
+
+
 
 	@Transactional
 	@PostMapping("/cancelComplete")
@@ -351,3 +390,5 @@ public class AceController {
 	}
 
 }
+
+
