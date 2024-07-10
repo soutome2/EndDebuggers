@@ -130,6 +130,10 @@
 					<br>
 					<h4>利用者のレビュー</h4>
 					<br>
+					<form action="Review" method="post">
+						<input type="submit" value="全てのレビューを表示" class="circle">
+					</form>
+					<br>
 					<div class="container-fluid" id="bodyid">
 						<div th:each="review:${reviewList}" class="gray-background" id="count">
 							<div id="headText">
