@@ -416,8 +416,8 @@ th {
 @media (max-width: 576px) {
 	.img-fluid {
 
-		width: 40%;
-		height: 40%;
+		width: 50%;
+		height: 50%;
 		height: auto;
 		/* 高さは自動調整 */
 	}
