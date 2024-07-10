@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -200,7 +201,9 @@ public class AceController {
 			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
+			List<Review> reviewlist = reviewRepository.findAIIByCid(loginForm.getCid());
 			mv.addObject("reserveList", list);
+			mv.addObject("reviewList", reviewlist);
 			mv.setViewName("customer");
 			return mv;
 		} else {
@@ -381,6 +384,17 @@ public class AceController {
 		mv.addObject("reviewList", sublist);
 		mv.addObject("pages", pages);
 		mv.setViewName("review");
+		return mv;
+	}
+	
+	@Transactional
+	@PostMapping("/ReviewDelete")
+	public ModelAndView PostReviewDelete(@RequestParam("reviewid") Integer reviewid, ModelAndView mv) {
+		Optional<Review> delete = reviewRepository.findById(reviewid);
+		Review deleteReview = delete.get();
+		reviewRepository.deleteById(reviewid);
+		mv.addObject("deleteReview", deleteReview);
+		mv.setViewName("reviewDelete");
 		return mv;
 	}
 
