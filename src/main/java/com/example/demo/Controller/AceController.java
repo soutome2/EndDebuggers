@@ -373,7 +373,7 @@ public class AceController {
 
 		// 前後2つの数字を含むリストを生成
 		for (int i = page - 2; i <= page + 2; i++) {
-			if (i >= 0 && i <= 20) {
+			if (i >= 0 && i <= list.size() / 10 + 1) {
 				pages.add(i);
 			}
 		}
