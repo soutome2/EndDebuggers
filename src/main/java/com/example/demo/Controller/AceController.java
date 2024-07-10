@@ -299,6 +299,14 @@ public class AceController {
 		return mv;
 	}
 
+	@GetMapping("/ReviewInput")
+	public String GetReview(
+			ReviewInputForm reviewInputForm) {
+
+		return "reviewInput";
+
+	}
+
 	@PostMapping("/ReviewError")
 	public ModelAndView ReviewError(@ModelAttribute @Validated ReviewInputForm reviewInputForm,
 			BindingResult result,
@@ -307,6 +315,7 @@ public class AceController {
 
 		if (!result.hasErrors()) {
 			Review review = reviewInputForm.getEntity();
+	
 			reviewRepository.saveAndFlush(review);
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
 			mv.setViewName("redirect:/ReviewComplete");
