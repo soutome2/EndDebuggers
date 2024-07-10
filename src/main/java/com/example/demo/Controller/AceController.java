@@ -311,4 +311,43 @@ public class AceController {
 		return "redirect:/";
 	}
 
+	@PostMapping("/Review")
+	public ModelAndView PostReview(@RequestParam("page") Integer page, ModelAndView mv) {
+		List<Review> list = reviewRepository.findAIIByEname(session.getAttribute("ename"));
+		
+		int startIndex = (page - 1) * 10; // 開始インデックスの計算
+	    int endIndex = startIndex + 10; // 終了インデックスの計算
+
+	    // インデックスがリストの範囲内に収まるように調整
+	    if (startIndex < 0) {
+	        startIndex = 0;
+	    }
+	    if (endIndex >= list.size()) {
+	        endIndex = list.size() - 1;
+	    }
+	    
+	 // サブリストを取得
+	    List<ReserveCustomer> sublist = list.subList(startIndex, endIndex + 1);
+	    
+	    List<Integer> pages = new ArrayList<>();
+
+        // 範囲外の入力は空リストを返す
+        if (page < 0 || page > list.size()/ 10 + 1) {
+        	mv.setViewName("home");
+        	return mv;
+        }
+
+        // 前後2つの数字を含むリストを生成
+        for (int i = page - 2; i <= page + 2; i++) {
+            if (i >= 0 && i <= 20) {
+                pages.add(i);
+            }
+        }
+        
+		mv.addObject("reviewList", sublist);
+		mv.addObject("pages", pages);
+		mv.setViewName("review");
+		return mv;
+	}
+
 }
