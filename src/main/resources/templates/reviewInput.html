@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>レビュー入力</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div class="wrapper">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="navbar navbar-expand-sm navbar-light bg-light">
+					<div class="container">
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarContent">
+
+							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+								<li class="nav-item">
+									<a href="/" class="nav-link" aria-current="page">ホーム</a>
+								</li>
+							</ul>
+
+							<ul class="navbar-nav mb-2 mb-sm-0">
+								<li class="nav-item">
+									<a th:if="${session.cid} == null" href="/Login"
+										class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
+									<form th:if="${session.cid} != null" action="/Customer" method="post">
+										<input type="hidden" name="cid" th:value="${session.cid}">
+										<input type="hidden" name="password" th:value="${session.password}">
+										<button type="submit" class="nav-link, btn btn-outline-primary">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+												<path fill-rule="evenodd"
+													d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+											</svg>
+										</button>
+									</form>
+
+								</li>
+							</ul>
+
+
+						</div>
+					</div>
+
+				</nav>
+
+			</div>
+		</div>
+		<br>
+		<div class="container white-background">
+			<br>
+
+			<h3>レビュー入力画面</h3>
+			<form action="setReview" method="post" th:object="${reviewInputForm}">
+				<table>
+					<tr>
+						<th class="tableHead1">利用者ID</th>
+						<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="9">
+							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">担当者名</th>
+						<td><input name="ename" type="text" class="width-middle" th:value="*{ename}" maxlength="21">
+							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">タイトル</th>
+						<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
+								maxlength="255">
+							<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">コメント</th>
+						<td><textarea name="comment" type="text" class="width-middle" id="detailInput"
+								style="width: 300px; height: 80px;" maxlength="100">[[*{detail}]]</textarea>
+							<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
+						</td>
+					</tr>
+				</table>
+				<div class="controlbox">
+					<input type="submit" value="送信" class="button-login">
+					<input type="reset" value="リセット" class="button-login">
+				</div>
+			</form>
+			<br>
+			<br>
+		</div>
+	</div>
+	<br>
+
+	<div class="footer_foot">
+		<small class="footer_copy">
+			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+		</small>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
