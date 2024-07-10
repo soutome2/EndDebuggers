@@ -63,7 +63,7 @@
 			<br>
 
 			<h3>レビュー入力画面</h3>
-			<form action="setReview" method="post" th:object="${reviewInputForm}">
+			<form action="ReviewError" method="post" th:object="${reviewInputForm}">
 				<table>
 					<tr>
 						<th class="tableHead1">利用者ID</th>
@@ -73,8 +73,15 @@
 					</tr>
 					<tr>
 						<th class="tableHead1">担当者名</th>
-						<td><input name="ename" type="text" class="width-middle" th:value="*{ename}" maxlength="21">
+						<td><input type="hidden" name="ename" th:value="${session.ename} "> 
+						    <span th:text="${session.ename}"></span>
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">評価</th>
+						<td><input name="star" type="number" class="width-middle" th:value="*{star}" >
+							<span th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></span>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +94,7 @@
 					<tr>
 						<th class="tableHead1">コメント</th>
 						<td><textarea name="comment" type="text" class="width-middle" id="detailInput"
-								style="width: 300px; height: 80px;" maxlength="100">[[*{detail}]]</textarea>
+								style="width: 300px; height: 80px;" maxlength="100">[[*{comment}]]</textarea>
 							<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
 						</td>
 					</tr>
