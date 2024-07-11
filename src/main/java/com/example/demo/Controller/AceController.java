@@ -312,8 +312,7 @@ public class AceController {
 	}
 
 	@GetMapping("/ReviewInput")
-	public String GetReview(
-			ReviewInputForm reviewInputForm) {
+	public String GetReview(ReviewInputForm reviewInputForm) {
 
 		return "reviewInput";
 
@@ -338,9 +337,9 @@ public class AceController {
 			mv.setViewName("redirect:/ReviewComplete");
 			return mv;
 		} else {
-
-			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
-			mv.setViewName("redirect:/ReviewInput");
+			
+			mv.addObject("reviewInputForm", reviewInputForm);
+			mv.setViewName("reviewInput");
 			return mv;
 		}
 
