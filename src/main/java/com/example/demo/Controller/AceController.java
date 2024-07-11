@@ -314,8 +314,6 @@ public class AceController {
 	@GetMapping("/ReviewInput")
 	public ModelAndView GetReview(ReviewInputForm reviewInputForm, ModelAndView mv) {
 
-		String[] names = { "田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太" };
-		mv.addObject("names", names);
 		mv.setViewName("reviewInput");
 
 		return mv;
@@ -342,8 +340,6 @@ public class AceController {
 			return mv;
 		} else {
 
-			String[] names = { "田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太" };
-			mv.addObject("names", names);
 			mv.addObject("reviewInputForm", reviewInputForm);
 			mv.setViewName("reviewInput");
 			return mv;
