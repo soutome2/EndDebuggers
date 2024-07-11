@@ -124,14 +124,18 @@
 							</svg>
 
 
-							<span class="left-align" th:text="${review.cid}"></span><br>
+							<span class="left-align underline-color" th:text="${review.cid}"></span><br>
 						</div><!--消さないで、フォントサイズ変更-->
 
 						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"
 							th:text="${review.title}"></span><br>
-						<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+
+						<div style="font-size: 12px;">
+							<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+						</div>
+
 						<span class="left-align" th:text="${review.comment}"></span><br>
 
 					</div>
