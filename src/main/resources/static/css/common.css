@@ -324,6 +324,19 @@ th {
 	color: rgb(0, 0, 0);
 }
 
+.btn-login-icon{
+	background-color: rgb(255, 255, 128);
+	border-color: rgb(0, 0, 0);
+	color: rgb(0, 0, 0);
+}
+
+.btn-login-icon:hover{
+	background-color: rgb(27, 184, 27);
+	border-color: rgb(27, 184, 27);
+	color: #fff;
+}
+
+
 .btn-primary-custom {
 	background-color: rgb(29, 199, 29);
 	border-color: rgb(29, 199, 29);
