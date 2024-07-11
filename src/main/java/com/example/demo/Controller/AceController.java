@@ -375,11 +375,41 @@ public class AceController {
 	public ModelAndView PostReview(@RequestParam("page") Integer page, ModelAndView mv) {
 		String ename = (String) session.getAttribute("sortEname");
 		Integer sortStar = (Integer) session.getAttribute("sortStar");
+		String sortBy = (String) session.getAttribute("sortBy");
+		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
+
 		List<Review> list = new ArrayList<>();
+		//評価絞り込み
 		if (sortStar != null) {
 			list = reviewRepository.findAIIByEnameAndStar(ename, sortStar);
 		} else {
-			list = reviewRepository.findAIIByEname(ename);
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEname(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByStar(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByStarDesc(ename);
+				}
+			} else if (sortBy.equals("date")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByReviewdate(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+				}
+			}
 		}
 
 		int startIndex = (page - 1) * 10; // 開始インデックスの計算
@@ -432,6 +462,8 @@ public class AceController {
 	public ModelAndView PostReviewAll(@RequestParam("page") Integer page, RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		session.removeAttribute("sortStar");
+		session.removeAttribute("sortBy");
+		session.setAttribute("sortOrder", true);
 		session.setAttribute("sortEname", (String) session.getAttribute("ename"));
 		redirectAttributes.addAttribute("page", page);
 		mv.setViewName("redirect:/Review");
@@ -439,16 +471,27 @@ public class AceController {
 	}
 
 	@PostMapping("/SortStar")
-	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname, @RequestParam("sortStar") Integer sortStar,
+	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname,
+			@RequestParam("sortStar") Integer sortStar, @RequestParam("sortBy") String sortBy,
+			@RequestParam("sortOrder") boolean sortOrder,
 			RedirectAttributes redirectAttributes, ModelAndView mv) {
-		
+
 		session.setAttribute("sortEname", sortEname);
-		
+
 		if (sortStar == 0) {
 			session.removeAttribute("sortStar");
 		} else {
 			session.setAttribute("sortStar", sortStar);
 		}
+
+		if (sortBy == "") {
+			session.removeAttribute("sortBy");
+		} else {
+			session.setAttribute("sortBy", sortBy);
+		}
+
+		session.setAttribute("sortOrder", sortOrder);
+
 		redirectAttributes.addAttribute("page", page);
 		mv.setViewName("redirect:/Review");
 		return mv;
