@@ -88,6 +88,14 @@
 				<h4 th:text="${session.ename}+'さんのレビュー一覧'"></h4>
 
 				<form th:if="${reviewList != null}" action="/SortStar" method="post">
+					<select name="sortEname">
+						<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
+						<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
+						<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
+						<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
+						<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+					</select>
+					<input type="hidden" name="page" value="1">
 					<select name="sortStar">
 						<option value="0" th:selected="${session.sortStar == null}">全て</option>
 						<option value="1" th:selected="${session.sortStar == 1}">★1</option>
