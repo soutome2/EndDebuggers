@@ -337,17 +337,21 @@ th {
 
 }
 
-.btn-logout{
-	background-color: red; /* 背景色を赤に設定 */
-    color: white; /* テキスト色を白に設定 */
-    border: none; /* ボーダーをなしに設定 */
-    padding: 10px 20px; /* パディングを設定 */
-    cursor: pointer;
-    border-radius: 5px; 
+.btn-logout {
+	background-color: red;
+	/* 背景色を赤に設定 */
+	color: white;
+	/* テキスト色を白に設定 */
+	border: none;
+	/* ボーダーをなしに設定 */
+	padding: 10px 20px;
+	/* パディングを設定 */
+	cursor: pointer;
+	border-radius: 5px;
 }
 
-.btn-logout:hover{
-	 background-color: darkred;
+.btn-logout:hover {
+	background-color: darkred;
 }
 
 /*キャンセルボタン*/
@@ -463,20 +467,23 @@ th {
 
 /*homeの写真サイズ変更2枚*/
 @media (min-width: 768px) {
-    .mobile-image {
-        display: none;
-    }
-    .desktop-image {
-        display: block;
-    }
+	.mobile-image {
+		display: none;
+	}
+
+	.desktop-image {
+		display: block;
+	}
 }
+
 @media (max-width: 767.98px) {
-    .desktop-image {
-        display: none;
-    }
-    .mobile-image {
-        display: block;
-    }
+	.desktop-image {
+		display: none;
+	}
+
+	.mobile-image {
+		display: block;
+	}
 }
 
 /*ここまでhome写真変更コード*/
@@ -533,19 +540,35 @@ th {
 }
 
 .centered {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+
+
+
+/* ----------------------以下reviewのcss ----------------------------*/
+
+/* review１つひとつを囲っている枠*/
+.box {
+	border: 2px solid #000;
+	border-radius: 20px;
+	padding: 20px;
+	/*width: 700px;*/
+	background-color: #fff;
+}
 
 .pages-container {
-    display: flex; /* flexbox を使用して要素を横並びに配置 */
+	display: flex;
+	/* flexbox を使用して要素を横並びに配置 */
 }
 
 .page {
-    margin-right: 10px; /* 各ページフォームの間隔を調整 */
+	margin-right: 10px;
+	/* 各ページフォームの間隔を調整 */
 }
 
 .rate {
@@ -560,5 +583,6 @@ th {
 .star.selected {
   color: #ffb906; /* 選択された星の色 */
 }
+
 
 
