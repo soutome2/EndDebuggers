@@ -324,6 +324,19 @@ th {
 	color: rgb(0, 0, 0);
 }
 
+.btn-login-icon{
+	background-color: rgb(255, 255, 128);
+	border-color: rgb(0, 0, 0);
+	color: rgb(0, 0, 0);
+}
+
+.btn-login-icon:hover{
+	background-color: rgb(27, 184, 27);
+	border-color: rgb(27, 184, 27);
+	color: #fff;
+}
+
+
 .btn-primary-custom {
 	background-color: rgb(29, 199, 29);
 	border-color: rgb(29, 199, 29);
@@ -550,7 +563,7 @@ th {
 
 
 
-/* ----------------------以下reviewのcss ----------------------------*/
+/* ---------------------------以下reviewのcss ------------------------------*/
 
 /* review１つひとつを囲っている枠*/
 .box {
@@ -567,11 +580,11 @@ th {
             margin-top: 20px; /* 上部のマージンを調整 */
         }
 
+/*レビュー一覧IDの下に引いてある線*/
 .underline-color {
             text-decoration: underline;
             text-decoration-color: rgb(192, 192, 192);
         }
-
 
 .pages-container {
 	display: flex;

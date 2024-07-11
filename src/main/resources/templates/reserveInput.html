@@ -62,7 +62,7 @@
 										<form th:if="${session.cid} != null" action="/Customer" method="post">
 											<input type="hidden" name="cid" th:value="${session.cid}">
 											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-outline-primary">
+											<button type="submit" class="nav-link, btn btn-login-icon">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -155,7 +155,7 @@
 					<div class="d-flex align-items-center">
 						<h4 class="mr-3">利用者のレビュー</h4>
 						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="nav-link btn btn-outline-primary">レビュー追加</a>
+							class="btn btn-primary-custom">レビュー追加</a>
 						<span th:if="${session.cid} == null">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					</div>
 					<br>
