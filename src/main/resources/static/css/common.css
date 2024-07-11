@@ -550,7 +550,7 @@ th {
 
 
 
-/* ----------------------以下reviewのcss ----------------------------*/
+/* ---------------------------以下reviewのcss ------------------------------*/
 
 /* review１つひとつを囲っている枠*/
 .box {
@@ -567,11 +567,11 @@ th {
             margin-top: 20px; /* 上部のマージンを調整 */
         }
 
+/*レビュー一覧IDの下に引いてある線*/
 .underline-color {
             text-decoration: underline;
             text-decoration-color: rgb(192, 192, 192);
         }
-
 
 .pages-container {
 	display: flex;
