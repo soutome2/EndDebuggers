@@ -140,11 +140,11 @@
 						<input type="submit" value="全てのレビューを表示" class="circle">
 					</form>
 					<br>
-					<div th:if="${#lists.isEmpty(reviewList)}">
+					<div th:if="${#lists.isEmpty(reviewList)}" >
 						<p>まだレビューがありません</p>
 					</div>
 					<div class="container-fluid" id="bodyid">
-						<div th:each="review:${reviewList}" class="gray-background" id="count">
+						<div th:each="review:${reviewList}" class="gray-background row justify-content-center" id="count">
 							<div class="box col-8">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-person-circle" viewBox="0 0 16 16">
