@@ -138,12 +138,13 @@
 						<input type="submit" value="全てのレビューを表示" class="circle">
 					</form>
 					<br>
+					<div th:if="${#lists.isEmpty(reviewList)}">
+						<p>まだレビューがありません</p>
+					</div>
 					<div class="container-fluid" id="bodyid">
 						<div th:each="review:${reviewList}" class="gray-background" id="count">
-							<div id="headText">
-								<h4 class="left-align" th:text="${review.cid}"></h4>
-							</div>
-							<span class="left-align" th:text="${review.star}+" "+${review.title}"></span>
+							<span class="left-align" th:text="${review.cid}"></span>
+							<span class="left-align" th:text="${review.star}+' '+${review.title}"></span>
 							<span class="left-align" th:text="${review.comment}"></span>
 							<span class="left-align" th:text="${review.reviewdate}+'日の投稿です'"></span>
 						</div>

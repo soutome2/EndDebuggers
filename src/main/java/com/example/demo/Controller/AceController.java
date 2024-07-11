@@ -169,8 +169,15 @@ public class AceController {
 		//日数処理
 		String min = startDate.format(DateTimeFormatter.ISO_DATE);
 		String max = endDate.format(DateTimeFormatter.ISO_DATE);
-
-		mv.addObject("reserveInputForm", reserveInputForm);
+		
+		//reviewリスト作成
+		String ename = (String) session.getAttribute("ename");
+		List<Review> list = reviewRepository.findAIIByEname(ename);
+		int endIndex = 5;
+		if (endIndex >= list.size()) {
+			endIndex = list.size();
+		}
+		List<Review> sublist = list.subList(0, endIndex);
 
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
@@ -178,7 +185,9 @@ public class AceController {
 		session.setAttribute("timeList", timeList);
 		session.setAttribute("min", min);
 		session.setAttribute("max", max);
-
+		
+		mv.addObject("reviewList", sublist);
+		mv.addObject("reserveInputForm", reserveInputForm);
 		mv.setViewName("reserveInput");
 
 		return mv;
@@ -303,8 +312,7 @@ public class AceController {
 	}
 
 	@GetMapping("/ReviewInput")
-	public String GetReview(
-			ReviewInputForm reviewInputForm) {
+	public String GetReview(ReviewInputForm reviewInputForm) {
 
 		return "reviewInput";
 
@@ -329,9 +337,9 @@ public class AceController {
 			mv.setViewName("redirect:/ReviewComplete");
 			return mv;
 		} else {
-
-			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
-			mv.setViewName("redirect:/ReviewInput");
+			
+			mv.addObject("reviewInputForm", reviewInputForm);
+			mv.setViewName("reviewInput");
 			return mv;
 		}
 

@@ -16,7 +16,7 @@ public class ReserveInputForm {
 	@NotBlank(message = "登録済みの利用者IDを入力して下さい")
 	private String cid;
 
-	@NotNull(message = "担当者名にエラーが発生しています")
+	@NotNull(message = "担当者名が設定されていません")
 	private String ename;
 
 	private String password;

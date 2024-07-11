@@ -547,15 +547,7 @@ th {
 	text-align: center;
 }
 
-.pages-container {
-	display: flex;
-	/* flexbox を使用して要素を横並びに配置 */
-}
 
-.page {
-	margin-right: 10px;
-	/* 各ページフォームの間隔を調整 */
-}
 
 
 /* ----------------------以下reviewのcss ----------------------------*/
@@ -568,3 +560,29 @@ th {
 	/*width: 700px;*/
 	background-color: #fff;
 }
+
+.pages-container {
+	display: flex;
+	/* flexbox を使用して要素を横並びに配置 */
+}
+
+.page {
+	margin-right: 10px;
+	/* 各ページフォームの間隔を調整 */
+}
+
+.rate {
+  font-size: 30px; /* 星のアイコンのサイズ */
+}
+
+.rate .star {
+  cursor: pointer;
+  font-size: inherit; /* 親要素からの継承を受ける */
+}
+
+.star.selected {
+  color: #ffb906; /* 選択された星の色 */
+}
+
+
+
