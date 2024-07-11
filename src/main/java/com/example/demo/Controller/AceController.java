@@ -314,8 +314,6 @@ public class AceController {
 	@GetMapping("/ReviewInput")
 	public ModelAndView GetReview(ReviewInputForm reviewInputForm, ModelAndView mv) {
 
-		String[] names = { "田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太" };
-		mv.addObject("names", names);
 		mv.setViewName("reviewInput");
 
 		return mv;
@@ -342,8 +340,6 @@ public class AceController {
 			return mv;
 		} else {
 
-			String[] names = { "田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太" };
-			mv.addObject("names", names);
 			mv.addObject("reviewInputForm", reviewInputForm);
 			mv.setViewName("reviewInput");
 			return mv;
@@ -377,7 +373,7 @@ public class AceController {
 
 	@GetMapping("/Review")
 	public ModelAndView PostReview(@RequestParam("page") Integer page, ModelAndView mv) {
-		String ename = (String) session.getAttribute("ename");
+		String ename = (String) session.getAttribute("sortEname");
 		Integer sortStar = (Integer) session.getAttribute("sortStar");
 		List<Review> list = new ArrayList<>();
 		if (sortStar != null) {
@@ -436,14 +432,18 @@ public class AceController {
 	public ModelAndView PostReviewAll(@RequestParam("page") Integer page, RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		session.removeAttribute("sortStar");
+		session.setAttribute("sortEname", (String) session.getAttribute("ename"));
 		redirectAttributes.addAttribute("page", page);
 		mv.setViewName("redirect:/Review");
 		return mv;
 	}
 
 	@PostMapping("/SortStar")
-	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortStar") Integer sortStar,
+	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname, @RequestParam("sortStar") Integer sortStar,
 			RedirectAttributes redirectAttributes, ModelAndView mv) {
+		
+		session.setAttribute("sortEname", sortEname);
+		
 		if (sortStar == 0) {
 			session.removeAttribute("sortStar");
 		} else {

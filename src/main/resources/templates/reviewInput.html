@@ -76,10 +76,11 @@
 						<th class="tableHead1">担当者名</th>
 						<td>
 							<select name="ename" class="form-select">
-								<!-- 直接配列を使用してオプションを生成 -->
-								<option th:each="name : ${names}" th:value="${name}"
-									th:text="${name}" th:selected="${name == session.ename}">
-								</option>
+								<option value="田中太郎" th:selected="${session.ename.equals('田中太郎')}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${session.ename.equals('佐藤花子')}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${session.ename.equals('鈴木一郎')}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${session.ename.equals('高橋美咲')}">高橋美咲</option>
+								<option value="中村健太" th:selected="${session.ename.equals('中村健太')}">中村健太</option>
 							</select>
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
