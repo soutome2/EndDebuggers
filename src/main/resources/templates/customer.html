@@ -100,8 +100,11 @@
 				<br>
 				<div class="container white-background content">
 					<div class="container-fluid" id="bodyid">
-						<h5 th:text="${session.cid}+'さんのレビュー一覧'"></h5>
-
+						<div class="d-flex align-items-center">
+							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"></h5>
+							<a th:if="${session.cid} != null" href="/ReviewInput"
+								class="nav-link btn btn-outline-primary">レビュー追加</a>
+						</div>
 						<div th:if="${reviewList == null}">
 							<p>まだレビューがありません</p>
 						</div>
