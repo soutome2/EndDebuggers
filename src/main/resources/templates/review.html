@@ -87,7 +87,7 @@
 			<br>
 			<div class="container white-background content">
 				<div class="container-fluid" id="bodyid">
-					<h4 class="central-text" th:text="${session.ename}+'さんのレビュー一覧'"></h4>
+					<h3 class="central-text" th:text="${session.ename}+'さんのレビュー'"></h3>
 
 					<div th:if="${reviewList == null}" class="centered">
 						<p>まだレビューがありません</p>
@@ -107,14 +107,18 @@
 							</svg>
 
 
-							<span class="left-align" th:text="${review.cid}"></span><br>
+							<span class="left-align underline-color" th:text="${review.cid}"></span><br>
 						</div><!--消さないで、フォントサイズ変更-->
 
 						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"
 							th:text="${review.title}"></span><br>
-						<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+
+						<div style="font-size: 12px;">
+							<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+						</div>
+
 						<span class="left-align" th:text="${review.comment}"></span><br>
 
 					</div>

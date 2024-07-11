@@ -561,16 +561,17 @@ th {
 	background-color: #fff;
 }
 
-/* review一覧のアイコンの色 */
-.icon-color path{
-	fill: rgb(0, 0, 255);
-}
-
 /*--さんのレビュー一覧タイトルを中央揃え*/
 .central-text {
             text-align: center; /* テキストを中央揃えにする */
             margin-top: 20px; /* 上部のマージンを調整 */
         }
+
+.underline-color {
+            text-decoration: underline;
+            text-decoration-color: rgb(192, 192, 192);
+        }
+
 
 .pages-container {
 	display: flex;
