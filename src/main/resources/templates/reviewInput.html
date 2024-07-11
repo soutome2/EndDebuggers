@@ -37,7 +37,7 @@
 									<form th:if="${session.cid} != null" action="/Customer" method="post">
 										<input type="hidden" name="cid" th:value="${session.cid}">
 										<input type="hidden" name="password" th:value="${session.password}">
-										<button type="submit" class="nav-link, btn btn-outline-primary">
+										<button type="submit" class="nav-link, btn btn-login-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 												fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -76,10 +76,11 @@
 						<th class="tableHead1">担当者名</th>
 						<td>
 							<select name="ename" class="form-select">
-								<!-- 直接配列を使用してオプションを生成 -->
-								<option th:each="name : ${names}" th:value="${name}"
-									th:text="${name}" th:selected="${name == session.ename}">
-								</option>
+								<option value="田中太郎" th:selected="${session.ename.equals('田中太郎')}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${session.ename.equals('佐藤花子')}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${session.ename.equals('鈴木一郎')}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${session.ename.equals('高橋美咲')}">高橋美咲</option>
+								<option value="中村健太" th:selected="${session.ename.equals('中村健太')}">中村健太</option>
 							</select>
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
@@ -115,7 +116,7 @@
 					<tr>
 						<th class="tableHead1">タイトル</th>
 						<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
-								maxlength="255">
+								maxlength="30">
 							<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 
 

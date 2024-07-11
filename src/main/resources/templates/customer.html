@@ -41,7 +41,7 @@
 										<form th:if="${session.cid} != null" action="/Customer" method="post">
 											<input type="hidden" name="cid" th:value="${session.cid}">
 											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-outline-primary">
+											<button type="submit" class="nav-link, btn btn-login-icon">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -67,7 +67,7 @@
 				<br>
 				<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
 				<div id="contents" class="table-responsive" th:if="${not #lists.isEmpty(reserveList)}">
-					<table >
+					<table>
 						<tr>
 							<th class="tableHead2">日付</th>
 							<th class="tableHead2">時間</th>
@@ -93,8 +93,8 @@
 					<br>
 				</div>
 				<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
-				
-			
+
+
 
 				<form action="/Logout" method="post">
 					<button type="submit" class="btn-logout">ログアウト</button>
@@ -106,28 +106,26 @@
 						<div class="d-flex align-items-center">
 							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"></h5>
 							<a th:if="${session.cid} != null" href="/ReviewInput"
-								class="nav-link btn btn-outline-primary">レビュー追加</a>
+								class="btn btn-primary-custom">レビュー追加</a>
 						</div>
 						<div th:if="${reviewList == null}">
 							<p>まだレビューがありません</p>
 						</div>
 
-						<div th:each="review:${reviewList}" class="row gray-background justify-content-center" id="count">
+						<div th:each="review:${reviewList}" class="row gray-background justify-content-center"
+							id="count">
 
 							<div class="box col-8">
-								<span class="left-align" th:text="${review.reviewdate}"></span>
-								<span class="left-align" th:text="${review.ename}+'にレビュー済み'"></span>
-								<br>
-								
-
-
-
-
-
+								<div style="font-size: 12px;">
+									<span class="left-align" th:text="${review.reviewdate}"></span>
+									<span class="left-align" th:text="${review.ename}+'にレビュー済み'"></span>
+									<br>
+								</div>
 								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
 									class="left-align">★</span>
 
-								<span class="left-align" th:text="${review.title}"></span><br>
+								<span class="left-align" style="font-size: 15px; font-weight: bold;"
+									th:text="${review.title}"></span><br>
 								<span class="left-align" th:text="${review.comment}"></span><br>
 								<form action="/ReviewDelete" method="post">
 									<input type="hidden" name="reviewid" th:value="${review.reviewid}">

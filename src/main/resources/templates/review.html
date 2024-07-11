@@ -63,7 +63,7 @@
 									<form th:if="${session.cid} != null" action="/Customer" method="post">
 										<input type="hidden" name="cid" th:value="${session.cid}">
 										<input type="hidden" name="password" th:value="${session.password}">
-										<button type="submit" class="nav-link, btn btn-outline-primary">
+										<button type="submit" class="nav-link, btn btn-login-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 												fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -88,6 +88,14 @@
 				<h4 th:text="${session.ename}+'さんのレビュー一覧'"></h4>
 
 				<form th:if="${reviewList != null}" action="/SortStar" method="post">
+					<select name="sortEname">
+						<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
+						<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
+						<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
+						<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
+						<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+					</select>
+					<input type="hidden" name="page" value="1">
 					<select name="sortStar">
 						<option value="0" th:selected="${session.sortStar == null}">全て</option>
 						<option value="1" th:selected="${session.sortStar == 1}">★1</option>
@@ -95,6 +103,16 @@
 						<option value="3" th:selected="${session.sortStar == 3}">★3</option>
 						<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 						<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+					</select>
+					<select name="sortBy">
+						<option value="">並び替え</option>
+						<option value="date" th:selected="${session.sortBy == 'date'}">日付</option>
+						<option value="time" th:selected="${session.sortBy == 'time'}">時間</option>
+						<option value="star" th:selected="${session.sortBy == 'star'}">評価</option>
+					</select>
+					<select name="sortOrder">
+						<option value="true" th:selected="${session.sortOrder == true}">昇順</option>
+						<option value="false" th:selected="${session.sortOrder == false}">降順</option>
 					</select>
 					<input type="hidden" name="page" value="1">
 					<input type="submit" value="表示">
@@ -106,7 +124,7 @@
 
 				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
 					id="count">
-					<div class="box col-8">
+					<div class="box col-12">
 						<div style="font-size: 22px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
 								class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">
@@ -138,7 +156,7 @@
 			<div th:each="page : ${pages}" class="page">
 				<form action="/Review" method="get">
 					<input type="hidden" name="page" th:value="${page}">
-					<button type="submit" class="btn btn-outline-primary" th:text="${page}">
+					<button type="submit" class="btn btn-primary-custom" th:text="${page}">
 					</button>
 				</form>
 			</div>

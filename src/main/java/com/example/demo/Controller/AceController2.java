@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class AceController2 {
 	private final JsonConverterService jsonConverterService;
 	private final ReviewRepository reviewRepository;
-	@GetMapping("/GetReview")
+	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(@RequestParam("ename") String ename ) {
 		List<Review> list = reviewRepository.findAIIByEname(ename);
 		String json=jsonConverterService.getReviewToJson(list);

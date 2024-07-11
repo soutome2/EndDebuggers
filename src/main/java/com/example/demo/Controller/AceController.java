@@ -169,7 +169,7 @@ public class AceController {
 		//日数処理
 		String min = startDate.format(DateTimeFormatter.ISO_DATE);
 		String max = endDate.format(DateTimeFormatter.ISO_DATE);
-		
+
 		//reviewリスト作成
 		String ename = (String) session.getAttribute("ename");
 		List<Review> list = reviewRepository.findAIIByEname(ename);
@@ -185,7 +185,7 @@ public class AceController {
 		session.setAttribute("timeList", timeList);
 		session.setAttribute("min", min);
 		session.setAttribute("max", max);
-		
+
 		mv.addObject("reviewList", sublist);
 		mv.addObject("reserveInputForm", reserveInputForm);
 		mv.setViewName("reserveInput");
@@ -312,9 +312,11 @@ public class AceController {
 	}
 
 	@GetMapping("/ReviewInput")
-	public String GetReview(ReviewInputForm reviewInputForm) {
+	public ModelAndView GetReview(ReviewInputForm reviewInputForm, ModelAndView mv) {
 
-		return "reviewInput";
+		mv.setViewName("reviewInput");
+
+		return mv;
 
 	}
 
@@ -330,14 +332,14 @@ public class AceController {
 			LocalTime currentTime = LocalTime.now();
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
-	
+
 			reviewRepository.saveAndFlush(review);
 
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
 			mv.setViewName("redirect:/ReviewComplete");
 			return mv;
 		} else {
-			
+
 			mv.addObject("reviewInputForm", reviewInputForm);
 			mv.setViewName("reviewInput");
 			return mv;
@@ -369,13 +371,49 @@ public class AceController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/Review")
+	@GetMapping("/Review")
 	public ModelAndView PostReview(@RequestParam("page") Integer page, ModelAndView mv) {
-		String ename = (String) session.getAttribute("ename");
-		List<Review> list = reviewRepository.findAIIByEname(ename);
+		String ename = (String) session.getAttribute("sortEname");
+		Integer sortStar = (Integer) session.getAttribute("sortStar");
+		String sortBy = (String) session.getAttribute("sortBy");
+		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
+
+		List<Review> list = new ArrayList<>();
+		//評価絞り込み
+		if (sortStar != null) {
+			list = reviewRepository.findAIIByEnameAndStar(ename, sortStar);
+		} else {
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEname(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByStar(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByStarDesc(ename);
+				}
+			} else if (sortBy.equals("date")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByReviewdate(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename);
+				} else {
+					list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+				}
+			}
+		}
 
 		int startIndex = (page - 1) * 10; // 開始インデックスの計算
-		int endIndex = startIndex + 10; // 終了インデックスの計算
+		int endIndex = startIndex + 9; // 終了インデックスの計算
 
 		// インデックスがリストの範囲内に収まるように調整
 		if (startIndex < 0) {
@@ -408,7 +446,7 @@ public class AceController {
 		mv.setViewName("review");
 		return mv;
 	}
-	
+
 	@Transactional
 	@PostMapping("/ReviewDelete")
 	public ModelAndView PostReviewDelete(@RequestParam("reviewid") Integer reviewid, ModelAndView mv) {
@@ -419,9 +457,44 @@ public class AceController {
 		mv.setViewName("reviewDelete");
 		return mv;
 	}
-	
-	
-	
 
+	@PostMapping("/ReviewAll")
+	public ModelAndView PostReviewAll(@RequestParam("page") Integer page, RedirectAttributes redirectAttributes,
+			ModelAndView mv) {
+		session.removeAttribute("sortStar");
+		session.removeAttribute("sortBy");
+		session.setAttribute("sortOrder", true);
+		session.setAttribute("sortEname", (String) session.getAttribute("ename"));
+		redirectAttributes.addAttribute("page", page);
+		mv.setViewName("redirect:/Review");
+		return mv;
+	}
+
+	@PostMapping("/SortStar")
+	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname,
+			@RequestParam("sortStar") Integer sortStar, @RequestParam("sortBy") String sortBy,
+			@RequestParam("sortOrder") boolean sortOrder,
+			RedirectAttributes redirectAttributes, ModelAndView mv) {
+
+		session.setAttribute("sortEname", sortEname);
+
+		if (sortStar == 0) {
+			session.removeAttribute("sortStar");
+		} else {
+			session.setAttribute("sortStar", sortStar);
+		}
+
+		if (sortBy == "") {
+			session.removeAttribute("sortBy");
+		} else {
+			session.setAttribute("sortBy", sortBy);
+		}
+
+		session.setAttribute("sortOrder", sortOrder);
+
+		redirectAttributes.addAttribute("page", page);
+		mv.setViewName("redirect:/Review");
+		return mv;
+	}
 
 }
