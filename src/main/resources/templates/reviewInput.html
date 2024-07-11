@@ -67,14 +67,20 @@
 				<table>
 					<tr>
 						<th class="tableHead1">利用者ID</th>
-						<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="9">
+						<td><input name="cid" type="hidden" th:value="${session.cid}" maxlength="9">
+							<span th:text="${session.cid}" class="width-middle"></span>
 							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 						</td>
 					</tr>
 					<tr>
 						<th class="tableHead1">担当者名</th>
-						<td><input type="hidden" name="ename" th:value="${session.ename} ">
-							<span th:text="${session.ename}"></span>
+						<td>
+							<select name="ename" class="form-select">
+								<!-- 直接配列を使用してオプションを生成 -->
+								<option th:each="name : ${names}" th:value="${name}"
+									th:text="${name}" th:selected="${name == session.ename}">
+								</option>
+							</select>
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
 					</tr>
@@ -166,7 +172,7 @@
 				});
 
 				// 更新された選択された星の数を表示
-				selectedStarsElement.textContent = value 
+				selectedStarsElement.textContent = value
 			});
 		});
 	});
