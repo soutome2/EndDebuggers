@@ -68,6 +68,19 @@
 			<div class="container-fluid" id="bodyid">
 				<h4 th:text="${session.ename}+'さんのレビュー一覧'"></h4>
 
+				<form th:if="${reviewList != null}" action="/SortStar" method="post">
+					<select name="sortStar">
+						<option value="0" th:selected="${session.sortStar == null}">全て</option>
+						<option value="1" th:selected="${session.sortStar == 1}">★1</option>
+						<option value="2" th:selected="${session.sortStar == 2}">★2</option>
+						<option value="3" th:selected="${session.sortStar == 3}">★3</option>
+						<option value="4" th:selected="${session.sortStar == 4}">★4</option>
+						<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+					</select>
+					<input type="hidden" name="page" value="1">
+					<input type="submit" value="表示">
+				</form>
+
 				<div th:if="${reviewList == null}" class="centered">
 					<p>まだレビューがありません</p>
 				</div>
@@ -83,38 +96,38 @@
 
 
 
-					
-					
-					<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
-				
-					<span class="left-align" th:text="${review.title}"></span><br>
-					<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
-					<span class="left-align" th:text="${review.comment}"></span><br>
 
+
+						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
+
+						<span class="left-align" th:text="${review.title}"></span><br>
+						<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+						<span class="left-align" th:text="${review.comment}"></span><br>
+
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container pages-container white-background">
-			<div th:each="page : ${pages}" class="page">
-				<form action="/Review" method="post">
-					<input type="hidden" name="page" th:value="${page}">
-					<button type="submit" class="btn btn-outline-primary" th:text="${page}">
-					</button>
-				</form>
+			<div class="container pages-container white-background">
+				<div th:each="page : ${pages}" class="page">
+					<form action="/Review" method="get">
+						<input type="hidden" name="page" th:value="${page}">
+						<button type="submit" class="btn btn-outline-primary" th:text="${page}">
+						</button>
+					</form>
+				</div>
+			</div>
+			<br>
+			<div class="footer_foot">
+				<small class="footer_copy">
+					Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+				</small>
 			</div>
 		</div>
-		<br>
-		<div class="footer_foot">
-			<small class="footer_copy">
-				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-			</small>
-		</div>
-	</div>
 
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
 </body>
 
 </html>

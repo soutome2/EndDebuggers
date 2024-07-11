@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Entity.Review;
 
-public interface ReviewRepository extends JpaRepository <Review,Integer>{
+public interface ReviewRepository extends JpaRepository <Review, Integer>{
 	
 	List<Review> findAIIByEname(String ename);
+	List<Review> findAIIByEnameAndStar(String ename, Integer star);
 	List<Review> findAIIByCid(String Cid);
 
 }
