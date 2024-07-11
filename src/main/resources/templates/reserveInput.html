@@ -144,7 +144,8 @@
 					<div class="container-fluid" id="bodyid">
 						<div th:each="review:${reviewList}" class="gray-background" id="count">
 							<span class="left-align" th:text="${review.cid}"></span>
-							<span class="left-align" th:text="${review.star}+' '+${review.title}"></span>
+							<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
+							<span class="left-align" th:text="${review.title}"></span><br>
 							<span class="left-align" th:text="${review.comment}"></span>
 							<span class="left-align" th:text="${review.reviewdate}+'日の投稿です'"></span>
 						</div>
