@@ -135,7 +135,7 @@
 						<span th:if="${session.cid} == null">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					</div>
 					<br>
-					<form action="Review" method="post">
+					<form action="ReviewAll" method="post">
 						<input type="hidden" name="page" value="1">
 						<input type="submit" value="全てのレビューを表示" class="circle">
 					</form>
