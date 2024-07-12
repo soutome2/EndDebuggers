@@ -104,10 +104,14 @@
 						<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 						<option value="5" th:selected="${session.sortStar == 5}">★5</option>
 					</select>
+					<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
+						th:max="${session.now}" onchange="setMinEndDate()">
+					～
+					<input type="date" id="endDate" name="endDate" th:value="${session.endDate}" th:max="${session.now}"
+						onchange="setMaxStartDate()">
 					<select name="sortBy">
 						<option value="">並び替え</option>
 						<option value="date" th:selected="${session.sortBy == 'date'}">日付</option>
-						<option value="time" th:selected="${session.sortBy == 'time'}">時間</option>
 						<option value="star" th:selected="${session.sortBy == 'star'}">評価</option>
 					</select>
 					<select name="sortOrder">
@@ -171,6 +175,40 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 			crossorigin="anonymous"></script>
+
+		<script>
+			function setMinEndDate() {
+				// 開始日の入力値を取得
+				let startDateInput = document.getElementById("startDate");
+				let startDateValue = startDateInput.value;
+
+				// 終了日の要素を取得
+				let endDateInput = document.getElementById("endDate");
+
+				// 開始日が入力されている場合、それ以降の日付を終了日の最小値に設定する
+				if (startDateValue) {
+					endDateInput.setAttribute('min', startDateValue);
+				} else {
+					endDateInput.removeAttribute('min'); // 開始日が未選択の場合は制限を解除する
+				}
+			}
+
+			function setMaxStartDate() {
+				// 終了日の入力値を取得
+				let endDateInput = document.getElementById("endDate");
+				let endDateValue = endDateInput.value;
+
+				// 開始日の要素を取得
+				let startDateInput = document.getElementById("startDate");
+
+				// 終了日が入力されている場合、それ以前の日付を開始日の最大値に設定する
+				if (endDateValue) {
+					startDateInput.setAttribute('max', endDateValue);
+				} else {
+					startDateInput.removeAttribute('max'); // 終了日が未選択の場合は制限を解除する
+				}
+			}
+		</script>
 
 	</div>
 
