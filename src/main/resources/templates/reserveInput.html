@@ -153,11 +153,13 @@
 					</div>
 					<br>
 					<div class="d-flex align-items-center">
-						<h4 class="mr-3">利用者のレビュー</h4>
-						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="btn btn-primary-custom">レビュー追加</a>
-						<span th:if="${session.cid} == null">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
+							<h4 class="mr-3 d-none d-md-block">利用者のレビュー</h4>
+						<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom">レビュー追加</a>
+						<span th:if="${session.cid} == null" class="d-none d-md-block">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					</div>
+					<!--スマホ画面で見る時の文字サイズ変更してる-->
+					<p class="d-block d-md-none text-left" style="font-size: 20px; margin: 0;">利用者のレビュー</p>
+					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					<br>
 					<form action="ReviewAll" method="post">
 						<input type="hidden" name="page" value="1">
@@ -170,7 +172,7 @@
 					<div class="container-fluid" id="bodyid">
 						<div th:each="review:${reviewList}" class="gray-background row justify-content-center"
 							id="count">
-							<div class="box col-8">
+							<div class="box col-12 col-md-8">
 								<div style="font-size: 22px;">
 									<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
 										class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">
