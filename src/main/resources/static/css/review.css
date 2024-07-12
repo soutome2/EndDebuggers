@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.pages-container {
+	display: flex;
+	/* flexbox を使用して要素を横並びに配置 */
+	justify-content: center;
+}
+
 .active-page {
     background-color: #007bff;
     color: #fff;
