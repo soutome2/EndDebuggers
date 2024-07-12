@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class JsonConverterService{
 
 	private ObjectMapper objectMapper; // JacksonのObjectMapperをDI（Dependency Injection）する
 
+	//Entityをjson文字列に変換
 	public String EntityToJson(List<Review> list) {
 
 		try {
@@ -37,15 +39,16 @@ public class JsonConverterService{
 		}
 	}
 	
+	//json文字列をEntityに変換
 	public List<Review> JsonToEntity(String json) {
 
         try {
         	 List<Review> reviewList = objectMapper.readValue(json, new TypeReference<List<Review>>(){});
              return reviewList;
-            
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        	//取得したjsonがnull(レビューがない)ときは空のリストを返す。htmlでレビューがないときの判定
+            List<Review> emptyList = new ArrayList<>();
+            return emptyList ;
         }
     }
 

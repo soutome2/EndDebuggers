@@ -9,13 +9,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +35,7 @@ import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.JsonConverterService;
 import com.example.demo.Service.ReserveService;
 
 import jakarta.servlet.http.HttpSession;
@@ -47,6 +51,7 @@ public class AceController {
 	private final ReviewRepository reviewRepository;
 	private final CustomerService customerService;
 	private final ReserveService reserveService;
+	private final JsonConverterService jsonConverterService;
 	private final HttpSession session;
 
 	@GetMapping("/")
@@ -63,6 +68,7 @@ public class AceController {
 
 	}
 
+	@CrossOrigin
 	@GetMapping("/Reserve")
 	public ModelAndView GetReserve(ReserveInputForm reserveInputForm, ModelAndView mv,
 			ReviewInputForm reviewInputForm) {
@@ -174,13 +180,29 @@ public class AceController {
 
 		//reviewリスト作成
 		String ename = (String) session.getAttribute("ename");
-		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+
+		//API化
+		
+		String baseUrl = "https://aceconcierge.azurewebsites.net";
+		String endpoint = "/GetReviewJson";
+		String queryename =  "?ename=%s".formatted(ename);
+		System.out.println(queryename);
+		String apiUrl = baseUrl + endpoint + queryename;
+		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
+				apiUrl,
+				String.class);
+
+		// レスポンスのボディを取得
+		String responseBody = responseEntity.getBody();
+		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
+		
+		//List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+		System.out.println(list);
 		int endIndex = 5;
 		if (endIndex >= list.size()) {
 			endIndex = list.size();
 		}
 		List<Review> sublist = list.subList(0, endIndex);
-
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
 		session.setAttribute("headDateList", headDateList);
@@ -212,7 +234,8 @@ public class AceController {
 			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
-			List<Review> reviewlist = reviewRepository.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
+			List<Review> reviewlist = reviewRepository
+					.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
 			mv.addObject("reserveList", list);
 			mv.addObject("reviewList", reviewlist);
 			mv.setViewName("customer");
@@ -461,7 +484,7 @@ public class AceController {
 							sortStar);
 				}
 			}
-		//星絞り込み
+			//星絞り込み
 		} else if (sortStar != null) {
 			//並び替え判断
 			if (sortBy == null) {
@@ -539,6 +562,8 @@ public class AceController {
 				pages.add(i);
 			}
 		}
+		
+		session.setAttribute("page", page);
 
 		mv.addObject("reviewList", sublist);
 		mv.addObject("pages", pages);
