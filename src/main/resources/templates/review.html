@@ -137,7 +137,7 @@
 							<span class="left-align underline-color" th:text="${review.cid}"></span><br>
 						</div><!--消さないで、フォントサイズ変更-->
 
-						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
+						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align star-color">★</span>
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"
 							th:text="${review.title}"></span><br>

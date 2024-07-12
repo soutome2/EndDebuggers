@@ -86,6 +86,24 @@ h4 {
 	/* 1.1倍に拡大 */
 }
 
+.overall-view{
+	background: none;
+	border: none;
+	color: rgb(28, 183, 15);
+	cursor: pointer;
+	padding: 0;
+	display: inline;
+	transition: transform 0.2s ease;
+	font-size: 18px; 
+	font-weight: 550;
+        transition: background-color 0.3s; 
+}
+
+.overall-view:hover{
+	color: rgb(0, 128, 0);
+	 
+}
+
 .tableData {
 	text-align: center;
 
@@ -588,10 +606,27 @@ th {
 	text-decoration-color: rgb(192, 192, 192);
 }
 
- .custom-width {
-        width: 150px; /* 任意の幅に変更 */
-        padding: 5px 10px; /* 内側の余白 */
-    }
+/*レビュー追加ボタンの幅設定*/
+.custom-width {
+	width: 150px;
+	/* 任意の幅に変更 */
+	padding: 5px 10px;
+	/* 内側の余白 */
+}
+
+/*星の色設定*/
+.star-color {
+	color: rgb(255, 247, 87);
+	text-shadow:
+		1px 1px 0 black,
+		1px -1px 0 black,
+		-1px 1px 0 black,
+		-1px -1px 0 black,
+		0px 1px 0 black,
+		0px -1px 0 black,
+		1px 0px 0 black,
+		-1px 0px 0 black;
+}
 
 .pages-container {
 	display: flex;
