@@ -13,8 +13,12 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	//条件抽出
 	List<Review> findAIIByEname(String ename);
+	
+
 
 	List<Review> findAIIByCid(String Cid);
+	
+	List<Review> findAIIByCidOrderByReviewdateDescReviewtimeDesc(String Cid);
 
 	List<Review> findAIIByEnameAndStar(String ename, Integer star);
 
@@ -51,6 +55,8 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	
 	//並び替え星淳
 	List<Review> findAIIByEnameOrderByStar(String ename);
+	
+	
 
 	List<Review> findAIIByEnameAndStarOrderByStar(String ename, Integer star);
 

@@ -128,7 +128,7 @@
 
 				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
 					id="count">
-					<div class="box col-12 col-md-8">
+					<div class="box col-12 col-md-8"  th:if="${review.title != null && review.title != ''}">
 						<div style="font-size: 22px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
 								class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">
@@ -141,7 +141,7 @@
 							<span class="left-align underline-color" th:text="${review.cid}"></span><br>
 						</div><!--消さないで、フォントサイズ変更-->
 
-						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align">★</span>
+						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}" class="left-align star-color">★</span>
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"
 							th:text="${review.title}"></span><br>
