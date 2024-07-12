@@ -187,9 +187,9 @@
 
 				// 開始日が入力されている場合、それ以降の日付を終了日の最小値に設定する
 				if (startDateValue) {
-					endDateInput.min = startDateValue;
+					endDateInput.setAttribute('min', startDateValue);
 				} else {
-					endDateInput.min = ""; // 開始日が未選択の場合は制限を解除する
+					endDateInput.removeAttribute('min'); // 開始日が未選択の場合は制限を解除する
 				}
 			}
 
@@ -203,9 +203,9 @@
 
 				// 終了日が入力されている場合、それ以前の日付を開始日の最大値に設定する
 				if (endDateValue) {
-					startDateInput.max = endDateValue;
+					startDateInput.setAttribute('max', endDateValue);
 				} else {
-					startDateInput.max = ""; // 終了日が未選択の場合は制限を解除する
+					startDateInput.removeAttribute('max'); // 終了日が未選択の場合は制限を解除する
 				}
 			}
 		</script>
