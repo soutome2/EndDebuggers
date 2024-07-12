@@ -324,13 +324,13 @@ th {
 	color: rgb(0, 0, 0);
 }
 
-.btn-login-icon{
+.btn-login-icon {
 	background-color: rgb(255, 255, 128);
 	border-color: rgb(0, 0, 0);
 	color: rgb(0, 0, 0);
 }
 
-.btn-login-icon:hover{
+.btn-login-icon:hover {
 	background-color: rgb(27, 184, 27);
 	border-color: rgb(27, 184, 27);
 	color: #fff;
@@ -576,15 +576,22 @@ th {
 
 /*--さんのレビュー一覧タイトルを中央揃え*/
 .central-text {
-            text-align: center; /* テキストを中央揃えにする */
-            margin-top: 20px; /* 上部のマージンを調整 */
-        }
+	text-align: center;
+	/* テキストを中央揃えにする */
+	margin-top: 20px;
+	/* 上部のマージンを調整 */
+}
 
 /*レビュー一覧IDの下に引いてある線*/
 .underline-color {
-            text-decoration: underline;
-            text-decoration-color: rgb(192, 192, 192);
-        }
+	text-decoration: underline;
+	text-decoration-color: rgb(192, 192, 192);
+}
+
+ .custom-width {
+        width: 150px; /* 任意の幅に変更 */
+        padding: 5px 10px; /* 内側の余白 */
+    }
 
 .pages-container {
 	display: flex;
@@ -597,17 +604,17 @@ th {
 }
 
 .rate {
-  font-size: 30px; /* 星のアイコンのサイズ */
+	font-size: 30px;
+	/* 星のアイコンのサイズ */
 }
 
 .rate .star {
-  cursor: pointer;
-  font-size: inherit; /* 親要素からの継承を受ける */
+	cursor: pointer;
+	font-size: inherit;
+	/* 親要素からの継承を受ける */
 }
 
 .star.selected {
-  color: #ffb906; /* 選択された星の色 */
+	color: #ffb906;
+	/* 選択された星の色 */
 }
-
-
-

@@ -85,7 +85,7 @@
 		<br>
 		<div class="container white-background content">
 			<div class="container-fluid" id="bodyid">
-				<h4 th:text="${session.ename}+'さんのレビュー'"></h4>
+				<h4 th:text="${session.sortEname}+'さんのレビュー'"></h4>
 
 				<form th:if="${reviewList != null}" action="/SortStar" method="post">
 					<select name="sortEname">
