@@ -123,9 +123,10 @@
 					<input type="submit" value="表示">
 				</form>
 
-				<div th:if="${reviewList == null}" class="centered">
+				<div th:if="${#lists.isEmpty(reviewList)}" class="centered">
 					<p>まだレビューがありません</p>
 				</div>
+				
 
 				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
 					id="count">

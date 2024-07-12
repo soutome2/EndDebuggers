@@ -562,6 +562,8 @@ public class AceController {
 				pages.add(i);
 			}
 		}
+		
+		session.setAttribute("page", page);
 
 		mv.addObject("reviewList", sublist);
 		mv.addObject("pages", pages);
