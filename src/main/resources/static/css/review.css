@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.active-page {
+    background-color: #007bff;
+    color: #fff;
+}
