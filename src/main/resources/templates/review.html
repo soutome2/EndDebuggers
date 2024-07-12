@@ -112,7 +112,7 @@
 						onchange="setMaxStartDate()">
 					<select name="sortBy">
 						<option value="">並び替え</option>
-						<option value="date" th:selected="${session.sortBy == 'date'}">日付</option>
+						<option value="time" th:selected="${session.sortBy == 'time'}">日時</option>
 						<option value="star" th:selected="${session.sortBy == 'star'}">評価</option>
 					</select>
 					<select name="sortOrder">

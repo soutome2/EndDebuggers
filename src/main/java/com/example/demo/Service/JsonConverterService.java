@@ -1,11 +1,13 @@
 package com.example.demo.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.Review;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,7 +19,7 @@ public class JsonConverterService{
 
 	private ObjectMapper objectMapper; // JacksonのObjectMapperをDI（Dependency Injection）する
 
-	public String getReviewToJson(List<Review> list) {
+	public String EntityToJson(List<Review> list) {
 
 		try {
 			// リストをJSON形式の文字列に変換する
@@ -35,5 +37,17 @@ public class JsonConverterService{
 		}
 	}
 	
+	public List<Review> JsonToEntity(String json) {
+
+        try {
+        	 List<Review> reviewList = objectMapper.readValue(json, new TypeReference<List<Review>>(){});
+             return reviewList;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 	
 }
