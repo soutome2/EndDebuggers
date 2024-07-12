@@ -174,7 +174,7 @@ public class AceController {
 
 		//reviewリスト作成
 		String ename = (String) session.getAttribute("ename");
-		List<Review> list = reviewRepository.findAIIByEname(ename);
+		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 		int endIndex = 5;
 		if (endIndex >= list.size()) {
 			endIndex = list.size();
@@ -212,7 +212,7 @@ public class AceController {
 			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
 			System.out.println(list);
-			List<Review> reviewlist = reviewRepository.findAIIByCid(loginForm.getCid());
+			List<Review> reviewlist = reviewRepository.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
 			mv.addObject("reserveList", list);
 			mv.addObject("reviewList", reviewlist);
 			mv.setViewName("customer");
@@ -539,8 +539,6 @@ public class AceController {
 				pages.add(i);
 			}
 		}
-		
-		session.setAttribute("page", page);
 
 		mv.addObject("reviewList", sublist);
 		mv.addObject("pages", pages);
