@@ -628,11 +628,6 @@ th {
 		-1px 0px 0 black;
 }
 
-.pages-container {
-	display: flex;
-	/* flexbox を使用して要素を横並びに配置 */
-}
-
 .page {
 	margin-right: 10px;
 	/* 各ページフォームの間隔を調整 */
