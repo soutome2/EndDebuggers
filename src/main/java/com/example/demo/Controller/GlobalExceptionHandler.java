@@ -1,19 +1,18 @@
 package com.example.demo.Controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException(Model model, Exception ex) {
-        // エラーページに表示する情報をモデルに追加
-        model.addAttribute("errorMessage", ex.getMessage());
-        return "error";
+    public String handleException(Exception e) {
+        logger.error("エラーが発生しました: {}", e.getMessage());
+        return "error"; // error.htmlを表示するか、他の処理を行う
     }
 }

@@ -69,7 +69,7 @@ public class AceController {
 		Object enameObject = session.getAttribute("ename");
 		String enameString = null;
 		if (enameObject == null) {
-			mv.addObject("errorMessage", "Request method 'GET' is not supported");
+			mv.addObject("errorMessage", "不正なアクセスです。");
 			mv.setViewName("error");
 			return mv;
 		}
@@ -566,7 +566,7 @@ public class AceController {
 		session.removeAttribute("startDate");
 		session.removeAttribute("endDate");
 		session.removeAttribute("sortBy");
-		session.setAttribute("sortOrder", true);
+		session.setAttribute("sortOrder", false);
 		session.setAttribute("sortEname", (String) session.getAttribute("ename"));
 		redirectAttributes.addAttribute("page", page);
 		mv.setViewName("redirect:/Review");
