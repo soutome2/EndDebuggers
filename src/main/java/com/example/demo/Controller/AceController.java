@@ -51,6 +51,8 @@ public class AceController {
 
 	@GetMapping("/")
 	public String GetHome() {
+		LocalDate date = LocalDate.now();
+		session.setAttribute("now", date);
 		return "home";
 
 	}
@@ -472,7 +474,7 @@ public class AceController {
 
 	@PostMapping("/SortStar")
 	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname,
-			@RequestParam("sortStar") Integer sortStar, @RequestParam("sortBy") String sortBy,
+			@RequestParam("sortStar") Integer sortStar, @RequestParam("sortDate") LocalDate sortDate, @RequestParam("sortBy") String sortBy,
 			@RequestParam("sortOrder") boolean sortOrder,
 			RedirectAttributes redirectAttributes, ModelAndView mv) {
 
@@ -482,6 +484,12 @@ public class AceController {
 			session.removeAttribute("sortStar");
 		} else {
 			session.setAttribute("sortStar", sortStar);
+		}
+		
+		if (sortStar == null) {
+			session.removeAttribute("sortDate");
+		} else {
+			session.setAttribute("sortDate", sortDate);
 		}
 
 		if (sortBy == "") {

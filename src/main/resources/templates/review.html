@@ -104,6 +104,8 @@
 						<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 						<option value="5" th:selected="${session.sortStar == 5}">★5</option>
 					</select>
+					<input name="sortDate" type="date" th:max="${session.now}"
+						class="width-middle" th:value="${session.sortDate}">
 					<select name="sortBy">
 						<option value="">並び替え</option>
 						<option value="date" th:selected="${session.sortBy == 'date'}">日付</option>
