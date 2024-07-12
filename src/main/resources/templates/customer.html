@@ -104,18 +104,24 @@
 				<div class="container white-background content">
 					<div class="container-fluid" id="bodyid">
 						<div class="d-flex align-items-center">
-							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"></h5>
+							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-none d-md-block"></h5>
 							<a th:if="${session.cid} != null" href="/ReviewInput"
-								class="btn btn-primary-custom">レビュー追加</a>
+								class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
 						</div>
+						
+						<!--スマホ画面で見る時の文字位置変更してる-->
+						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-block d-md-none"></h5>
+						<a th:if="${session.cid} != null" href="/ReviewInput"
+								class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
+						
 						<div th:if="${reviewList == null}">
 							<p>まだレビューがありません</p>
 						</div>
 
 						<div th:each="review:${reviewList}" class="row gray-background justify-content-center"
 							id="count">
-
-							<div class="box col-8">
+                        
+							<div class="box col-12 col-md-8">
 								<div style="font-size: 12px;">
 									<span class="left-align" th:text="${review.reviewdate}"></span>
 									<span class="left-align" th:text="${review.ename}+'にレビュー済み'"></span>
