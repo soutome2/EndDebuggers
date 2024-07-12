@@ -159,7 +159,7 @@
 					</div>
 					<!--スマホ画面で見る時の文字サイズ変更してる-->
 					<div class="d-flex align-items-center">
-					<p class="d-block d-md-none text-left" style="font-size: 20px; margin: 0; font-weight: 540;">利用者のレビュー</p>
+					<p class="d-block d-md-none text-left" style="font-size: 18px; margin: 0; font-weight: 540;">利用者のレビュー</p>
 					<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom d-block d-md-none ms-4">レビュー追加</a>
 					</div>
 					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
@@ -189,7 +189,7 @@
 								</div><!--消さないで、フォントサイズ変更-->
 
 								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-									class="left-align star-color">★</span>
+									class="left-align star-color" style="margin-right: 2px;">★</span>
 
 								<span class="left-align" style="font-size: 16px; font-weight: bold;"
 									th:text="${review.title}"></span><br>
