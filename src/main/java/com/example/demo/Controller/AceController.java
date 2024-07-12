@@ -51,6 +51,8 @@ public class AceController {
 
 	@GetMapping("/")
 	public String GetHome() {
+		LocalDate date = LocalDate.now();
+		session.setAttribute("now", date);
 		return "home";
 
 	}
@@ -375,13 +377,116 @@ public class AceController {
 	public ModelAndView PostReview(@RequestParam("page") Integer page, ModelAndView mv) {
 		String ename = (String) session.getAttribute("sortEname");
 		Integer sortStar = (Integer) session.getAttribute("sortStar");
+		LocalDate startDate = (LocalDate) session.getAttribute("startDate");
+		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
 
 		List<Review> list = new ArrayList<>();
 		//評価絞り込み
-		if (sortStar != null) {
-			list = reviewRepository.findAIIByEnameAndStar(ename, sortStar);
+		if (startDate != null && endDate != null) {
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+							startDate, endDate, sortStar);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, startDate, endDate,
+							sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, startDate, endDate,
+							sortStar);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
+							startDate, endDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+							startDate, endDate, sortStar);
+				}
+			}
+		} else if (startDate != null) {
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndStartDate(ename, startDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+							sortStar);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndStartDateOrderByStar(ename, startDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, startDate, sortStar);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename, startDate,
+							sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+							sortStar);
+				}
+			}
+		} else if (endDate != null) {
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndEndDate(ename, endDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+							sortStar);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndEndDateOrderByStar(ename, endDate, sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, endDate, sortStar);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename, endDate,
+							sortStar);
+				} else {
+					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+							sortStar);
+				}
+			}
+		//星絞り込み
+		} else if (sortStar != null) {
+			//並び替え判断
+			if (sortBy == null) {
+				//昇順降順
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameAndStar(ename, sortStar);
+				} else {
+					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
+							sortStar);
+				}
+			} else if (sortBy.equals("star")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameAndStarOrderByStar(ename, sortStar);
+				} else {
+					list = reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, sortStar);
+				}
+			} else if (sortBy.equals("time")) {
+				if (sortOrder) {
+					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename,
+							sortStar);
+				} else {
+					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
+							sortStar);
+				}
+			}
 		} else {
 			//並び替え判断
 			if (sortBy == null) {
@@ -396,12 +501,6 @@ public class AceController {
 					list = reviewRepository.findAIIByEnameOrderByStar(ename);
 				} else {
 					list = reviewRepository.findAIIByEnameOrderByStarDesc(ename);
-				}
-			} else if (sortBy.equals("date")) {
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameOrderByReviewdate(ename);
-				} else {
-					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
 				}
 			} else if (sortBy.equals("time")) {
 				if (sortOrder) {
@@ -462,6 +561,8 @@ public class AceController {
 	public ModelAndView PostReviewAll(@RequestParam("page") Integer page, RedirectAttributes redirectAttributes,
 			ModelAndView mv) {
 		session.removeAttribute("sortStar");
+		session.removeAttribute("startDate");
+		session.removeAttribute("endDate");
 		session.removeAttribute("sortBy");
 		session.setAttribute("sortOrder", true);
 		session.setAttribute("sortEname", (String) session.getAttribute("ename"));
@@ -472,7 +573,9 @@ public class AceController {
 
 	@PostMapping("/SortStar")
 	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname,
-			@RequestParam("sortStar") Integer sortStar, @RequestParam("sortBy") String sortBy,
+			@RequestParam("sortStar") Integer sortStar,
+			@RequestParam(value = "startDate", required = false) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) LocalDate endDate, @RequestParam("sortBy") String sortBy,
 			@RequestParam("sortOrder") boolean sortOrder,
 			RedirectAttributes redirectAttributes, ModelAndView mv) {
 
@@ -482,6 +585,18 @@ public class AceController {
 			session.removeAttribute("sortStar");
 		} else {
 			session.setAttribute("sortStar", sortStar);
+		}
+
+		if (startDate == null) {
+			session.removeAttribute("startDate");
+		} else {
+			session.setAttribute("startDate", startDate);
+		}
+
+		if (endDate == null) {
+			session.removeAttribute("endDate");
+		} else {
+			session.setAttribute("endDate", endDate);
 		}
 
 		if (sortBy == "") {

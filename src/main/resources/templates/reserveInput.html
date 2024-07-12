@@ -154,11 +154,14 @@
 					<br>
 					<div class="d-flex align-items-center">
 							<h4 class="mr-3 d-none d-md-block">利用者のレビュー</h4>
-						<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom">レビュー追加</a>
+						<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom d-none d-md-block">レビュー追加</a>
 						<span th:if="${session.cid} == null" class="d-none d-md-block">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					</div>
 					<!--スマホ画面で見る時の文字サイズ変更してる-->
-					<p class="d-block d-md-none text-left" style="font-size: 20px; margin: 0;">利用者のレビュー</p>
+					<div class="d-flex align-items-center">
+					<p class="d-block d-md-none text-left" style="font-size: 20px; margin: 0; font-weight: 540;">利用者のレビュー</p>
+					<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom d-block d-md-none  ms-4">レビュー追加</a>
+					</div>
 					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
 					<br>
 					<form action="ReviewAll" method="post">
