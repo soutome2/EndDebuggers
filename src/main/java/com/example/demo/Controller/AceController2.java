@@ -27,7 +27,7 @@ public class AceController2 {
 			List<Review> list = reviewRepository.findAIIByEname(ename);
 
 			if (list != null && !list.isEmpty()) {
-				String json = jsonConverterService.getReviewToJson(list);
+				String json = jsonConverterService.EntityToJson(list);
 				return json;
 			} else {
 				// エンティティが見つからなかった場合の処理
@@ -48,6 +48,9 @@ public class AceController2 {
 
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
+		List<Review> list =jsonConverterService.JsonToEntity(responseBody);
+		System.out.println("エンテティ");
+		System.out.println(list);
 		System.out.println("レスポンスボディ: " + responseBody);
 
 		// 必要に応じてレスポンスを処理する
