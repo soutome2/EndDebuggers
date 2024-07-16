@@ -407,8 +407,6 @@ public class AceController {
 		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
-		
-		System.out.println(sortBy);
 
 		List<Review> list = new ArrayList<>();
 		//評価絞り込み
@@ -480,7 +478,7 @@ public class AceController {
 						: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 			} else {
 				list = sortOrder ? reviewRepository.findAIIByEname(ename)
-						: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+						: reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
 			}
 		}
 
