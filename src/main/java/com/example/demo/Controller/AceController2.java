@@ -198,7 +198,7 @@ public class AceController2 {
 		{
 			// enameがしていされなかった
 			System.out.println("enameの指定なし");
-			return ResponseEntity.ok("{}"); // enameがnullの場合も空のJSONオブジェクトを返す例
+			return ResponseEntity.ok("enameを入力して下さい"); // enameがnullの場合も空のJSONオブジェクトを返す例
 		}
 	}
 
