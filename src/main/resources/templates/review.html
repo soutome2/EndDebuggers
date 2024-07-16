@@ -128,19 +128,19 @@
 						</select>
 					</div>
 					<div class="col-12 col-md-3 mb-2">
-					<input type="hidden" name="page" value="1">
-					<input type="submit" value="表示">
+						<input type="hidden" name="page" value="1">
+						<input type="submit" value="表示">
 					</div>
 				</form>
 
 				<div th:if="${#lists.isEmpty(reviewList)}" class="centered">
 					<p>まだレビューがありません</p>
 				</div>
-				
 
-				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
-					id="count">
-					<div class="box col-12 col-md-8" th:if="${review.title != null && review.title != ''}">
+
+				<div th:each="review, index :${reviewList}" th:if="${review.title != null && review.title != ''}"
+					class="gray-background row  justify-content-center" id="count">
+					<div class="box col-12 col-md-8">
 						<div style="font-size: 22px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
 								class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">
