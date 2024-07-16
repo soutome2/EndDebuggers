@@ -184,18 +184,17 @@ public class AceController {
 		String ename = (String) session.getAttribute("ename");
 
 		//API化
-		
+
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/GetReviewJson";
-		String queryename =  "?ename=%s".formatted(ename);
-		
-		
-		String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint,queryename);
+		String queryename = "?ename=%s".formatted(ename);
+
+		String apiUrl = jsonConverterService.MakeFilePath(baseUrl, endpoint, queryename);
 		//String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint);
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
-		
+
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
@@ -203,7 +202,7 @@ public class AceController {
 		//reviewリストの作成
 		//List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 		reviewService.getAverage(ename);
-		
+
 		List<Review> filteredList = reviewService.getFilteredReview(list);
 
 		// 5件のサブリストを取得
@@ -414,132 +413,77 @@ public class AceController {
 		List<Review> list = new ArrayList<>();
 		//評価絞り込み
 		if (startDate != null && endDate != null) {
-			//並び替え判断
-			if (sortBy == null) {
-				//昇順降順
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-							startDate, endDate, sortStar);
-				}
-			} else if (sortBy.equals("star")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, startDate, endDate,
-							sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, startDate, endDate,
-							sortStar);
-				}
-			} else if (sortBy.equals("time")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
-							startDate, endDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-							startDate, endDate, sortStar);
-				}
+			if ("star".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, startDate, endDate, sortStar)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, startDate, endDate,
+								sortStar);
+			} else if ("time".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
+								startDate, endDate, sortStar)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+								startDate, endDate, sortStar);
+			} else {
+				list = sortOrder ? reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, sortStar)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+								startDate, endDate, sortStar);
 			}
 		} else if (startDate != null) {
-			//並び替え判断
-			if (sortBy == null) {
-				//昇順降順
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndStartDate(ename, startDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
-							sortStar);
-				}
-			} else if (sortBy.equals("star")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndStartDateOrderByStar(ename, startDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, startDate, sortStar);
-				}
-			} else if (sortBy.equals("time")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename, startDate,
-							sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
-							sortStar);
-				}
+			if ("star".equals(sortBy)) {
+				list = sortOrder ? reviewRepository.findByEnameAndStartDateOrderByStar(ename, startDate, sortStar)
+						: reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, startDate, sortStar);
+			} else if ("time".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename, startDate,
+								sortStar)
+						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+								sortStar);
+			} else {
+				list = sortOrder ? reviewRepository.findByEnameAndStartDate(ename, startDate, sortStar)
+						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+								sortStar);
 			}
 		} else if (endDate != null) {
-			//並び替え判断
-			if (sortBy == null) {
-				//昇順降順
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndEndDate(ename, endDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
-							sortStar);
-				}
-			} else if (sortBy.equals("star")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndEndDateOrderByStar(ename, endDate, sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, endDate, sortStar);
-				}
-			} else if (sortBy.equals("time")) {
-				if (sortOrder) {
-					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename, endDate,
-							sortStar);
-				} else {
-					list = reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
-							sortStar);
-				}
+			if ("star".equals(sortBy)) {
+				list = sortOrder ? reviewRepository.findByEnameAndEndDateOrderByStar(ename, endDate, sortStar)
+						: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, endDate, sortStar);
+			} else if ("time".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename, endDate,
+								sortStar)
+						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+								sortStar);
+			} else {
+				list = sortOrder ? reviewRepository.findByEnameAndEndDate(ename, endDate, sortStar)
+						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+								sortStar);
 			}
-			//星絞り込み
 		} else if (sortStar != null) {
-			//並び替え判断
-			if (sortBy == null) {
-				//昇順降順
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameAndStar(ename, sortStar);
-				} else {
-					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
-							sortStar);
-				}
-			} else if (sortBy.equals("star")) {
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameAndStarOrderByStar(ename, sortStar);
-				} else {
-					list = reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, sortStar);
-				}
-			} else if (sortBy.equals("time")) {
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename,
-							sortStar);
-				} else {
-					list = reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
-							sortStar);
-				}
+			if ("star".equals(sortBy)) {
+				list = sortOrder ? reviewRepository.findAIIByEnameAndStarOrderByStar(ename, sortStar)
+						: reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, sortStar);
+			} else if ("time".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename, sortStar)
+						: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename, sortStar);
+			} else {
+				list = sortOrder ? reviewRepository.findAIIByEnameAndStar(ename, sortStar)
+						: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename, sortStar);
 			}
 		} else {
-			//並び替え判断
-			if (sortBy == null) {
-				//昇順降順
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEname(ename);
-				} else {
-					list = reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
-				}
-			} else if (sortBy.equals("star")) {
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameOrderByStar(ename);
-				} else {
-					list = reviewRepository.findAIIByEnameOrderByStarDesc(ename);
-				}
-			} else if (sortBy.equals("time")) {
-				if (sortOrder) {
-					list = reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename);
-				} else {
-					list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
-				}
+			if ("star".equals(sortBy)) {
+				list = sortOrder ? reviewRepository.findAIIByEnameOrderByStar(ename)
+						: reviewRepository.findAIIByEnameOrderByStarDesc(ename);
+			} else if ("time".equals(sortBy)) {
+				list = sortOrder ? reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename)
+						: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+			} else {
+				list = sortOrder ? reviewRepository.findAIIByEname(ename)
+						: reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
 			}
 		}
-		
+
 		//平均値計算
 		reviewService.getAverage(ename);
 
