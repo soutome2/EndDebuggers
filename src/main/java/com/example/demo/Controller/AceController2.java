@@ -226,7 +226,7 @@ public class AceController2 {
 			@RequestParam(value = "title", required = false) String title,@RequestParam(value = "comment", required = false) String comment,@RequestParam(value = "star", required = false) Integer star) {
 		
 		// リクエストURLを定義
-		String apiUrl="http://localhost:8080/InsertReview";
+		String apiUrl="https://aceconcierge.azurewebsites.net/InsertReview";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
