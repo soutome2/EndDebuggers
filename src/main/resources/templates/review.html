@@ -116,7 +116,8 @@
 							th:max="${session.now}" onchange="setMaxStartDate()" class="ms-2">
 					</div>
 
-					<div class="col-12 col-md-3 mb-2">
+					<!--スマホ-->
+					<div class="col-12 col-md-3 mb-2 d-block d-md-none">
 						<select name="sortBy">
 							<option value="">並び替え</option>
 							<option value="time" th:selected="${session.sortBy == 'time'}">日時</option>
@@ -127,9 +128,25 @@
 							<option value="false" th:selected="${session.sortOrder == false}">降順</option>
 						</select>
 					</div>
-					<div class="col-12 col-md-3 mb-2">
+
+					<!--パソコン-->
+					<div class="col-12 col-md-3 mb-2 d-none d-md-block interval-sort">
+						<select name="sortBy">
+							<option value="">並び替え</option>
+							<option value="time" th:selected="${session.sortBy == 'time'}">日時</option>
+							<option value="star" th:selected="${session.sortBy == 'star'}">評価</option>
+						</select>
+						<select name="sortOrder">
+							<option value="true" th:selected="${session.sortOrder == true}">昇順</option>
+							<option value="false" th:selected="${session.sortOrder == false}">降順</option>
+						</select>
+					</div>
+
+
+					<div class="col-12 col-md-3 mb-3">
 						<input type="hidden" name="page" value="1">
-						<input type="submit" value="表示">
+						<input type="submit" value="表示" class="d-block d-md-none display-button"><!--スマホ-->
+						<input type="submit" value="表示" class="submit-btn d-none d-md-block display-button"><!--パソコン-->
 					</div>
 				</form>
 
@@ -138,8 +155,12 @@
 				</div>
 
 
-				<div th:each="review, index :${reviewList}" th:if="${review.title != null && review.title != ''}"
-					class="gray-background row  justify-content-center" id="count">
+				<div th:if="${#lists.size(reviewList) > 0}">
+					<h5 th:text="'平均評価：☆'+${session.averageStars}"></h5>
+				</div>
+				
+				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
+					id="count">
 					<div class="box col-12 col-md-8">
 						<div style="font-size: 22px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
