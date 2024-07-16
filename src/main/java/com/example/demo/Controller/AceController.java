@@ -407,8 +407,6 @@ public class AceController {
 		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
-		
-		System.out.println(sortBy);
 
 		List<Review> list = new ArrayList<>();
 		//評価絞り込み
@@ -480,7 +478,7 @@ public class AceController {
 						: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 			} else {
 				list = sortOrder ? reviewRepository.findAIIByEname(ename)
-						: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+						: reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
 			}
 		}
 
@@ -499,14 +497,14 @@ public class AceController {
 		List<Integer> pages = new ArrayList<>();
 
 		// 範囲外の入力は空リストを返す
-		if (page < 0 || page > list.size() / 10 + 1) {
+		if (page < 0 || page > filteredList.size() / 10 + 1) {
 			mv.setViewName("home");
 			return mv;
 		}
 
 		// 前後2つの数字を含むリストを生成
 		for (int i = page - 2; i <= page + 2; i++) {
-			if (i >= 1 && i <= list.size() / 10 + 1) {
+			if (i >= 1 && i <= filteredList.size() / 10 + 1) {
 				pages.add(i);
 			}
 		}
