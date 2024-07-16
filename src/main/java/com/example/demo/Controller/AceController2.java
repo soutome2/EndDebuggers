@@ -222,10 +222,11 @@ public class AceController2 {
 	}
 	
 	@GetMapping("/PostReview")
-	public String postReview() {
+	public String postReview(@RequestParam(value = "cid", required = false) String cid,@RequestParam(value = "ename", required = false) String ename,
+			@RequestParam(value = "title", required = false) String title,@RequestParam(value = "comment", required = false) String comment,@RequestParam(value = "star", required = false) Integer star) {
 		
 		// リクエストURLを定義
-		String apiUrl="http://localhost:8080/InsertReview";
+		String apiUrl="https://aceconcierge.azurewebsites.net/InsertReview";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
@@ -234,11 +235,12 @@ public class AceController2 {
 
 		// 送信するフォームデータを準備
 		ReviewInputForm reviewInputForm = new ReviewInputForm();
-		reviewInputForm.setCid("Gest");
-		reviewInputForm.setEname("佐藤花子");
-		reviewInputForm.setTitle("だめ");
-		reviewInputForm.setComment("ダメだこりゃ");
-		reviewInputForm.setStar(-1);
+		System.out.println(cid);
+		reviewInputForm.setCid(cid);
+		reviewInputForm.setEname(ename);
+		reviewInputForm.setTitle(title);
+		reviewInputForm.setComment(comment);
+		reviewInputForm.setStar(star);
 
 
 		// HTTPリクエストエンティティを作成
