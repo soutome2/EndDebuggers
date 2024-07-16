@@ -614,6 +614,29 @@ th {
 	/* 内側の余白 */
 }
 
+/*ソートの間隔空け*/
+.submit-btn {
+    margin-left: -90px; /* 左のマージンを調整 */
+    display: inline-block;
+}
+
+.interval-sort{
+	 margin-left: -25px; /* 左のマージンを調整 */
+    display: inline-block;
+}
+
+.display-button{
+	background-color: rgb(192, 192, 192); /* 青色 */
+    color: white; /* テキストの色 */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.display-button:hover{
+	background-color: rgb(128, 128, 128);
+}
 
 
 /*星の色設定*/
