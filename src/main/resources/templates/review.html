@@ -20,7 +20,9 @@
 				var color = '#';
 				for (var i = 0; i < 6; i++) {
 					color += letters[Math.floor(Math.random() * 16)];
-				}
+					
+				}while (color === '#FF0000');/*redは避ける*/
+				
 				return color;
 			}
 
@@ -109,7 +111,7 @@
 							</select>
 						</div>
 
-					<div class="col-12 col-md-4 mb-4 d-flex align-items-center">
+					<div class="col-12 col-md-4 mb-3 d-flex align-items-center">
 						<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
 							th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
 						～
@@ -131,7 +133,7 @@
 
 						<div class="col-12 col-md-3 mb-3">
 							<input type="hidden" name="page" value="1">
-							<input type="submit" value="表示" class="display-button">
+							<input type="submit" value="表示" class="remove-btn display-button">
 						</div>
 					</form>
 				</div>
@@ -158,7 +160,7 @@
 							</select>
 						</div>
 
-						<div class="col-12 col-md-4 mb-3 d-flex align-items-center">
+						<div class="col-12 col-md-4 mb-4 d-flex align-items-center">
 							<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
 								th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
 							～
