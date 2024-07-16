@@ -101,7 +101,7 @@
 						</div>
 						<div class="col-md-6">
 							<div style="margin-top: 20px; text-align: left;">
-							
+
 								<h5 th:text="${session.ename} + ' ' + ${session.furigana}" class="d-block d-md-none">
 								</h5>
 								<h3 th:text="${session.ename} + ' ' + ${session.furigana}" class="d-none d-md-block">
@@ -179,7 +179,10 @@
 					</div>
 					<div class="row">
 						<div th:if="${#lists.size(reviewList) > 0}" class="col-12 col-md-3 mb-0 ms-4">
-							<h5 th:text="'平均評価：☆'+${session.averageStars}"></h5>
+							<h5>平均評価：
+								<span class="star-color">★</span>
+								<span th:text="${session.averageStars}"></span>
+							</h5>
 						</div>
 					</div>
 					<div class="container-fluid" id="bodyid">
