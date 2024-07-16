@@ -180,7 +180,7 @@ public class AceController2 {
 							: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 				} else {
 					list = parsedOrder ? reviewRepository.findAIIByEname(ename)
-							: reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+							: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 				}
 			}
 
