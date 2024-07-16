@@ -35,11 +35,10 @@ import lombok.AllArgsConstructor;
 public class AceController2 {
 	private final JsonConverterService jsonConverterService;
 	private final ReviewRepository reviewRepository;
-	
+
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
-		return
-				"JSONデータの取得URL：/GetReviewJson		\n"
+		return "JSONデータの取得URL：/GetReviewJson		\n"
 				+ "param:\n"
 				+ "担当者名 String ename [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]\n"
 				+ "評価 Integer star [1, 2, 3, 4, 5]\n"
@@ -50,102 +49,156 @@ public class AceController2 {
 	}
 
 	@GetMapping("/GetReviewJson")
-	public String ReviewReturn(@RequestParam(value = "ename", required = false) String ename,
-			@RequestParam(value = "star", required = false) Integer star,
-			@RequestParam(value = "startDate", required = false) LocalDate startDate,
-			@RequestParam(value = "endDate", required = false) LocalDate endDate,
+	public ResponseEntity<?> ReviewReturn(
+			@RequestParam(value = "ename", required = false) String ename,
+			@RequestParam(value = "star", required = false) String star,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
 			@RequestParam(value = "sortBy", required = false) String sortBy,
-			@RequestParam(value = "order", required = false) boolean order) {
+			@RequestParam(value = "order", required = false) String order) {
+
+		// 変換後のパラメータを格納する変数
+		Integer parsedStar = null;
+		LocalDate parsedStartDate = null;
+		LocalDate parsedEndDate = null;
+		Boolean parsedOrder = true;
+
+		// starの変換
+		if (star != null) {
+			try {
+				parsedStar = Integer.parseInt(star);
+			} catch (NumberFormatException e) {
+				return ResponseEntity.badRequest().body("starパラメータが整数である必要があります");
+			}
+		}
+
+		// startDateの変換
+		if (startDate != null) {
+			try {
+				parsedStartDate = LocalDate.parse(startDate);
+			} catch (Exception e) {
+				return ResponseEntity.badRequest().body("startDateパラメータが日付の形式である必要があります");
+			}
+		}
+
+		// endDateの変換
+		if (endDate != null) {
+			try {
+				parsedEndDate = LocalDate.parse(endDate);
+			} catch (Exception e) {
+				return ResponseEntity.badRequest().body("endDateパラメータが日付の形式である必要があります");
+			}
+		}
+
+		// orderの変換
+		if (order != null) {
+			if (order.equalsIgnoreCase("true")) {
+				parsedOrder = true;
+			} else if (order.equalsIgnoreCase("false")) {
+				parsedOrder = false;
+			} else {
+				return ResponseEntity.badRequest().body("orderパラメータがブール値である必要があります");
+			}
+		}
+
 		if (ename != null) {
 			List<Review> list = new ArrayList<>();
 
 			if (startDate != null && endDate != null) {
-			    if ("star".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, startDate, endDate, star) :
-			                reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, startDate, endDate, star);
-			    } else if ("time".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename, startDate, endDate, star) :
-			                reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename, startDate, endDate, star);
-			    } else {
-			        list = order ?
-			                reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, star) :
-			                reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename, startDate, endDate, star);
-			    }
+				if ("star".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, parsedStartDate,
+									parsedEndDate, parsedStar)
+							: reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, parsedStartDate,
+									parsedEndDate, parsedStar);
+				} else if ("time".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
+									parsedStartDate, parsedEndDate, parsedStar)
+							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStartDate, parsedEndDate, parsedStar);
+				} else {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndReviewdateGroup(ename, parsedStartDate, parsedEndDate,
+									parsedStar)
+							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStartDate, parsedEndDate, parsedStar);
+				}
 			} else if (startDate != null) {
-			    if ("star".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndStartDateOrderByStar(ename, startDate, star) :
-			                reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, startDate, star);
-			    } else if ("time".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename, startDate, star) :
-			                reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate, star);
-			    } else {
-			        list = order ?
-			                reviewRepository.findByEnameAndStartDate(ename, startDate, star) :
-			                reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate, star);
-			    }
+				if ("star".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndStartDateOrderByStar(ename, parsedStartDate, parsedStar)
+							: reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, parsedStartDate,
+									parsedStar);
+				} else if ("time".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename,
+									parsedStartDate, parsedStar)
+							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStartDate, parsedStar);
+				} else {
+					list = parsedOrder ? reviewRepository.findByEnameAndStartDate(ename, parsedStartDate, parsedStar)
+							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStartDate, parsedStar);
+				}
 			} else if (endDate != null) {
-			    if ("star".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndEndDateOrderByStar(ename, endDate, star) :
-			                reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, endDate, star);
-			    } else if ("time".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename, endDate, star) :
-			                reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate, star);
-			    } else {
-			        list = order ?
-			                reviewRepository.findByEnameAndEndDate(ename, endDate, star) :
-			                reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate, star);
-			    }
+				if ("star".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndEndDateOrderByStar(ename, parsedEndDate, parsedStar)
+							: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, parsedEndDate, parsedStar);
+				} else if ("time".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename,
+									parsedEndDate, parsedStar)
+							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedEndDate, parsedStar);
+				} else {
+					list = parsedOrder ? reviewRepository.findByEnameAndEndDate(ename, parsedEndDate, parsedStar)
+							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedEndDate, parsedStar);
+				}
 			} else if (star != null) {
-			    if ("star".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findAIIByEnameAndStarOrderByStar(ename, star) :
-			                reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, star);
-			    } else if ("time".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename, star) :
-			                reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename, star);
-			    } else {
-			        list = order ?
-			                reviewRepository.findAIIByEnameAndStar(ename, star) :
-			                reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename, star);
-			    }
+				if ("star".equals(sortBy)) {
+					list = parsedOrder ? reviewRepository.findAIIByEnameAndStarOrderByStar(ename, parsedStar)
+							: reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, parsedStar);
+				} else if ("time".equals(sortBy)) {
+					list = parsedOrder
+							? reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename, parsedStar)
+							: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStar);
+				} else {
+					list = parsedOrder ? reviewRepository.findAIIByEnameAndStar(ename, parsedStar)
+							: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStar);
+				}
 			} else {
-			    if ("star".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findAIIByEnameOrderByStar(ename) :
-			                reviewRepository.findAIIByEnameOrderByStarDesc(ename);
-			    } else if ("time".equals(sortBy)) {
-			        list = order ?
-			                reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename) :
-			                reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
-			    } else {
-			        list = order ?
-			                reviewRepository.findAIIByEname(ename) :
-			                reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
-			    }
+				if ("star".equals(sortBy)) {
+					list = parsedOrder ? reviewRepository.findAIIByEnameOrderByStar(ename)
+							: reviewRepository.findAIIByEnameOrderByStarDesc(ename);
+				} else if ("time".equals(sortBy)) {
+					list = parsedOrder ? reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename)
+							: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+				} else {
+					list = parsedOrder ? reviewRepository.findAIIByEname(ename)
+							: reviewRepository.findAIIByEnameOrderByReviewdateDesc(ename);
+				}
 			}
 
 			if (list != null && !list.isEmpty()) {
 				String json = jsonConverterService.EntityToJson(list);
-				return json;
+				return ResponseEntity.ok().body(json);
 
 			} else {
 				// エンティティが見つからなかった場合の処理 enameでコンシェルジュの名前以外指定
 				System.out.println("entityがnullまたは空");
-				return "{}"; // 空のJSONオブジェクトを返す例
+				return ResponseEntity.ok().body("{}"); // 空のJSONオブジェクトを返す例
 			}
 		} else
 
 		{
 			// enameがしていされなかった
 			System.out.println("enameの指定なし");
-			return "{}"; // enameがnullの場合も空のJSONオブジェクトを返す例
+			return ResponseEntity.ok("enameを入力して下さい"); // enameがnullの場合も空のJSONオブジェクトを返す例
 		}
 	}
 

@@ -108,7 +108,7 @@
 						</select>
 					</div>
 
-					<div class="col-12 col-md-4 mb-3 d-flex align-items-center">
+					<div class="col-12 col-md-4 mb-4 d-flex align-items-center">
 						<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
 							th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
 						～
@@ -156,9 +156,12 @@
 
 
 				<div th:if="${#lists.size(reviewList) > 0}">
-					<h5 th:text="'平均評価：☆'+${session.averageStars}"></h5>
+					<h5>平均評価：
+						<span class="star-color">★</span>
+						<span th:text="${session.averageStars}"></span>
+					</h5>
 				</div>
-				
+
 				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
 					id="count">
 					<div class="box col-12 col-md-8">
