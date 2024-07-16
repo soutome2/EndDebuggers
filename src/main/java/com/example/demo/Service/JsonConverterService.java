@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Entity.Review;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
@@ -26,11 +25,8 @@ public class JsonConverterService{
 		try {
 			// リストをJSON形式の文字列に変換する
 			String json = objectMapper.writeValueAsString(list);
-			System.out.println("え");
-			System.out.println("まじか");
-			JsonNode jsons = objectMapper.readTree(json);
-			System.out.println(jsons);
-			System.out.println("まじか");
+			//JsonNode jsons = objectMapper.readTree(json);
+			//System.out.println(jsons);
 			return json;
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

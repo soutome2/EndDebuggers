@@ -188,8 +188,9 @@ public class AceController {
 		String queryename =  "?ename=%s".formatted(ename);
 		
 		
-		String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint,queryename);
+		String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint,"まるもり");
 		//String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint);
+		System.out.println("挙動分からん");
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
