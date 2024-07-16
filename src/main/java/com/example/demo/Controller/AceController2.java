@@ -23,21 +23,21 @@ public class AceController2 {
 
 	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(@RequestParam(value = "ename", required = false) String ename) {
-		System.out.println("意味不明");
 		if (ename != null) {
 			List<Review> list = reviewRepository.findAIIByEname(ename);
 			System.out.println(list);
-			System.out.println("リスト");
+
 
 			if (list != null && !list.isEmpty()) {
 				String json = jsonConverterService.EntityToJson(list);
 				return json;
 			} else {
-				// エンティティが見つからなかった場合の処理
+				// エンティティが見つからなかった場合の処理 enameでコンシェルジュの名前以外指定
 				System.out.println("entityがnullまたは空");
 				return "{}"; // 空のJSONオブジェクトを返す例
 			}
 		} else {
+			// enameがしていされなかった
 			System.out.println("enameの指定なし");
 			return "{}"; // enameがnullの場合も空のJSONオブジェクトを返す例
 		}
