@@ -49,7 +49,7 @@ public class AceController2 {
 	}
 
 	@GetMapping("/GetReviewJson")
-	public ResponseEntity<?> ReviewReturn(
+	public String ReviewReturn(
 			@RequestParam(value = "ename", required = false) String ename,
 			@RequestParam(value = "star", required = false) String star,
 			@RequestParam(value = "startDate", required = false) String startDate,
@@ -68,7 +68,8 @@ public class AceController2 {
 			try {
 				parsedStar = Integer.parseInt(star);
 			} catch (NumberFormatException e) {
-				return ResponseEntity.badRequest().body("starパラメータが整数である必要があります");
+				System.out.println("starは数値型である必要があります");
+				return "{}";
 			}
 		}
 
@@ -77,7 +78,8 @@ public class AceController2 {
 			try {
 				parsedStartDate = LocalDate.parse(startDate);
 			} catch (Exception e) {
-				return ResponseEntity.badRequest().body("startDateパラメータが日付の形式である必要があります");
+				System.out.println("startDateは日付型である必要があります");
+				return "{}";
 			}
 		}
 
@@ -86,7 +88,8 @@ public class AceController2 {
 			try {
 				parsedEndDate = LocalDate.parse(endDate);
 			} catch (Exception e) {
-				return ResponseEntity.badRequest().body("endDateパラメータが日付の形式である必要があります");
+				System.out.println("endDateは日付型である必要があります");
+				return "{}";
 			}
 		}
 
@@ -97,7 +100,8 @@ public class AceController2 {
 			} else if (order.equalsIgnoreCase("false")) {
 				parsedOrder = false;
 			} else {
-				return ResponseEntity.badRequest().body("orderパラメータがブール値である必要があります");
+				System.out.println("orderはブール型である必要があります");
+				return "{}";
 			}
 		}
 
@@ -186,19 +190,19 @@ public class AceController2 {
 
 			if (list != null && !list.isEmpty()) {
 				String json = jsonConverterService.EntityToJson(list);
-				return ResponseEntity.ok().body(json);
+				return json;
 
 			} else {
 				// エンティティが見つからなかった場合の処理 enameでコンシェルジュの名前以外指定
 				System.out.println("entityがnullまたは空");
-				return ResponseEntity.ok().body("{}"); // 空のJSONオブジェクトを返す例
+				return "{}"; // 空のJSONオブジェクトを返す例
 			}
 		} else
 
 		{
 			// enameがしていされなかった
 			System.out.println("enameの指定なし");
-			return ResponseEntity.ok("enameを入力して下さい"); // enameがnullの場合も空のJSONオブジェクトを返す例
+			return "{}"; // enameがnullの場合も空のJSONオブジェクトを返す例
 		}
 	}
 
@@ -220,13 +224,16 @@ public class AceController2 {
 		// 必要に応じてレスポンスを処理する
 		return "OKかも";
 	}
-	
+
 	@GetMapping("/PostReview")
-	public String postReview(@RequestParam(value = "cid", required = false) String cid,@RequestParam(value = "ename", required = false) String ename,
-			@RequestParam(value = "title", required = false) String title,@RequestParam(value = "comment", required = false) String comment,@RequestParam(value = "star", required = false) Integer star) {
-		
+	public String postReview(@RequestParam(value = "cid", required = false) String cid,
+			@RequestParam(value = "ename", required = false) String ename,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "comment", required = false) String comment,
+			@RequestParam(value = "star", required = false) Integer star) {
+
 		// リクエストURLを定義
-		String apiUrl="http://localhost:8080/InsertReview";
+		String apiUrl = "http://localhost:8080/InsertReview";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
@@ -242,63 +249,57 @@ public class AceController2 {
 		reviewInputForm.setComment(comment);
 		reviewInputForm.setStar(star);
 
-
 		// HTTPリクエストエンティティを作成
 		HttpEntity<ReviewInputForm> requestEntity = new HttpEntity<>(reviewInputForm, headers);
 
 		// HTTPメソッドとしてPOSTを使用してリクエストを送信
 		ResponseEntity<String> responseEntity = restTemplate.exchange(
-		    apiUrl,
-		    HttpMethod.POST,
-		    requestEntity,
-		    String.class
-		);
+				apiUrl,
+				HttpMethod.POST,
+				requestEntity,
+				String.class);
 		System.out.println(responseEntity.getBody());
 		HttpStatusCode statusCode = responseEntity.getStatusCode();
 		if (statusCode == HttpStatus.CREATED || statusCode == HttpStatus.OK) {
-		    // 通信が成功した場合の処理
-		    return responseEntity.getBody();
+			// 通信が成功した場合の処理
+			return responseEntity.getBody();
 		} else {
-		    // 通信が失敗した場合の処理
-		    // 例えば、エラーメッセージをログに出力するなど
-		    System.out.println("Request failed with status code: " + statusCode);
-		    return "Failed to process request";
+			// 通信が失敗した場合の処理
+			// 例えば、エラーメッセージをログに出力するなど
+			System.out.println("Request failed with status code: " + statusCode);
+			return "Failed to process request";
 		}
-		
+
 	}
-	
-	
+
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
-			BindingResult result
-			) {
+			BindingResult result) {
 		System.out.println(result);
 		if (!result.hasErrors()) {
 			Review review = reviewInputForm.getEntity();
 			LocalDate currentDate = LocalDate.now();
 			LocalTime currentTime = LocalTime.now();
-			
+
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
 			System.out.println(review);
 
 			reviewRepository.saveAndFlush(review);
 
-		
 			return "Review created successfully.";
 		} else {
 
-			  StringBuilder errorMessage = new StringBuilder();
-	            for (FieldError error : result.getFieldErrors()) {
-	                errorMessage.append(error.getField())
-	                             .append(": ")
-	                             .append(error.getDefaultMessage())
-	                             .append("; ");
-	            }
-	            return "Failed to create review. Errors: " + errorMessage.toString();
+			StringBuilder errorMessage = new StringBuilder();
+			for (FieldError error : result.getFieldErrors()) {
+				errorMessage.append(error.getField())
+						.append(": ")
+						.append(error.getDefaultMessage())
+						.append("; ");
+			}
+			return "Failed to create review. Errors: " + errorMessage.toString();
 		}
 
 	}
 
-	
 }
