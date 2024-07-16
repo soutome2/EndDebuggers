@@ -155,9 +155,13 @@
 				</div>
 
 
+				<div th:if="${#lists.size(reviewList) > 0}">
+					<h5 th:text="'平均評価：☆'+${session.averageStars}"></h5>
+				</div>
+				
 				<div th:each="review, index :${reviewList}" class="gray-background row  justify-content-center"
 					id="count">
-					<div class="box col-12 col-md-8" th:if="${review.title != null && review.title != ''}">
+					<div class="box col-12 col-md-8">
 						<div style="font-size: 22px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
 								class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">

@@ -153,24 +153,32 @@
 					</div>
 					<br>
 					<div class="d-flex align-items-center">
-							<h4 class="mr-3 d-none d-md-block">利用者のレビュー</h4>
-						<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom d-none d-md-block ms-4">レビュー追加</a>
-						<span th:if="${session.cid} == null" class="d-none d-md-block">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
+						<h4 class="mr-3 d-none d-md-block">利用者のレビュー</h4>
+						<a th:if="${session.cid} != null" href="/ReviewInput"
+							class="btn btn-primary-custom d-none d-md-block ms-4">レビュー追加</a>
+						<span th:if="${session.cid} == null" class="d-none d-md-block">レビューの追加は<a href="/Login"
+								class="atten">ログイン</a>が必要です</span>
 					</div>
 					<!--スマホ画面で見る時の文字サイズ変更してる-->
 					<div class="d-flex align-items-center">
-					<p class="d-block d-md-none text-left" style="font-size: 18px; margin: 0; font-weight: 540;">利用者のレビュー</p>
-					<a th:if="${session.cid} != null" href="/ReviewInput" class="btn btn-primary-custom d-block d-md-none ms-4">レビュー追加</a>
+						<p class="d-block d-md-none text-left" style="font-size: 18px; margin: 0; font-weight: 540;">
+							利用者のレビュー</p>
+						<a th:if="${session.cid} != null" href="/ReviewInput"
+							class="btn btn-primary-custom d-block d-md-none ms-4">レビュー追加</a>
 					</div>
-					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login" class="atten">ログイン</a>が必要です</span>
+					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login"
+							class="atten">ログイン</a>が必要です</span>
 					<br>
 					<form action="ReviewAll" method="post">
 						<input type="hidden" name="page" value="1">
 						<input type="submit" value="全てのレビューを表示" class="overall-view ms-4">
 					</form>
-					
+
 					<div th:if="${#lists.isEmpty(reviewList)}">
 						<p>まだレビューがありません</p>
+					</div>
+					<div th:if="${#lists.size(reviewList) > 0}">
+						<h5 th:text="'平均評価：☆'+${session.averageStars}"></h5>
 					</div>
 					<div class="container-fluid" id="bodyid">
 						<div th:each="review:${reviewList}" class="gray-background row justify-content-center"

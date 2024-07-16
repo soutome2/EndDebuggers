@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +37,7 @@ import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.JsonConverterService;
 import com.example.demo.Service.ReserveService;
+import com.example.demo.Service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -49,6 +52,7 @@ public class AceController {
 	private final ReviewRepository reviewRepository;
 	private final CustomerService customerService;
 	private final ReserveService reserveService;
+	private final ReviewService reviewService;
 	private final JsonConverterService jsonConverterService;
 	private final HttpSession session;
 
@@ -179,28 +183,32 @@ public class AceController {
 		//reviewリスト作成
 		String ename = (String) session.getAttribute("ename");
 
-		/*API化
+		//API化
 		
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/GetReviewJson";
 		String queryename =  "?ename=%s".formatted(ename);
-		System.out.println(queryename);
-		String apiUrl = baseUrl + endpoint + queryename;
+		
+		
+		String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint,queryename);
+		//String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint);
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
-
+		
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
-		*/
-		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
-		System.out.println(list);
-		int endIndex = 5;
-		if (endIndex >= list.size()) {
-			endIndex = list.size();
-		}
-		List<Review> sublist = list.subList(0, endIndex);
+
+		//reviewリストの作成
+		//List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+		reviewService.getAverage(ename);
+		
+		List<Review> filteredList = reviewService.getFilteredReview(list);
+
+		// 5件のサブリストを取得
+		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
+
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
 		session.setAttribute("headDateList", headDateList);
@@ -531,20 +539,18 @@ public class AceController {
 				}
 			}
 		}
+		
+		//平均値計算
+		reviewService.getAverage(ename);
+
+		//空タイトルを除くfilter処理
+		List<Review> filteredList = reviewService.getFilteredReview(list);
 
 		int startIndex = (page - 1) * 10; // 開始インデックスの計算
-		int endIndex = startIndex + 9; // 終了インデックスの計算
-
-		// インデックスがリストの範囲内に収まるように調整
-		if (startIndex < 0) {
-			startIndex = 0;
-		}
-		if (endIndex >= list.size()) {
-			endIndex = list.size() - 1;
-		}
+		int endIndex = startIndex + 10; // 終了インデックスの計算
 
 		// サブリストを取得
-		List<Review> sublist = list.subList(startIndex, endIndex + 1);
+		List<Review> sublist = reviewService.getSubReview(filteredList, startIndex, endIndex);
 
 		List<Integer> pages = new ArrayList<>();
 
@@ -560,7 +566,7 @@ public class AceController {
 				pages.add(i);
 			}
 		}
-		
+
 		session.setAttribute("page", page);
 
 		mv.addObject("reviewList", sublist);
