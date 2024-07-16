@@ -51,6 +51,18 @@ public class JsonConverterService{
             return emptyList ;
         }
     }
+	
+	public String MakeFilePath(String baseUrl,String endpoint,String queryename) {
+		String apiUrl = baseUrl + endpoint + queryename;
+		return  apiUrl ;
+	}
+	
+	//オーバーライドで引数が与えられない場合の処理はここに書くデフォルト引数の処理
+	public String MakeFilePath(String baseUrl,String endpoint) {
+		String queryename="田中太郎";
+		String apiUrl = baseUrl + endpoint + queryename;
+		return  apiUrl ;
+	}
 
 	
 }

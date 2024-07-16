@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -179,13 +181,15 @@ public class AceController {
 		//reviewリスト作成
 		String ename = (String) session.getAttribute("ename");
 
-		/*API化
+		//API化
 		
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/GetReviewJson";
 		String queryename =  "?ename=%s".formatted(ename);
-		System.out.println(queryename);
-		String apiUrl = baseUrl + endpoint + queryename;
+		
+		
+		String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint,queryename);
+		//String apiUrl = jsonConverterService.MakeFilePath(baseUrl,endpoint);
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
@@ -193,8 +197,8 @@ public class AceController {
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
-		*/
-		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+	
+		//List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 		System.out.println(list);
 		int endIndex = 5;
 		if (endIndex >= list.size()) {
