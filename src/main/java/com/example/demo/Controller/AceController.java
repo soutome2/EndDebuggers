@@ -409,6 +409,8 @@ public class AceController {
 		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
+		
+		System.out.println(sortBy);
 
 		List<Review> list = new ArrayList<>();
 		//評価絞り込み
