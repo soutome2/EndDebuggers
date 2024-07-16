@@ -40,12 +40,12 @@ public class AceController2 {
 	public String Manual() {
 		return "JSONデータの取得URL：/GetReviewJson		\n"
 				+ "param:\n"
-				+ "担当者名 String ename [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]\n"
-				+ "評価 Integer star [1, 2, 3, 4, 5]\n"
-				+ "絞り込み開始日 LocalDate startDate [yyyy-mm-dd]\n"
-				+ "絞り込み終了日 LocalDate endDate [yyyy-mm-dd]\n"
-				+ "並び替え条件 String sortBy [date, star]\n"
-				+ "順序 boolean order [true, false]\n";
+				+ "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]\n"
+				+ "評価 'star' [1, 2, 3, 4, 5]\n"
+				+ "絞り込み開始日 'startDate' [yyyy-mm-dd]\n"
+				+ "絞り込み終了日 'endDate' [yyyy-mm-dd]\n"
+				+ "並び替え条件 'sortBy' [date, star]\n"
+				+ "昇降順 'boolean' [true, false]\n";
 	}
 
 	@GetMapping("/GetReviewJson")
