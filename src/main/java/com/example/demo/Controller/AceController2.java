@@ -227,9 +227,10 @@ public class AceController2 {
 	
 	
 	//API経由Insertできるかのデモコントローラー
+
 	@GetMapping("/DemoInsertReview")
 	public String demoInsertReview() {
-		String baseUrl = "http://localhost:8080";
+		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/PostReview";
 		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
 				"田中太郎","いまいち","まともなことを","2");
@@ -248,7 +249,7 @@ public class AceController2 {
 			@RequestParam(value = "star", required = false) Integer star) {
 
 		// リクエストURLを定義
-		String apiUrl = "http://localhost:8080/InsertReview";
+		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
 		String cid="Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
