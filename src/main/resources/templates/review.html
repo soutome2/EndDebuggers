@@ -18,11 +18,14 @@
 			function getRandomColor() {
 				var letters = '0123456789ABCDEF';
 				var color = '#';
-				for (var i = 0; i < 6; i++) {
-					color += letters[Math.floor(Math.random() * 16)];
-					
-				}while (color === '#FF0000');/*redは避ける*/
-				
+
+				do {
+					color = '#';
+					for (var i = 0; i < 6; i++) {
+						color += letters[Math.floor(Math.random() * 16)];
+					}
+				} while (color === '#FF0000'); // 赤は避ける
+
 				return color;
 			}
 
@@ -111,13 +114,13 @@
 							</select>
 						</div>
 
-					<div class="col-12 col-md-4 mb-3 d-flex align-items-center">
-						<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
-							th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
-						～
-						<input type="date" id="endDate" name="endDate" th:value="${session.endDate}"
-							th:max="${session.now}" onchange="setMaxStartDate()" class="ms-2">
-					</div>
+						<div class="col-12 col-md-4 mb-3 d-flex align-items-center">
+							<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
+								th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
+							～
+							<input type="date" id="endDate" name="endDate" th:value="${session.endDate}"
+								th:max="${session.now}" onchange="setMaxStartDate()" class="ms-2">
+						</div>
 
 						<div class="col-12 col-md-3 mb-2">
 							<select name="sortBy">
@@ -215,7 +218,7 @@
 						</div><!--消さないで、フォントサイズ変更-->
 
 						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-							class="left-align star-color">★</span>
+							class="left-align star-color" style="margin-right: 2px;">★</span>
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"
 							th:text="${review.title}"></span><br>
