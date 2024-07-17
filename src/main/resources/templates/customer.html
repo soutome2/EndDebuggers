@@ -104,23 +104,25 @@
 				<div class="container white-background content">
 					<div class="container-fluid" id="bodyid">
 						<div class="d-flex align-items-center">
-							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-none d-md-block"></h5>
+							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
+								class="d-none d-md-block"></h5>
 							<a th:if="${session.cid} != null" href="/ReviewInput"
 								class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
 						</div>
-						
+
 						<!--スマホ画面で見る時の文字位置変更してる-->
-						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-block d-md-none"></h5>
+						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
+							class="d-block d-md-none"></h5>
 						<a th:if="${session.cid} != null" href="/ReviewInput"
-								class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
-						
+							class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
+
 						<div th:if="${reviewList == null}">
 							<p>まだレビューがありません</p>
 						</div>
 
 						<div th:each="review:${reviewList}" class="row gray-background justify-content-center"
 							id="count">
-                        
+
 							<div class="box col-12 col-md-8">
 								<div style="font-size: 12px;">
 									<span class="left-align" th:text="${review.reviewdate}"></span>
@@ -133,15 +135,40 @@
 								<span class="left-align" style="font-size: 15px; font-weight: bold;"
 									th:text="${review.title}"></span><br>
 								<span class="left-align" th:text="${review.comment}"></span><br>
-								<form action="/ReviewDelete" method="post">
-									<input type="hidden" name="reviewid" th:value="${review.reviewid}">
-									<button type="submit" class="btn-cancel">削除</button>
-								</form>
+
+
+								<a class="dropdown-item" href="#" data-bs-toggle="modal"
+									data-bs-target="#formModal5"><button type="submit"
+										class="btn-cancel">削除</button></a>
 
 							</div>
 
 
+							<div class="modal fade" id="formModal5" tanbindex="-1" aria-labelledby="formModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<br>
+										<br>
+										<form action="/ReviewDelete" method="post" id="deleteForm">
+											<input type="hidden" name="reviewid" th:value="${review.reviewid}">
+											<input type="hidden" name="cid" th:value="${session.cid}">
+											<input type="hidden" name="password" th:value="${session.password}">
+											<span>本当に削除してよろしいですか?</span>
+											<button type="submit" class="btn-cancel">削除</button>
+										</form>
+										<br>
+										<br>
+
+
+
+									</div>
+								</div>
+							</div>
 						</div>
+
+
+
 					</div>
 				</div>
 
@@ -159,6 +186,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
