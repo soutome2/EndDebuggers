@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class JsonConverterService{
+public class JsonConverterService {
 
 	private ObjectMapper objectMapper; // JacksonのObjectMapperをDI（Dependency Injection）する
 
@@ -34,30 +34,42 @@ public class JsonConverterService{
 			return null; // エラー時はnullを返すなどの適切な処理を行う
 		}
 	}
-	
+
 	//json文字列をEntityに変換
 	public List<Review> JsonToEntity(String json) {
 
-        try {
-        	 List<Review> reviewList = objectMapper.readValue(json, new TypeReference<List<Review>>(){});
-             return reviewList;
-        } catch (IOException e) {
-        	//取得したjsonがnull(レビューがない)ときは空のリストを返す。htmlでレビューがないときの判定
-            List<Review> emptyList = new ArrayList<>();
-            return emptyList ;
-        }
-    }
-	//URL文字列を連結処理
-	public String MakeFilePath(String baseUrl,String endpoint,String queryename) {
-		String apiUrl = baseUrl + endpoint + queryename;
-		return  apiUrl ;
+		try {
+			List<Review> reviewList = objectMapper.readValue(json, new TypeReference<List<Review>>() {
+			});
+			return reviewList;
+		} catch (IOException e) {
+			//取得したjsonがnull(レビューがない)ときは空のリストを返す。htmlでレビューがないときの判定
+			List<Review> emptyList = new ArrayList<>();
+			return emptyList;
+		}
 	}
-	
-	//オーバーライドで引数が与えられない場合の処理はここに書くデフォルト引数の処理
-	public String MakeFilePath(String baseUrl,String endpoint) {
-		String queryename="?ename=田中太郎";
+
+	//URL文字列を連結処理
+	public String MakeFilePath(String baseUrl, String endpoint, String queryename) {
 		String apiUrl = baseUrl + endpoint + queryename;
-		return  apiUrl ;
+		return apiUrl;
+	}
+
+	//オーバーライドで引数が与えられない場合の処理はここに書くデフォルト引数の処理
+	public String MakeFilePath(String baseUrl, String endpoint) {
+		String queryename = "?ename=田中太郎";
+		String apiUrl = baseUrl + endpoint + queryename;
+		return apiUrl;
+	}
+
+	public String MakeFilePathInsert(String baseUrl, String endpoint,
+			String queryename, String querytitle, String querycomment, String querystar) {
+		String apiUrl = baseUrl + endpoint
+				+ "?ename=" + queryename
+				+ "&title=" + querytitle
+				+ "&comment=" + querycomment
+				+ "&star=" + querystar;
+		return apiUrl;
 	}
 
 }

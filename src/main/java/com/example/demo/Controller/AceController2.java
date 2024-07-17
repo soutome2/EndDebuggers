@@ -224,16 +224,32 @@ public class AceController2 {
 		// 必要に応じてレスポンスを処理する
 		return "OKかも";
 	}
+	
+	
+	//API経由Insertできるかのデモコントローラー
+	@GetMapping("/DemoInsertReview")
+	public String demoInsertReview() {
+		String baseUrl = "http://localhost:8080";
+		String endpoint = "/PostReview";
+		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
+				"田中太郎","いまいち","まともなことを","2");
+		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
+				apiUrl,
+				String.class);
+		return  responseEntity.getBody();
 
+	}
+	
+	//GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
 	@GetMapping("/PostReview")
-	public String postReview(@RequestParam(value = "cid", required = false) String cid,
-			@RequestParam(value = "ename", required = false) String ename,
+	public String postReview(@RequestParam(value = "ename", required = false) String ename,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "comment", required = false) String comment,
 			@RequestParam(value = "star", required = false) Integer star) {
 
 		// リクエストURLを定義
 		String apiUrl = "http://localhost:8080/InsertReview";
+		String cid="Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
@@ -271,7 +287,7 @@ public class AceController2 {
 		}
 
 	}
-
+	//Formクラスで受け取りバリデーションチェックし書き込む
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {
