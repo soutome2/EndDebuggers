@@ -497,14 +497,14 @@ public class AceController {
 		List<Integer> pages = new ArrayList<>();
 
 		// 範囲外の入力は空リストを返す
-		if (page < 0 || page > list.size() / 10 + 1) {
+		if (page < 0 || page > filteredList.size() / 10 + 1) {
 			mv.setViewName("home");
 			return mv;
 		}
 
 		// 前後2つの数字を含むリストを生成
 		for (int i = page - 2; i <= page + 2; i++) {
-			if (i >= 1 && i <= list.size() / 10 + 1) {
+			if (i >= 1 && i <= filteredList.size() / 10 + 1) {
 				pages.add(i);
 			}
 		}
