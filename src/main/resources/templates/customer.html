@@ -152,6 +152,8 @@
 										<br>
 										<form action="/ReviewDelete" method="post" id="deleteForm">
 											<input type="hidden" name="reviewid" th:value="${review.reviewid}">
+											<input type="hidden" name="cid" th:value="${session.cid}">
+											<input type="hidden" name="password" th:value="${session.password}">
 											<span>本当に削除してよろしいですか?</span>
 											<button type="submit" class="btn-cancel">削除</button>
 										</form>
