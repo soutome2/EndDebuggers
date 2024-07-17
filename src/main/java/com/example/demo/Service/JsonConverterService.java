@@ -60,5 +60,4 @@ public class JsonConverterService{
 		return  apiUrl ;
 	}
 
-	
 }
