@@ -120,52 +120,53 @@
 							<p>まだレビューがありません</p>
 						</div>
 
-						<div th:each="review:${reviewList}" class="row gray-background justify-content-center"
+						<div th:each="review : ${reviewList}" class="row gray-background justify-content-center"
 							id="count">
-
 							<div class="box col-12 col-md-8">
 								<div style="font-size: 12px;">
 									<span class="left-align" th:text="${review.reviewdate}"></span>
-									<span class="left-align" th:text="${review.ename}+'にレビュー済み'"></span>
+									<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
 									<br>
 								</div>
 								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
 									class="left-align star-color" style="margin-right: 2px;">★</span>
-
 								<span class="left-align" style="font-size: 15px; font-weight: bold;"
 									th:text="${review.title}"></span><br>
 								<span class="left-align" th:text="${review.comment}"></span><br>
 
+								<!-- Delete Button with Modal Trigger -->
+								<button type="button" class="btn-cancel" data-bs-toggle="modal"
+									th:data-bs-target="'#formModal' + ${review.reviewid}">
+									削除
+								</button>
 
-								<a class="dropdown-item" href="#" data-bs-toggle="modal"
-									data-bs-target="#formModal5"><button type="submit"
-										class="btn-cancel">削除</button></a>
-
-							</div>
-
-
-							<div class="modal fade" id="formModal5" tanbindex="-1" aria-labelledby="formModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<br>
-										<br>
-										<form action="/ReviewDelete" method="post" id="deleteForm">
-											<input type="hidden" name="reviewid" th:value="${review.reviewid}">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<span>本当に削除してよろしいですか?</span>
-											<button type="submit" class="btn-cancel">削除</button>
-										</form>
-										<br>
-										<br>
-
-
-
+								<!-- Modal for Delete Confirmation -->
+								<div class="modal fade" th:id="'formModal' + ${review.reviewid}" tabindex="-1"
+									aria-labelledby="formModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="formModalLabel">確認</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>本当にこのレビューを削除してよろしいですか？</p>
+											</div>
+											<div class="modal-footer">
+												<form action="/ReviewDelete" method="post" id="deleteForm">
+													<input type="hidden" name="reviewid" th:value="${review.reviewid}">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">キャンセル</button>
+													<button type="submit" class="btn btn-danger">削除する</button>
+												</form>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 
 
 
