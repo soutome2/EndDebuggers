@@ -32,7 +32,6 @@ import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
-import com.example.demo.Service.JsonConverterService;
 import com.example.demo.Service.ReserveService;
 import com.example.demo.Service.ReviewService;
 
@@ -50,7 +49,6 @@ public class AceController {
 	private final CustomerService customerService;
 	private final ReserveService reserveService;
 	private final ReviewService reviewService;
-	private final JsonConverterService jsonConverterService;
 	private final HttpSession session;
 
 	@GetMapping("/")
@@ -84,7 +82,7 @@ public class AceController {
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 
 		//表示する日数の幅と時間の幅のパラメーター
-		int dateRange = 7;
+		int dateRange = 13;
 		int timeRange = 9;
 
 		//開始終了日時　開始時刻
@@ -143,17 +141,8 @@ public class AceController {
 			LocalDate reserveDate = i.getReservedate();
 			LocalTime reserveTime = i.getReservetime();
 
-			System.out.println(reserveDate);
-			System.out.println(reserveTime);
 			int daysDifference = (int) ChronoUnit.DAYS.between(startDate, reserveDate);
 			int timeDifference = (int) ChronoUnit.HOURS.between(startTime, reserveTime);
-
-			System.out.println("OK");
-			System.out.println(startDate);
-			System.out.println(reserveDate);
-			System.out.println(daysDifference);
-
-			System.out.println(timeDifference);
 
 			if (daysDifference < 0 || dateRange < daysDifference) {
 				continue;
