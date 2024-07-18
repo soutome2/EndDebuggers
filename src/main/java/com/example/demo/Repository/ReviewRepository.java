@@ -165,6 +165,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	
 	//日時順逆順
 	List<Review> findAIIByEnameOrderByReviewdateDescReviewtimeDesc(String ename);
+	List<Review> findAIIByEnameOrderByReviewdate(String ename);
 
 	List<Review> findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(String ename, Integer star);
 
