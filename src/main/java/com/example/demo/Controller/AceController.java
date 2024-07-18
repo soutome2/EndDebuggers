@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -486,14 +485,14 @@ public class AceController {
 		List<Integer> pages = new ArrayList<>();
 
 		// 範囲外の入力は空リストを返す
-		if (page < 0 || page > filteredList.size() / 10 + 1) {
+		if (page < 0 || page > list.size() / 10 + 1) {
 			mv.setViewName("home");
 			return mv;
 		}
 
 		// 前後2つの数字を含むリストを生成
 		for (int i = page - 2; i <= page + 2; i++) {
-			if (i >= 1 && i <= filteredList.size() / 10 + 1) {
+			if (i >= 1 && i <= list.size() / 10 + 1) {
 				pages.add(i);
 			}
 		}
@@ -509,11 +508,17 @@ public class AceController {
 	@Transactional
 	@PostMapping("/ReviewDelete")
 	public ModelAndView PostReviewDelete(@RequestParam("reviewid") Integer reviewid, ModelAndView mv) {
-		Optional<Review> delete = reviewRepository.findById(reviewid);
-		Review deleteReview = delete.get();
+		
+		System.out.println(reviewid);
 		reviewRepository.deleteById(reviewid);
-		mv.addObject("deleteReview", deleteReview);
-		mv.setViewName("reviewDelete");
+		List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId((String) session.getAttribute("cid"));
+		System.out.println(list);
+		List<Review> reviewlist = reviewRepository
+				.findAIIByCidOrderByReviewdateDescReviewtimeDesc((String) session.getAttribute("cid"));
+		mv.addObject("reserveList", list);
+		mv.addObject("reviewList", reviewlist);
+		mv.setViewName("customer");
+		
 		return mv;
 	}
 

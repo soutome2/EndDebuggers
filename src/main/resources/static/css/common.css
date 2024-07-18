@@ -618,11 +618,16 @@ th {
 .submit-btn {
     margin-left: -90px; /* 左のマージンを調整 */
     display: inline-block;
+     margin-top: -5px; /* 例: 上に移動 */
 }
 
 .interval-sort{
 	 margin-left: -25px; /* 左のマージンを調整 */
     display: inline-block;
+}
+
+.remove-btn{
+	 margin-top: 10px; /* 例: 下に移動 */
 }
 
 .display-button{
@@ -653,8 +658,9 @@ th {
 		0px 1px 0 black,
 		0px -1px 0 black,
 		1px 0px 0 black,
-		-1px 0px 0 black;
+		-1px 0px 0 black; 
 }
+
 
 .page {
 	margin-right: 10px;

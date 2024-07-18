@@ -65,30 +65,34 @@
 				<br>
 				<h3>以下のレビューが入力されました</h3><br>
 
-					<div class="table-responsive" th:object="${reviewInputForm}">
-						<table>
-							<tr>
-								<th class="tableHead2">ユーザー名</th>
-								<th class="tableHead2">コンシェルジュ名</th>
-								<th class="tableHead2">評価数</th>
-								<th class="tableHead2">タイトル</th>
-								<th class="tableHead2">レビュー内容</th>
-							</tr>
-							<tr>
-								<th><span th:text="*{cid}"></span>
-								<th><span th:text="${session.ename}"></span></th>
-								<th><span th:text="*{star}"></span></th>
-								<th><span th:text="*{title}"></span>
-								<th><span th:text="*{comment}"></span></th>
-							</tr>
-						</table>
-					</div>
-					<br>
-					<br>
-					
-					<a  href="Reserve"
-											class="nav-link, btn btn-outline-primary" aria-current="page">戻る</a>
-				
+				<div class="table-responsive" th:object="${reviewInputForm}">
+					<table>
+						<tr>
+							<th class="tableHead2">ユーザー名</th>
+							<th class="tableHead2">コンシェルジュ名</th>
+							<th class="tableHead2">評価数</th>
+							<th class="tableHead2">タイトル</th>
+							<th class="tableHead2">レビュー内容</th>
+						</tr>
+						<tr>
+							<th><span th:text="*{cid}"></span>
+							<th><span th:text="*{ename}"></span></th>
+							<th><span th:text="*{star}"></span></th>
+							<th><span th:text="*{title}"></span>
+							<th><span th:text="*{comment}"></span></th>
+						</tr>
+					</table>
+				</div>
+				<br>
+				<br>
+
+				<form th:if="${session.cid} != null" action="/Customer" method="post">
+					<input type="hidden" name="cid" th:value="${session.cid}">
+					<input type="hidden" name="password" th:value="${session.password}">
+					<button type="submit" class="button-login">
+						マイページに戻る
+					</button>
+				</form>
 				<br>
 				<br>
 			</div>
