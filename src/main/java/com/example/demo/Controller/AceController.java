@@ -199,6 +199,12 @@ public class AceController {
 
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
+		
+		List<Integer> countSentiment=reviewService.CountSentiment(sublist);
+		
+		for (Integer i:countSentiment) {
+			System.out.println(i);
+		}
 
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
@@ -209,6 +215,8 @@ public class AceController {
 
 		mv.addObject("reviewList", sublist);
 		mv.addObject("reserveInputForm", reserveInputForm);
+		mv.addObject("countSentiment", countSentiment);
+		
 		mv.setViewName("reserveInput");
 
 		return mv;

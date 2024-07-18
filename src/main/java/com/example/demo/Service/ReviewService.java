@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ReviewService {
 
 	//平均計算メソッド
 	public void getAverage(String ename) {
-		
+
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 
 		//平均の計算
@@ -75,6 +76,27 @@ public class ReviewService {
 
 		return sublist;
 
+	}
+
+	public List<Integer> CountSentiment(List<Review> review) {
+		//0:positive 1:neutral 2:negativeの合計全て0で初期化
+		List<Integer> sentimentSumList = new ArrayList<>(Collections.nCopies(3, 0));
+		for (Review i : review) {
+			if (i.getSentiment() != null) {
+				String sentiment = i.getSentiment();
+				if (sentiment.equals("positive")) {
+					sentimentSumList.set(0, sentimentSumList.get(0) + 1);
+				} else if (sentiment.equals("neutral")) {
+					sentimentSumList.set(1, sentimentSumList.get(1) + 1);
+				} else if (sentiment.equals("negative")) {
+					sentimentSumList.set(2, sentimentSumList.get(2) + 1);
+				} else {
+
+				}
+			}
+
+		}
+		return sentimentSumList;
 	}
 
 }
