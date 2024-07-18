@@ -200,9 +200,9 @@ public class AceController {
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
-		List<Integer> countSentiment = reviewService.CountSentiment(sublist);
+		List<Integer> sentimentSumList = reviewService.CountSentiment(sublist);
 
-		for (Integer i : countSentiment) {
+		for (Integer i : sentimentSumList) {
 			System.out.println(i);
 		}
 
@@ -215,7 +215,7 @@ public class AceController {
 
 		mv.addObject("reviewList", sublist);
 		mv.addObject("reserveInputForm", reserveInputForm);
-		mv.addObject("countSentiment", countSentiment);
+		mv.addObject("sentimentSumList", sentimentSumList);
 
 		mv.setViewName("reserveInput");
 

@@ -38,18 +38,18 @@ public class AceController2 {
 	private final JsonConverterService jsonConverterService;
 	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewRepository reviewRepository;
-
+	
 	@GetMapping("/Test")
 	public String Test() {
 		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
 		// Positive、Negative、Neutralのスコアを数値のみで取得
-		double positiveScore = documentSentiment.getConfidenceScores().getPositive();
-		double negativeScore = documentSentiment.getConfidenceScores().getNegative();
-		double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
+        double positiveScore = documentSentiment.getConfidenceScores().getPositive();
+        double negativeScore = documentSentiment.getConfidenceScores().getNegative();
+        double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
 
-		// 数値のみの文字列を作成して返す
-		return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
-				positiveScore, negativeScore, neutralScore);
+        // 数値のみの文字列を作成して返す
+        return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
+                positiveScore, negativeScore, neutralScore);
 	}
 
 	@GetMapping("/GetReviewManual")
@@ -236,22 +236,23 @@ public class AceController2 {
 		// 必要に応じてレスポンスを処理する
 		return "OKかも";
 	}
-
+	
+	
 	//API経由Insertできるかのデモコントローラー
 	@GetMapping("/DemoInsertReview")
 	@CrossOrigin
 	public String demoInsertReview() {
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/PostReview";
-		String apiUrl = jsonConverterService.MakeFilePathInsert(baseUrl, endpoint,
-				"田中太郎", "いまいち", "owata", "2");
+		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
+				"田中太郎","いまいち","owata","2");
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
-		return responseEntity.getBody();
+		return  responseEntity.getBody();
 
 	}
-
+	
 	//GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
 	@GetMapping("/PostReview")
 	public String postReview(@RequestParam(value = "ename", required = false) String ename,
@@ -261,7 +262,7 @@ public class AceController2 {
 
 		// リクエストURLを定義
 		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
-		String cid = "Gest";
+		String cid="Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
@@ -299,7 +300,6 @@ public class AceController2 {
 		}
 
 	}
-
 	//Formクラスで受け取りバリデーションチェックし書き込む
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
@@ -312,7 +312,7 @@ public class AceController2 {
 
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
-
+			
 			//感情分析の結果
 			String text = review.getComment();
 			DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
