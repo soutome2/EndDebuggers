@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.azure.ai.textanalytics.models.DocumentSentiment;
 import com.example.demo.Entity.Customer;
 import com.example.demo.Entity.Reserve;
 import com.example.demo.Entity.ReserveCustomer;
@@ -34,6 +35,7 @@ import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.ReserveService;
 import com.example.demo.Service.ReviewService;
+import com.example.demo.Service.TextAnalyticsService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -50,6 +52,7 @@ public class AceController {
 	private final ReserveService reserveService;
 	private final ReviewService reviewService;
 	private final HttpSession session;
+	private final TextAnalyticsService textAnalyticsService;
 
 	@GetMapping("/")
 	public String GetHome() {
@@ -349,6 +352,11 @@ public class AceController {
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
 
+			String text = review.getComment();
+			DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
+			review.setSentiment(documentSentiment.getSentiment());
+			review.set
+			
 			reviewRepository.saveAndFlush(review);
 
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
