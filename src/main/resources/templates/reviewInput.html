@@ -76,11 +76,11 @@
 						<th class="tableHead1">担当者名</th>
 						<td>
 							<select name="ename" class="form-select">
-								<option value="田中太郎" th:selected="${session.ename.equals('田中太郎')}">田中太郎</option>
-								<option value="佐藤花子" th:selected="${session.ename.equals('佐藤花子')}">佐藤花子</option>
-								<option value="鈴木一郎" th:selected="${session.ename.equals('鈴木一郎')}">鈴木一郎</option>
-								<option value="高橋美咲" th:selected="${session.ename.equals('高橋美咲')}">高橋美咲</option>
-								<option value="中村健太" th:selected="${session.ename.equals('中村健太')}">中村健太</option>
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.ename)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.ename)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.ename)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.ename)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.ename)}">中村健太</option>
 							</select>
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
