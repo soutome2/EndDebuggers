@@ -129,7 +129,7 @@
 									<br>
 								</div>
 								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-									class="left-align star-color" style="margin-right: 2px;">★</span>
+									class="left-align star-color filled" style="margin-right: 2px;">★</span>
 								<span class="left-align" style="font-size: 15px; font-weight: bold;"
 									th:text="${review.title}"></span><br>
 								<span class="left-align" th:text="${review.comment}"></span><br>

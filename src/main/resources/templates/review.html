@@ -197,7 +197,7 @@
 
 				<div th:if="${#lists.size(reviewList) > 0}">
 					<h5>平均評価：
-						<span class="star-color">★</span>
+						<span class="star-color filled">★</span>
 						<span th:text="${session.averageStars}"></span>
 					</h5>
 				</div>
@@ -219,7 +219,7 @@
 
 
 						<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-								class="left-align star-color" style="margin-right: 2px;">★</span>
+								class="left-align star-color filled" style="margin-right: 2px;">★</span>
 
 
 						<span class="left-align" style="font-size: 16px; font-weight: bold;"

@@ -648,7 +648,7 @@ th {
 
 
 /*星の色設定*/
-.star-color {
+/*.star-color {
 	color: rgb(255, 247, 87);
 	text-shadow:
 		1px 1px 0 black,
@@ -659,7 +659,18 @@ th {
 		0px -1px 0 black,
 		1px 0px 0 black,
 		-1px 0px 0 black; 
+}*/
+
+.star-color {
+    font-size: 24px; /* 星のサイズ */
+    color: transparent; /* 空の星の色は透明 */
+    -webkit-text-stroke: 1px black; /* 輪郭を黒に */
 }
+
+.filled {
+    color: rgb(255, 247, 87); /* 塗りつぶされた星の色 */
+}
+
 
 
 .page {
