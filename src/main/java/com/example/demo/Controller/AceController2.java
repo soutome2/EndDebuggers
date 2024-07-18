@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.azure.ai.textanalytics.models.DocumentSentiment;
 import com.example.demo.Entity.Review;
 import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.JsonConverterService;
+import com.example.demo.Service.TextAnalyticsService;
 
 import lombok.AllArgsConstructor;
 
@@ -34,7 +36,21 @@ import lombok.AllArgsConstructor;
 @RestController
 public class AceController2 {
 	private final JsonConverterService jsonConverterService;
+	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewRepository reviewRepository;
+	
+	@GetMapping("/Test")
+	public String Test() {
+		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
+		// Positive、Negative、Neutralのスコアを数値のみで取得
+        double positiveScore = documentSentiment.getConfidenceScores().getPositive();
+        double negativeScore = documentSentiment.getConfidenceScores().getNegative();
+        double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
+
+        // 数値のみの文字列を作成して返す
+        return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
+                positiveScore, negativeScore, neutralScore);
+	}
 
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
@@ -227,9 +243,10 @@ public class AceController2 {
 	
 	
 	//API経由Insertできるかのデモコントローラー
+
 	@GetMapping("/DemoInsertReview")
 	public String demoInsertReview() {
-		String baseUrl = "http://localhost:8080";
+		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/PostReview";
 		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
 				"田中太郎","いまいち","まともなことを","2");
@@ -248,7 +265,7 @@ public class AceController2 {
 			@RequestParam(value = "star", required = false) Integer star) {
 
 		// リクエストURLを定義
-		String apiUrl = "http://localhost:8080/InsertReview";
+		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
 		String cid="Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
