@@ -46,9 +46,23 @@ public class TextAnalyticsService {
 		}
 	}
 	public String MaxRateSentiment(Double positiveRate,Double neutralRate,Double negativeRate) {
+		String flagSentiment="neutral";
 		
+		if(positiveRate>neutralRate||positiveRate>negativeRate) {
+			flagSentiment="positive";
+			System.out.println("1");
+		}
+		else if(neutralRate>negativeRate) {
+			flagSentiment="neutral";
+			System.out.println("2");
+		}
+		else if(negativeRate>neutralRate) {
+			flagSentiment="negative";
+			System.out.println("3");
+		}
+				
 		
-		return"";
+		return flagSentiment;
 		
 	}
 }
