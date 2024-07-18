@@ -97,13 +97,12 @@
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row"><!--スマホ-->
 						<div class="col-12 col-md-2 mb-3">
 							<select name="sortEname">
-								<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
-								<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
-								<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
-								<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
-								<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.sortEname)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.sortEname)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.sortEname)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.sortEname)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.sortEname)}">中村健太</option>
 							</select>
-							<input type="hidden" name="page" value="1">
 							<select name="sortStar">
 								<option value="0" th:selected="${session.sortStar == null}">全て</option>
 								<option value="1" th:selected="${session.sortStar == 1}">★1</option>
@@ -111,6 +110,15 @@
 								<option value="3" th:selected="${session.sortStar == 3}">★3</option>
 								<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 								<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+							</select>
+							<select name="sortSentiment">
+								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
+								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
+									positive</option>
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">neutral
+								</option>
+								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
+									negative</option>
 							</select>
 						</div>
 
@@ -152,7 +160,6 @@
 								<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
 								<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
 							</select>
-							<input type="hidden" name="page" value="1">
 							<select name="sortStar">
 								<option value="0" th:selected="${session.sortStar == null}">全て</option>
 								<option value="1" th:selected="${session.sortStar == 1}">★1</option>
@@ -160,6 +167,15 @@
 								<option value="3" th:selected="${session.sortStar == 3}">★3</option>
 								<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 								<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+							</select>
+							<select name="sortSentiment">
+								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
+								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
+									positive</option>
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">neutral
+								</option>
+								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
+									negative</option>
 							</select>
 						</div>
 
@@ -221,7 +237,6 @@
 								</div><!--消さないで、フォントサイズ変更-->
 
 
-
 								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
 									class="left-align star-color filled" style="margin-right: 2px;">★</span>
 
@@ -232,15 +247,13 @@
 									<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
 								</div>
 
-
-
 								<span class="left-align" th:text="${review.comment}"></span><br>
 							</div>
 
 							<div class="col-6  d-flex justify-content-center align-items-center">
 
 								<!--えがお-->
-								<span  th:if="${review.sentiment}=='positive'"><svg xmlns="http://www.w3.org/2000/svg"
+								<span th:if="${review.sentiment}=='positive'"><svg xmlns="http://www.w3.org/2000/svg"
 										width="32" height="32" fill="currentColor" class="bi bi-emoji-laughing"
 										viewBox="0 0 16 16">
 										<path
@@ -249,7 +262,7 @@
 											d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
 									</svg></span>
 
-                                <!--ニュートラル-->
+								<!--ニュートラル-->
 								<span th:if="${review.sentiment}=='neutral'"><svg xmlns="http://www.w3.org/2000/svg"
 										width="32" height="32" fill="currentColor" class="bi bi-emoji-neutral"
 										viewBox="0 0 16 16">
@@ -258,7 +271,7 @@
 										<path
 											d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
 									</svg></span>
-									
+
 								<!--ネガティブ-->
 								<span class="text-right" th:if="${review.sentiment}=='negative'"><svg
 										xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
