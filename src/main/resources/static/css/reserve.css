@@ -28,3 +28,10 @@
 .shown {
     display: table-cell;
 }
+
+.text-right {
+    text-align: right;
+}
+.text-center{
+	   text-align: center;
+}

@@ -193,31 +193,53 @@
 						<div th:each="review:${reviewList}" class="gray-background row justify-content-center"
 							id="count">
 							<div class="box col-12 col-md-8">
-								<div style="font-size: 22px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-										class="bi bi-person-circle random-color-icon" viewBox="0 0 16 16">
-										<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-										<path fill-rule="evenodd"
-											d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-									</svg>
+								<div class="row">
+									<div class="col-6 ">
+										<div style="font-size: 22px;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+												fill="currentColor" class="bi bi-person-circle random-color-icon"
+												viewBox="0 0 16 16">
+												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+												<path fill-rule="evenodd"
+													d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+											</svg>
 
 
-									<span class="left-align underline-color" th:text="${review.cid}"></span><br>
-								</div><!--消さないで、フォントサイズ変更-->
+											<span class="left-align underline-color" th:text="${review.cid}"></span>
+
+										</div><!--消さないで、フォントサイズ変更-->
 
 
-								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-									class="left-align star-color filled" style="margin-right: 2px;">★</span>
 
-								<span class="left-align" style="font-size: 16px; font-weight: bold;"
-									th:text="${review.title}"></span><br>
+										<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
+											class="left-align star-color filled" style="margin-right: 2px;">★</span>
 
-								<div style="font-size: 12px;">
-									<span class="left-align" th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+										<span class="left-align" style="font-size: 16px; font-weight: bold;"
+											th:text="${review.title}"></span><br>
+
+										<div style="font-size: 12px;">
+											<span class="left-align"
+												th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
+										</div>
+
+
+
+										<span class="left-align" th:text="${review.comment}"></span><br>
+									</div>
+
+									<div class="col-6  d-flex justify-content-center align-items-center">
+										<span class="text-right" th:if="${review.sentiment}=='positive'">(^▽^)/</span>
+										<span class="text-right" th:if="${review.sentiment}=='neutral'">(
+											ﾉД`)ｼｸｼｸ…</span>
+										<span class="text-right" th:if="${review.sentiment}=='negative'">(
+											ﾉД`)ｼｸｼｸ…</span>
+										<br>
+									</div>
 								</div>
 
-								<span class="left-align" th:text="${review.comment}"></span><br>
 							</div>
+
+
 						</div>
 					</div>
 				</div>
