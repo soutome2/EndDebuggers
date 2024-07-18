@@ -199,10 +199,10 @@ public class AceController {
 
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
-		
-		List<Integer> countSentiment=reviewService.CountSentiment(sublist);
-		
-		for (Integer i:countSentiment) {
+
+		List<Integer> countSentiment = reviewService.CountSentiment(sublist);
+
+		for (Integer i : countSentiment) {
 			System.out.println(i);
 		}
 
@@ -216,7 +216,7 @@ public class AceController {
 		mv.addObject("reviewList", sublist);
 		mv.addObject("reserveInputForm", reserveInputForm);
 		mv.addObject("countSentiment", countSentiment);
-		
+
 		mv.setViewName("reserveInput");
 
 		return mv;
@@ -434,6 +434,24 @@ public class AceController {
 								startDate, endDate, sortStar, sortSentiment)
 						: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
 								startDate, endDate, sortStar, sortSentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByPositiveAsc(ename,
+								startDate, endDate, sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByPositiveDesc(ename,
+								startDate, endDate, sortStar, sortSentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByNegativeAsc(ename,
+								startDate, endDate, sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByNegativeDesc(ename,
+								startDate, endDate, sortStar, sortSentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByNeutralAsc(ename,
+								startDate, endDate, sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByNeutralDesc(ename,
+								startDate, endDate, sortStar, sortSentiment);
 			} else {
 				list = sortOrder
 						? reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, sortStar,
@@ -453,6 +471,24 @@ public class AceController {
 								sortStar, sortSentiment)
 						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
 								sortStar, sortSentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndStartDateOrderByPositiveAsc(ename, startDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByPositiveDesc(ename, startDate,
+								sortStar, sortSentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndStartDateOrderByNegativeAsc(ename, startDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByNegativeDesc(ename, startDate,
+								sortStar, sortSentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndStartDateOrderByNeutralAsc(ename, startDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByNeutralDesc(ename, startDate,
+								sortStar, sortSentiment);
 			} else {
 				list = sortOrder ? reviewRepository.findByEnameAndStartDate(ename, startDate, sortStar, sortSentiment)
 						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
@@ -470,6 +506,24 @@ public class AceController {
 								sortStar, sortSentiment)
 						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
 								sortStar, sortSentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndEndDateOrderByPositiveAsc(ename, endDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByPositiveDesc(ename, endDate,
+								sortStar, sortSentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndEndDateOrderByNegativeAsc(ename, endDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByNegativeDesc(ename, endDate,
+								sortStar, sortSentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameAndEndDateOrderByNeutralAsc(ename, endDate,
+								sortStar, sortSentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByNeutralDesc(ename, endDate,
+								sortStar, sortSentiment);
 			} else {
 				list = sortOrder ? reviewRepository.findByEnameAndEndDate(ename, endDate, sortStar, sortSentiment)
 						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
@@ -483,6 +537,21 @@ public class AceController {
 				list = sortOrder
 						? reviewRepository.findByEnameOrderByReviewdateAscReviewtimeAsc(ename, sortStar, sortSentiment)
 						: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename, sortStar,
+								sortSentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameOrderByPositiveAsc(ename, sortStar, sortSentiment)
+						: reviewRepository.findByEnameOrderByPositiveDesc(ename, sortStar,
+								sortSentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameOrderByNegativeAsc(ename, sortStar, sortSentiment)
+						: reviewRepository.findByEnameOrderByNegativeDesc(ename, sortStar,
+								sortSentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = sortOrder
+						? reviewRepository.findByEnameOrderByNeutralAsc(ename, sortStar, sortSentiment)
+						: reviewRepository.findByEnameOrderByNeutralDesc(ename, sortStar,
 								sortSentiment);
 			} else {
 				list = sortOrder ? reviewRepository.findByEname(ename, sortStar, sortSentiment)

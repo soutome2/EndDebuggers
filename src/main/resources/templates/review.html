@@ -152,13 +152,13 @@
 				<div class="d-none d-md-block">
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row">
 						<!--パソコン-->
-						<div class="col-12 col-md-2 mb-3">
+						<div class="col-12 col-md-3 mb-3">
 							<select name="sortEname">
-								<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
-								<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
-								<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
-								<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
-								<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.sortEname)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.sortEname)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.sortEname)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.sortEname)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.sortEname)}">中村健太</option>
 							</select>
 							<select name="sortStar">
 								<option value="0" th:selected="${session.sortStar == null}">全て</option>
@@ -199,7 +199,7 @@
 							</select>
 						</div>
 
-						<div class="col-12 col-md-3 mb-3">
+						<div class="col-12 col-md-2 mb-3">
 							<input type="hidden" name="page" value="1">
 							<input type="submit" value="表示" class="submit-btn display-button"><!--パソコン-->
 						</div>
