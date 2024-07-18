@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#carousel-container {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.carousel-table {
+    width: auto; /* テーブルの幅を自動調整 */
+    table-layout: fixed; /* テーブルのレイアウトを固定 */
+    border-collapse: collapse; /* セル間の隙間をなくす */
+}
+
+.pagination {
+    margin-top: 10px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: table-cell;
+}
