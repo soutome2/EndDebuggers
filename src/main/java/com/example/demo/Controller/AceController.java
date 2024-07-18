@@ -189,10 +189,13 @@ public class AceController {
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
 */
 		//reviewリストの作成
+		System.out.println("Ok1");
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+		System.out.println("Ok2");
 		reviewService.getAverage(ename);
-
+		System.out.println("Ok3");
 		List<Review> filteredList = reviewService.getFilteredReview(list);
+		System.out.println("Ok4");
 
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);

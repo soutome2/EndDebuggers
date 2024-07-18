@@ -243,13 +243,13 @@ public class AceController2 {
 	
 	
 	//API経由Insertできるかのデモコントローラー
-
 	@GetMapping("/DemoInsertReview")
+	@CrossOrigin
 	public String demoInsertReview() {
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/PostReview";
 		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
-				"田中太郎","いまいち","まともなことを","2");
+				"田中太郎","いまいち","owata","2");
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);

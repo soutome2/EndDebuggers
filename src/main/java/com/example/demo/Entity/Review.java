@@ -42,5 +42,18 @@ public class Review {
 	
 	@Column(name = "star")
 	private Integer star;
+	
+	@Column(name = "positiverate")
+	private Double positiverate;
+	
+	@Column(name = "neutralrate")
+	private Double neutralrate;
+	
+	@Column(name = "negativerate")
+	private Double negativerate;
+	
+	@Column(name = "sentiment")
+	private String sentiment;
+
 
 }
