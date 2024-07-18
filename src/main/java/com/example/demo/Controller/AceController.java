@@ -355,10 +355,13 @@ public class AceController {
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
 
+			//感情分析の結果
 			String text = review.getComment();
 			DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
-			review.setSentiment(documentSentiment.getSentiment());
-			review.set
+			review.setSentiment(documentSentiment.getSentiment().toString());
+			review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
+			review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
+			review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
 			
 			reviewRepository.saveAndFlush(review);
 
