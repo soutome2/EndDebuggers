@@ -39,9 +39,9 @@ public class AceController2 {
 	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewRepository reviewRepository;
 	
-	@GetMapping("/Test")
+	@GetMapping("/test")
 	public String Test() {
-		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
+		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("最高でした。質問に対しても正確な回答をしていただいて、不安が解消されました。再度利用したいです。");
 		// Positive、Negative、Neutralのスコアを数値のみで取得
         double positiveScore = documentSentiment.getConfidenceScores().getPositive();
         double negativeScore = documentSentiment.getConfidenceScores().getNegative();

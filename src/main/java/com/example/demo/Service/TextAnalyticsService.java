@@ -45,4 +45,10 @@ public class TextAnalyticsService {
 			return null;
 		}
 	}
+	public String MaxRateSentiment(Double positiveRate,Double neutralRate,Double negativeRate) {
+		
+		
+		return"";
+		
+	}
 }
