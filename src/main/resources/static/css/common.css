@@ -725,6 +725,21 @@ th {
     border-color: transparent transparent transparent #000; /* 三角の外側が黒 */
 }
 
+
+.speech-bubble2{
+	position: relative;
+    display: inline-block;
+    padding: 10px;
+    margin: 20px;
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+    border: 2px solid #000; /* 吹き出しの外側に黒いボーダー */
+    color: rgb(0, 0, 0);
+    width: 300px;
+}
+
+
+
 /*感情アイコンのｎ位置*/
 .position-relative {
     position: relative;
@@ -736,6 +751,8 @@ th {
    /*right: 100px;  /* 必要に応じて調整 */
     /*text-align: center; /* 中央揃え */
 /*}*/
+
+
 
     
 
