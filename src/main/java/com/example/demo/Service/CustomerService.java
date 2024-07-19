@@ -16,6 +16,11 @@ import com.example.demo.Repository.CustomerRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 
+/**
+ * このクラスは顧客関連のメソッドを用意するクラスです。<br>
+ * エラー処理や複数回使用される処理を保存するのに適しています。
+ * @author kachi
+ */
 @AllArgsConstructor
 @Service
 public class CustomerService {
@@ -23,6 +28,12 @@ public class CustomerService {
 	private final CustomerRepository customerRepository;
 	private final HttpSession session;
 
+	/**
+	 * ログイン情報のチェック処理とエラー処理。
+	 * @param loginForm ログイン用の入力フォーム
+	 * @param result 認証済みの顧客の情報
+	 * @author kachi
+	 */
 	public Customer getByCid(LoginForm loginForm, BindingResult result) {
 
 		if (loginForm.getCid().trim().isEmpty() || loginForm.getCid().trim().equals(" ")) {
@@ -65,6 +76,13 @@ public class CustomerService {
 
 	}
 
+	/**
+	 * 予約時の顧客idとpasswordの認証。
+	 * @param reserveInputForm 予約入力フォーム
+	 * @param result エラー表示の保管庫
+	 * @return 認証済みの顧客の情報
+	 * @author kachi
+	 */
 	public Customer getByCid(ReserveInputForm reserveInputForm, BindingResult result) {
 
 		String cid = reserveInputForm.getCid();
@@ -104,6 +122,12 @@ public class CustomerService {
 
 	}
 	
+	/**
+	 * 新規登録時のidの重複判定。
+	 * @param customerInputForm 新規登録の入力フォーム
+	 * @param result エラー表示の保管庫
+	 * @author kachi
+	 */
 	public void setCustomer(CustomerInputForm customerInputForm, BindingResult result) {
 
 		if (customerInputForm.getCid().trim().isEmpty() || customerInputForm.getCid().trim().equals(" ")) {

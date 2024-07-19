@@ -8,6 +8,11 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.demo.Entity.ReserveCustomer;
 
+/**
+ * t_reserveとm_customerを内部結合したテーブル用のリポジトリ
+ * @author soutome
+ *
+ */
 public interface ReserveCustomerRepository extends JpaRepository<ReserveCustomer, String> {
 
 	@Query(value = "SELECT cid,cname,password,tel,mailaddress,reserveid,ename,"

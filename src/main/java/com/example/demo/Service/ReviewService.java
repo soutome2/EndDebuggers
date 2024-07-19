@@ -12,14 +12,24 @@ import com.example.demo.Repository.ReviewRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 
+/**
+ * このクラスはレビュー関連のメソッドを用意するクラスです。<br>
+ * エラー処理や複数回使用される処理を保存するのに適しています。
+ * @author kachi
+ */
 @AllArgsConstructor
 @Service
 public class ReviewService {
-
+	
 	private final ReviewRepository reviewRepository;
 	private final HttpSession session;
 
-	//平均計算メソッド
+	/**
+	 * 評価の平均値を計算するメソッドです。
+	 * @return sessionのaverageStarsに平均値を保存。
+	 * @param ename 担当者の名前
+	 * @author kachi
+	 */
 	public void getAverage(String ename) {
 
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
@@ -45,10 +55,15 @@ public class ReviewService {
 
 	}
 
-	//レビューリスト生成メソッド
+	/**
+	 * タイトルの記述がないレビューを省いたリストを生成するメソッドです。<br>
+	 * 平均値計算はこのメソッドの前に使用してください。
+	 * @param list フィルターをかけたいリスト
+	 * @return タイトルなしを除いたリスト
+	 * @author kachi
+	 */
 	public List<Review> getFilteredReview(List<Review> list) {
 
-		//タイトルが空のものを省いたリスト生成
 		List<Review> filteredList = new ArrayList<>();
 
 		// 元のリストからgetTitle()が空でない要素だけを抽出して新しいリストを作成する
@@ -61,6 +76,14 @@ public class ReviewService {
 		return filteredList;
 	}
 
+	/**
+	 * リストを開始値と終了値の範囲に基づいてサブリストとして返すメソッドです。
+	 * @param list 分割したいリスト
+	 * @param startIndex 開始値
+	 * @param endIndex 終了値
+	 * @return サブリスト
+	 * @author kachi
+	 */
 	public List<Review> getSubReview(List<Review> list, int startIndex, int endIndex) {
 
 		// インデックスがリストの範囲内に収まるように調整
@@ -78,6 +101,12 @@ public class ReviewService {
 
 	}
 
+	/**
+	 * 
+	 * @param review
+	 * @return
+	 * @author seino
+	 */
 	public List<Integer> CountSentiment(List<Review> review) {
 		//0:positive 1:neutral 2:negativeの合計全て0で初期化
 		List<Integer> sentimentSumList = new ArrayList<>(Collections.nCopies(3, 0));
