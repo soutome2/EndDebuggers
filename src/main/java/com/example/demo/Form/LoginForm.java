@@ -3,6 +3,11 @@ package com.example.demo.Form;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+/**
+ * ログイン認証用のフォーム
+ * @author soutome
+ *
+ */
 @Data
 public class LoginForm {
 	

@@ -32,6 +32,12 @@ import com.example.demo.Service.TextAnalyticsService;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * webAPI化に関わるコントローラクラス<br>
+ * レストコントローラによる表示の為テンプレートhtmlの使用は不可。
+ * @author seino
+ *
+ */
 @AllArgsConstructor
 @RestController
 public class AceController2 {
@@ -39,6 +45,11 @@ public class AceController2 {
 	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewRepository reviewRepository;
 	
+	/**
+	 * 感情分析のお試しページ
+	 * @return 画面に結果を表示
+	 * @author kachi
+	 */
 	@GetMapping("/Test")
 	public String Test() {
 		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
@@ -51,7 +62,23 @@ public class AceController2 {
         return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
                 positiveScore, negativeScore, neutralScore);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
+	@GetMapping("/demochan")
+	public String demochan(){
+		String sentiment=textAnalyticsService.MaxRateSentiment(0.2,0.4,0.4);
+		return sentiment;
+	}
 
+	/**
+	 * JSONデータ取得用のパラメータ入力マニュアル
+	 * @return 説明文表示
+	 * @author kachi
+	 */
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
 		return "JSONデータの取得URL：/GetReviewJson		\n"
@@ -64,10 +91,17 @@ public class AceController2 {
 				+ "昇降順 'boolean' [true, false]\n";
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(
 			@RequestParam(value = "ename", required = false) String ename,
 			@RequestParam(value = "star", required = false) String star,
+			@RequestParam(value = "sentiment", required = false) String sentiment,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			@RequestParam(value = "sortBy", required = false) String sortBy,
@@ -128,79 +162,74 @@ public class AceController2 {
 				if ("star".equals(sortBy)) {
 					list = parsedOrder
 							? reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, parsedStartDate,
-									parsedEndDate, parsedStar)
+									parsedEndDate, parsedStar, sentiment)
 							: reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, parsedStartDate,
-									parsedEndDate, parsedStar);
+									parsedEndDate, parsedStar, sentiment);
 				} else if ("time".equals(sortBy)) {
 					list = parsedOrder
 							? reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedStartDate, parsedEndDate, parsedStar)
+									parsedStartDate, parsedEndDate, parsedStar, sentiment)
 							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedEndDate, parsedStar);
+									parsedStartDate, parsedEndDate, parsedStar, sentiment);
 				} else {
 					list = parsedOrder
 							? reviewRepository.findByEnameAndReviewdateGroup(ename, parsedStartDate, parsedEndDate,
-									parsedStar)
+									parsedStar, sentiment)
 							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedEndDate, parsedStar);
+									parsedStartDate, parsedEndDate, parsedStar, sentiment);
 				}
 			} else if (startDate != null) {
 				if ("star".equals(sortBy)) {
 					list = parsedOrder
-							? reviewRepository.findByEnameAndStartDateOrderByStar(ename, parsedStartDate, parsedStar)
+							? reviewRepository.findByEnameAndStartDateOrderByStar(ename, parsedStartDate, parsedStar,
+									sentiment)
 							: reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, parsedStartDate,
-									parsedStar);
+									parsedStar, sentiment);
 				} else if ("time".equals(sortBy)) {
 					list = parsedOrder
 							? reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedStartDate, parsedStar)
+									parsedStartDate, parsedStar, sentiment)
 							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedStar);
+									parsedStartDate, parsedStar, sentiment);
 				} else {
-					list = parsedOrder ? reviewRepository.findByEnameAndStartDate(ename, parsedStartDate, parsedStar)
+					list = parsedOrder
+							? reviewRepository.findByEnameAndStartDate(ename, parsedStartDate, parsedStar, sentiment)
 							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedStar);
+									parsedStartDate, parsedStar, sentiment);
 				}
 			} else if (endDate != null) {
 				if ("star".equals(sortBy)) {
 					list = parsedOrder
-							? reviewRepository.findByEnameAndEndDateOrderByStar(ename, parsedEndDate, parsedStar)
-							: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, parsedEndDate, parsedStar);
+							? reviewRepository.findByEnameAndEndDateOrderByStar(ename, parsedEndDate, parsedStar,
+									sentiment)
+							: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, parsedEndDate, parsedStar,
+									sentiment);
 				} else if ("time".equals(sortBy)) {
 					list = parsedOrder
 							? reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedEndDate, parsedStar)
+									parsedEndDate, parsedStar, sentiment)
 							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedEndDate, parsedStar);
+									parsedEndDate, parsedStar, sentiment);
 				} else {
-					list = parsedOrder ? reviewRepository.findByEnameAndEndDate(ename, parsedEndDate, parsedStar)
-							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedEndDate, parsedStar);
-				}
-			} else if (star != null) {
-				if ("star".equals(sortBy)) {
-					list = parsedOrder ? reviewRepository.findAIIByEnameAndStarOrderByStar(ename, parsedStar)
-							: reviewRepository.findAIIByEnameAndStarOrderByStarDesc(ename, parsedStar);
-				} else if ("time".equals(sortBy)) {
 					list = parsedOrder
-							? reviewRepository.findAIIByEnameAndStarOrderByReviewdateAscReviewtimeAsc(ename, parsedStar)
-							: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStar);
-				} else {
-					list = parsedOrder ? reviewRepository.findAIIByEnameAndStar(ename, parsedStar)
-							: reviewRepository.findAIIByEnameAndStarOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStar);
+							? reviewRepository.findByEnameAndEndDate(ename, parsedEndDate, parsedStar, sentiment)
+							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedEndDate, parsedStar, sentiment);
 				}
 			} else {
 				if ("star".equals(sortBy)) {
-					list = parsedOrder ? reviewRepository.findAIIByEnameOrderByStar(ename)
-							: reviewRepository.findAIIByEnameOrderByStarDesc(ename);
+					list = parsedOrder ? reviewRepository.findByEnameOrderByStar(ename, parsedStar, sentiment)
+							: reviewRepository.findByEnameOrderByStarDesc(ename, parsedStar, sentiment);
 				} else if ("time".equals(sortBy)) {
-					list = parsedOrder ? reviewRepository.findAIIByEnameOrderByReviewdateAscReviewtimeAsc(ename)
-							: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+					list = parsedOrder
+							? reviewRepository.findByEnameOrderByReviewdateAscReviewtimeAsc(ename, parsedStar,
+									sentiment)
+							: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStar, sentiment);
 				} else {
-					list = parsedOrder ? reviewRepository.findAIIByEname(ename)
-							: reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+					list = parsedOrder ? reviewRepository.findByEname(ename, parsedStar, sentiment)
+							: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename,
+									parsedStar, sentiment);
 				}
 			}
 
@@ -222,6 +251,12 @@ public class AceController2 {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
 	@CrossOrigin
 	@GetMapping("/GetReview")
 	public String getReview() {
@@ -242,7 +277,12 @@ public class AceController2 {
 	}
 	
 	
-	//API経由Insertできるかのデモコントローラー
+	
+	/**
+	 * API経由Insertできるかのデモコントローラー
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/DemoInsertReview")
 	@CrossOrigin
 	public String demoInsertReview() {
@@ -257,7 +297,11 @@ public class AceController2 {
 
 	}
 	
-	//GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
+	/**
+	 * GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/PostReview")
 	public String postReview(@RequestParam(value = "ename", required = false) String ename,
 			@RequestParam(value = "title", required = false) String title,
@@ -304,7 +348,12 @@ public class AceController2 {
 		}
 
 	}
-	//Formクラスで受け取りバリデーションチェックし書き込む
+	
+	/**
+	 * Formクラスで受け取りバリデーションチェックし書き込む
+	 * @return
+	 * @author seino
+	 */
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {

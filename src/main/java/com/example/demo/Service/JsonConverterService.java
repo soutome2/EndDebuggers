@@ -13,13 +13,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * このクラスはJson形式にするwebAPI関連のメソッドを用意するクラスです。<br>
+ * エラー処理や複数回使用される処理を保存するのに適しています。
+ * @author seino
+ */
 @Service
 @AllArgsConstructor
 public class JsonConverterService {
 
 	private ObjectMapper objectMapper; // JacksonのObjectMapperをDI（Dependency Injection）する
 
-	//Entityをjson文字列に変換
+	/**
+	 * EntityをJSON文字列に変換。
+	 * @param list
+	 * @return
+	 * @author seino
+	 */
 	public String EntityToJson(List<Review> list) {
 
 		try {
@@ -35,7 +45,13 @@ public class JsonConverterService {
 		}
 	}
 
-	//json文字列をEntityに変換
+	
+	/**
+	 * json文字列をEntityに変換。
+	 * @param json
+	 * @return
+	 * @author seino
+	 */
 	public List<Review> JsonToEntity(String json) {
 
 		try {
@@ -49,19 +65,43 @@ public class JsonConverterService {
 		}
 	}
 
-	//URL文字列を連結処理
+	/**
+	 * URL文字列の連結処理。
+	 * @param baseUrl
+	 * @param endpoint
+	 * @param queryename
+	 * @return
+	 * @author seino
+	 */
 	public String MakeFilePath(String baseUrl, String endpoint, String queryename) {
 		String apiUrl = baseUrl + endpoint + queryename;
 		return apiUrl;
 	}
 
-	//オーバーライドで引数が与えられない場合の処理はここに書くデフォルト引数の処理
+	/**
+	 * オーバーライドで引数が与えられない場合の処理はここに書くデフォルト引数の処理。
+	 * @param baseUrl
+	 * @param endpoint
+	 * @return
+	 * @author seino
+	 */
 	public String MakeFilePath(String baseUrl, String endpoint) {
 		String queryename = "?ename=田中太郎";
 		String apiUrl = baseUrl + endpoint + queryename;
 		return apiUrl;
 	}
 
+	/**
+	 * 
+	 * @param baseUrl
+	 * @param endpoint
+	 * @param queryename
+	 * @param querytitle
+	 * @param querycomment
+	 * @param querystar
+	 * @return
+	 * @author seino
+	 */
 	public String MakeFilePathInsert(String baseUrl, String endpoint,
 			String queryename, String querytitle, String querycomment, String querystar) {
 		String apiUrl = baseUrl + endpoint

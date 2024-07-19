@@ -10,6 +10,11 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * m_customerテーブルへの入力用のフォーム
+ * @author soutome
+ *
+ */
 @Data
 public class CustomerInputForm {
 

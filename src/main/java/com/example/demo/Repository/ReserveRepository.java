@@ -9,6 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Entity.Reserve;
 
+/**
+ * t_reserveテーブル用のリポジトリ
+ * @author soutome
+ *
+ */
 public interface ReserveRepository extends JpaRepository<Reserve,Integer>{
 	public List<Reserve> findAllByEname(String ename);
 	public List<Reserve> findAllByCid(String cid);

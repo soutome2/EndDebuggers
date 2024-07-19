@@ -97,13 +97,12 @@
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row"><!--スマホ-->
 						<div class="col-12 col-md-2 mb-3">
 							<select name="sortEname">
-								<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
-								<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
-								<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
-								<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
-								<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.sortEname)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.sortEname)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.sortEname)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.sortEname)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.sortEname)}">中村健太</option>
 							</select>
-							<input type="hidden" name="page" value="1">
 							<select name="sortStar">
 								<option value="0" th:selected="${session.sortStar == null}">全て</option>
 								<option value="1" th:selected="${session.sortStar == 1}">★1</option>
@@ -111,6 +110,15 @@
 								<option value="3" th:selected="${session.sortStar == 3}">★3</option>
 								<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 								<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+							</select>
+							<select name="sortSentiment">
+								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
+								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
+									positive</option>
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">neutral
+								</option>
+								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
+									negative</option>
 							</select>
 						</div>
 
@@ -144,15 +152,14 @@
 				<div class="d-none d-md-block">
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row">
 						<!--パソコン-->
-						<div class="col-12 col-md-2 mb-3">
+						<div class="col-12 col-md-3 mb-3">
 							<select name="sortEname">
-								<option value="田中太郎" th:selected="${session.sortEname.equals('田中太郎')}">田中太郎</option>
-								<option value="佐藤花子" th:selected="${session.sortEname.equals('佐藤花子')}">佐藤花子</option>
-								<option value="鈴木一郎" th:selected="${session.sortEname.equals('鈴木一郎')}">鈴木一郎</option>
-								<option value="高橋美咲" th:selected="${session.sortEname.equals('高橋美咲')}">高橋美咲</option>
-								<option value="中村健太" th:selected="${session.sortEname.equals('中村健太')}">中村健太</option>
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.sortEname)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.sortEname)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.sortEname)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.sortEname)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.sortEname)}">中村健太</option>
 							</select>
-							<input type="hidden" name="page" value="1">
 							<select name="sortStar">
 								<option value="0" th:selected="${session.sortStar == null}">全て</option>
 								<option value="1" th:selected="${session.sortStar == 1}">★1</option>
@@ -160,6 +167,15 @@
 								<option value="3" th:selected="${session.sortStar == 3}">★3</option>
 								<option value="4" th:selected="${session.sortStar == 4}">★4</option>
 								<option value="5" th:selected="${session.sortStar == 5}">★5</option>
+							</select>
+							<select name="sortSentiment">
+								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
+								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
+									positive</option>
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">neutral
+								</option>
+								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
+									negative</option>
 							</select>
 						</div>
 
@@ -183,7 +199,7 @@
 							</select>
 						</div>
 
-						<div class="col-12 col-md-3 mb-3">
+						<div class="col-12 col-md-2 mb-3">
 							<input type="hidden" name="page" value="1">
 							<input type="submit" value="表示" class="submit-btn display-button"><!--パソコン-->
 						</div>
@@ -248,9 +264,9 @@
 									<span th:if="${review.sentiment}=='positive'"><svg
 											xmlns="http://www.w3.org/2000/svg" width="60" height="60"
 											fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
-											
-											<circle cx="8" cy="8" r="7" fill="white" />
-											
+
+											<circle cx="8" cy="8" r="7" fill="yellow" />
+
 											<path
 												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											<path
@@ -261,9 +277,9 @@
 									<span th:if="${review.sentiment}=='neutral'"><svg xmlns="http://www.w3.org/2000/svg"
 											width="60" height="60" fill="currentColor" class="bi bi-emoji-neutral"
 											viewBox="0 0 16 16">
-											
+
 											<circle cx="8" cy="8" r="7" fill="white" />
-											
+
 											<path
 												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											<path
@@ -274,9 +290,9 @@
 									<span class="text-right" th:if="${review.sentiment}=='negative'"><svg
 											xmlns="http://www.w3.org/2000/svg" width="60" height="60"
 											fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">
-											
+
 											<circle cx="8" cy="8" r="7" fill="white" />
-											
+
 											<path
 												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											<path
