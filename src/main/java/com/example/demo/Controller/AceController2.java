@@ -2,7 +2,6 @@ package com.example.demo.Controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
@@ -28,6 +27,7 @@ import com.example.demo.Entity.Review;
 import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.JsonConverterService;
+import com.example.demo.Service.ReviewService;
 import com.example.demo.Service.TextAnalyticsService;
 
 import lombok.AllArgsConstructor;
@@ -43,8 +43,9 @@ import lombok.AllArgsConstructor;
 public class AceController2 {
 	private final JsonConverterService jsonConverterService;
 	private final TextAnalyticsService textAnalyticsService;
+	private final ReviewService reviewService;
 	private final ReviewRepository reviewRepository;
-	
+
 	/**
 	 * 感情分析のお試しページ
 	 * @return 画面に結果を表示
@@ -54,23 +55,23 @@ public class AceController2 {
 	public String Test() {
 		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
 		// Positive、Negative、Neutralのスコアを数値のみで取得
-        double positiveScore = documentSentiment.getConfidenceScores().getPositive();
-        double negativeScore = documentSentiment.getConfidenceScores().getNegative();
-        double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
+		double positiveScore = documentSentiment.getConfidenceScores().getPositive();
+		double negativeScore = documentSentiment.getConfidenceScores().getNegative();
+		double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
 
-        // 数値のみの文字列を作成して返す
-        return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
-                positiveScore, negativeScore, neutralScore);
+		// 数値のみの文字列を作成して返す
+		return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
+				positiveScore, negativeScore, neutralScore);
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 * @author seino
 	 */
 	@GetMapping("/demochan")
-	public String demochan(){
-		String sentiment=textAnalyticsService.MaxRateSentiment(0.2,0.4,0.4);
+	public String demochan() {
+		String sentiment = textAnalyticsService.MaxRateSentiment(0.2, 0.4, 0.4);
 		return sentiment;
 	}
 
@@ -91,7 +92,6 @@ public class AceController2 {
 				+ "昇降順 'boolean' [true, false]\n";
 	}
 
-	
 	/**
 	 * 
 	 * @return
@@ -156,82 +156,8 @@ public class AceController2 {
 		}
 
 		if (ename != null) {
-			List<Review> list = new ArrayList<>();
-
-			if (startDate != null && endDate != null) {
-				if ("star".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, parsedStartDate,
-									parsedEndDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, parsedStartDate,
-									parsedEndDate, parsedStar, sentiment);
-				} else if ("time".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedStartDate, parsedEndDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedEndDate, parsedStar, sentiment);
-				} else {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndReviewdateGroup(ename, parsedStartDate, parsedEndDate,
-									parsedStar, sentiment)
-							: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedEndDate, parsedStar, sentiment);
-				}
-			} else if (startDate != null) {
-				if ("star".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndStartDateOrderByStar(ename, parsedStartDate, parsedStar,
-									sentiment)
-							: reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, parsedStartDate,
-									parsedStar, sentiment);
-				} else if ("time".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedStartDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedStar, sentiment);
-				} else {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndStartDate(ename, parsedStartDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStartDate, parsedStar, sentiment);
-				}
-			} else if (endDate != null) {
-				if ("star".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndEndDateOrderByStar(ename, parsedEndDate, parsedStar,
-									sentiment)
-							: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, parsedEndDate, parsedStar,
-									sentiment);
-				} else if ("time".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename,
-									parsedEndDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedEndDate, parsedStar, sentiment);
-				} else {
-					list = parsedOrder
-							? reviewRepository.findByEnameAndEndDate(ename, parsedEndDate, parsedStar, sentiment)
-							: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedEndDate, parsedStar, sentiment);
-				}
-			} else {
-				if ("star".equals(sortBy)) {
-					list = parsedOrder ? reviewRepository.findByEnameOrderByStar(ename, parsedStar, sentiment)
-							: reviewRepository.findByEnameOrderByStarDesc(ename, parsedStar, sentiment);
-				} else if ("time".equals(sortBy)) {
-					list = parsedOrder
-							? reviewRepository.findByEnameOrderByReviewdateAscReviewtimeAsc(ename, parsedStar,
-									sentiment)
-							: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStar, sentiment);
-				} else {
-					list = parsedOrder ? reviewRepository.findByEname(ename, parsedStar, sentiment)
-							: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename,
-									parsedStar, sentiment);
-				}
-			}
+			List<Review> list = reviewService.sortReviewList(ename, parsedStar, sentiment, parsedStartDate,
+					parsedEndDate, sortBy, parsedOrder);
 
 			if (list != null && !list.isEmpty()) {
 				String json = jsonConverterService.EntityToJson(list);
@@ -251,7 +177,6 @@ public class AceController2 {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @return
@@ -275,9 +200,7 @@ public class AceController2 {
 		// 必要に応じてレスポンスを処理する
 		return "OKかも";
 	}
-	
-	
-	
+
 	/**
 	 * API経由Insertできるかのデモコントローラー
 	 * @return
@@ -288,15 +211,15 @@ public class AceController2 {
 	public String demoInsertReview() {
 		String baseUrl = "https://aceconcierge.azurewebsites.net";
 		String endpoint = "/PostReview";
-		String apiUrl=jsonConverterService.MakeFilePathInsert(baseUrl,endpoint,
-				"田中太郎","いまいち","owata","2");
+		String apiUrl = jsonConverterService.MakeFilePathInsert(baseUrl, endpoint,
+				"田中太郎", "いまいち", "owata", "2");
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				apiUrl,
 				String.class);
-		return  responseEntity.getBody();
+		return responseEntity.getBody();
 
 	}
-	
+
 	/**
 	 * GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
 	 * @return
@@ -310,7 +233,7 @@ public class AceController2 {
 
 		// リクエストURLを定義
 		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
-		String cid="Gest";
+		String cid = "Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
@@ -348,7 +271,7 @@ public class AceController2 {
 		}
 
 	}
-	
+
 	/**
 	 * Formクラスで受け取りバリデーションチェックし書き込む
 	 * @return
@@ -365,7 +288,7 @@ public class AceController2 {
 
 			review.setReviewdate(currentDate);
 			review.setReviewtime(currentTime);
-			
+
 			//感情分析の結果
 			String text = review.getComment();
 			DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);

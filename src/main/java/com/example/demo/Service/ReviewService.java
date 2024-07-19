@@ -1,10 +1,12 @@
 package com.example.demo.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Entity.Review;
 import com.example.demo.Repository.ReviewRepository;
@@ -20,7 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class ReviewService {
-	
+
 	private final ReviewRepository reviewRepository;
 	private final HttpSession session;
 
@@ -126,6 +128,170 @@ public class ReviewService {
 
 		}
 		return sentimentSumList;
+	}
+
+	/**
+	 * ソート機能用の様々な分岐を格納したメソッド。
+	 * @param ename 担当者名
+	 * @param star 評価
+	 * @param sentiment 感情分析
+	 * @param startDate 開始日
+	 * @param endDate 終了日
+	 * @param sortBy 並び替え
+	 * @param order 昇順降順
+	 * @return 条件に合ったソート結果
+	 * @author kachi
+	 */
+	public List<Review> sortReviewList(
+			@RequestParam(value = "ename", required = false) String ename,
+			@RequestParam(value = "star", required = false) Integer star,
+			@RequestParam(value = "sentiment", required = false) String sentiment,
+			@RequestParam(value = "startDate", required = false) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) LocalDate endDate,
+			@RequestParam(value = "sortBy", required = false) String sortBy,
+			@RequestParam(value = "order", required = false) boolean order) {
+
+		List<Review> list = new ArrayList<>();
+		//評価絞り込み
+		if (startDate != null && endDate != null) {
+			if ("star".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByStar(ename, startDate, endDate, star,
+								sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByStarDesc(ename, startDate, endDate,
+								star, sentiment);
+			} else if ("time".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateAscReviewtimeAsc(ename,
+								startDate, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+								startDate, endDate, star, sentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByPositiveAsc(ename,
+								startDate, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByPositiveDesc(ename,
+								startDate, endDate, star, sentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByNegativeAsc(ename,
+								startDate, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByNegativeDesc(ename,
+								startDate, endDate, star, sentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroupOrderByNeutralAsc(ename,
+								startDate, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByNeutralDesc(ename,
+								startDate, endDate, star, sentiment);
+			} else {
+				list = order
+						? reviewRepository.findByEnameAndReviewdateGroup(ename, startDate, endDate, star,
+								sentiment)
+						: reviewRepository.findByEnameAndReviewdateGroupOrderByReviewdateDescReviewtimeDesc(ename,
+								startDate, endDate, star, sentiment);
+			}
+		} else if (startDate != null) {
+			if ("star".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndStartDateOrderByStar(ename, startDate, star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByStarDesc(ename, startDate, star,
+								sentiment);
+			} else if ("time".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndStartDateOrderByReviewdateAscReviewtimeAsc(ename, startDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+								star, sentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndStartDateOrderByPositiveAsc(ename, startDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByPositiveDesc(ename, startDate,
+								star, sentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndStartDateOrderByNegativeAsc(ename, startDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByNegativeDesc(ename, startDate,
+								star, sentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndStartDateOrderByNeutralAsc(ename, startDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByNeutralDesc(ename, startDate,
+								star, sentiment);
+			} else {
+				list = order ? reviewRepository.findByEnameAndStartDate(ename, startDate, star, sentiment)
+						: reviewRepository.findByEnameAndStartDateOrderByReviewdateDescReviewtimeDesc(ename, startDate,
+								star, sentiment);
+			}
+		} else if (endDate != null) {
+			if ("star".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndEndDateOrderByStar(ename, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByStarDesc(ename, endDate, star,
+								sentiment);
+			} else if ("time".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndEndDateOrderByReviewdateAscReviewtimeAsc(ename, endDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+								star, sentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndEndDateOrderByPositiveAsc(ename, endDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByPositiveDesc(ename, endDate,
+								star, sentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndEndDateOrderByNegativeAsc(ename, endDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByNegativeDesc(ename, endDate,
+								star, sentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameAndEndDateOrderByNeutralAsc(ename, endDate,
+								star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByNeutralDesc(ename, endDate,
+								star, sentiment);
+			} else {
+				list = order ? reviewRepository.findByEnameAndEndDate(ename, endDate, star, sentiment)
+						: reviewRepository.findByEnameAndEndDateOrderByReviewdateDescReviewtimeDesc(ename, endDate,
+								star, sentiment);
+			}
+		} else {
+			if ("star".equals(sortBy)) {
+				list = order ? reviewRepository.findByEnameOrderByStar(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByStarDesc(ename, star, sentiment);
+			} else if ("time".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameOrderByReviewdateAscReviewtimeAsc(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename, star,
+								sentiment);
+			} else if ("positive".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameOrderByPositiveAsc(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByPositiveDesc(ename, star,
+								sentiment);
+			} else if ("negative".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameOrderByNegativeAsc(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByNegativeDesc(ename, star,
+								sentiment);
+			} else if ("neutral".equals(sortBy)) {
+				list = order
+						? reviewRepository.findByEnameOrderByNeutralAsc(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByNeutralDesc(ename, star,
+								sentiment);
+			} else {
+				list = order ? reviewRepository.findByEname(ename, star, sentiment)
+						: reviewRepository.findByEnameOrderByReviewdateDescReviewtimeDesc(ename, star,
+								sentiment);
+			}
+		}
+		return list;
 	}
 
 }
