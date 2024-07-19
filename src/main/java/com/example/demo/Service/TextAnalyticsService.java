@@ -79,7 +79,7 @@ public class TextAnalyticsService {
 		String flagSentiment = "neutral";
 		
 		Double epsilon=0.0000001;
-		//positiveとnegaiveとneutral扱い
+		//positiveとnegaive等しい場合neutral扱い
 		if (Math.abs(positiveRate-negativeRate)<epsilon) {
 			flagSentiment = "neutral";
 		}
