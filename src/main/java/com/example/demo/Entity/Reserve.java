@@ -11,10 +11,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * t_reserveテーブルのエンティティ
+ * @author soutome
+ *
+ */
 @Entity
 @Table(name = "t_reserve")
 @Data
-
 public class Reserve {
 
 	@Id
