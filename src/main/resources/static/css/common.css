@@ -86,7 +86,7 @@ h4 {
 	/* 1.1倍に拡大 */
 }
 
-.overall-view{
+.overall-view {
 	background: none;
 	border: none;
 	color: rgb(28, 183, 15);
@@ -94,14 +94,14 @@ h4 {
 	padding: 0;
 	display: inline;
 	transition: transform 0.2s ease;
-	font-size: 18px; 
+	font-size: 18px;
 	font-weight: 550;
-        transition: background-color 0.3s; 
+	transition: background-color 0.3s;
 }
 
-.overall-view:hover{
+.overall-view:hover {
 	color: rgb(0, 128, 0);
-	 
+
 }
 
 .tableData {
@@ -590,7 +590,8 @@ th {
 	padding: 20px;
 	/*width: 700px;*/
 	background-color: #fff;
-	position: relative; /* これが必要 */
+	position: relative;
+	/* これが必要 */
 }
 
 /*--さんのレビュー一覧タイトルを中央揃え*/
@@ -617,33 +618,42 @@ th {
 
 /*ソートの間隔空け*/
 .submit-btn {
-    margin-left: -90px; /* 左のマージンを調整 */
-    display: inline-block;
-     margin-top: -5px; /* 例: 上に移動 */
+	margin-left: -90px;
+	/* 左のマージンを調整 */
+	display: inline-block;
+	margin-top: -5px;
+	/* 例: 上に移動 */
 }
 
-.interval-sort{
-	 margin-left: -25px; /* 左のマージンを調整 */
-    display: inline-block;
+.interval-sort {
+	margin-left: -25px;
+	/* 左のマージンを調整 */
+	display: inline-block;
 }
 
-.remove-btn{
-	 margin-top: 10px; /* 例: 下に移動 */
+.remove-btn {
+	margin-top: 10px;
+	/* 例: 下に移動 */
 }
 
-.display-button{
-	background-color: rgb(192, 192, 192); /* 青色 */
-    color: white; /* テキストの色 */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid black; /* 黒のボーダー */
-    border-radius: 5px; /* 角を丸める */
-    padding: 5px 10px; /* 内側の余白 */
+.display-button {
+	background-color: rgb(192, 192, 192);
+	/* 青色 */
+	color: white;
+	/* テキストの色 */
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid black;
+	/* 黒のボーダー */
+	border-radius: 5px;
+	/* 角を丸める */
+	padding: 5px 10px;
+	/* 内側の余白 */
 }
 
-.display-button:hover{
+.display-button:hover {
 	background-color: rgb(128, 128, 128);
 }
 
@@ -663,100 +673,136 @@ th {
 }*/
 
 .star-color {
-    font-size: 24px; /* 星のサイズ */
-    color: transparent; /* 空の星の色は透明 */
-    -webkit-text-stroke: 1px black; /* 輪郭を黒に */
+	font-size: 24px;
+	/* 星のサイズ */
+	color: transparent;
+	/* 空の星の色は透明 */
+	-webkit-text-stroke: 1px black;
+	/* 輪郭を黒に */
 }
 
 .filled {
-    color: rgb(255, 247, 87); /* 塗りつぶされた星の色 */
+	color: rgb(255, 247, 87);
+	/* 塗りつぶされた星の色 */
 }
 
 /**/
 .speech-bubble {
-    position: relative;
-    display: inline-block;
-    padding: 10px;
-    margin: 20px;
-    background: rgb(0, 0, 0);
-    border-radius: 10px;
-    border: 2px solid #000; /* 吹き出しの外側に黒いボーダー */
-    color: rgb(0, 0, 0);
-    width: 510px;
+	position: relative;
+	display: inline-block;
+	padding: 10px;
+	margin: 20px;
+	background: rgb(0, 0, 0);
+	border-radius: 10px;
+	border: 2px solid #000;
+	/* 吹き出しの外側に黒いボーダー */
+	color: rgb(0, 0, 0);
+	width: 510px;
 }
 
 .speech-bubble.right {
-    background: rgb(255, 255, 255);
+	background: rgb(255, 255, 255);
 }
 
 .speech-bubble.right::after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 100%; /* 吹き出しの右側 */
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent transparent rgb(255, 255, 255); /* 中が白 */
-    border-left-color: rgb(255, 255, 255); /* 三角部分の左側に黒いボーダー */
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 100%;
+	/* 吹き出しの右側 */
+	width: 0;
+	height: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent transparent rgb(255, 255, 255);
+	/* 中が白 */
+	border-left-color: rgb(255, 255, 255);
+	/* 三角部分の左側に黒いボーダー */
 }
 
 .speech-bubble.right::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 100%;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent transparent #000; /* 三角の外側が黒 */
+	content: '';
+	position: absolute;
+	top: 8px;
+	left: 100%;
+	width: 0;
+	height: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent transparent #000;
+	/* 三角の外側が黒 */
 }
+
 .speech-bubble.right::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 100%;
-    width: 0;
-    height: 0;
-    border-width: 13px;
-    border-style: solid;
-    border-color: transparent transparent transparent #000; /* 三角の外側が黒 */
+	content: '';
+	position: absolute;
+	top: 8px;
+	left: 100%;
+	width: 0;
+	height: 0;
+	border-width: 13px;
+	border-style: solid;
+	border-color: transparent transparent transparent #000;
+	/* 三角の外側が黒 */
 }
 
+/**/
 
-.speech-bubble2{
+.speech-bubble2 {
 	position: relative;
-    display: inline-block;
-    padding: 10px;
-    margin: 20px;
-    background: rgb(0, 0, 0);
-    border-radius: 10px;
-    border: 2px solid #000; /* 吹き出しの外側に黒いボーダー */
-    color: rgb(0, 0, 0);
-    width: 300px;
+	display: inline-block;
+	padding: 10px;
+	margin: 20px;
+	background: rgb(0, 0, 0);
+	border-radius: 10px;
+	border: 2px solid #000;
+	color: rgb(0, 0, 0);
+	width: 250px;
 }
 
+.speech-bubble2.bottom {
+	background: rgb(255, 255, 255);
+	/* 背景色を白に設定 */
+	color: rgb(0, 0, 0);
+	/* 文字色を黒に設定 */
+	position: relative;
+	/* 相対位置指定 */
+	
+}
+
+.speech-bubble2.bottom::after {
+	content: '';
+	position: absolute;
+	/* 絶対位置指定 */
+	top: 100%;
+	/* 三角形の位置を調整 */
+	left: 50%;
+	/* 左端から中央に */
+	transform: translateX(-50%);
+	/* 中央揃え */
+	border-width: 15px;
+	/* 三角形のサイズ */
+	border-style: solid;
+	border-color:  #000 transparent transparent transparent; /* 上右下左の順に設定 */
+    border-top-color: rgb(255, 255, 255); /* 上の線を白色に設定 */
+}
+
+.speech-bubble2.bottom::before {
+   content: '';
+    position: absolute;
+    top: calc(100% - 0px); /* 上の三角形より少し下に配置 */
+    left: calc(50% - 0px); /* 三角形の中心に配置 */
+    transform: translateX(-50%);
+    border-width: 18px; /* 一回り大きい黒い三角形のサイズを設定 */
+    border-style: solid;
+    border-color: #000 transparent transparent transparent; /* 上右下左の順に設定 */
+}
 
 
 /*感情アイコンのｎ位置*/
 .position-relative {
-    position: relative;
+	position: relative;
 }
-
-/*.icon-container {
-    position: absolute;
-    bottom: 70px; /* 必要に応じて調整 下からの距離 */
-   /*right: 100px;  /* 必要に応じて調整 */
-    /*text-align: center; /* 中央揃え */
-/*}*/
-
-
-
-    
-
-
 
 .page {
 	margin-right: 10px;

@@ -27,6 +27,57 @@ public class ReviewService {
 	private final HttpSession session;
 
 	/**
+	 * 
+	 * @param reviewList
+	 * @return maxRateList
+	 * @author seino
+	 */
+	public List<String> GetMaxRateList(List<Review> reviewList) {
+		
+		//3つの感情のうちスコアが最大の感情
+		String maxRateSentiment;
+		//3つの感情のうちスコアが最大の感情の確率
+		String maxRate;
+
+		//3つの感情のうちスコアが最大の感情の確率リスト　reviewListと対応
+		List<String> maxRateList = new ArrayList<>();
+		
+		//sentimentがnullならなしにした。全く関係ない文字列が入っている場合エラー。それ以外は確率値を文字列に
+	
+		for (Review review : reviewList) {
+			
+	
+			maxRateSentiment = review.getSentiment();
+			if (maxRateSentiment == null) {
+				maxRateList.add("なし");
+
+			} else {
+				if (maxRateSentiment.equals("positive")) {
+					maxRate = String.valueOf(100*review.getPositiverate());
+					maxRateList.add("ポジティブ:"+maxRate);
+
+				} else if (maxRateSentiment.equals("neutral")) {
+					maxRate = String.valueOf(100*review.getNeutralrate());
+					maxRateList.add("ノーマル:"+maxRate);
+
+				} else if (maxRateSentiment.equals("negative")) {
+					maxRate = String.valueOf(100*review.getNegativerate());
+					maxRateList.add("ネガティブ:"+maxRate);
+
+				} else {
+					maxRate = String.valueOf("エラー");
+					maxRateList.add(maxRate);
+				}
+			}
+
+		}
+
+		//今までの条件式を満たさない場合はneutral
+		return maxRateList;
+
+	}
+
+	/**
 	 * 評価の平均値を計算するメソッドです。
 	 * @return sessionのaverageStarsに平均値を保存。
 	 * @param ename 担当者の名前
