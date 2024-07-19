@@ -83,17 +83,18 @@ public class TextAnalyticsService {
 		if (Math.abs(positiveRate-negativeRate)<epsilon) {
 			flagSentiment = "neutral";
 		}
+		//positiverateがneutral以上かつnegativeより高いとき、もっとも高いのはpositive
 		else if (positiveRate >= neutralRate && positiveRate > negativeRate) {
 			flagSentiment = "positive";
 			System.out.println("1");
 		}
 	
-		//positiveのスコアがもっとも高くないかつnegativeの信頼度がneutral以上場合、もっとも高いのはneutral
+		//positiveのスコアがもっとも高くないかつnegativeの信頼度がneutral以上場合、もっとも高いのはnegative
 		else if (negativeRate >= neutralRate) {
 			flagSentiment = "negative";
 		} 
 		
-		//今までの条件式を満たさない場合はpositiveとnegativeが等しい場合のみその場合はneutral
+		//今までの条件式を満たさない場合はneutral
 		return flagSentiment;
 
 	}
