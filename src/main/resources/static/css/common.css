@@ -767,6 +767,7 @@ th {
 	/* 文字色を黒に設定 */
 	position: relative;
 	/* 相対位置指定 */
+	
 }
 
 .speech-bubble2.bottom::after {
@@ -782,20 +783,26 @@ th {
 	border-width: 15px;
 	/* 三角形のサイズ */
 	border-style: solid;
-	border-color: rgb(0, 0, 0) transparent transparent transparent;
-	/* 透明 透明 背景色 透明 */
+	border-color:  #000 transparent transparent transparent; /* 上右下左の順に設定 */
+    border-top-color: rgb(255, 255, 255); /* 上の線を白色に設定 */
 }
 
-
+.speech-bubble2.bottom::before {
+   content: '';
+    position: absolute;
+    top: calc(100% - 0px); /* 上の三角形より少し下に配置 */
+    left: calc(50% - 0px); /* 三角形の中心に配置 */
+    transform: translateX(-50%);
+    border-width: 18px; /* 一回り大きい黒い三角形のサイズを設定 */
+    border-style: solid;
+    border-color: #000 transparent transparent transparent; /* 上右下左の順に設定 */
+}
 
 
 /*感情アイコンのｎ位置*/
 .position-relative {
 	position: relative;
 }
-
-
-
 
 .page {
 	margin-right: 10px;
