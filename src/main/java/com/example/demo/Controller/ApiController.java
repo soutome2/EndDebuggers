@@ -40,7 +40,7 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 @RestController
-public class AceController2 {
+public class ApiController {
 	private final JsonConverterService jsonConverterService;
 	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewService reviewService;
