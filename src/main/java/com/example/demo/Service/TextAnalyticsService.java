@@ -48,7 +48,7 @@ public class TextAnalyticsService {
 	public String MaxRateSentiment(Double positiveRate,Double neutralRate,Double negativeRate) {
 		String flagSentiment="neutral";
 		
-		if(positiveRate>neutralRate||positiveRate>negativeRate) {
+		if(positiveRate>neutralRate&&positiveRate>negativeRate) {
 			flagSentiment="positive";
 			System.out.println("1");
 		}
