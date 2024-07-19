@@ -33,14 +33,20 @@ public class ReviewService {
 	 * @author seino
 	 */
 	public List<String> GetMaxRateList(List<Review> reviewList) {
-
-		List<String> maxRateList = new ArrayList<>();
-
+		
+		//3つの感情のうちスコアが最大の感情
 		String maxRateSentiment;
+		//3つの感情のうちスコアが最大の感情の確率
 		String maxRate;
 
+		//3つの感情のうちスコアが最大の感情の確率リスト　reviewListと対応
+		List<String> maxRateList = new ArrayList<>();
+		
+		//sentimentがnullならなしにした。全く関係ない文字列が入っている場合エラー。それ以外は確率値を文字列に
+	
 		for (Review review : reviewList) {
-
+			
+	
 			maxRateSentiment = review.getSentiment();
 			if (maxRateSentiment == null) {
 				maxRateList.add("なし");
@@ -59,7 +65,7 @@ public class ReviewService {
 					maxRateList.add(maxRate);
 
 				} else {
-					maxRate = String.valueOf("その他");
+					maxRate = String.valueOf("エラー");
 					maxRateList.add(maxRate);
 				}
 			}
