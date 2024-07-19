@@ -51,6 +51,12 @@ public class AceController2 {
         return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
                 positiveScore, negativeScore, neutralScore);
 	}
+	
+	@GetMapping("/demochan")
+	public String demochan(){
+		String sentiment=textAnalyticsService.MaxRateSentiment(0.9,0.1,0.1);
+		return sentiment;
+	}
 
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
