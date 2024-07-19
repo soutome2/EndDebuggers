@@ -376,7 +376,9 @@ public class AceController {
 			Double neutralRate=	documentSentiment.getConfidenceScores().getNeutral();
 			Double negativeRate=documentSentiment.getConfidenceScores().getNegative();
 			
-			String sentiment=textAnalyticsService.MaxRateSentiment(0.9,0.1,0.1);
+			String sentiment=textAnalyticsService.MaxRateSentiment(positiveRate,neutralRate,negativeRate);
+			
+			review.setSentiment(sentiment);
 
 			reviewRepository.saveAndFlush(review);
 

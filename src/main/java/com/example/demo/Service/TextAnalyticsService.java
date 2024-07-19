@@ -45,24 +45,28 @@ public class TextAnalyticsService {
 			return null;
 		}
 	}
-	public String MaxRateSentiment(Double positiveRate,Double neutralRate,Double negativeRate) {
-		String flagSentiment="neutral";
+
+	public String MaxRateSentiment(Double positiveRate, Double neutralRate, Double negativeRate) {
 		
-		if(positiveRate>neutralRate&&positiveRate>negativeRate) {
-			flagSentiment="positive";
+		String flagSentiment = "neutral";
+		
+		Double epsilon=0.0000001;
+		//positiveとnegaiveとneutral扱い
+		if (Math.abs(positiveRate-negativeRate)<epsilon) {
+			flagSentiment = "neutral";
+		}
+		else if (positiveRate >= neutralRate && positiveRate > negativeRate) {
+			flagSentiment = "positive";
 			System.out.println("1");
 		}
-		else if(neutralRate>negativeRate) {
-			flagSentiment="neutral";
-			System.out.println("2");
-		}
-		else if(negativeRate>neutralRate) {
-			flagSentiment="negative";
-			System.out.println("3");
-		}
-				
+	
+		//positiveのスコアがもっとも高くないかつnegativeの信頼度がneutral以上場合、もっとも高いのはneutral
+		else if (negativeRate >= neutralRate) {
+			flagSentiment = "negative";
+		} 
 		
+		//今までの条件式を満たさない場合はpositiveとnegativeが等しい場合のみその場合はneutral
 		return flagSentiment;
-		
+
 	}
 }
