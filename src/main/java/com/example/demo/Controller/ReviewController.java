@@ -81,15 +81,18 @@ public class ReviewController {
 		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
 
 		List<Integer> pages = new ArrayList<>();
-		
+
 		List<String> maxRateList = new ArrayList<>();
+
+		maxRateList = reviewService.GetMaxRateList(sublist);
+
+		for (String i : maxRateList) {
+			System.out.println(i);
+		}
 		
-		
-		maxRateList=reviewService.GetMaxRateList(sublist);
-		
-		
-		
-		
+		for (Review i : sublist) {
+			System.out.println(i);
+		}
 
 		// 範囲外の入力は空リストを返す
 		if (page < 0 || page > filteredList.size() / 10 + 1) {
@@ -234,7 +237,6 @@ public class ReviewController {
 		mv.addObject("reserveList", list);
 		mv.addObject("reviewList", reviewlist);
 		mv.setViewName("customer");
-		
 
 		return mv;
 	}

@@ -54,15 +54,15 @@ public class ReviewService {
 			} else {
 				if (maxRateSentiment.equals("positive")) {
 					maxRate = String.valueOf(review.getPositiverate());
-					maxRateList.add(maxRate);
+					maxRateList.add("ポジティブ:"+maxRate);
 
 				} else if (maxRateSentiment.equals("neutral")) {
 					maxRate = String.valueOf(review.getNeutralrate());
-					maxRateList.add(maxRate);
+					maxRateList.add("普通:"+maxRate);
 
 				} else if (maxRateSentiment.equals("negative")) {
 					maxRate = String.valueOf(review.getNegativerate());
-					maxRateList.add(maxRate);
+					maxRateList.add("ネガティブ:"+maxRate);
 
 				} else {
 					maxRate = String.valueOf("エラー");
