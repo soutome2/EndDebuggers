@@ -209,13 +209,13 @@
 				<div th:if="${#lists.isEmpty(reviewList)}" class="centered">
 					<p>まだレビューがありません</p>
 				</div>
-				
+
 				<!--sentiment:全レビューの各sentimentの合計個数,index:配列のindex数
 				sentimentSumListは、0:positive,1:neutral,2:negative-->
 
 				<span th:each="sentiment, index : ${sentimentSumList}">
-					
-					
+
+
 					<!--index=0のときpositiveの個数,平均評価と星表示。改行したくないのでspanで囲ってる-->
 
 					<span th:if="${index.index}==0">平均評価：
@@ -229,7 +229,7 @@
 							</svg></span>
 						<span th:text="  ${sentiment}"></span>
 					</span>
-					
+
 					<!--index=1のときneutralの個数表示-->
 					<span th:if="${index.index}==1">
 
@@ -242,7 +242,7 @@
 
 						<span th:text="${sentiment}"></span>
 					</span>
-					
+
 					<!--index=1のときnegativeの個数表示-->
 					<span th:if="${index.index}==2">
 
@@ -262,7 +262,7 @@
 					id="count">
 					<div class="col-12 col-md-8">
 						<div class="row">
-							<div class="col-6">
+							<div class="col-9 ">
 								<div class="speech-bubble right">
 									<div style="font-size: 22px;">
 										<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -297,7 +297,7 @@
 
 							</div>
 
-							<div class="col-6 d-flex align-items-center justify-content-end">
+							<div class="col-1 d-flex align-items-center justify-content-end ">
 								<div class="position-absolute bottom-right">
 
 									<!--えがお-->
@@ -339,8 +339,22 @@
 												d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
 										</svg></span>
 									<br>
+
+									<!--顔の下に各確率表示-->
+
+
+
+
 								</div>
 							</div>
+
+							<div class="col-2 white-background">
+								<p th:text="'good:'+${review.positiverate}"></p>
+								<p th:text="'normal:'+${review.neutralrate}"></p>
+								<p th:text="'bad:'+${review.negativerate}"></p>
+							</div>
+				
+
 
 						</div>
 
