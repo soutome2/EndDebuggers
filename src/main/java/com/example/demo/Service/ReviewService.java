@@ -27,6 +27,51 @@ public class ReviewService {
 	private final HttpSession session;
 
 	/**
+	 * 
+	 * @param reviewList
+	 * @return maxRateList
+	 * @author seino
+	 */
+	public List<String> GetMaxRateList(List<Review> reviewList) {
+
+		List<String> maxRateList = new ArrayList<>();
+
+		String maxRateSentiment;
+		String maxRate;
+
+		for (Review review : reviewList) {
+
+			maxRateSentiment = review.getSentiment();
+			if (maxRateSentiment == null) {
+				maxRateList.add("なし");
+
+			} else {
+				if (maxRateSentiment.equals("positive")) {
+					maxRate = String.valueOf(review.getPositiverate());
+					maxRateList.add(maxRate);
+
+				} else if (maxRateSentiment.equals("neutral")) {
+					maxRate = String.valueOf(review.getNeutralrate());
+					maxRateList.add(maxRate);
+
+				} else if (maxRateSentiment.equals("negative")) {
+					maxRate = String.valueOf(review.getNegativerate());
+					maxRateList.add(maxRate);
+
+				} else {
+					maxRate = String.valueOf("その他");
+					maxRateList.add(maxRate);
+				}
+			}
+
+		}
+
+		//今までの条件式を満たさない場合はneutral
+		return maxRateList;
+
+	}
+
+	/**
 	 * 評価の平均値を計算するメソッドです。
 	 * @return sessionのaverageStarsに平均値を保存。
 	 * @param ename 担当者の名前
