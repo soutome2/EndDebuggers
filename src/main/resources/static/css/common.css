@@ -590,6 +590,7 @@ th {
 	padding: 20px;
 	/*width: 700px;*/
 	background-color: #fff;
+	position: relative; /* これが必要 */
 }
 
 /*--さんのレビュー一覧タイトルを中央揃え*/
@@ -670,6 +671,73 @@ th {
 .filled {
     color: rgb(255, 247, 87); /* 塗りつぶされた星の色 */
 }
+
+/**/
+.speech-bubble {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    margin: 20px;
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+    border: 2px solid #000; /* 吹き出しの外側に黒いボーダー */
+    color: rgb(0, 0, 0);
+    width: 510px;
+}
+
+.speech-bubble.right {
+    background: rgb(255, 255, 255);
+}
+
+.speech-bubble.right::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 100%; /* 吹き出しの右側 */
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgb(255, 255, 255); /* 中が白 */
+    border-left-color: rgb(255, 255, 255); /* 三角部分の左側に黒いボーダー */
+}
+
+.speech-bubble.right::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #000; /* 三角の外側が黒 */
+}
+.speech-bubble.right::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-width: 13px;
+    border-style: solid;
+    border-color: transparent transparent transparent #000; /* 三角の外側が黒 */
+}
+
+/*感情アイコンのｎ位置*/
+.position-relative {
+    position: relative;
+}
+
+/*.icon-container {
+    position: absolute;
+    bottom: 70px; /* 必要に応じて調整 下からの距離 */
+   /*right: 100px;  /* 必要に応じて調整 */
+    /*text-align: center; /* 中央揃え */
+/*}*/
+
+    
 
 
 
