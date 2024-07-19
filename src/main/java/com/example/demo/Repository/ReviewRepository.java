@@ -9,6 +9,11 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.demo.Entity.Review;
 
+/**
+ * t_reviewテーブル用のリポジトリ
+ * @author soutome
+ *
+ */
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	//条件抽出
