@@ -32,6 +32,12 @@ import com.example.demo.Service.TextAnalyticsService;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * webAPI化に関わるコントローラクラス<br>
+ * レストコントローラによる表示の為テンプレートhtmlの使用は不可。
+ * @author seino
+ *
+ */
 @AllArgsConstructor
 @RestController
 public class AceController2 {
@@ -39,6 +45,11 @@ public class AceController2 {
 	private final TextAnalyticsService textAnalyticsService;
 	private final ReviewRepository reviewRepository;
 	
+	/**
+	 * 感情分析のお試しページ
+	 * @return 画面に結果を表示
+	 * @author kachi
+	 */
 	@GetMapping("/Test")
 	public String Test() {
 		DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment("めちゃくちゃいい人だった。これからも利用したい。");
@@ -52,12 +63,22 @@ public class AceController2 {
                 positiveScore, negativeScore, neutralScore);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/demochan")
 	public String demochan(){
 		String sentiment=textAnalyticsService.MaxRateSentiment(0.9,0.1,0.1);
 		return sentiment;
 	}
 
+	/**
+	 * JSONデータ取得用のパラメータ入力マニュアル
+	 * @return 説明文表示
+	 * @author kachi
+	 */
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
 		return "JSONデータの取得URL：/GetReviewJson		\n"
@@ -70,6 +91,12 @@ public class AceController2 {
 				+ "昇降順 'boolean' [true, false]\n";
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(
 			@RequestParam(value = "ename", required = false) String ename,
@@ -224,6 +251,12 @@ public class AceController2 {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 * @author seino
+	 */
 	@CrossOrigin
 	@GetMapping("/GetReview")
 	public String getReview() {
@@ -244,7 +277,12 @@ public class AceController2 {
 	}
 	
 	
-	//API経由Insertできるかのデモコントローラー
+	
+	/**
+	 * API経由Insertできるかのデモコントローラー
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/DemoInsertReview")
 	@CrossOrigin
 	public String demoInsertReview() {
@@ -259,7 +297,11 @@ public class AceController2 {
 
 	}
 	
-	//GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
+	/**
+	 * GetでInsertのための情報を受け取りFormに詰め込み、実際に書き込むためのControllerに送信
+	 * @return
+	 * @author seino
+	 */
 	@GetMapping("/PostReview")
 	public String postReview(@RequestParam(value = "ename", required = false) String ename,
 			@RequestParam(value = "title", required = false) String title,
@@ -306,7 +348,12 @@ public class AceController2 {
 		}
 
 	}
-	//Formクラスで受け取りバリデーションチェックし書き込む
+	
+	/**
+	 * Formクラスで受け取りバリデーションチェックし書き込む
+	 * @return
+	 * @author seino
+	 */
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {
