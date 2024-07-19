@@ -70,7 +70,7 @@ public class AceController2 {
 	 */
 	@GetMapping("/demochan")
 	public String demochan(){
-		String sentiment=textAnalyticsService.MaxRateSentiment(0.9,0.1,0.1);
+		String sentiment=textAnalyticsService.MaxRateSentiment(0.2,0.4,0.4);
 		return sentiment;
 	}
 
