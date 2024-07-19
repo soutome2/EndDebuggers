@@ -114,44 +114,21 @@
 
 					<h3 th:text="${session.ename} + 'の空き状況'"></h3>
 					<p>予約希望日をカレンダーから選択してください</p>
-
-
-					<div class="table-responsive carousel-container" id="carousel-container">
-						<table class="table-chenge carousel-table" id="carousel-table">
-							<thead>
-								<tr>
-									<th class="tableHead1"></th> <!-- 空のセルを作成 -->
-									<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-									<th class="tableHead1" th:each="head, iterStat : ${session.headDateList}"
-										th:if="${iterStat.index < 7}" th:text="${head}"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- 時間のリストを基に縦軸の行を生成 -->
-								<tr th:each="time, rowIndex : ${session.timeList}">
-									<td th:text="${time}"></td> <!-- 時間を表示 -->
-									<!-- 各セルに対して、条件によって表示を変える -->
-									<td th:each="date, colIndex : ${session.dateList}" class="tableData"
-										th:class="${colIndex.index < 7 ? 'shown' : 'hidden'}">
-										<!-- matrix のデータを表示する -->
-										<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-											<form action="ReserveInput" method="post">
-												<input type="hidden" name="date" th:value="${date}">
-												<input type="hidden" name="time" th:value="${time}">
-												<button type="submit" class="circle">〇</button>
-											</form>
-										</span>
-										<span class="cross"
-											th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
-										<!-- 他の値に対する条件表示も必要であれば追加 -->
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					
 					<div class="pagination">
 						<button id="prev-btn">前の7列</button>
 						<button id="next-btn">次の7列</button>
+					</div>
+
+					<div class="table-responsive carousel-container" id="carousel-container">
+						<table class="table-chenge carousel-table" id="carousel-table">
+							<thead id="table-head">
+								<!--JavaScriptにより挿入-->
+							</thead>
+							<tbody id="table-body">
+								<!--JavaScriptにより挿入-->
+							</tbody>
+						</table>
 					</div>
 					<br>
 					<div class="d-flex align-items-center">
@@ -381,7 +358,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 			crossorigin="anonymous"></script>
-		<!--<script src="js/script.js"></script>-->
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			let headDateList = /*[[${session.headDateList}]]*/[]; // Thymeleafで受け取ったリストをJavaScript変数にセット
+			let timeList = /*[[${session.timeList}]]*/[]; // Thymeleafで受け取ったリストをJavaScript変数にセット
+			let dateList = /*[[${session.dateList}]]*/[]; // Thymeleafで受け取ったList<LocalDate>をJavaScript変数にセット
+			let matrix = /*[[${session.matrix}]]*/[]; // Thymeleafで受け取ったリストをJavaScript変数にセット
+        /*]]>*/
+		</script>
+		<script th:src="@{/js/script.js}"></script>
 </body>
 
 </html>
