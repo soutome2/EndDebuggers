@@ -82,7 +82,7 @@
 							<td th:text="${reserve.detail}"></td>
 
 							<td>
-								<form action="/cancelComplete" method="post">
+								<form action="/CancelComplete" method="post">
 									<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
 									<button type="submit" class="btn-cancel">キャンセルする</button>
 								</form>

@@ -9,28 +9,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/common.css">
-	<link rel="stylesheet" type="text/css" href="/css/reserve.css">
-
-	<script th:inline="javascript">
-
-		document.addEventListener("DOMContentLoaded", function () {
-			function getRandomColor() {
-				var letters = '0123456789ABCDEF';
-				var color = '#';
-				for (var i = 0; i < 6; i++) {
-					color += letters[Math.floor(Math.random() * 16)];
-				}
-				return color;
-			}
-
-			var icons = document.querySelectorAll('.random-color-icon');
-			icons.forEach(function (icon, index) {
-				icon.style.color = getRandomColor();
-			});
-		});
-
-	</script>
-
 </head>
 
 <body>
@@ -83,312 +61,106 @@
 				</div>
 			</div>
 
-			<br>
-			<div class="container white-background">
+
+
+
+			<div class="container">
 
 				<br>
+
 				<div class="container white-background">
-
-
-					<div class="row">
-						<div class="col-md-6 order-md-2">
-
-							<div class="image-container">
-								<img th:src="@{'/img/person/'+${session.ename}+'.jfif'}" th:alt="${session.ename}"
-									width="300" height="300" class="img-fluid">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div style="margin-top: 20px; text-align: left;">
-
-								<h5 th:text="${session.ename} + ' ' + ${session.furigana}" class="d-block d-md-none">
-								</h5>
-								<h3 th:text="${session.ename} + ' ' + ${session.furigana}" class="d-none d-md-block">
-								</h3>
-								<p th:text="${session.referral}">
-
-								</p>
-							</div>
-						</div>
+					<br>
+					<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
+					<br>
+					<div th:if="${session.cid} == null">
+						IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から
 					</div>
-
-					<h3 th:text="${session.ename} + 'の空き状況'"></h3>
-					<p>予約希望日をカレンダーから選択してください</p>
-
-
-					<div class="table-responsive carousel-container" id="carousel-container">
-						<table class="table-chenge carousel-table" id="carousel-table">
-							<thead>
-								<tr>
-									<th class="tableHead1"></th> <!-- 空のセルを作成 -->
-									<!-- 日付のリストを基に横軸のヘッダーを生成 -->
-									<th class="tableHead1" th:each="head, iterStat : ${session.headDateList}"
-										th:if="${iterStat.index < 7}" th:text="${head}"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- 時間のリストを基に縦軸の行を生成 -->
-								<tr th:each="time, rowIndex : ${session.timeList}">
-									<td th:text="${time}"></td> <!-- 時間を表示 -->
-									<!-- 各セルに対して、条件によって表示を変える -->
-									<td th:each="date, colIndex : ${session.dateList}" class="tableData"
-										th:class="${colIndex.index < 7 ? 'shown' : 'hidden'}">
-										<!-- matrix のデータを表示する -->
-										<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-											<form action="Reservetime" method="post">
-												<input type="hidden" name="date" th:value="${date}">
-												<input type="hidden" name="time" th:value="${time}">
-												<button type="submit" class="circle">〇</button>
-											</form>
-										</span>
-										<span class="cross"
-											th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
-										<!-- 他の値に対する条件表示も必要であれば追加 -->
-									</td>
-								</tr>
-							</tbody>
+					<br>
+					<form th:action="ReserveError" method="post" th:object="${reserveInputForm}">
+						<table>
+							<tr>
+								<th class="tableHead1">予約日時</th>
+								<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
+									<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}"
+										th:errors="*{reservedate}">
+									</h4>
+								</td>
+							</tr>
+							<tr>
+								<th class="tableHead1">予約者ID</th>
+								<td>
+									<input th:if="${session.cid} == null" name="cid" type="text" class="width-middle"
+										th:value="*{cid}" maxlength="8">
+									<input th:if="${session.cid} != null" name="cid" type="hidden"
+										th:value="${session.cid}">
+									<span th:if="${session.cid} != null" th:text="${session.cid}"></span>
+									<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+								</td>
+							</tr>
+							<tr th:if="${session.cid} == null">
+								<th class="tableHead1">パスワード</th>
+								<td>
+									<input name="password" type="password" class="width-middle" th:value="*{password}"
+										maxlength="20">
+									<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+								</td>
+							</tr>
+							<!--顧客名の表示とform用パスワードの送信-->
+							<tr th:if="${session.cid} != null">
+								<th class="tableHead1">予約者名</th>
+								<td>
+									<input name="password" type="hidden" th:value="${session.password}">
+									<span th:text="${session.cname}"></span>
+								</td>
+							</tr>
+							<tr>
+								<th class="tableHead1">相談内容</th>
+								<td><textarea name="detail" type="text" class="width-middle" id="detailInput"
+										style="width: 300px; height: 80px;" maxlength="100">[[*{detail}]]</textarea>
+									<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
+								</td>
+							</tr>
 						</table>
-					</div>
-					<div class="pagination">
-						<button id="prev-btn">前の7列</button>
-						<button id="next-btn">次の7列</button>
-					</div>
-					<br>
-					<div class="d-flex align-items-center">
-						<h4 class="mr-3 d-none d-md-block">利用者のレビュー</h4>
-						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="btn btn-primary-custom d-none d-md-block ms-4">レビュー追加</a>
-						<span th:if="${session.cid} == null" class="d-none d-md-block">レビューの追加は<a href="/Login"
-								class="atten">ログイン</a>が必要です</span>
-					</div>
-					<!--スマホ画面で見る時の文字サイズ変更してる-->
-					<div class="d-flex align-items-center">
-						<p class="d-block d-md-none text-left" style="font-size: 18px; margin: 0; font-weight: 540;">
-							利用者のレビュー</p>
-						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="btn btn-primary-custom d-block d-md-none ms-4">レビュー追加</a>
-					</div>
-					<span th:if="${session.cid} == null" class="d-block d-md-none">レビューの追加は<a href="/Login"
-							class="atten">ログイン</a>が必要です</span>
-					<br>
-					<form action="ReviewAll" method="post">
-						<input type="hidden" name="page" value="1">
-						<input type="submit" value="全てのレビューを表示" class="overall-view ms-4">
-					</form>
-
-					<div th:if="${#lists.isEmpty(reviewList)}">
-						<p>まだレビューがありません</p>
-					</div>
-
-
-
-					<span th:each="sentiment, index : ${sentimentSumList}">
-
-
-						<span th:if="${index.index}==0">平均評価：
-							<span class="star-color filled">★</span>
-							<span th:text="${session.averageStars}"></span>
-							<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-									class="bi bi-emoji-laughing" viewBox="0 0 16 16">
-									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-									<path
-										d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
-								</svg></span>
-							<span th:text="  ${sentiment}"></span>
-						</span>
-
-						<span th:if="${index.index}==1">
-
-							<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-									class="bi bi-emoji-neutral" viewBox="0 0 16 16">
-									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-									<path
-										d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
-								</svg></span>
-
-							<span th:text="${sentiment}"></span>
-						</span>
-
-						<span th:if="${index.index}==2">
-
-							<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-									class="bi bi-emoji-frown" viewBox="0 0 16 16">
-									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-									<path
-										d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
-								</svg></span>
-							<span th:text="${sentiment}"></span>
-						</span>
-
-
-					</span>
-
-					<div class="container-fluid" id="bodyid">
-						<div th:each="review:${reviewList}" class="gray-background row justify-content-center"
-							id="count">
-							<div class="col-12 col-md-8">
-								<div class="row">
-									<div class="col-6">
-										<div class="speech-bubble right">
-											<div style="font-size: 22px;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-													fill="currentColor" class="bi bi-person-circle random-color-icon"
-													viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-
-
-												<span class="left-align underline-color" th:text="${review.cid}"></span>
-
-											</div><!--消さないで、フォントサイズ変更-->
-
-
-
-											<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-												class="left-align star-color filled" style="margin-right: 2px;">★</span>
-
-											<span class="left-align" style="font-size: 16px; font-weight: bold;"
-												th:text="${review.title}"></span><br>
-
-											<div style="font-size: 12px;">
-												<span class="left-align"
-													th:text="${review.reviewdate}+'にレビュー済み'"></span><br>
-											</div>
-
-
-
-											<span class="left-align" th:text="${review.comment}"></span><br>
-										</div>
-
-									</div>
-
-									<div class="col-6 d-flex align-items-center justify-content-end">
-										<div class="position-absolute bottom-right">
-
-											<!--えがお-->
-											<span th:if="${review.sentiment}=='positive'"><svg
-													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
-													fill="currentColor" class="bi bi-emoji-laughing"
-													viewBox="0 0 16 16">
-
-													<circle cx="8" cy="8" r="7" fill="yellow" />
-
-													<path
-														d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-													<path
-														d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
-												</svg></span>
-
-											<!--ニュートラル-->
-											<span th:if="${review.sentiment}=='neutral'"><svg
-													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
-													fill="currentColor" class="bi bi-emoji-neutral" viewBox="0 0 16 16">
-
-													<circle cx="8" cy="8" r="7" fill="white" />
-
-													<path
-														d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-													<path
-														d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
-												</svg></span>
-
-											<!--ネガティブ-->
-											<span class="text-right" th:if="${review.sentiment}=='negative'"><svg
-													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
-													fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">
-
-													<circle cx="8" cy="8" r="7" fill="white" />
-
-													<path
-														d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-													<path
-														d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
-												</svg></span>
-											<br>
-										</div>
-
-									</div>
-								</div>
-
-							</div>
-
+						<p>文字数: <span id="charCount"></span>/100</p>
+						<input type="hidden" name="ename" th:value="${session.ename}">
+						<input type="hidden" name="reservedate" th:value="*{reservedate}">
+						<input type="hidden" name="reservetime" th:value="*{reservetime}">
+						<div class="controlbox">
+							<input type="submit" value="送信" class="button-login">
+							<input type="reset" value="リセット" class="button-login">
 
 						</div>
-					</div>
+					</form>
+					<br>
+					<br>
 				</div>
 			</div>
-			<br>
-			<!--<form action="Complete" method="post" th:object="${reserveInputForm}">
-			<table>
-				<tr>
-					<th class="tableHead1">利用者ID*</th>
-					<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
-						<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
-					</td>
-				</tr>
-
-				IDとパスワード未登録のお客様は<a href="/Register" class="atten">こちら</a>から
-
-				<tr>
-					<th class="tableHead1">パスワード*</th>
-					<td><input name="password" type="password" class="width-middle" th:value="*{password}">
-						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-					</td>
-				</tr>
-				<tr>
-					<th class="tableHead1">日付</th>
-					<td><input name="reservedate" type="date" th:min="${session.min}" th:max="${session.max}"
-							class="width-middle" th:value="*{reservedate}">
-						<span th:if="${#fields.hasErrors('reservedate')}" th:errors="*{reservedate}"></span>
-					</td>
-				</tr>
-				<tr>
-					<th class="tableHead1">時間</th>
-					<td><input name="reservetime" type="time" list="time-list" min="10:00" max="19:00" step="3600"
-							class="width-middle" th:value="*{reservetime}">
-						<span th:if="${#fields.hasErrors('reservetime')}" th:errors="*{reservetime}"></span>
-						<datalist id="time-list">
-							<option value="10:00"></option>
-							<option value="11:00"></option>
-							<option value="12:00"></option>
-							<option value="13:00"></option>
-							<option value="14:00"></option>
-							<option value="15:00"></option>
-							<option value="16:00"></option>
-							<option value="17:00"></option>
-							<option value="18:00"></option>
-							<option value="19:00"></option>
-						</datalist>
-					</td>
-				</tr>
-				<tr>
-					<th class="tableHead1">相談内容</th>
-					<td><input name="detail" type="text" class="width-middle" style="width: 300px; height: 100px;"
-							th:value="*{detail}">
-						<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
-					</td>
-				</tr>
-			</table>
-			<input type="hidden" name="ename" th:value="${session.ename}">
-			<div class="controlbox">
-				<input type="submit" value="送信" class="button">
-				<input type="reset" value="リセット" class="button">
-			</div>
-		</form>-->
-
-			<div class="footer_foot">
-				<small class="footer_copy">
-					Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-				</small>
-			</div>
 		</div>
+		<br>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-			crossorigin="anonymous"></script>
-		<!--<script src="js/script.js"></script>-->
+		<div class="footer_foot">
+			<small class="footer_copy">
+				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+			</small>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const initialDetail = document.getElementById("detailInput").value;
+			const charCountElement = document.getElementById("charCount");
+			charCountElement.textContent = initialDetail.length;
+
+			// textarea の入力変更時に文字数を更新する
+			document.getElementById("detailInput").addEventListener("input", function () {
+				charCountElement.textContent = this.value.length;
+			});
+		});
+	</script>
 </body>
 
 </html>
