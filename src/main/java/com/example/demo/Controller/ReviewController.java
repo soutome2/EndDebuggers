@@ -80,7 +80,7 @@ public class ReviewController {
 		// サブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, startIndex, endIndex);
 
-		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
+		List<Integer> sentimentSumList = reviewService.CountSentiment(filteredList);
 
 		List<Integer> pages = new ArrayList<>();
 
