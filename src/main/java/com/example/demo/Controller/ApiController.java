@@ -256,7 +256,7 @@ public class ApiController {
 		// リクエストURLを定義
 		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
 		//String apiUrl = "http://localhost:8080/InsertReview";
-		String cid = "Gest";
+		String cid = "Guest";
 		RestTemplate restTemplate = new RestTemplate();
 
 		// リクエストヘッダーを準備（オプション）
