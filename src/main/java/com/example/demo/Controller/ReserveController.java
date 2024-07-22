@@ -60,7 +60,7 @@ public class ReserveController {
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 
 		//表示する日数の幅と時間の幅のパラメーター
-		int dateRange = 13;
+		int dateRange = 34;
 		int timeRange = 9;
 
 		//開始終了日時　開始時刻
@@ -158,7 +158,7 @@ public class ReserveController {
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
-		List<Integer> sentimentSumList = reviewService.CountSentiment(sublist);
+		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
 
 		for (Integer i : sentimentSumList) {
 			System.out.println(i);

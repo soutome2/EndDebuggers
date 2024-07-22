@@ -261,7 +261,7 @@
 				<!--2つの配列から一つずつ取り出す-->
 				<div th:each="review, index :${reviewList}" th:with="maxRate=${maxRateList[__${index.index}__]}"
 					class="gray-background row  justify-content-center" id="count">
-					<div class="col-12 col-md-8">
+					<div class="col-12 col-md-8 ">
 						<div class="row">
 							<div class="col-6">
 								<div class="speech-bubble right">
@@ -330,9 +330,7 @@
 											<span th:text="${maxRate}"></span>
 										</p>
 
-									</div>
 								</div>
-
 
 							</div>
 
@@ -340,8 +338,11 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
+	</div>
+	</div>
+
+	</div>
 	</div>
 	</div>
 	</div>
