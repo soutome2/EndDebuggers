@@ -2,13 +2,17 @@ package com.example.demo.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Entity.Review;
+import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReviewRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,7 +37,7 @@ public class ReviewService {
 	 * @author seino
 	 */
 	public List<String> GetMaxRateList(List<Review> reviewList) {
-		
+
 		//3つの感情のうちスコアが最大の感情
 		String maxRateSentiment;
 		//3つの感情のうちスコアが最大の感情の確率
@@ -41,28 +45,27 @@ public class ReviewService {
 
 		//3つの感情のうちスコアが最大の感情の確率リスト　reviewListと対応
 		List<String> maxRateList = new ArrayList<>();
-		
+
 		//sentimentがnullならなしにした。全く関係ない文字列が入っている場合エラー。それ以外は確率値を文字列に
-	
+
 		for (Review review : reviewList) {
-			
-	
+
 			maxRateSentiment = review.getSentiment();
 			if (maxRateSentiment == null) {
 				maxRateList.add("なし");
 
 			} else {
 				if (maxRateSentiment.equals("positive")) {
-					maxRate = String.valueOf(100*review.getPositiverate());
-					maxRateList.add("ポジティブ:"+maxRate);
+					maxRate = String.valueOf((int) (100 * review.getPositiverate()));
+					maxRateList.add("ポジティブ:" + maxRate + "%");
 
 				} else if (maxRateSentiment.equals("neutral")) {
-					maxRate = String.valueOf(100*review.getNeutralrate());
-					maxRateList.add("ノーマル:"+maxRate);
+					maxRate = String.valueOf((int) (100 * review.getNeutralrate()));
+					maxRateList.add("ノーマル:" + maxRate + "%");
 
 				} else if (maxRateSentiment.equals("negative")) {
-					maxRate = String.valueOf(100*review.getNegativerate());
-					maxRateList.add("ネガティブ:"+maxRate);
+					maxRate = String.valueOf((int) (100 * review.getNegativerate()));
+					maxRateList.add("ネガティブ:" + maxRate + "%");
 
 				} else {
 					maxRate = String.valueOf("エラー");
@@ -344,5 +347,33 @@ public class ReviewService {
 		}
 		return list;
 	}
+	
+	/**
+	 * API経由でのename存在判定
+	 * @param customerInputForm 新規登録の入力フォーム
+	 * @param result エラー表示の保管庫
+	 * @author seino
+	 */
+	public void CheckEname(ReviewInputForm reviewInputForm, BindingResult result) {
+		
+		System.out.println("?");
+		List<String> enameList = Arrays.asList("田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太");
+		String ename = reviewInputForm.getEname();
+
+		if (enameList.contains(ename)) {
+			System.out.println("指定されたenameがリストに存在します");
+
+		} else {
+			System.out.println("指定されたenameはリストに存在しません");
+			result.addError(new FieldError(
+					result.getObjectName(), "ename", "そのコンシェルジュは存在しません"));
+		}
+		return;
+
+	}
 
 }
+
+
+
+
