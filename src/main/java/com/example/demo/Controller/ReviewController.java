@@ -195,6 +195,7 @@ public class ReviewController {
 
 			//感情分析の結果
 			String text = review.getComment();
+			String sentiment="";
 			if (text != "") {
 				DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
 				review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
@@ -205,7 +206,7 @@ public class ReviewController {
 				Double neutralRate = documentSentiment.getConfidenceScores().getNeutral();
 				Double negativeRate = documentSentiment.getConfidenceScores().getNegative();
 
-				String sentiment = textAnalyticsService.MaxRateSentiment(positiveRate, neutralRate, negativeRate);
+				sentiment = textAnalyticsService.MaxRateSentiment(positiveRate, neutralRate, negativeRate);
 
 				review.setSentiment(sentiment);
 			}
