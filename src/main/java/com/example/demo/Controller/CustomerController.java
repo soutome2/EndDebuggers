@@ -38,7 +38,6 @@ public class CustomerController {
 	private final CustomerService customerService;
 	private final HttpSession session;
 
-	
 	/**
 	 * ログイン入力ページ
 	 * @param loginForm 空のログインフォーム
@@ -108,9 +107,8 @@ public class CustomerController {
 
 	@PostMapping("/CustomerError")
 	public String PostCustomerError(@ModelAttribute @Validated CustomerInputForm customerInputForm,
-			RedirectAttributes redirectAttributes,
-			BindingResult result) {
-
+			BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		customerService.setCustomer(customerInputForm, result);
 
 		if (!result.hasErrors()) {
