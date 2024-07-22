@@ -62,8 +62,6 @@ public class ReviewController {
 		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
-		
-		
 
 		List<Review> list = reviewService.sortReviewList(ename, sortStar, sortSentiment, startDate, endDate, sortBy,
 				sortOrder);
@@ -91,7 +89,7 @@ public class ReviewController {
 		for (String i : maxRateList) {
 			System.out.println(i);
 		}
-		
+
 		for (Review i : sublist) {
 			System.out.println(i);
 		}
@@ -197,20 +195,21 @@ public class ReviewController {
 
 			//感情分析の結果
 			String text = review.getComment();
-			DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
-			review.setSentiment(documentSentiment.getSentiment().toString());
-			review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
-			review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
-			review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
+			if (text != null) {
+				DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
+				review.setSentiment(documentSentiment.getSentiment().toString());
+				review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
+				review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
+				review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
 
-			Double positiveRate = documentSentiment.getConfidenceScores().getPositive();
-			Double neutralRate = documentSentiment.getConfidenceScores().getNeutral();
-			Double negativeRate = documentSentiment.getConfidenceScores().getNegative();
+				Double positiveRate = documentSentiment.getConfidenceScores().getPositive();
+				Double neutralRate = documentSentiment.getConfidenceScores().getNeutral();
+				Double negativeRate = documentSentiment.getConfidenceScores().getNegative();
 
-			String sentiment = textAnalyticsService.MaxRateSentiment(positiveRate, neutralRate, negativeRate);
+				String sentiment = textAnalyticsService.MaxRateSentiment(positiveRate, neutralRate, negativeRate);
 
-			review.setSentiment(sentiment);
-
+				review.setSentiment(sentiment);
+			}
 			reviewRepository.saveAndFlush(review);
 
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
