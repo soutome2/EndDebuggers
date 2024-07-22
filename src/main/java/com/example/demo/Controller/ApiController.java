@@ -89,7 +89,7 @@ public class ApiController {
 				+ "絞り込み開始日 'startDate' [yyyy-mm-dd]\n"
 				+ "絞り込み終了日 'endDate' [yyyy-mm-dd]\n"
 				+ "並び替え条件 'sortBy' [date, star]\n"
-				+ "昇降順 'boolean' [true, false]\n";
+				+ "昇降順 'order' [true, false]\n";
 	}
 
 	/**
