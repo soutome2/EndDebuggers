@@ -26,7 +26,6 @@ import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
-import com.example.demo.Service.JsonConverterService;
 import com.example.demo.Service.ReserveService;
 import com.example.demo.Service.ReviewService;
 
@@ -43,7 +42,6 @@ public class ReserveController {
 	private final ReserveService reserveService;
 	private final ReviewService reviewService;
 	private final HttpSession session;
-	private final JsonConverterService jsonConverterService;
 
 	@CrossOrigin
 	@GetMapping("/Reserve")
@@ -192,7 +190,7 @@ public class ReserveController {
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
-		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
+		List<Integer> sentimentSumList = reviewService.CountSentiment(filteredList);
 		
 
 		for (Integer i : sentimentSumList) {
