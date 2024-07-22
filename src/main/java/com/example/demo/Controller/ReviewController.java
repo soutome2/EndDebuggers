@@ -62,6 +62,8 @@ public class ReviewController {
 		LocalDate endDate = (LocalDate) session.getAttribute("endDate");
 		String sortBy = (String) session.getAttribute("sortBy");
 		boolean sortOrder = (boolean) session.getAttribute("sortOrder");
+		
+		
 
 		List<Review> list = reviewService.sortReviewList(ename, sortStar, sortSentiment, startDate, endDate, sortBy,
 				sortOrder);
