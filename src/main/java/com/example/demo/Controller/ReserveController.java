@@ -158,7 +158,7 @@ public class ReserveController {
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
-		List<Integer> sentimentSumList = reviewService.CountSentiment(sublist);
+		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
 
 		for (Integer i : sentimentSumList) {
 			System.out.println(i);
