@@ -216,6 +216,10 @@ public class ReserveController {
 	@GetMapping("/ReserveComplete")
 	public String PostReserveComplete(@ModelAttribute ReserveInputForm reserveInputForm) {
 		Reserve reserve = reserveInputForm.getEntity();
+		session.setAttribute("cid", reserveInputForm.getCid());
+		session.setAttribute("password", reserveInputForm.getPassword());
+		
+
 		reserveRepository.saveAndFlush(reserve);
 		return "complete";
 	}

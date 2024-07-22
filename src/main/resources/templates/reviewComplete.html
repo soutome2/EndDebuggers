@@ -73,6 +73,7 @@
 							<th class="tableHead2">評価数</th>
 							<th class="tableHead2">タイトル</th>
 							<th class="tableHead2">レビュー内容</th>
+							<th class="tableHead2">AIがコメントから感情を分析した結果</th>
 						</tr>
 						<tr>
 							<th><span th:text="*{cid}"></span>
@@ -80,6 +81,7 @@
 							<th><span th:text="*{star}"></span></th>
 							<th><span th:text="*{title}"></span>
 							<th><span th:text="*{comment}"></span></th>
+							<th><span th:text="${sentiment}"></span></th>
 						</tr>
 					</table>
 				</div>
