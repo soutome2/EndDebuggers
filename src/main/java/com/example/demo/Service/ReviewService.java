@@ -125,7 +125,9 @@ public class ReviewService {
 		// 元のリストからgetTitle()が空でない要素だけを抽出して新しいリストを作成する
 		for (Review review : list) {
 			if (review.getTitle() != null && !review.getTitle().isEmpty()) {
-				filteredList.add(review);
+				if (review.getTitle() != null && !review.getComment().isEmpty()) {
+					filteredList.add(review);
+				}
 			}
 		}
 
@@ -347,7 +349,7 @@ public class ReviewService {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * API経由でのename存在判定
 	 * @param customerInputForm 新規登録の入力フォーム
@@ -355,7 +357,7 @@ public class ReviewService {
 	 * @author seino
 	 */
 	public void CheckEname(ReviewInputForm reviewInputForm, BindingResult result) {
-		
+
 		System.out.println("?");
 		List<String> enameList = Arrays.asList("田中太郎", "佐藤花子", "鈴木一郎", "高橋美咲", "中村健太");
 		String ename = reviewInputForm.getEname();
@@ -373,7 +375,3 @@ public class ReviewService {
 	}
 
 }
-
-
-
-

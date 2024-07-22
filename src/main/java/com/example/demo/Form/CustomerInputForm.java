@@ -31,7 +31,7 @@ public class CustomerInputForm {
 	private String cname;
 
 	@NotBlank(message = "電話番号を入力して下さい")
-	@Pattern(regexp = "^\\d{10,11}$", message = "電話番号は10桁または11桁の数字で入力してください")
+	@Pattern(regexp = "^\\d{10,11}$", message = "10桁または11桁の数字を入力してください")
 	private String tel;
 
 	@NotBlank(message = "メールアドレスを入力して下さい")
