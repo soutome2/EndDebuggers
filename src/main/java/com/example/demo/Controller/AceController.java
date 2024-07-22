@@ -17,7 +17,6 @@ public class AceController {
 	public String GetHome() {
 		LocalDate date = LocalDate.now();
 		session.setAttribute("now", date);
-		System.out.println("俺の思いを受け止めて");
 		return "home";
 
 	}

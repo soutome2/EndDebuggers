@@ -60,7 +60,7 @@ public class ReserveController {
 		List<Reserve> reserveList = reserveRepository.findAllByEname(enameString);
 
 		//表示する日数の幅と時間の幅のパラメーター
-		int dateRange = 13;
+		int dateRange = 34;
 		int timeRange = 9;
 
 		//開始終了日時　開始時刻
