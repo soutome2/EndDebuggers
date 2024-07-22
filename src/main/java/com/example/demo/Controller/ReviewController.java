@@ -214,6 +214,7 @@ public class ReviewController {
 			reviewRepository.saveAndFlush(review);
 
 			redirectAttributes.addFlashAttribute("reviewInputForm", reviewInputForm);
+			redirectAttributes.addFlashAttribute("sentiment",sentiment);
 			mv.setViewName("redirect:/ReviewComplete");
 			return mv;
 		} else {
