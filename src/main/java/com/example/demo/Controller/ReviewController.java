@@ -195,9 +195,8 @@ public class ReviewController {
 
 			//感情分析の結果
 			String text = review.getComment();
-			if (text != null) {
+			if (text != "") {
 				DocumentSentiment documentSentiment = textAnalyticsService.analyzeSentiment(text);
-				review.setSentiment(documentSentiment.getSentiment().toString());
 				review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
 				review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
 				review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
