@@ -82,14 +82,35 @@ public class ApiController {
 	 */
 	@GetMapping("/GetReviewManual")
 	public String Manual() {
-		return "JSONデータの取得URL：/GetReviewJson		\n"
-				+ "param:\n"
-				+ "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]\n"
-				+ "評価 'star' [1, 2, 3, 4, 5]\n"
-				+ "絞り込み開始日 'startDate' [yyyy-mm-dd]\n"
-				+ "絞り込み終了日 'endDate' [yyyy-mm-dd]\n"
-				+ "並び替え条件 'sortBy' [date, star]\n"
-				+ "昇降順 'boolean' [true, false]\n";
+	    return "JSONデータの取得エンドポイント：/GetReviewJson<br>"
+	            + "param:<br>"
+	            + "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]<br>"
+	            + "評価 'star' [1, 2, 3, 4, 5]<br>"
+	            + "絞り込み開始日 'startDate' [yyyy-mm-dd]<br>"
+	            + "絞り込み終了日 'endDate' [yyyy-mm-dd]<br>"
+	            + "並び替え条件 'sortBy' [date, star]<br>"
+	            + "昇降順 'order' [true, false]<br>";
+	}
+
+
+	/**
+	 * JSONデータ取得用のパラメータ入力マニュアル
+	 * @return 説明文表示
+	 * @author kachi
+	 */
+	@GetMapping("/GetInsertReviewManual")
+	public String InsertReviewManual() {
+		return"<html><body>"
+	            + "<p>レビュー書き込みのためのエンドポイント：/PostReview<br>"
+	            + "パラメーター:<br>"
+	            + "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]<br>"
+	            + "レビュータイトル 'title' 任意の文字列<br>"
+	            + "レビュー本文 'comment' 任意の文字列<br>"
+	            + "評価 'star' [1, 2, 3, 4, 5]<br>"
+	            + "URLの例 http://aceconcierge.azurewebsites.net/PostReview?ename=田中太郎&title=いまいちだな&comment=ダメダメ&star=2</p>"
+	            + "</body></html>";
+				
+	
 	}
 
 	/**

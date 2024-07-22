@@ -26,6 +26,7 @@ import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReserveRepository;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.JsonConverterService;
 import com.example.demo.Service.ReserveService;
 import com.example.demo.Service.ReviewService;
 
@@ -42,6 +43,7 @@ public class ReserveController {
 	private final ReserveService reserveService;
 	private final ReviewService reviewService;
 	private final HttpSession session;
+	private final JsonConverterService jsonConverterService;
 
 	@CrossOrigin
 	@GetMapping("/Reserve")
@@ -143,10 +145,41 @@ public class ReserveController {
 		//日数処理
 		String min = startDate.format(DateTimeFormatter.ISO_DATE);
 		String max = endDate.format(DateTimeFormatter.ISO_DATE);
-
-		//reviewリスト作成
+		
+		//sessionenameの取得
 		String ename = (String) session.getAttribute("ename");
-		//reviewリストの作成
+
+		/* 	//reviewリストの作成 API化
+		
+		//APIURLのためのリクエストパラメータを指定
+		String sortby="date";
+		String order="false";
+
+	
+　　　　//%sに変数埋め込まれる　ename:sessionから sortby:date order:falese 降順
+		String base = "https://aceconcierge.azurewebsites.net/GetReviewJson?ename=%s"
+				+ "&sortby=%s"
+				+ "&order=%s";
+
+		String apiUrl= String.format(base, ename,sortby,order);
+		System.out.println(apiUrl);
+
+		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
+				apiUrl,
+				String.class);
+		String responseBody = responseEntity.getBody();
+		List<Review> list2 = jsonConverterService.JsonToEntity(responseBody);
+		System.out.println("エンテティ");
+		System.out.println(list2);
+		System.out.println("レスポンスボディ: " + responseBody);
+		List<Review> filteredList = reviewService.getFilteredReview(list2);
+		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
+
+		List<Integer> sentimentSumList = reviewService.CountSentiment(list2);
+		*/
+		
+		
+		//reviewリストの作成 通常
 		System.out.println("Ok1");
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 		System.out.println("Ok2");
@@ -154,11 +187,13 @@ public class ReserveController {
 		System.out.println("Ok3");
 		List<Review> filteredList = reviewService.getFilteredReview(list);
 		System.out.println("Ok4");
+		
 
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
 		List<Integer> sentimentSumList = reviewService.CountSentiment(list);
+		
 
 		for (Integer i : sentimentSumList) {
 			System.out.println(i);
