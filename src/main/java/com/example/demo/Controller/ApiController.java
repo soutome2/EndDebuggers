@@ -86,6 +86,7 @@ public class ApiController {
 	            + "param:<br>"
 	            + "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]<br>"
 	            + "評価 'star' [1, 2, 3, 4, 5]<br>"
+	            + "感情 'sentiment' [positive,neutral, negative]<br>"
 	            + "絞り込み開始日 'startDate' [yyyy-mm-dd]<br>"
 	            + "絞り込み終了日 'endDate' [yyyy-mm-dd]<br>"
 	            + "並び替え条件 'sortBy' [date, star]<br>"
@@ -254,6 +255,7 @@ public class ApiController {
 
 		// リクエストURLを定義
 		String apiUrl = "https://aceconcierge.azurewebsites.net/InsertReview";
+		//String apiUrl = "http://localhost:8080/InsertReview";
 		String cid = "Gest";
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -302,6 +304,10 @@ public class ApiController {
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {
 		System.out.println(result);
+		
+		reviewService.CheckEname(reviewInputForm, result) ;
+
+			
 		if (!result.hasErrors()) {
 			Review review = reviewInputForm.getEntity();
 			LocalDate currentDate = LocalDate.now();
