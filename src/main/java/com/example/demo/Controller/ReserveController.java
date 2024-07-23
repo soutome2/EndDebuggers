@@ -181,7 +181,7 @@ public class ReserveController {
 		System.out.println("Ok1");
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
 		System.out.println("Ok2");
-		reviewService.getAverage(ename);
+		reviewService.getAverage(list);
 		System.out.println("Ok3");
 		List<Review> filteredList = reviewService.getFilteredReview(list);
 		System.out.println("Ok4");

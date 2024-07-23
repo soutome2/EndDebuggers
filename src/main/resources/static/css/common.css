@@ -59,6 +59,7 @@ h4 {
 	/* インラインブロック要素にすることでテキストに合わせたサイズになる */
 	transition: transform 0.2s ease;
 	/* 変化を滑らかにするためのトランジション */
+	font-size: 16px;
 }
 
 .cross:hover {
@@ -79,6 +80,7 @@ h4 {
 	/* インライン要素にすることでテキストに合わせたサイズになる */
 	transition: transform 0.2s ease;
 	/* 変化を滑らかにするためのトランジション */
+	font-size: 16px;
 }
 
 .circle:hover {

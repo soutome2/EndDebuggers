@@ -67,7 +67,7 @@ public class ReviewController {
 				sortOrder);
 
 		//平均値計算
-		reviewService.getAverage(ename);
+		reviewService.getAverage(list);
 
 		//空タイトルを除くfilter処理
 		List<Review> filteredList = reviewService.getFilteredReview(list);
