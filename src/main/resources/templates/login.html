@@ -49,13 +49,14 @@
 
 		<div class="container white-background content">
 			<br>
-			<p>ログイン情報を入力してください。</p>
+			<span>ログイン情報を入力してください。</span>
 
 
 
-			<div th:if="${session.cid} == null">
-				IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から
-			</div>
+			<span th:if="${session.cid} == null">
+				(IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から)
+			</span>
+			<br>
 			<br>
 
 			<form action="Customer" method="post" th:object="${loginForm}">
