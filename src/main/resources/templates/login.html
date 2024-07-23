@@ -53,6 +53,11 @@
 
 
 
+			<div th:if="${session.cid} == null">
+				IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から
+			</div>
+			<br>
+
 			<form action="Customer" method="post" th:object="${loginForm}">
 				<table>
 					<tr>
