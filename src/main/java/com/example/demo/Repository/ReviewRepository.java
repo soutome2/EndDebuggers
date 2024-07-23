@@ -75,7 +75,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 			+ "FROM t_review "
 			+ "WHERE (:star IS NULL OR star = :star) "
 			+ "AND  (:sentiment IS NULL OR sentiment = :sentiment) "
-			+ "AND ename=:ename"
+			+ "AND ename=:ename "
 			+ "ORDER BY star ASC", nativeQuery = true)
 	List<Review> findByEnameOrderByStar(@Param("ename") String ename, @Param("star") Integer star,
 			@Param("sentiment") String sentiment);
