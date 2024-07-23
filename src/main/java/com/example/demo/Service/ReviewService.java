@@ -68,7 +68,7 @@ public class ReviewService {
 					maxRateList.add("ネガティブ:" + maxRate + "%");
 
 				} else {
-					maxRate = String.valueOf("エラー");
+					maxRate = String.valueOf("その他");
 					maxRateList.add(maxRate);
 				}
 			}
