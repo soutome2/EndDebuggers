@@ -86,14 +86,13 @@ public class ReviewService {
 	 * @param ename 担当者の名前
 	 * @author kachi
 	 */
-	public void getAverage(String ename) {
-
-		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
+	public void getAverage(List<Review> list) {
 
 		//平均の計算
 		if (list.isEmpty()) {
 			// リストが空の場合の処理
 			System.out.println("リストが空です。");
+			session.setAttribute("averageStars", 0);
 		} else {
 			// 平均値を計算する
 			double totalStars = 0.0;
