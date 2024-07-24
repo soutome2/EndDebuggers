@@ -175,7 +175,7 @@
 				<div class="d-none d-md-block">
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row">
 						<!--パソコン-->
-						<div class="col-12 col-md-3 mb-3">
+						<div class="col-12 col-md-4 mb-3">
 							<select name="sortEname">
 								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.sortEname)}">田中太郎</option>
 								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.sortEname)}">佐藤花子</option>
@@ -222,7 +222,7 @@
 							</select>
 						</div>
 
-						<div class="col-12 col-md-2 mb-3">
+						<div class="col-12 col-md-1 mb-3">
 							<input type="hidden" name="page" value="1">
 							<input type="submit" value="表示" class="submit-btn display-button"><!--パソコン-->
 						</div>
