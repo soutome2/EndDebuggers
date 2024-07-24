@@ -119,6 +119,7 @@ public class ApiController {
 	 * @return
 	 * @author seino
 	 */
+	@CrossOrigin
 	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(
 			@RequestParam(value = "ename", required = false) String ename,
