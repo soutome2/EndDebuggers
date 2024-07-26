@@ -13,101 +13,99 @@
 
 <body>
 	<div class="wrapper">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-light bg-light">
-						<div class="container">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="navbar navbar-expand-sm navbar-light bg-light">
+					<div class="container">
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
 
-							<div class="collapse navbar-collapse" id="navbarContent">
+						<div class="collapse navbar-collapse" id="navbarContent">
 
-								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">ホーム</a>
-									</li>
-								</ul>
+							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+								<li class="nav-item">
+									<a href="/" class="nav-link" aria-current="page">ホーム</a>
+								</li>
+							</ul>
 
-								<ul class="navbar-nav mb-2 mb-sm-0">
-									<li class="nav-item">
-										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
-										<form th:if="${session.cid} != null" action="/Customer" method="post">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-login-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-											</button>
-										</form>
+							<ul class="navbar-nav mb-2 mb-sm-0">
+								<li class="nav-item">
+									<a th:if="${session.cid} == null" href="/Login"
+										class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
+									<form th:if="${session.cid} != null" action="/Customer" method="post">
+										<input type="hidden" name="cid" th:value="${session.cid}">
+										<input type="hidden" name="password" th:value="${session.password}">
+										<button type="submit" class="nav-link, btn btn-login-icon">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+												<path fill-rule="evenodd"
+													d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+											</svg>
+										</button>
+									</form>
 
-									</li>
-								</ul>
+								</li>
+							</ul>
 
 
-							</div>
 						</div>
-
-					</nav>
-
-				</div>
-			</div>
-			<br>
-			<div class="container white-background">
-				<br>
-
-				<h3>ユーザー登録画面</h3>
-				<form action="CustomerError" method="post" th:object="${customerInputForm}">
-					<table>
-						<tr>
-							<th class="tableHead1">利用者ID*</th>
-							<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="9">
-								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">パスワード*</th>
-							<td><input name="password" type="password" class="width-middle" th:value="*{password}"
-									maxlength="21">
-								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">名前*</th>
-							<td><input name="cname" type="text" class="width-middle" th:value="*{cname}" maxlength="61">
-								<span th:if="${#fields.hasErrors('cname')}" th:errors="*{cname}"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">電話番号</th>
-							<td><input name="tel" type="text" class="width-middle" th:value="*{tel}" maxlength="12">
-								<span th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">メールアドレス</th>
-							<td><input name="mailaddress" type="text" id="emailInput" class="width-middle"
-									th:value="*{mailaddress}" maxlength="255">
-								<span th:if="${#fields.hasErrors('mailaddress')}" th:errors="*{mailaddress}"></span>
-							</td>
-						</tr>
-					</table>
-					<div class="controlbox">
-						<input type="submit" value="送信" class="button-login">
-						<input type="reset" value="リセット" class="button-login">
 					</div>
-				</form>
-				<br>
-				<br>
+
+				</nav>
+
 			</div>
+		</div>
+		<br>
+		<div class="container white-background content">
+			<br>
+
+			<h3>ユーザー登録画面</h3>
+			<form action="CustomerError" method="post" th:object="${customerInputForm}">
+				<table>
+					<tr>
+						<th class="tableHead1">利用者ID*</th>
+						<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="9">
+							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">パスワード*</th>
+						<td><input name="password" type="password" class="width-middle" th:value="*{password}"
+								maxlength="21">
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">名前*</th>
+						<td><input name="cname" type="text" class="width-middle" th:value="*{cname}" maxlength="61">
+							<span th:if="${#fields.hasErrors('cname')}" th:errors="*{cname}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">電話番号</th>
+						<td><input name="tel" type="text" class="width-middle" th:value="*{tel}" maxlength="12">
+							<span th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">メールアドレス</th>
+						<td><input name="mailaddress" type="text" id="emailInput" class="width-middle"
+								th:value="*{mailaddress}" maxlength="255">
+							<span th:if="${#fields.hasErrors('mailaddress')}" th:errors="*{mailaddress}"></span>
+						</td>
+					</tr>
+				</table>
+				<div class="controlbox">
+					<input type="submit" value="送信" class="button-login">
+					<input type="reset" value="リセット" class="button-login">
+				</div>
+			</form>
+			<br>
+			<br>
 		</div>
 		<br>
 		<div class="footer_foot">

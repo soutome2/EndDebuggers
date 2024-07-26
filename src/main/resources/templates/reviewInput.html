@@ -13,133 +13,131 @@
 
 <body>
 	<div class="wrapper">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-light bg-light">
-						<div class="container">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="navbar navbar-expand-sm navbar-light bg-light">
+					<div class="container">
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
 
-							<div class="collapse navbar-collapse" id="navbarContent">
+						<div class="collapse navbar-collapse" id="navbarContent">
 
-								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">ホーム</a>
-									</li>
-								</ul>
+							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+								<li class="nav-item">
+									<a href="/" class="nav-link" aria-current="page">ホーム</a>
+								</li>
+							</ul>
 
-								<ul class="navbar-nav mb-2 mb-sm-0">
-									<li class="nav-item">
-										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
-										<form th:if="${session.cid} != null" action="/Customer" method="post">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-login-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-											</button>
-										</form>
+							<ul class="navbar-nav mb-2 mb-sm-0">
+								<li class="nav-item">
+									<a th:if="${session.cid} == null" href="/Login"
+										class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
+									<form th:if="${session.cid} != null" action="/Customer" method="post">
+										<input type="hidden" name="cid" th:value="${session.cid}">
+										<input type="hidden" name="password" th:value="${session.password}">
+										<button type="submit" class="nav-link, btn btn-login-icon">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+												<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+												<path fill-rule="evenodd"
+													d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+											</svg>
+										</button>
+									</form>
 
-									</li>
-								</ul>
+								</li>
+							</ul>
 
 
-							</div>
 						</div>
-
-					</nav>
-
-				</div>
-			</div>
-			<br>
-			<div class="container white-background">
-				<br>
-
-				<h3>レビュー入力画面</h3>
-				<form action="ReviewError" method="post" th:object="${reviewInputForm}">
-					<table>
-						<tr>
-							<th class="tableHead1">利用者ID</th>
-							<td><input name="cid" type="hidden" th:value="${session.cid}" maxlength="9">
-								<span th:text="${session.cid}" class="width-middle"></span>
-								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">担当者名</th>
-							<td>
-								<select name="ename" class="form-select">
-									<option value="田中太郎" th:selected="${'田中太郎'.equals(session.ename)}">田中太郎</option>
-									<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.ename)}">佐藤花子</option>
-									<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.ename)}">鈴木一郎</option>
-									<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.ename)}">高橋美咲</option>
-									<option value="中村健太" th:selected="${'中村健太'.equals(session.ename)}">中村健太</option>
-								</select>
-								<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
-							</td>
-						</tr>
-
-						<tr>
-							<th class="tableHead1">星評価</th>
-							<!-- 星の選択と数を管理するフォーム -->
-							<td>
-								<!-- 星の選択用のUI -->
-								<div class="rate">
-									<span class="star" data-value="1">★</span>
-									<span class="star" data-value="2">★</span>
-									<span class="star" data-value="3">★</span>
-									<span class="star" data-value="4">★</span>
-									<span class="star" data-value="5">★</span>
-									<span id="selectedStars"></span>
-								</div>
-
-								<!-- 選択された星の数を表示する部分 -->
-								<span id="selectedStars"></span>
-
-								<!-- 隠しフィールドで星の数を送信 -->
-								<input id="starValue" name="star" type="hidden" th:value="*{star}">
-								<span th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></span>
-							</td>
-
-
-						</tr>
-
-
-
-						<tr>
-							<th class="tableHead1">タイトル</th>
-							<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
-									maxlength="30">
-								<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-
-
-							</td>
-						</tr>
-						<tr>
-							<th class="tableHead1">コメント</th>
-							<td><textarea name="comment" type="text" class="width-middle" id="detailInput"
-									style=" height: 80px;" maxlength="100">[[*{comment}]]</textarea>
-								<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
-							</td>
-						</tr>
-					</table>
-					<div class="controlbox">
-						<input type="submit" value="送信" class="button-login">
-						<input type="reset" value="リセット" class="button-login">
 					</div>
-				</form>
-				<br>
-				<br>
+
+				</nav>
+
 			</div>
+		</div>
+		<br>
+		<div class="container white-background content">
+			<br>
+
+			<h3>レビュー入力画面</h3>
+			<form action="ReviewError" method="post" th:object="${reviewInputForm}">
+				<table>
+					<tr>
+						<th class="tableHead1">利用者ID</th>
+						<td><input name="cid" type="hidden" th:value="${session.cid}" maxlength="9">
+							<span th:text="${session.cid}" class="width-middle"></span>
+							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">担当者名</th>
+						<td>
+							<select name="ename" class="form-select">
+								<option value="田中太郎" th:selected="${'田中太郎'.equals(session.ename)}">田中太郎</option>
+								<option value="佐藤花子" th:selected="${'佐藤花子'.equals(session.ename)}">佐藤花子</option>
+								<option value="鈴木一郎" th:selected="${'鈴木一郎'.equals(session.ename)}">鈴木一郎</option>
+								<option value="高橋美咲" th:selected="${'高橋美咲'.equals(session.ename)}">高橋美咲</option>
+								<option value="中村健太" th:selected="${'中村健太'.equals(session.ename)}">中村健太</option>
+							</select>
+							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="tableHead1">星評価</th>
+						<!-- 星の選択と数を管理するフォーム -->
+						<td>
+							<!-- 星の選択用のUI -->
+							<div class="rate">
+								<span class="star" data-value="1">★</span>
+								<span class="star" data-value="2">★</span>
+								<span class="star" data-value="3">★</span>
+								<span class="star" data-value="4">★</span>
+								<span class="star" data-value="5">★</span>
+								<span id="selectedStars"></span>
+							</div>
+
+							<!-- 選択された星の数を表示する部分 -->
+							<span id="selectedStars"></span>
+
+							<!-- 隠しフィールドで星の数を送信 -->
+							<input id="starValue" name="star" type="hidden" th:value="*{star}">
+							<span th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></span>
+						</td>
+
+
+					</tr>
+
+
+
+					<tr>
+						<th class="tableHead1">タイトル</th>
+						<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
+								maxlength="30">
+							<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+
+
+						</td>
+					</tr>
+					<tr>
+						<th class="tableHead1">コメント</th>
+						<td><textarea name="comment" type="text" class="width-middle" id="detailInput"
+								style=" height: 80px;" maxlength="100">[[*{comment}]]</textarea>
+							<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
+						</td>
+					</tr>
+				</table>
+				<div class="controlbox">
+					<input type="submit" value="送信" class="button-login">
+					<input type="reset" value="リセット" class="button-login">
+				</div>
+			</form>
+			<br>
+			<br>
 		</div>
 		<br>
 
