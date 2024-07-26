@@ -77,7 +77,8 @@
 					<tr th:each="reserve:${reserveList}">
 						<td th:text="${reserve.reservedate}"></td>
 						<td th:text="${reserve.reservetime}"></td>
-						<td th:text="${reserve.ename}"></td>
+						<td th:data-ename="${reserve.ename}" onclick="handleBoxClick(this.dataset.ename)"
+							style="cursor: pointer;" th:text="${reserve.ename}"></td>
 						<td th:text="${reserve.detail}"></td>
 
 						<td>
@@ -120,8 +121,8 @@
 					</div>
 
 					<div th:each="review : ${reviewList}" class="row gray-background justify-content-center" id="count">
-						<div class="box col-12 col-md-8" th:data-ename="${review.ename}" onclick="handleBoxClick(this.dataset.ename)"
-							style="cursor: pointer;">
+						<div class="box col-12 col-md-8" th:data-ename="${review.ename}"
+							onclick="handleBoxClick(this.dataset.ename)" style="cursor: pointer;">
 							<div style="font-size: 12px;">
 								<span class="left-align" th:text="${review.reviewdate}"></span>
 								<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
