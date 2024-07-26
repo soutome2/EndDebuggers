@@ -16,6 +16,7 @@
 
 <body>
 	<div class="wrapper">
+		<!-- navberコンポ―ネント -->
 		<div th:replace="~{fragments/navber :: navber}"></div>
 		<br>
 
@@ -61,27 +62,24 @@
 					</div>
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/不動産/ローン.jpg', title='住宅ローンのアドバイス',
 									message1='金利や返済プランの最適化提案',
 									message2='金融機関の住宅ローン商品比較・選定支援',
 									message3='審査基準や必要書類のアドバイス'
 									)}">　</div>
 
-						<!-- 2枚目の画像 -->
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/不動産/資産運用.jpg', title='資産運用の戦略策定', 
 									message1='不動産投資の戦略提案',
 									message2='ポートフォリオのリスク管理と収益最大化の相談',
 									message3='長期的な資産価値の向上アドバイス'
 									)}">　</div>
 
-						<!-- 3枚目の画像 -->
-
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/不動産/不動産売買.jpg', title='不動産の売買・賃貸・管理に関する助言', 
 									message1='不動産選択のアドバイス',
 									message2='最適な取引条件とリスク管理',
@@ -103,32 +101,24 @@
 					</div>
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-
-
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/おうちの修繕/リフォーム.jpg', title='住宅の修繕とリフォームの設計', 
 									message1='既存住宅の補強と耐震改修の設計',
 									message2='インテリアのリフォーム計画の立案',
 									message3='ライフスタイルに合わせた収納設計の提案'
 									)}">　</div>
 
-
-
-						<!-- 2枚目の画像 -->
-
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/おうちの修繕/施工管理.jpg', title='施工の一貫したサポート', 
 									message1='工事の進捗状況の確認',
 									message2='施工中の品質チェックと調整',
 									message3='施工完了後のアフターケアや問題解決'
 									)}">　</div>
 
-
-						<!-- 3枚目の画像 -->
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/おうちの修繕/最新技術.jpg', title='最新技術とトレンドに精通した特殊なリフォーム', 
 									message1='エネルギー効率の高い暖房設備などの提案',
 									message2='バリアフリーリフォームのプランを立案',
@@ -149,32 +139,25 @@
 					</div>
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						
+						<!-- 相談内容コンポ―ネント -->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/介護/在宅介護.jpg', title='高齢者ケアと在宅介護の支援', 
 									message1='日常生活のアセスメントとケアプランの立案。',
 									message2='高齢者の安全と健康管理に関する相談',
 									message3='身体的なケアや精神的なサポートの提供'
 									)}">　</div>
 
-
-
-						<!-- 2枚目の画像 -->
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント -->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/介護/認知症ケア.jpg', title='認知症ケアと家族支援', 
 									message1='認知症に関する教育とアドバイス',
 									message2='家庭内での認知症患者の行動管理の戦略策定',
 									message3='認知症特化のコミュニティの運営や参加を推薦'
 									)}">　</div>
 
-
-
-						<!-- 3枚目の画像 -->
-
-						<div th:replace="~{fragments/ConsultationContent :: 
-								ConsultationContent(
+						<!-- 相談内容コンポ―ネント -->
+						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/介護/施設運営.jpg', title='施設運営と介護サービスの改善', 
 									message1='最新の介護技術とベストプラクティスを教育',
 									message2='施設内のケアプランの見直しと改善を提案',
@@ -196,7 +179,7 @@
 					</div>
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 									imageUrl='/img/終活/遺書.jpg', title='終活と遺言書作成', 
 									message1='遺言書の作成と法的な助言',
@@ -204,8 +187,7 @@
 									message3='遺言書や相続に関する法的手続きの詳細な説明'
 									)}">　</div>
 
-
-						<!-- 2枚目の画像 -->
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 							imageUrl='/img/終活/遺産.jpg', title='相続税対策と財産分割', 
 							message1='相続税の計画と対策を立案',
@@ -213,8 +195,7 @@
 							message3='相続に伴うリスクや財政的な影響について評価'
 							)}"></div>
 			
-						<!-- 3枚目の画像 -->
-						
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 							imageUrl='/img/終活/老後ライフ.jpg', title='財務プランニングと将来のセキュリティ', 
 							message1='ライフゴールに基づいた財務プランの策定',
@@ -238,7 +219,7 @@
 					</div>
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
-						
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 							imageUrl='/img/金融/車.jpg', title='自動車保険の見直しと提案', 
 							message1='保険ニーズを評価し自動車保険商品の提案',
@@ -246,8 +227,7 @@
 							message3='事故対応や補償内容に関する説明'
 							)}"></div>
 						
-						<!-- 2枚目の画像 -->
-						
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 							imageUrl='/img/金融/生命保険.jpg', title='生命保険の選定と計画', 
 							message1='ライフプランに合わせた生命保険商品を選定',
@@ -255,8 +235,7 @@
 							message3='保険金の受け取り方法や税務上のメリットの説明'
 							)}"></div>
 
-						<!-- 3枚目の画像 -->
-						
+						<!-- 相談内容コンポ―ネント arg1=画像,arg2=相談内容タイトル,arg3～5=相談内容一覧-->
 						<div th:replace="~{fragments/ConsultationContent :: ConsultationContent(
 							imageUrl='/img/金融/資産運用.jpg', title='資産運用とリスク管理の戦略', 
 							message1='資産運用の戦略を策定',
