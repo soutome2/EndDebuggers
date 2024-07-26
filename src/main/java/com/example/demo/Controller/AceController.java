@@ -13,8 +13,6 @@ import lombok.AllArgsConstructor;
 @Controller
 public class AceController {
 	private final HttpSession session;
-
-	@CrossOrigin
 	@GetMapping("/")
 	@CrossOrigin
 	public String GetHome() {
