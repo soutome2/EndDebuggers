@@ -77,7 +77,7 @@
 					<tr th:each="reserve:${reserveList}">
 						<td th:text="${reserve.reservedate}"></td>
 						<td th:text="${reserve.reservetime}"></td>
-						<td th:data-ename="${reserve.ename}" onclick="handleBoxClick(this.dataset.ename)"
+						<td th:data-ename="${reserve.ename}" onclick="handleTableClick(this.dataset.ename)"
 							style="cursor: pointer;" th:text="${reserve.ename}"></td>
 						<td th:text="${reserve.detail}"></td>
 
@@ -183,6 +183,23 @@
 
 	<script>
 		function handleBoxClick(ename) {
+			console.log("ename:");
+			console.log(ename);
+			const form = document.createElement('form');
+			form.method = 'POST';
+			form.action = '/ReviewConcierge'; // POSTリクエストを送信する URL
+
+			const input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'ename';
+			input.value = ename;
+			form.appendChild(input);
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+		
+		function handleTableClick(ename) {
 			console.log("ename:");
 			console.log(ename);
 			const form = document.createElement('form');
