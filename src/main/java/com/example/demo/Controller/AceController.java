@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 public class AceController {
 	private final HttpSession session;
 
+	@CrossOrigin
 	@GetMapping("/")
 	@CrossOrigin
 	public String GetHome() {

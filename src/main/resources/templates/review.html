@@ -138,7 +138,8 @@
 								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
 								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
 									ポジティブ</option>
-								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">ノーマル
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">
+									ノーマル
 								</option>
 								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
 									ネガティブ</option>
@@ -195,7 +196,8 @@
 								<option value="" th:selected="${session.sortSentiment == null}">全て</option>
 								<option value="positive" th:selected="${'positive'.equals(session.sortSentiment)}">
 									ポジティブ</option>
-								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">ノーマル
+								<option value="neutral" th:selected="${'neutral'.equals(session.sortSentiment)}">
+									ノーマル
 								</option>
 								<option value="negative" th:selected="${'negative'.equals(session.sortSentiment)}">
 									ネガティブ</option>
@@ -355,7 +357,8 @@
 											<br>
 
 
-											<p style="position: relative; left: -40px;"><!--感情パーセントの左に空白入れて位置を調整してる-->
+											<p style="position: relative; left: -40px;">
+												<!--感情パーセントの左に空白入れて位置を調整してる-->
 												<span th:text="${maxRate}"></span>
 											</p>
 
@@ -448,83 +451,71 @@
 
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<!--ここまでスマホ-->
 
-	</div>
-	</div>
-	</div>
-
-	</div>
-	</div>
-	</div>
-	</div>
-	<div class="container pages-container white-background">
-		<div th:each="page : ${pages}" class="page">
-			<form action="/Review" method="get">
-				<input type="hidden" name="page" th:value="${page}">
-				<button type="submit" class="btn btn-primary-custom" th:text="${page}"
-					　th:classappend="${session.page == page ? 'active-page' : ''}"
-					th:disabled="${session.page == page}">
-				</button>
-			</form>
+		<div class="container pages-container white-background">
+			<div th:each="page : ${pages}" class="page">
+				<form action="/Review" method="get">
+					<input type="hidden" name="page" th:value="${page}">
+					<button type="submit" class="btn btn-primary-custom" th:text="${page}"
+						　th:classappend="${session.page == page ? 'active-page' : ''}"
+						th:disabled="${session.page == page}">
+					</button>
+				</form>
+			</div>
 		</div>
-	</div>
-	<br>
-	<div class="footer_foot">
-		<small class="footer_copy">
-			Copyright ACE Co.,Ltd. 2024 All Rights reserved.
-		</small>
-	</div>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-
-	<script>
-		function setMinEndDate() {
-			// 開始日の入力値を取得
-			let startDateInput = document.getElementById("startDate");
-			let startDateValue = startDateInput.value;
-
-			// 終了日の要素を取得
-			let endDateInput = document.getElementById("endDate");
-
-			// 開始日が入力されている場合、それ以降の日付を終了日の最小値に設定する
-			if (startDateValue) {
-				endDateInput.setAttribute('min', startDateValue);
-			} else {
-				endDateInput.removeAttribute('min'); // 開始日が未選択の場合は制限を解除する
-			}
-		}
-
-		function setMaxStartDate() {
-			// 終了日の入力値を取得
-			let endDateInput = document.getElementById("endDate");
-			let endDateValue = endDateInput.value;
-
-			// 開始日の要素を取得
-			let startDateInput = document.getElementById("startDate");
-
-			// 終了日が入力されている場合、それ以前の日付を開始日の最大値に設定する
-			if (endDateValue) {
-				startDateInput.setAttribute('max', endDateValue);
-			} else {
-				startDateInput.removeAttribute('max'); // 終了日が未選択の場合は制限を解除する
-			}
-		}
-	</script>
+		<br>
+		<div class="footer_foot">
+			<small class="footer_copy">
+				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
+			</small>
+		</div>
 
 	</div>
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 
+<script>
+	function setMinEndDate() {
+		// 開始日の入力値を取得
+		let startDateInput = document.getElementById("startDate");
+		let startDateValue = startDateInput.value;
+
+		// 終了日の要素を取得
+		let endDateInput = document.getElementById("endDate");
+
+		// 開始日が入力されている場合、それ以降の日付を終了日の最小値に設定する
+		if (startDateValue) {
+			endDateInput.setAttribute('min', startDateValue);
+		} else {
+			endDateInput.removeAttribute('min'); // 開始日が未選択の場合は制限を解除する
+		}
+	}
+
+	function setMaxStartDate() {
+		// 終了日の入力値を取得
+		let endDateInput = document.getElementById("endDate");
+		let endDateValue = endDateInput.value;
+
+		// 開始日の要素を取得
+		let startDateInput = document.getElementById("startDate");
+
+		// 終了日が入力されている場合、それ以前の日付を開始日の最大値に設定する
+		if (endDateValue) {
+			startDateInput.setAttribute('max', endDateValue);
+		} else {
+			startDateInput.removeAttribute('max'); // 終了日が未選択の場合は制限を解除する
+		}
+	}
+</script>
 
 </html>
