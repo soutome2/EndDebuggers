@@ -13,77 +13,80 @@
 
 <body>
 	<div class="wrapper">
-		<div class="container-fluid ">
-			<div class="row">
-				<nav class="navbar navbar-expand-sm navbar-light bg-light">
-					<div class="container">
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-							data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
+		<div class="content">
+			<div class="container-fluid ">
+				<div class="row">
+					<nav class="navbar navbar-expand-sm navbar-light bg-light">
+						<div class="container">
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
 
-						<div class="collapse navbar-collapse" id="navbarContent">
+							<div class="collapse navbar-collapse" id="navbarContent">
 
-							<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-								<li class="nav-item">
-									<a href="/" class="nav-link" aria-current="page">ホーム</a>
-								</li>
-							</ul>
+								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
+									<li class="nav-item">
+										<a href="/" class="nav-link" aria-current="page">ホーム</a>
+									</li>
+								</ul>
 
-							<ul class="navbar-nav mb-2 mb-sm-0">
-								<li class="nav-item">
-									<a href="/Login" class="nav-link, btn btn-outline-primary"
-										aria-current="page">ログイン</a>
-								</li>
-							</ul>
+								<ul class="navbar-nav mb-2 mb-sm-0">
+									<li class="nav-item">
+										<a href="/Login" class="nav-link, btn btn-outline-primary"
+											aria-current="page">ログイン</a>
+									</li>
+								</ul>
+							</div>
 						</div>
+
+					</nav>
+
+				</div>
+			</div>
+
+			<br>
+
+			<div class="container white-background content">
+				<br>
+				<span>ログイン情報を入力してください。</span>
+				<span th:if="${session.cid} == null">
+					(IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から)
+				</span>
+				<br>
+				<br>
+
+				<form action="Customer" method="post" th:object="${loginForm}">
+					<table>
+						<tr>
+							<th class="tableHead1" style="color: black;">利用者ID*</th>
+							<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
+								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}" class="atten"></span>
+							</td>
+						</tr>
+						<tr>
+							<th class="tableHead1" style="color: black;">パスワード*</th>
+							<td><input name="password" type="password" class="width-middle" th:value="*{password}">
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+									class="atten"></span>
+							</td>
+						</tr>
+					</table>
+
+
+
+
+					<div class="controlbox">
+
+						<input type="submit" value="送信" class="button-login">
+						<input type="reset" value="リセット" class="button-login">
 					</div>
 
-				</nav>
-
+				</form>
+				<br>
+				<br>
 			</div>
-		</div>
-
-		<br>
-
-		<div class="container white-background content">
-			<br>
-			<span>ログイン情報を入力してください。</span>
-			<span th:if="${session.cid} == null">
-				(IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から)
-			</span>
-			<br>
-			<br>
-
-			<form action="Customer" method="post" th:object="${loginForm}">
-				<table>
-					<tr>
-						<th class="tableHead1" style="color: black;">利用者ID*</th>
-						<td><input name="cid" type="text" class="width-middle" th:value="*{cid}">
-							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}" class="atten"></span>
-						</td>
-					</tr>
-					<tr>
-						<th class="tableHead1" style="color: black;">パスワード*</th>
-						<td><input name="password" type="password" class="width-middle" th:value="*{password}">
-							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="atten"></span>
-						</td>
-					</tr>
-				</table>
-
-
-
-
-				<div class="controlbox">
-
-					<input type="submit" value="送信" class="button-login">
-					<input type="reset" value="リセット" class="button-login">
-				</div>
-
-			</form>
-			<br>
-			<br>
 		</div>
 		<br>
 		<div class="footer_foot">
