@@ -68,15 +68,13 @@
 			<div id="contents" class="table-responsive" th:if="${not #lists.isEmpty(reserveList)}">
 				<table>
 					<tr>
-						<th class="tableHead2">日付</th>
-						<th class="tableHead2">時間</th>
+						<th class="tableHead2">日時</th>
 						<th class="tableHead2">担当者名</th>
 						<th class="tableHead2">相談内容</th>
 						<th class="tableHead2">予約のキャンセル</th>
 					</tr>
 					<tr th:each="reserve:${reserveList}">
-						<td th:text="${reserve.reservedate}"></td>
-						<td th:text="${reserve.reservetime}"></td>
+						<td th:text="${reserve.datetime}"></td>
 						<td th:data-ename="${reserve.ename}" onclick="handleTableClick(this.dataset.ename)"
 							style="cursor: pointer;" th:text="${reserve.ename}"></td>
 						<td th:text="${reserve.detail}"></td>
