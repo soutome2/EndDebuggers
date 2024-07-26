@@ -1,5 +1,8 @@
 package com.example.demo.Controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import com.example.demo.Entity.ReserveCustomer;
 import com.example.demo.Entity.Review;
 import com.example.demo.Form.CustomerInputForm;
 import com.example.demo.Form.LoginForm;
+import com.example.demo.Form.ReserveCustomerWithDateTime;
 import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReviewRepository;
@@ -77,10 +81,18 @@ public class CustomerController {
 			session.setAttribute("password", loginForm.getPassword());
 			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
-			System.out.println(list);
 			List<Review> reviewlist = reviewRepository
 					.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
-			mv.addObject("reserveList", list);
+			List<ReserveCustomerWithDateTime> combinedList = new ArrayList<>();
+			for (int i = 0; i < list.size(); i++) {
+				// LocalDateとLocalTimeをLocalDateTimeに変換
+				LocalDateTime dateTime = LocalDateTime.of(list.get(i).getReservedate(), list.get(i).getReservetime());
+				// 希望のフォーマットを指定
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd HH:mm");
+				// フォーマットして文字列に変換
+				combinedList.add(new ReserveCustomerWithDateTime(list.get(i), dateTime.format(formatter)));
+			}
+			mv.addObject("reserveList", combinedList);
 			mv.addObject("reviewList", reviewlist);
 			mv.setViewName("customer");
 			return mv;
