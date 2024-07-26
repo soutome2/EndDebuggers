@@ -131,6 +131,21 @@ public class ReviewController {
 		mv.setViewName("redirect:/Review");
 		return mv;
 	}
+	
+	@PostMapping("/ReviewConcierge")
+	public ModelAndView PostReviewConcierge(@RequestParam("ename") String ename, RedirectAttributes redirectAttributes,
+			ModelAndView mv) {
+		session.removeAttribute("sortStar");
+		session.removeAttribute("sortSentiment");
+		session.removeAttribute("startDate");
+		session.removeAttribute("endDate");
+		session.removeAttribute("sortBy");
+		session.setAttribute("sortOrder", false);
+		session.setAttribute("sortEname", ename);
+		redirectAttributes.addAttribute("page", 1);
+		mv.setViewName("redirect:/Review");
+		return mv;
+	}
 
 	@PostMapping("/SortStar")
 	public ModelAndView PostSortStar(@RequestParam("page") Integer page, @RequestParam("sortEname") String sortEname,
