@@ -120,7 +120,8 @@
 					</div>
 
 					<div th:each="review : ${reviewList}" class="row gray-background justify-content-center" id="count">
-						<div class="box col-12 col-md-8">
+						<div class="box col-12 col-md-8" th:data-ename="${review.ename}" onclick="handleBoxClick(this.dataset.ename)"
+							style="cursor: pointer;">
 							<div style="font-size: 12px;">
 								<span class="left-align" th:text="${review.reviewdate}"></span>
 								<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
@@ -179,7 +180,24 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 
+	<script>
+		function handleBoxClick(ename) {
+			console.log("ename:");
+			console.log(ename);
+			const form = document.createElement('form');
+			form.method = 'POST';
+			form.action = '/setEname'; // POSTリクエストを送信する URL
 
+			const input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'ename';
+			input.value = ename;
+			form.appendChild(input);
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
 </body>
 
 </html>
