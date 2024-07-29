@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 0; i < timeList.length; i++) {
                 let time = timeList[i];
                 let hour = time.split(':')[0];
+                let min = time.split(':')[1];
                 let row = document.createElement('tr');
-                row.innerHTML = `<td class="tableTime">${hour}時～</td>`;
+                row.innerHTML = `<td class="tableTime">${hour}:${min}～</td>`;
                 for (let j = 0; j < dateList.length; j++) {
                     let date = dateList[j];
                     let col = document.createElement('td');
