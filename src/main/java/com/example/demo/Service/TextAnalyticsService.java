@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.azure.ai.textanalytics.TextAnalyticsClient;
 import com.azure.ai.textanalytics.TextAnalyticsClientBuilder;
 import com.azure.ai.textanalytics.models.DocumentSentiment;
-import com.azure.ai.textanalytics.models.SentenceSentiment;
 import com.azure.core.credential.AzureKeyCredential;
 
 /**
@@ -45,7 +44,8 @@ public class TextAnalyticsService {
 			//日本語で判断
 			String language = "ja";
 			DocumentSentiment documentSentiment = client.analyzeSentiment(text, language);
-
+			
+			/*
 			// ログ出力例
 			System.out.println("Document sentiment: " + documentSentiment.getSentiment());
 
@@ -56,6 +56,7 @@ public class TextAnalyticsService {
 				System.out.println("Negative score: " + sentenceSentiment.getConfidenceScores().getNegative());
 				System.out.println("Neutral score: " + sentenceSentiment.getConfidenceScores().getNeutral());
 			}
+			*/
 
 			return documentSentiment; // 分析結果を返す
 		} catch (Exception e) {
