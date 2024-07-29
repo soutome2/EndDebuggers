@@ -67,7 +67,10 @@ public class ReserveController {
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
-
+		LocalTime currentTime = LocalTime.now();
+		//現在時刻と開始時刻の差を取得
+		int currntDifference= (int) ChronoUnit.HOURS.between(startTime, currentTime);
+		System.out.println(currntDifference);
 		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
@@ -88,26 +91,20 @@ public class ReserveController {
 
 		//10時から19時までの時間リスト
 		for (int j = 0; j < timeRange + 1; j++) {
-			LocalTime currentTime = startTime.plusHours(j);
-			timeList.add(currentTime);
+			LocalTime time = startTime.plusHours(j);
+			timeList.add(time);
 		}
 
-		// 結果の出力（確認用）
-		System.out.println("Dates:");
-		for (LocalDate date : dateList) {
-			System.out.println(date);
-		}
-
-		System.out.println("\nTimes:");
-		for (LocalTime time : timeList) {
-			System.out.println(time);
-		}
-
+	
 		for (int i = 0; i < timeRange + 1; i++) {
 			List<Integer> row = new ArrayList<>(dateRange + 1); // 列数を指定してArrayListを生成
 
 			// 各列を0で初期化
 			for (int j = 0; j < dateRange + 1; j++) {
+				if(j==0&&i< currntDifference+1) {
+					row.add(1);
+					continue;
+				}
 				row.add(0);
 			}
 
@@ -121,22 +118,16 @@ public class ReserveController {
 
 			int daysDifference = (int) ChronoUnit.DAYS.between(startDate, reserveDate);
 			int timeDifference = (int) ChronoUnit.HOURS.between(startTime, reserveTime);
-
+			//reservdateが開始日より前or設定した期間以でなければ1追加しないでループ飛ばす
 			if (daysDifference < 0 || dateRange < daysDifference) {
 				continue;
 			}
-
+			//reservdateが開始時刻より前or設定した期間内でなければ1追加しないでループ飛ばす
 			if (timeDifference < 0 || timeRange < timeDifference) {
 				continue;
 			}
 
 			matrix.get(timeDifference).set(daysDifference, 1);
-
-		}
-
-		// 二重リストの内容を出力（確認用）
-		for (List<Integer> row : matrix) {
-			System.out.println(row);
 
 		}
 
@@ -176,26 +167,15 @@ public class ReserveController {
 		List<Integer> sentimentSumList = reviewService.CountSentiment(list2);
 		*/
 		
-		
 		//reviewリストの作成 通常
-		System.out.println("Ok1");
 		List<Review> list = reviewRepository.findAIIByEnameOrderByReviewdateDescReviewtimeDesc(ename);
-		System.out.println("Ok2");
 		reviewService.getAverage(list);
-		System.out.println("Ok3");
 		List<Review> filteredList = reviewService.getFilteredReview(list);
-		System.out.println("Ok4");
 		
-
 		// 5件のサブリストを取得
 		List<Review> sublist = reviewService.getSubReview(filteredList, 0, 5);
 
 		List<Integer> sentimentSumList = reviewService.CountSentiment(filteredList);
-		
-
-		for (Integer i : sentimentSumList) {
-			System.out.println(i);
-		}
 
 		session.setAttribute("matrix", matrix);
 		session.setAttribute("dateList", dateList);
@@ -218,15 +198,51 @@ public class ReserveController {
 		Reserve reserve = reserveInputForm.getEntity();
 		session.setAttribute("cid", reserveInputForm.getCid());
 		session.setAttribute("password", reserveInputForm.getPassword());
-		
 
 		reserveRepository.saveAndFlush(reserve);
 		return "complete";
 	}
 
 	@PostMapping("/setEname")
-	public String PostReserve(@RequestParam("ename") String ename, @RequestParam("furigana") String furigana,
-			@RequestParam("referral") String referral) {
+	public String PostReserve(@RequestParam("ename") String ename) {
+		String furigana = null;
+		String referral = null;
+		if ("田中太郎".equals(ename)) {
+			furigana = "(タナカ タロウ)";
+			referral = "はじめまして、田中太郎と申します。\r\n"
+					+ "不動産業界で30年以上の経験を持ち、土地や住宅の売買、賃貸、管理に精通しています。\r\n"
+					+ "お客様のニーズに合わせた最適な不動産戦略を提案いたしますので、\r\n"
+					+ "どんな些細なご相談でもお気軽にお声掛けください。";
+		} else if ("佐藤花子".equals(ename)) {
+			furigana = "(サトウ ハナコ)";
+			referral = "はじめまして、佐藤花子です。\r\n"
+					+ "				建築士の資格を持ち、20年以上のリフォーム業界で経験を積んでいます。\r\n"
+					+ "				住宅の修繕やリフォームの設計から施工まで、幅広く対応しています。\r\n"
+					+ "				特に省エネ改修やバリアフリーリフォームに精通しており、\r\n"
+					+ "				お客様のニーズに合わせた提案を心がけています。ご相談はいつでもお気軽にどうぞ。";
+		} else if ("鈴木一郎".equals(ename)) {
+			furigana = "(スズキ イチロウ)";
+			referral = "はじめまして、鈴木一郎です。\r\n"
+					+ "				介護福祉士として25年のキャリアを持ち、\r\n"
+					+ "				特に認知症ケアや在宅介護の支援に力を注いでいます。\r\n"
+					+ "                利用者とその家族に寄り添ったサポートを提供し、地域社会に貢献しています。\r\n"
+					+ "                どうぞお気軽にご相談ください。";
+		} else if ("高橋美咲".equals(ename)) {
+			furigana = "(タカハシ ミサキ)";
+			referral = "はじめまして、高橋美咲です。\r\n"
+					+ "				ファイナンシャルプランナー資格を持ち、終活や相続に特化した法的・\r\n"
+					+ "				財務的なアドバイスを提供しています。遺言書作成や相続税対策、財産分割など、\r\n"
+					+ "				クライアントのニーズに合わせたプランを提案し、実行をサポートしています。\r\n"
+					+ "				安心と満足を最優先に考え、真摯に対応させていただきます。\r\n"
+					+ "				ご相談やお悩みがございましたら、お気軽にご連絡ください。";
+		} else if ("中村健太".equals(ename)) {
+			furigana = "(ナカムラ ケンタ)";
+			referral = "はじめまして、中村健太です。\r\n"
+					+ "				保険業界で20年以上の経験があり、特に自動車保険や生命保険に詳しいです。\r\n"
+					+ "				クライアントのライフスタイルに合わせた最適な保険商品の提案や見直しを行って\r\n"
+					+ "				います。資産運用やリスク管理についても幅広くサポートします。\r\n"
+					+ "				ご相談やお問い合わせがございましたら、お気軽にどうぞ。";
+		}
 		session.setAttribute("ename", ename);
 		session.setAttribute("furigana", furigana);
 		session.setAttribute("referral", referral);

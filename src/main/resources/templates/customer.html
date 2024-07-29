@@ -7,6 +7,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}">
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,166 +16,135 @@
 
 <body>
 	<div class="wrapper">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-light bg-light">
-						<div class="container">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
+		<!-- navberコンポ―ネント -->
+		<div th:replace="~{fragments/navber :: navber}"></div>
+		<br>
+
+		<div class="container white-background content">
+			<br>
+			<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
+			<div id="contents" class="table-responsive" th:if="${not #lists.isEmpty(reserveList)}">
+				<table>
+					<tr>
+						<th class="tableHead2">日時</th>
+						<th class="tableHead2">担当者名</th>
+						<th class="tableHead2">相談内容</th>
+						<th class="tableHead2">キャンセル</th>
+					</tr>
+					<tr th:each="reserve:${reserveList}">
+						<td th:text="${reserve.datetime}"></td>
+						<td th:data-ename="${reserve.ename}" onclick="handleTableClick(this.dataset.ename)"
+							style="cursor: pointer;" th:text="${reserve.ename}"></td>
+						<!--<td th:text="${reserve.detail}"></td>-->
+						<td>
+							<button type="button" class="btn-primary" data-bs-toggle="modal"
+								th:data-bs-target="'#detailModal' + ${reserve.reserveid}">
+								詳細
+							</button>
+							<!-- Modal for Delete Confirmation -->
+							<div class="modal fade" th:id="'detailModal' + ${reserve.reserveid}" tabindex="-1"
+								aria-labelledby="formModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="formModalLabel">確認</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p th:text="${reserve.detail}"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td>
+							<form action="/CancelComplete" method="post">
+								<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
+								<button type="submit" class="btn-cancel">キャンセル</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<br>
+			</div>
+			<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
+
+
+
+			<form action="/Logout" method="post">
+				<button type="submit" class="btn-logout">ログアウト</button>
+			</form>
+
+			<br>
+			<div class="container white-background content">
+				<div class="container-fluid" id="bodyid">
+					<div class="d-flex align-items-center">
+						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
+							class="d-none d-md-block"></h5>
+						<a th:if="${session.cid} != null" href="/ReviewInput"
+							class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
+					</div>
+
+					<!--スマホ画面で見る時の文字位置変更してる-->
+					<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-block d-md-none">
+					</h5>
+					<a th:if="${session.cid} != null" href="/ReviewInput"
+						class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
+
+					<div th:if="${reviewList == null}">
+						<p>まだレビューがありません</p>
+					</div>
+
+					<div th:each="review : ${reviewList}" class="row gray-background justify-content-center" id="count">
+						<div class="box col-12 col-md-8" th:data-ename="${review.ename}"
+							onclick="handleBoxClick(this.dataset.ename)" style="cursor: pointer;">
+							<div style="font-size: 12px;">
+								<span class="left-align" th:text="${review.reviewdate}"></span>
+								<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
+								<br>
+							</div>
+							<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
+								class="left-align star-color filled" style="margin-right: 2px;">★</span>
+							<span class="left-align" style="font-size: 15px; font-weight: bold;"
+								th:text="${review.title}"></span><br>
+							<span class="left-align" th:text="${review.comment}"></span><br>
+
+							<!-- Delete Button with Modal Trigger -->
+							<button type="button" class="btn-cancel" data-bs-toggle="modal"
+								th:data-bs-target="'#formModal' + ${review.reviewid}">
+								削除
 							</button>
 
-							<div class="collapse navbar-collapse" id="navbarContent">
-
-								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">ホーム</a>
-									</li>
-								</ul>
-
-								<ul class="navbar-nav mb-2 mb-sm-0">
-									<li class="nav-item">
-										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
-										<form th:if="${session.cid} != null" action="/Customer" method="post">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-login-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-											</button>
-										</form>
-
-									</li>
-								</ul>
-
-							</div>
-						</div>
-
-					</nav>
-
-				</div>
-			</div>
-			<br>
-
-			<div class="container white-background">
-				<br>
-				<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
-				<div id="contents" class="table-responsive" th:if="${not #lists.isEmpty(reserveList)}">
-					<table>
-						<tr>
-							<th class="tableHead2">日付</th>
-							<th class="tableHead2">時間</th>
-							<th class="tableHead2">担当者名</th>
-							<th class="tableHead2">相談内容</th>
-							<th class="tableHead2">予約のキャンセル</th>
-						</tr>
-						<tr th:each="reserve:${reserveList}">
-							<td th:text="${reserve.reservedate}"></td>
-							<td th:text="${reserve.reservetime}"></td>
-							<td th:text="${reserve.ename}"></td>
-							<td th:text="${reserve.detail}"></td>
-
-							<td>
-								<form action="/CancelComplete" method="post">
-									<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
-									<button type="submit" class="btn-cancel">キャンセルする</button>
-								</form>
-							</td>
-						</tr>
-					</table>
-					<br>
-					<br>
-				</div>
-				<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
-
-
-
-				<form action="/Logout" method="post">
-					<button type="submit" class="btn-logout">ログアウト</button>
-				</form>
-
-				<br>
-				<div class="container white-background content">
-					<div class="container-fluid" id="bodyid">
-						<div class="d-flex align-items-center">
-							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
-								class="d-none d-md-block"></h5>
-							<a th:if="${session.cid} != null" href="/ReviewInput"
-								class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
-						</div>
-
-						<!--スマホ画面で見る時の文字位置変更してる-->
-						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
-							class="d-block d-md-none"></h5>
-						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
-
-						<div th:if="${reviewList == null}">
-							<p>まだレビューがありません</p>
-						</div>
-
-						<div th:each="review : ${reviewList}" class="row gray-background justify-content-center"
-							id="count">
-							<div class="box col-12 col-md-8">
-								<div style="font-size: 12px;">
-									<span class="left-align" th:text="${review.reviewdate}"></span>
-									<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
-									<br>
-								</div>
-								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-									class="left-align star-color filled" style="margin-right: 2px;">★</span>
-								<span class="left-align" style="font-size: 15px; font-weight: bold;"
-									th:text="${review.title}"></span><br>
-								<span class="left-align" th:text="${review.comment}"></span><br>
-
-								<!-- Delete Button with Modal Trigger -->
-								<button type="button" class="btn-cancel" data-bs-toggle="modal"
-									th:data-bs-target="'#formModal' + ${review.reviewid}">
-									削除
-								</button>
-
-								<!-- Modal for Delete Confirmation -->
-								<div class="modal fade" th:id="'formModal' + ${review.reviewid}" tabindex="-1"
-									aria-labelledby="formModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="formModalLabel">確認</h5>
-												<button type="button" class="btn-close" data-bs-dismiss="modal"
-													aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<p>本当にこのレビューを削除してよろしいですか？</p>
-											</div>
-											<div class="modal-footer">
-												<form action="/ReviewDelete" method="post" id="deleteForm">
-													<input type="hidden" name="reviewid" th:value="${review.reviewid}">
-													<button type="submit" class="btn btn-danger">削除する</button>
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">キャンセル</button>
-												</form>
-											</div>
+							<!-- Modal for Delete Confirmation -->
+							<div class="modal fade" th:id="'formModal' + ${review.reviewid}" tabindex="-1"
+								aria-labelledby="formModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="formModalLabel">確認</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p>本当にこのレビューを削除してよろしいですか？</p>
+										</div>
+										<div class="modal-footer">
+											<form action="/ReviewDelete" method="post" id="deleteForm">
+												<input type="hidden" name="reviewid" th:value="${review.reviewid}">
+												<button type="submit" class="btn btn-danger">削除する</button>
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">キャンセル</button>
+											</form>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
-
-
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 		<br>
 		<div class="footer_foot">
@@ -188,7 +158,41 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 
+	<script>
+		function handleBoxClick(ename) {
+			console.log("ename:");
+			console.log(ename);
+			const form = document.createElement('form');
+			form.method = 'POST';
+			form.action = '/ReviewConcierge'; // POSTリクエストを送信する URL
 
+			const input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'ename';
+			input.value = ename;
+			form.appendChild(input);
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+
+		function handleTableClick(ename) {
+			console.log("ename:");
+			console.log(ename);
+			const form = document.createElement('form');
+			form.method = 'POST';
+			form.action = '/setEname'; // POSTリクエストを送信する URL
+
+			const input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'ename';
+			input.value = ename;
+			form.appendChild(input);
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
 </body>
 
 </html>

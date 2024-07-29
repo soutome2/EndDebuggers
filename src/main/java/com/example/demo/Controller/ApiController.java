@@ -58,7 +58,6 @@ public class ApiController {
 		double positiveScore = documentSentiment.getConfidenceScores().getPositive();
 		double negativeScore = documentSentiment.getConfidenceScores().getNegative();
 		double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
-
 		// 数値のみの文字列を作成して返す
 		return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
 				positiveScore, negativeScore, neutralScore);
@@ -90,7 +89,9 @@ public class ApiController {
 	            + "絞り込み開始日 'startDate' [yyyy-mm-dd]<br>"
 	            + "絞り込み終了日 'endDate' [yyyy-mm-dd]<br>"
 	            + "並び替え条件 'sortBy' [date, star]<br>"
-	            + "昇降順 'order' [true, false]<br>";
+	            + "昇降順 'order' [true, false]<br>"
+	            + "URLの例:<br>"
+	            + "https://aceconcierge.azurewebsites.net/GetReviewJson?ename=田中太郎";
 	}
 
 
@@ -102,13 +103,14 @@ public class ApiController {
 	@GetMapping("/GetInsertReviewManual")
 	public String InsertReviewManual() {
 		return"<html><body>"
-	            + "<p>レビュー書き込みのためのエンドポイント：/PostReview<br>"
+	            + "<p>レビュー書き込みのエンドポイント：/PostReview<br>"
 	            + "パラメーター:<br>"
 	            + "担当者名 'ename' [田中太郎, 佐藤花子, 鈴木一郎, 高橋美咲, 中村健太]<br>"
 	            + "レビュータイトル 'title' 任意の文字列<br>"
 	            + "レビュー本文 'comment' 任意の文字列<br>"
 	            + "評価 'star' [1, 2, 3, 4, 5]<br>"
-	            + "URLの例 http://aceconcierge.azurewebsites.net/PostReview?ename=田中太郎&title=いまいちだな&comment=ダメダメ&star=2</p>"
+	            + "URLの例:<br>"
+	            + "https://aceconcierge.azurewebsites.net/PostReview?ename=田中太郎&title=テスト&comment=デモ緊張しちゃう。がんばろ。&star=1</p>"
 	            + "</body></html>";
 				
 	
@@ -119,6 +121,7 @@ public class ApiController {
 	 * @return
 	 * @author seino
 	 */
+	@CrossOrigin
 	@GetMapping("/GetReviewJson")
 	public String ReviewReturn(
 			@RequestParam(value = "ename", required = false) String ename,
@@ -206,7 +209,7 @@ public class ApiController {
 	 */
 	@CrossOrigin
 	@GetMapping("/GetReview")
-	public String getReview() {
+	public List<Review> getReview() {
 		// Web API にGETリクエストを送信し、レスポンスを受け取る
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				"https://aceconcierge.azurewebsites.net/GetReviewJson?ename=田中太郎",
@@ -215,12 +218,8 @@ public class ApiController {
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
-		System.out.println("エンテティ");
-		System.out.println(list);
-		System.out.println("レスポンスボディ: " + responseBody);
-
 		// 必要に応じてレスポンスを処理する
-		return "OKかも";
+		return list;
 	}
 
 	/**
@@ -265,7 +264,6 @@ public class ApiController {
 
 		// 送信するフォームデータを準備
 		ReviewInputForm reviewInputForm = new ReviewInputForm();
-		System.out.println(cid);
 		reviewInputForm.setCid(cid);
 		reviewInputForm.setEname(ename);
 		reviewInputForm.setTitle(title);
@@ -281,7 +279,6 @@ public class ApiController {
 				HttpMethod.POST,
 				requestEntity,
 				String.class);
-		System.out.println(responseEntity.getBody());
 		HttpStatusCode statusCode = responseEntity.getStatusCode();
 		if (statusCode == HttpStatus.CREATED || statusCode == HttpStatus.OK) {
 			// 通信が成功した場合の処理
@@ -303,8 +300,7 @@ public class ApiController {
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {
-		System.out.println(result);
-		
+				
 		reviewService.CheckEname(reviewInputForm, result) ;
 
 			
@@ -323,8 +319,6 @@ public class ApiController {
 			review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
 			review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
 			review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
-			System.out.println(review);
-
 			reviewRepository.saveAndFlush(review);
 
 			return "Review created successfully.";

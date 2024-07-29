@@ -15,89 +15,46 @@
 
 <body>
 	<div class="wrapper">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-light bg-light">
-						<div class="container">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
+		<!-- navberコンポ―ネント -->
+		<div th:replace="~{fragments/navber :: navber}"></div>
+		<br>
+		<div class="container white-background content">
 
-							<div class="collapse navbar-collapse" id="navbarContent">
+			<br>
+			<h3>以下のレビューが入力されました</h3><br>
 
-								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">ホーム</a>
-									</li>
-								</ul>
-
-								<ul class="navbar-nav mb-2 mb-sm-0">
-									<li class="nav-item">
-										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
-										<form th:if="${session.cid} != null" action="/Customer" method="post">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-login-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-											</button>
-										</form>
-
-									</li>
-								</ul>
-							</div>
-						</div>
-					</nav>
-				</div>
-				</nav>
+			<div class="table-responsive" th:object="${reviewInputForm}">
+				<table>
+					<tr>
+						<th class="tableHead2">ユーザー名</th>
+						<th class="tableHead2">コンシェルジュ名</th>
+						<th class="tableHead2">評価数</th>
+						<th class="tableHead2">タイトル</th>
+						<th class="tableHead2">レビュー内容</th>
+						<th class="tableHead2">AIがコメントから感情を分析した結果</th>
+					</tr>
+					<tr>
+						<th><span th:text="*{cid}"></span>
+						<th><span th:text="*{ename}"></span></th>
+						<th><span th:text="*{star}"></span></th>
+						<th><span th:text="*{title}"></span>
+						<th><span th:text="*{comment}"></span></th>
+						<th><span th:text="${sentiment}"></span></th>
+					</tr>
+				</table>
 			</div>
 			<br>
-			<div class="container white-background">
+			<br>
 
-				<br>
-				<h3>以下のレビューが入力されました</h3><br>
-
-				<div class="table-responsive" th:object="${reviewInputForm}">
-					<table>
-						<tr>
-							<th class="tableHead2">ユーザー名</th>
-							<th class="tableHead2">コンシェルジュ名</th>
-							<th class="tableHead2">評価数</th>
-							<th class="tableHead2">タイトル</th>
-							<th class="tableHead2">レビュー内容</th>
-							<th class="tableHead2">AIがコメントから感情を分析した結果</th>
-						</tr>
-						<tr>
-							<th><span th:text="*{cid}"></span>
-							<th><span th:text="*{ename}"></span></th>
-							<th><span th:text="*{star}"></span></th>
-							<th><span th:text="*{title}"></span>
-							<th><span th:text="*{comment}"></span></th>
-							<th><span th:text="${sentiment}"></span></th>
-						</tr>
-					</table>
-				</div>
-				<br>
-				<br>
-
-				<form th:if="${session.cid} != null" action="/Customer" method="post">
-					<input type="hidden" name="cid" th:value="${session.cid}">
-					<input type="hidden" name="password" th:value="${session.password}">
-					<button type="submit" class="button-login">
-						マイページに戻る
-					</button>
-				</form>
-				<br>
-				<br>
-			</div>
+			<form th:if="${session.cid} != null" action="/Customer" method="post">
+				<input type="hidden" name="cid" th:value="${session.cid}">
+				<input type="hidden" name="password" th:value="${session.password}">
+				<button type="submit" class="button-login">
+					マイページに戻る
+				</button>
+			</form>
+			<br>
+			<br>
 		</div>
 		<br>
 

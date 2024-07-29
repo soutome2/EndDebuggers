@@ -13,127 +13,76 @@
 
 <body>
 	<div class="wrapper">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-light bg-light">
-						<div class="container">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
+		<!-- navberコンポ―ネント -->
+		<div th:replace="~{fragments/navber :: navber}"></div>
 
-							<div class="collapse navbar-collapse" id="navbarContent">
-
-								<ul class="navbar-nav mb-2 mb-sm-0 me-auto">
-									<li class="nav-item">
-										<a href="/" class="nav-link" aria-current="page">ホーム</a>
-									</li>
-								</ul>
-
-								<ul class="navbar-nav mb-2 mb-sm-0">
-									<li class="nav-item">
-										<a th:if="${session.cid} == null" href="/Login"
-											class="nav-link, btn btn-outline-primary" aria-current="page">ログイン</a>
-										<form th:if="${session.cid} != null" action="/Customer" method="post">
-											<input type="hidden" name="cid" th:value="${session.cid}">
-											<input type="hidden" name="password" th:value="${session.password}">
-											<button type="submit" class="nav-link, btn btn-login-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-													fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-													<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-													<path fill-rule="evenodd"
-														d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												</svg>
-											</button>
-										</form>
-
-									</li>
-								</ul>
-
-
-							</div>
-						</div>
-
-					</nav>
-
-				</div>
-			</div>
-
-
-
-
-			<div class="container">
-
+		<div class="container content">
+			<br>
+			<div class="container white-background">
 				<br>
-
-				<div class="container white-background">
-					<br>
-					<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
-					<br>
-					<div th:if="${session.cid} == null">
-						IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から
-					</div>
-					<br>
-					<form th:action="ReserveError" method="post" th:object="${reserveInputForm}">
-						<table>
-							<tr>
-								<th class="tableHead1">予約日時</th>
-								<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
-									<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}"
-										th:errors="*{reservedate}">
-									</h4>
-								</td>
-							</tr>
-							<tr>
-								<th class="tableHead1">予約者ID</th>
-								<td>
-									<input th:if="${session.cid} == null" name="cid" type="text" class="width-middle"
-										th:value="*{cid}" maxlength="8">
-									<input th:if="${session.cid} != null" name="cid" type="hidden"
-										th:value="${session.cid}">
-									<span th:if="${session.cid} != null" th:text="${session.cid}"></span>
-									<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
-								</td>
-							</tr>
-							<tr th:if="${session.cid} == null">
-								<th class="tableHead1">パスワード</th>
-								<td>
-									<input name="password" type="password" class="width-middle" th:value="*{password}"
-										maxlength="20">
-									<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-								</td>
-							</tr>
-							<!--顧客名の表示とform用パスワードの送信-->
-							<tr th:if="${session.cid} != null">
-								<th class="tableHead1">予約者名</th>
-								<td>
-									<input name="password" type="hidden" th:value="${session.password}">
-									<span th:text="${session.cname}"></span>
-								</td>
-							</tr>
-							<tr>
-								<th class="tableHead1">相談内容</th>
-								<td><textarea name="detail" type="text" class="width-middle" id="detailInput"
-										style="height: 80px;" maxlength="100">[[*{detail}]]</textarea>
-									<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
-								</td>
-							</tr>
-						</table>
-						<p>文字数: <span id="charCount"></span>/100</p>
-						<input type="hidden" name="ename" th:value="${session.ename}">
-						<input type="hidden" name="reservedate" th:value="*{reservedate}">
-						<input type="hidden" name="reservetime" th:value="*{reservetime}">
-						<div class="controlbox">
-							<input type="submit" value="送信" class="button-login">
-							<input type="reset" value="リセット" class="button-login">
-
-						</div>
-					</form>
-					<br>
-					<br>
+				<h3 th:text="${session.ename} + 'へ予約登録'"></h3>
+				<br>
+				<div th:if="${session.cid} == null">
+					IDとパスワード未登録のお客様は<a href="/CustomerInput" class="atten">こちら</a>から
 				</div>
+				<br>
+				<form th:action="ReserveError" method="post" th:object="${reserveInputForm}">
+					<table>
+						<tr>
+							<th class="tableHead1">予約日時</th>
+							<td><span th:text="*{reservedate}+' '+*{reservetime}"></span>
+								<h4 class="cross" th:if="${#fields.hasErrors('reservedate')}"
+									th:errors="*{reservedate}">
+								</h4>
+							</td>
+						</tr>
+						<tr>
+							<th class="tableHead1">予約者ID</th>
+							<td>
+								<input th:if="${session.cid} == null" name="cid" type="text" class="width-middle"
+									th:value="*{cid}" maxlength="8">
+								<input th:if="${session.cid} != null" name="cid" type="hidden"
+									th:value="${session.cid}">
+								<span th:if="${session.cid} != null" th:text="${session.cid}"></span>
+								<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
+							</td>
+						</tr>
+						<tr th:if="${session.cid} == null">
+							<th class="tableHead1">パスワード</th>
+							<td>
+								<input name="password" type="password" class="width-middle" th:value="*{password}"
+									maxlength="20">
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							</td>
+						</tr>
+						<!--顧客名の表示とform用パスワードの送信-->
+						<tr th:if="${session.cid} != null">
+							<th class="tableHead1">予約者名</th>
+							<td>
+								<input name="password" type="hidden" th:value="${session.password}">
+								<span th:text="${session.cname}"></span>
+							</td>
+						</tr>
+						<tr>
+							<th class="tableHead1">相談内容</th>
+							<td><textarea name="detail" type="text" class="width-middle" id="detailInput"
+									style="height: 80px;" maxlength="100">[[*{detail}]]</textarea>
+								<span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span>
+							</td>
+						</tr>
+					</table>
+					<p>文字数: <span id="charCount"></span>/100</p>
+					<input type="hidden" name="ename" th:value="${session.ename}">
+					<input type="hidden" name="reservedate" th:value="*{reservedate}">
+					<input type="hidden" name="reservetime" th:value="*{reservetime}">
+					<div class="controlbox">
+						<input type="submit" value="送信" class="button-login">
+						<input type="reset" value="リセット" class="button-login">
+
+					</div>
+				</form>
+				<br>
+				<br>
 			</div>
 		</div>
 		<br>
