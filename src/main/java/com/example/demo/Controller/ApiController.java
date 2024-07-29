@@ -210,7 +210,7 @@ public class ApiController {
 	 */
 	@CrossOrigin
 	@GetMapping("/GetReview")
-	public String getReview() {
+	public List<Review> getReview() {
 		// Web API にGETリクエストを送信し、レスポンスを受け取る
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(
 				"https://aceconcierge.azurewebsites.net/GetReviewJson?ename=田中太郎",
@@ -219,12 +219,8 @@ public class ApiController {
 		// レスポンスのボディを取得
 		String responseBody = responseEntity.getBody();
 		List<Review> list = jsonConverterService.JsonToEntity(responseBody);
-		System.out.println("エンテティ");
-		System.out.println(list);
-		System.out.println("レスポンスボディ: " + responseBody);
-
 		// 必要に応じてレスポンスを処理する
-		return "OKかも";
+		return list;
 	}
 
 	/**
@@ -269,7 +265,6 @@ public class ApiController {
 
 		// 送信するフォームデータを準備
 		ReviewInputForm reviewInputForm = new ReviewInputForm();
-		System.out.println(cid);
 		reviewInputForm.setCid(cid);
 		reviewInputForm.setEname(ename);
 		reviewInputForm.setTitle(title);
@@ -285,7 +280,6 @@ public class ApiController {
 				HttpMethod.POST,
 				requestEntity,
 				String.class);
-		System.out.println(responseEntity.getBody());
 		HttpStatusCode statusCode = responseEntity.getStatusCode();
 		if (statusCode == HttpStatus.CREATED || statusCode == HttpStatus.OK) {
 			// 通信が成功した場合の処理
@@ -307,8 +301,7 @@ public class ApiController {
 	@PostMapping("/InsertReview")
 	public String InsertReview(@Validated @RequestBody ReviewInputForm reviewInputForm,
 			BindingResult result) {
-		System.out.println(result);
-		
+				
 		reviewService.CheckEname(reviewInputForm, result) ;
 
 			
@@ -327,8 +320,6 @@ public class ApiController {
 			review.setPositiverate(documentSentiment.getConfidenceScores().getPositive());
 			review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
 			review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
-			System.out.println(review);
-
 			reviewRepository.saveAndFlush(review);
 
 			return "Review created successfully.";
