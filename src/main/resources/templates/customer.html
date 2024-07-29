@@ -72,19 +72,15 @@
 															<td th:text="${reserve.detail}"></td>
 														</tr>
 														<tr>
-															<th class="tableHead2">キャンセル
-															</th>
-															<td>
+															<td colspan="2" class="under-column">
 																<form action="/CancelComplete" method="post">
 																	<input type="hidden" name="reserveid"
 																		th:value="${reserve.reserveid}">
 																	<button type="submit"
-																		class="btn-cancel">キャンセル</button>
+																		class="btn-logout">予約のキャンセル</button>
 																</form>
 															</td>
-														</tr>
 													</table>
-
 												</div>
 											</div>
 										</div>

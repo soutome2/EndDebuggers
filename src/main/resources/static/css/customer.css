@@ -8,6 +8,15 @@
     background-color: white;
 }
 
+.under-column {
+    border-right: none; /* 右側のボーダーを非表示 */
+	border-left: none; /* 左側のボーダーを非表示 */
+    border-bottom: none; /* 下側のボーダーを非表示 */
+    border-top: 1px solid #ccc; /* 上側のボーダー */
+    background-color: white;
+    text-align: right;
+}
+
 table {
     border-collapse: collapse;
 }
