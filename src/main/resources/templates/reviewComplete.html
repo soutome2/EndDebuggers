@@ -27,19 +27,26 @@
 				<table>
 					<tr>
 						<th class="tableHead2">ユーザー名</th>
-						<th class="tableHead2">コンシェルジュ名</th>
-						<th class="tableHead2">評価数</th>
-						<th class="tableHead2">タイトル</th>
-						<th class="tableHead2">レビュー内容</th>
-						<th class="tableHead2">AIがコメントから感情を分析した結果</th>
+						<td><span th:text="*{cid}"></span></td>
 					</tr>
 					<tr>
-						<th><span th:text="*{cid}"></span>
-						<th><span th:text="*{ename}"></span></th>
-						<th><span th:text="*{star}"></span></th>
-						<th><span th:text="*{title}"></span>
-						<th><span th:text="*{comment}"></span></th>
-						<th><span th:text="${sentiment}"></span></th>
+						<th class="tableHead2">コンシェルジュ名</th>
+						<td><span th:text="*{ename}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">評価数</th>
+						<td><span th:text="*{star}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">タイトル</th>
+						<td><span th:text="*{title}"></span></td>
+					<tr>
+						<th class="tableHead2">コメント</th>
+						<td><span th:text="*{comment}"></span></td>
+					</tr>
+					<tr>
+						<th class="tableHead2">AIがコメントから感情を分析した結果</th>
+						<td><span th:text="${sentiment}"></span></td>
 					</tr>
 				</table>
 			</div>

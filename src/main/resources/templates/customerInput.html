@@ -23,20 +23,20 @@
 			<form action="CustomerError" method="post" th:object="${customerInputForm}">
 				<table>
 					<tr>
-						<th class="tableHead1">利用者ID*</th>
+						<th class="tableHead1">利用者ID</th>
 						<td><input name="cid" type="text" class="width-middle" th:value="*{cid}" maxlength="9">
 							<span th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></span>
 						</td>
 					</tr>
 					<tr>
-						<th class="tableHead1">パスワード*</th>
+						<th class="tableHead1">パスワード</th>
 						<td><input name="password" type="password" class="width-middle" th:value="*{password}"
 								maxlength="21">
 							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 						</td>
 					</tr>
 					<tr>
-						<th class="tableHead1">名前*</th>
+						<th class="tableHead1">名前</th>
 						<td><input name="cname" type="text" class="width-middle" th:value="*{cname}" maxlength="61">
 							<span th:if="${#fields.hasErrors('cname')}" th:errors="*{cname}"></span>
 						</td>

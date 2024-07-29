@@ -15,9 +15,7 @@
 	<div class="wrapper">
 		<!-- navberコンポ―ネント -->
 		<div th:replace="~{fragments/navber :: navber}"></div>
-
 		<br>
-
 		<div class="container white-background content">
 			<br>
 			<span>ログイン情報を入力してください。</span>
@@ -26,7 +24,6 @@
 			</span>
 			<br>
 			<br>
-
 			<form action="Customer" method="post" th:object="${loginForm}">
 				<table>
 					<tr>
@@ -42,16 +39,10 @@
 						</td>
 					</tr>
 				</table>
-
-
-
-
 				<div class="controlbox">
-
 					<input type="submit" value="送信" class="button-login">
 					<input type="reset" value="リセット" class="button-login">
 				</div>
-
 			</form>
 			<br>
 			<br>
