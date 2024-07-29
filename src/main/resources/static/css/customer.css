@@ -18,4 +18,8 @@ th, td {
     text-align: center; /* Horizontal centering */
     vertical-align: middle; /* Vertical centering */
 }
+.centerContents{
+	display: flex; 
+	justify-content: center;
+}
 
