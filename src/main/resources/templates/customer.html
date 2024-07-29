@@ -22,14 +22,9 @@
 
 		<div class="container white-background content">
 			<br>
-			<div class="row justify-content-center ">
-				<div class="col-6">
-					<h3 class="px-5" th:text="${session.cname} + 'さんの予約状況'"></h3>
-				</div>
-			</div>
-			<div class="row justify-content-center ">
-				<div class="col-6">
-					<div id="contents" class="table-responsive px-5" th:if="${not #lists.isEmpty(reserveList)}">
+
+			<h3 class="centerContents" th:text="${session.cname} + 'さんの予約状況'"></h3>
+					<div id="contents" class="table-responsive centerContents" th:if="${not #lists.isEmpty(reserveList)}">
 						<table>
 							<tr>
 								<th class="tableHead2">日時</th>
@@ -91,17 +86,15 @@
 						<br>
 						<br>
 					</div>
-				</div>
 				<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
+				
+				<br>
+				<form class="centerContents" action="/Logout" method="post">
+					<button type="submit" class="btn-logout ">ログアウト</button>
+				</form>
+				<br>
 
-				<div class="row justify-content-end">
-					<div class="col-6">
-						<form action="/Logout" method="post">
-							<button type="submit" class="btn-logout">ログアウト</button>
-						</form>
 
-					</div>
-				</div>
 
 				<br>
 				<div class="container white-background content">
@@ -173,7 +166,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+		
 		</div>
 		<br>
 		<div class="footer_foot">
@@ -224,4 +217,4 @@
 	</script>
 </body>
 
-</html>
+</html>html>
