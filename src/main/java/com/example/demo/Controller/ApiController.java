@@ -58,7 +58,6 @@ public class ApiController {
 		double positiveScore = documentSentiment.getConfidenceScores().getPositive();
 		double negativeScore = documentSentiment.getConfidenceScores().getNegative();
 		double neutralScore = documentSentiment.getConfidenceScores().getNeutral();
-
 		// 数値のみの文字列を作成して返す
 		return String.format("Positive score: %.2f, Negative score: %.2f, Neutral score: %.2f",
 				positiveScore, negativeScore, neutralScore);
