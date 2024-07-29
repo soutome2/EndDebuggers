@@ -59,25 +59,6 @@
     margin-right: 10px; /* テーブル間の間隔を設定 */
 }
 
-/* メディアクエリ */
-@media screen and (max-width: 800px) {
-    .table {
-        font-size: 14px; /* 小さめの文字サイズに調整 */
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .table {
-        font-size: 10px; /* もっと小さい文字サイズに調整 */
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .table {
-        font-size: 8px; /* 最小の文字サイズに調整 */
-    }
-}
-
 /* カルーセルのスタイル */
 #carouselExample {
     display: flex;
