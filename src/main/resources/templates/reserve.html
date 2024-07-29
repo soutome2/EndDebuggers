@@ -104,33 +104,6 @@
 				<div id="carouselExample" class="carousel slide col-12 col-md-10" data-ride="carousel">
 					<div class="carousel-inner" id="carousel-inner">
 						<!-- ダイナミックコンテンツ -->
-						<table class="table">
-							<thead class="table-head">
-								<th class="tableTime"><span></span></th>
-								<th th:each="head : ${session.headDateList}" class="tableHead1">
-									<span th:text="${head}"></span>
-								</th>
-							</thead>
-							<tbody class="table-body">
-								<tr th:each="time, rowIndex : ${session.timeList}">
-									<td th:text="${time}+'～'" class="tableTime"></td> <!-- 時間を表示 -->
-									<!-- 各セルに対して、条件によって表示を変える -->
-									<td th:each="date, colIndex : ${session.dateList}" class="tableData">
-										<!-- matrix のデータを表示する -->
-										<span th:if="${session.matrix[rowIndex.index][colIndex.index] == 0}">
-											<form action="ReserveInput" method="post">
-												<input type="hidden" name="date" th:value="${date}">
-												<input type="hidden" name="time" th:value="${time}">
-												<button type="submit" class="circle">〇</button>
-											</form>
-										</span>
-										<span class="cross"
-											th:if="${session.matrix[rowIndex.index][colIndex.index] == 1}">×</span>
-										<!-- 他の値に対する条件表示も必要であれば追加 -->
-									</td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 
