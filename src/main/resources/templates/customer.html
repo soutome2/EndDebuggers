@@ -37,9 +37,9 @@
 							style="cursor: pointer;" th:text="${reserve.ename}"></td>
 						<!--<td th:text="${reserve.detail}"></td>-->
 						<td>
-							<button type="button" class="btn-cancel" data-bs-toggle="modal"
+							<button type="button" class="btn-primary" data-bs-toggle="modal"
 								th:data-bs-target="'#detailModal' + ${reserve.reserveid}">
-								削除
+								詳細
 							</button>
 							<!-- Modal for Delete Confirmation -->
 							<div class="modal fade" th:id="'detailModal' + ${reserve.reserveid}" tabindex="-1"
