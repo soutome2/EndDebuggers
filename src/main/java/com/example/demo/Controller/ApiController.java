@@ -112,8 +112,6 @@ public class ApiController {
 	            + "URLの例:<br>"
 	            + "https://aceconcierge.azurewebsites.net/PostReview?ename=田中太郎&title=テスト&comment=デモ緊張しちゃう。がんばろ。&star=1</p>"
 	            + "</body></html>";
-				
-	
 	}
 
 	/**
@@ -193,9 +191,7 @@ public class ApiController {
 				System.out.println("entityがnullまたは空");
 				return "{}"; // 空のJSONオブジェクトを返す例
 			}
-		} else
-
-		{
+		} else {
 			// enameがしていされなかった
 			System.out.println("enameの指定なし");
 			return "{}"; // enameがnullの場合も空のJSONオブジェクトを返す例
@@ -289,7 +285,6 @@ public class ApiController {
 			System.out.println("Request failed with status code: " + statusCode);
 			return "Failed to process request";
 		}
-
 	}
 
 	/**
@@ -302,8 +297,6 @@ public class ApiController {
 			BindingResult result) {
 				
 		reviewService.CheckEname(reviewInputForm, result) ;
-
-			
 		if (!result.hasErrors()) {
 			Review review = reviewInputForm.getEntity();
 			LocalDate currentDate = LocalDate.now();
@@ -320,10 +313,8 @@ public class ApiController {
 			review.setNeutralrate(documentSentiment.getConfidenceScores().getNeutral());
 			review.setNegativerate(documentSentiment.getConfidenceScores().getNegative());
 			reviewRepository.saveAndFlush(review);
-
 			return "Review created successfully.";
 		} else {
-
 			StringBuilder errorMessage = new StringBuilder();
 			for (FieldError error : result.getFieldErrors()) {
 				errorMessage.append(error.getField())
@@ -333,7 +324,5 @@ public class ApiController {
 			}
 			return "Failed to create review. Errors: " + errorMessage.toString();
 		}
-
 	}
-
 }
