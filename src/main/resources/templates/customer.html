@@ -21,8 +21,6 @@
 		<br>
 
 		<div class="container white-background content">
-			<br>
-
 			<h3 class="centerContents" th:text="${session.cname} + 'さんの予約状況'"></h3>
 					<div id="contents" class="table-responsive centerContents" th:if="${not #lists.isEmpty(reserveList)}">
 						<table>
