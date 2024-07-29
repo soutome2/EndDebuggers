@@ -92,14 +92,7 @@ public class ReserveController {
 			timeList.add(currentTime);
 		}
 
-		for (LocalDate date : dateList) {
-			System.out.println(date);
-		}
-
-		for (LocalTime time : timeList) {
-			System.out.println(time);
-		}
-
+	
 		for (int i = 0; i < timeRange + 1; i++) {
 			List<Integer> row = new ArrayList<>(dateRange + 1); // 列数を指定してArrayListを生成
 
