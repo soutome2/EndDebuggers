@@ -22,121 +22,140 @@
 
 		<div class="container white-background content">
 			<br>
-			<h3 th:text="${session.cname} + 'さんの予約状況'"></h3>
-			<div id="contents" class="table-responsive" th:if="${not #lists.isEmpty(reserveList)}">
-				<table>
-					<tr>
-						<th class="tableHead2">日時</th>
-						<th class="tableHead2">担当者名</th>
-						<th class="tableHead2">相談内容</th>
-						<th class="tableHead2">キャンセル</th>
-					</tr>
-					<tr th:each="reserve:${reserveList}">
-						<td th:text="${reserve.datetime}"></td>
-						<td th:data-ename="${reserve.ename}" onclick="handleTableClick(this.dataset.ename)"
-							style="cursor: pointer;" th:text="${reserve.ename}"></td>
-						<!--<td th:text="${reserve.detail}"></td>-->
-						<td>
-							<button type="button" class="btn-primary" data-bs-toggle="modal"
-								th:data-bs-target="'#detailModal' + ${reserve.reserveid}">
-								詳細
-							</button>
-							<!-- Modal for Delete Confirmation -->
-							<div class="modal fade" th:id="'detailModal' + ${reserve.reserveid}" tabindex="-1"
-								aria-labelledby="formModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="formModalLabel">確認</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p th:text="${reserve.detail}"></p>
+			<div class="row justify-content-center ">
+				<div class="col-6">
+					<h3 class="px-5" th:text="${session.cname} + 'さんの予約状況'"></h3>
+				</div>
+			</div>
+			<div class="row justify-content-center ">
+				<div class="col-6">
+					<div id="contents" class="table-responsive px-5" th:if="${not #lists.isEmpty(reserveList)}">
+						<table>
+							<tr>
+								<th class="tableHead2">日時</th>
+								<th class="tableHead2">担当者名</th>
+								<th class="tableHead2">予約情報の詳細</th>
+							</tr>
+							<tr th:each="reserve:${reserveList}">
+								<td th:text="${reserve.datetime}"></td>
+								<td th:data-ename="${reserve.ename}" onclick="handleTableClick(this.dataset.ename)"
+									style="cursor: pointer;" th:text="${reserve.ename}"></td>
+								<!--<td th:text="${reserve.detail}"></td>-->
+								<td>
+									<button type="button" class="btn-primary" data-bs-toggle="modal"
+										th:data-bs-target="'#detailModal' + ${reserve.reserveid}">
+										詳細
+									</button>
+									<!-- Modal for Delete Confirmation -->
+									<div class="modal fade" th:id="'detailModal' + ${reserve.reserveid}" tabindex="-1"
+										aria-labelledby="formModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title justify-content-center" id="formModalLabel" >レビュー情報の詳細</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<table>
+														<tr>
+															<th class="tableHead2">日時</th>
+															<td th:text="${reserve.datetime}"></td>
+														</tr>
+														<tr>
+															<th class="tableHead2">担当者名</th>
+															<td th:text="${reserve.ename}"></td>
+														</tr>
+														<tr>
+															<th class="tableHead2">相談内容</th>
+															<td th:text="${reserve.detail}"></td>
+														</tr>
+													</table>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</td>
-						<td>
-							<form action="/CancelComplete" method="post">
-								<input type="hidden" name="reserveid" th:value="${reserve.reserveid}">
-								<button type="submit" class="btn-cancel">キャンセル</button>
-							</form>
-						</td>
-					</tr>
-				</table>
+								</td>
+							</tr>
+						</table>
+						<br>
+						<br>
+					</div>
+				</div>
+				<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
+
+				<div class="row justify-content-end">
+					<div class="col-6">
+						<form action="/Logout" method="post">
+							<button type="submit" class="btn-logout">ログアウト</button>
+						</form>
+
+					</div>
+				</div>
+
 				<br>
-				<br>
-			</div>
-			<p th:if="${#lists.isEmpty(reserveList)}" th:text="${session.cname} + 'さんの予約状況は見つかりませんでした'"></p>
+				<div class="container white-background content">
+					<div class="container-fluid" id="bodyid">
+						<div class="d-flex align-items-center">
+							<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
+								class="d-none d-md-block"></h5>
+							<a th:if="${session.cid} != null" href="/ReviewInput"
+								class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
+						</div>
 
-
-
-			<form action="/Logout" method="post">
-				<button type="submit" class="btn-logout">ログアウト</button>
-			</form>
-
-			<br>
-			<div class="container white-background content">
-				<div class="container-fluid" id="bodyid">
-					<div class="d-flex align-items-center">
+						<!--スマホ画面で見る時の文字位置変更してる-->
 						<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;"
-							class="d-none d-md-block"></h5>
+							class="d-block d-md-none">
+						</h5>
 						<a th:if="${session.cid} != null" href="/ReviewInput"
-							class="btn btn-primary-custom d-none d-md-block mb-3 ms-3">レビュー追加</a>
-					</div>
+							class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
 
-					<!--スマホ画面で見る時の文字位置変更してる-->
-					<h5 th:text="${session.cid} + 'さんのレビュー一覧'" style="margin-right: 10px;" class="d-block d-md-none">
-					</h5>
-					<a th:if="${session.cid} != null" href="/ReviewInput"
-						class="btn btn-primary-custom d-block d-md-none custom-width mb-3">レビュー追加</a>
+						<div th:if="${reviewList == null}">
+							<p>まだレビューがありません</p>
+						</div>
 
-					<div th:if="${reviewList == null}">
-						<p>まだレビューがありません</p>
-					</div>
+						<div th:each="review : ${reviewList}" class="row gray-background justify-content-center"
+							id="count">
+							<div class="box col-12 col-md-8" th:data-ename="${review.ename}"
+								onclick="handleBoxClick(this.dataset.ename)" style="cursor: pointer;">
+								<div style="font-size: 12px;">
+									<span class="left-align" th:text="${review.reviewdate}"></span>
+									<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
+									<br>
+								</div>
+								<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
+									class="left-align star-color filled" style="margin-right: 2px;">★</span>
+								<span class="left-align" style="font-size: 15px; font-weight: bold;"
+									th:text="${review.title}"></span><br>
+								<span class="left-align" th:text="${review.comment}"></span><br>
 
-					<div th:each="review : ${reviewList}" class="row gray-background justify-content-center" id="count">
-						<div class="box col-12 col-md-8" th:data-ename="${review.ename}"
-							onclick="handleBoxClick(this.dataset.ename)" style="cursor: pointer;">
-							<div style="font-size: 12px;">
-								<span class="left-align" th:text="${review.reviewdate}"></span>
-								<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
-								<br>
-							</div>
-							<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
-								class="left-align star-color filled" style="margin-right: 2px;">★</span>
-							<span class="left-align" style="font-size: 15px; font-weight: bold;"
-								th:text="${review.title}"></span><br>
-							<span class="left-align" th:text="${review.comment}"></span><br>
+								<!-- Delete Button with Modal Trigger -->
+								<button type="button" class="btn-cancel" data-bs-toggle="modal"
+									th:data-bs-target="'#formModal' + ${review.reviewid}">
+									削除
+								</button>
 
-							<!-- Delete Button with Modal Trigger -->
-							<button type="button" class="btn-cancel" data-bs-toggle="modal"
-								th:data-bs-target="'#formModal' + ${review.reviewid}">
-								削除
-							</button>
-
-							<!-- Modal for Delete Confirmation -->
-							<div class="modal fade" th:id="'formModal' + ${review.reviewid}" tabindex="-1"
-								aria-labelledby="formModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="formModalLabel">確認</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>本当にこのレビューを削除してよろしいですか？</p>
-										</div>
-										<div class="modal-footer">
-											<form action="/ReviewDelete" method="post" id="deleteForm">
-												<input type="hidden" name="reviewid" th:value="${review.reviewid}">
-												<button type="submit" class="btn btn-danger">削除する</button>
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">キャンセル</button>
-											</form>
+								<!-- Modal for Delete Confirmation -->
+								<div class="modal fade" th:id="'formModal' + ${review.reviewid}" tabindex="-1"
+									aria-labelledby="formModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="formModalLabel">確認</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>本当にこのレビューを削除してよろしいですか？</p>
+											</div>
+											<div class="modal-footer">
+												<form action="/ReviewDelete" method="post" id="deleteForm">
+													<input type="hidden" name="reviewid" th:value="${review.reviewid}">
+													<button type="submit" class="btn btn-danger">削除する</button>
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">キャンセル</button>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>

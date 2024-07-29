@@ -7,3 +7,15 @@
     border-left: 1px solid #ccc; /* 左側のボーダー */
     background-color: white;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center; /* Horizontal centering */
+    vertical-align: middle; /* Vertical centering */
+}
+
