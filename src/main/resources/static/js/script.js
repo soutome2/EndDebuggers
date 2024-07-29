@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let itemsPerPage = 7; // 1ページあたりのアイテム数
-    let currentPageIndex = 0; // 現在のページインデックスを管理する変数
 
     // カルーセル内のテーブル生成
     function generateCarouselTable() {
@@ -11,36 +9,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         carouselInner.innerHTML = ''; // 内容をクリア
 
-        for (let startIdx = 0; startIdx < dateList.length; startIdx += itemsPerPage) {
+        //for (let startIdx = 0; startIdx < dateList.length; startIdx += itemsPerPage) {
             let table = document.createElement('div');
             table.className = 'table-container'; // 新しく追加したクラス
 
             // テーブルの内容
             let tableContent = `
-                <h5>${startIdx / itemsPerPage + 1}週目</h5>
+                
                 <table class="table">
-                    <thead id="table-head-${startIdx}" class="table-head"></thead>
-                    <tbody id="table-body-${startIdx}" class="table-body"></tbody>
+                    <thead id="table-head" class="table-head"></thead>
+                    <tbody id="table-body" class="table-body"></tbody>
                 </table>
             `;
             table.innerHTML = tableContent;
 
-            // テーブルを非表示にする
-            if (startIdx !== 0) {
-                table.style.display = 'none';
-            }
 
             carouselInner.appendChild(table);
 
             // ヘッダーの生成
-            let tableHead = document.getElementById(`table-head-${startIdx}`);
-            if (!tableHead) {
-                console.error(`Table head element with id "table-head-${startIdx}" not found.`);
-                continue; // 次のループに進む
-            }
+            let tableHead = document.getElementById(`table-head`);
             let headRow = document.createElement('tr');
             headRow.innerHTML = '<th class="tableTime"></th>';
-            for (let i = startIdx; i < startIdx + itemsPerPage && i < headDateList.length; i++) {
+            for (let i = 0; i < headDateList.length; i++) {
                 let head = headDateList[i];
                 let th = document.createElement('th');
                 th.className = 'tableHead1';
@@ -50,17 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
             tableHead.appendChild(headRow);
 
             // データの生成
-            let tableBody = document.getElementById(`table-body-${startIdx}`);
-            if (!tableBody) {
-                console.error(`Table body element with id "table-body-${startIdx}" not found.`);
-                continue; // 次のループに進む
-            }
+            let tableBody = document.getElementById(`table-body`);
             for (let i = 0; i < timeList.length; i++) {
                 let time = timeList[i];
                 let hour = time.split(':')[0];
                 let row = document.createElement('tr');
                 row.innerHTML = `<td class="tableTime">${hour}時～</td>`;
-                for (let j = startIdx; j < startIdx + itemsPerPage && j < dateList.length; j++) {
+                for (let j = 0; j < dateList.length; j++) {
                     let date = dateList[j];
                     let col = document.createElement('td');
                     col.className = 'tableData';
@@ -79,87 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // ボタンで次のテーブルを表示する関数
-        function showNextTable() {
-            // 現在のテーブルを非表示にする
-            let currentTable = document.querySelector('.table-container:nth-child(' + (currentPageIndex + 1) + ')');
-            if (currentTable) {
-                currentTable.style.display = 'none';
-            }
-
-            // 次のページインデックスを計算
-            currentPageIndex++;
-            if (currentPageIndex >= Math.ceil(dateList.length / itemsPerPage)) {
-                currentPageIndex = Math.ceil(dateList.length / itemsPerPage)-1; // 最初に戻る
-            }
-
-            // 次のテーブルを表示する
-            let nextTable = document.querySelector('.table-container:nth-child(' + (currentPageIndex + 1) + ')');
-            if (nextTable) {
-                nextTable.style.display = 'block';
-            }
-        }
-
-        // prevボタンで前のテーブルを表示する関数
-        function showPrevTable() {
-            // 現在のテーブルを非表示にする
-            let currentTable = document.querySelector('.table-container:nth-child(' + (currentPageIndex + 1) + ')');
-            if (currentTable) {
-                currentTable.style.display = 'none';
-            }
-
-            // 前のページインデックスを計算
-            currentPageIndex--;
-            if (currentPageIndex < 0) {
-                currentPageIndex = 0; // 最後に戻る
-            }
-
-            // 前のテーブルを表示する
-            let prevTable = document.querySelector('.table-container:nth-child(' + (currentPageIndex + 1) + ')');
-            if (prevTable) {
-                prevTable.style.display = 'block';
-            }
-        }
-
-        // ボタンにイベントリスナーを追加
-        let nextButton = document.getElementById('nextButton');
-        if (nextButton) {
-            nextButton.addEventListener('click', showNextTable);
-        }
-
-        // ボタンにイベントリスナーを追加
-        let prevButton = document.getElementById('prevButton');
-        if (prevButton) {
-            prevButton.addEventListener('click', showPrevTable);
-        }
         
-        // ボタンにイベントリスナーを追加
-        let nextButton2 = document.getElementById('nextButton2');
-        if (nextButton2) {
-            nextButton2.addEventListener('click', showNextTable);
-        }
-
-        // ボタンにイベントリスナーを追加
-        let prevButton2 = document.getElementById('prevButton2');
-        if (prevButton2) {
-            prevButton2.addEventListener('click', showPrevTable);
-        }
-
-        // 最初のページをアクティブにする
-        let firstTable = document.querySelector('.table-container:first-child');
-        if (firstTable) {
-            firstTable.style.display = 'block';
-        }
-
-        // ウィンドウのリサイズ時にテーブルの幅を調整する
-        window.addEventListener('resize', function() {
-            // すべてのテーブルを取得
-            let tables = document.querySelectorAll('.table');
-            tables.forEach(function(table) {
-                table.style.width = '100%';
-            });
-        });
-    }
 
     // DOMContentLoaded後にテーブル生成関数を呼び出す
     generateCarouselTable();

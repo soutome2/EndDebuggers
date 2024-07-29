@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.cancel-column {
+	border-top: none; /* 上側のボーダーを非表示 */
+    border-right: none; /* 右側のボーダーを非表示 */
+    border-bottom: none; /* 下側のボーダーを非表示 */
+    border-left: 1px solid #ccc; /* 左側のボーダー */
+    background-color: white;
+}
