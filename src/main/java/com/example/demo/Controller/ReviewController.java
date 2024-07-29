@@ -86,13 +86,7 @@ public class ReviewController {
 
 		maxRateList = reviewService.GetMaxRateList(sublist);
 
-		for (String i : maxRateList) {
-			System.out.println(i);
-		}
-
-		for (Review i : sublist) {
-			System.out.println(i);
-		}
+		
 
 		// 範囲外の入力は空リストを返す
 		if (page < 0 || page > filteredList.size() / 10 + 1) {
@@ -244,11 +238,9 @@ public class ReviewController {
 	@PostMapping("/ReviewDelete")
 	public ModelAndView PostReviewDelete(@RequestParam("reviewid") Integer reviewid, ModelAndView mv) {
 
-		System.out.println(reviewid);
 		reviewRepository.deleteById(reviewid);
 		List<ReserveCustomer> list = reserveCustomerRepository
 				.findAIIBycustomerId((String) session.getAttribute("cid"));
-		System.out.println(list);
 		List<Review> reviewlist = reviewRepository
 				.findAIIByCidOrderByReviewdateDescReviewtimeDesc((String) session.getAttribute("cid"));
 		mv.addObject("reserveList", list);
