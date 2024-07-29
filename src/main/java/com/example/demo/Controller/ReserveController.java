@@ -67,7 +67,9 @@ public class ReserveController {
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(dateRange);
 		LocalTime startTime = LocalTime.of(10, 0);
-
+		LocalTime currentTime = LocalTime.now();
+		//現在時刻と開始時刻の差を取得
+		int currntDifference= (int) ChronoUnit.HOURS.between(startTime, currentTime);
 		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();
@@ -88,8 +90,8 @@ public class ReserveController {
 
 		//10時から19時までの時間リスト
 		for (int j = 0; j < timeRange + 1; j++) {
-			LocalTime currentTime = startTime.plusHours(j);
-			timeList.add(currentTime);
+			LocalTime time = startTime.plusHours(j);
+			timeList.add(time);
 		}
 
 	
@@ -111,11 +113,11 @@ public class ReserveController {
 
 			int daysDifference = (int) ChronoUnit.DAYS.between(startDate, reserveDate);
 			int timeDifference = (int) ChronoUnit.HOURS.between(startTime, reserveTime);
-
+			//reservdateが開始日より前or設定した期間以でなければ1追加しないでループ飛ばす
 			if (daysDifference < 0 || dateRange < daysDifference) {
 				continue;
 			}
-
+			//reservdateが開始時刻より前or設定した期間内でなければ1追加しないでループ飛ばす
 			if (timeDifference < 0 || timeRange < timeDifference) {
 				continue;
 			}
@@ -191,7 +193,6 @@ public class ReserveController {
 		Reserve reserve = reserveInputForm.getEntity();
 		session.setAttribute("cid", reserveInputForm.getCid());
 		session.setAttribute("password", reserveInputForm.getPassword());
-		
 
 		reserveRepository.saveAndFlush(reserve);
 		return "complete";
