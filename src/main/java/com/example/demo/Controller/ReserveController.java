@@ -70,7 +70,6 @@ public class ReserveController {
 		LocalTime currentTime = LocalTime.now();
 		//現在時刻と開始時刻の差を取得
 		int currntDifference= (int) ChronoUnit.HOURS.between(startTime, currentTime);
-		System.out.println(currntDifference);
 		//matrix:予約があるかどうかを判断するための2次元配列 (0:予約なし,1予約あり) date,timeList:htmlで日付けと時間をひょうじするためのリストdateRange,timeRangeで期間調整
 		List<List<Integer>> matrix = new ArrayList<>();
 		List<LocalDate> dateList = new ArrayList<>();

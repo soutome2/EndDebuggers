@@ -47,17 +47,19 @@
 
 		function adjustTrianglePosition() {
 			var bubble = document.getElementById('dynamicSpeechBubble');
-			var triangle = bubble.querySelector('.speech-bubble2.bottom::after');
+			if (bubble) {
+				var triangle = bubble.querySelector('.speech-bubble2.bottom::after');
+				if (triangle) {
+					// 計算前に一度初期化する
+					triangle.style.left = '50%';
+					triangle.style.transform = 'translateX(-50%)';
 
-			// 計算前に一度初期化する
-			triangle.style.left = '50%';
-			triangle.style.transform = 'translateX(-50%)';
-
-			// 吹き出しの幅を取得し、三角形の位置を調整する
-			var bubbleWidth = bubble.offsetWidth;
-			triangle.style.left = (bubbleWidth / 2) + 'px';
+					// 吹き出しの幅を取得し、三角形の位置を調整する
+					var bubbleWidth = bubble.offsetWidth;
+					triangle.style.left = (bubbleWidth / 2) + 'px';
+				}
+			}
 		}
-
 		// 初期化時にも位置調整を実行する
 		adjustTrianglePosition();
 	</script>
@@ -73,7 +75,6 @@
 			<div class="container-fluid" id="bodyid">
 				<h4 th:text="${session.sortEname}+'さんのレビュー'" class="d-none d-md-block"></h4>
 				<h3 th:text="${session.sortEname}+'さんのレビュー'" class="d-block d-md-none text-center"></h3>
-
 				<div class="d-block d-md-none">
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row"><!--スマホ-->
 						<div class="col-12 col-md-2 mb-3">
@@ -111,7 +112,6 @@
 							<input type="date" id="endDate" name="endDate" th:value="${session.endDate}"
 								th:max="${session.now}" onchange="setMaxStartDate()" class="ms-2">
 						</div>
-
 						<div class="col-12 col-md-3 mb-2">
 							<select name="sortBy">
 								<option value="">並び替え</option>
@@ -123,14 +123,12 @@
 								<option value="false" th:selected="${session.sortOrder == false}">降順</option>
 							</select>
 						</div>
-
 						<div class="col-12 col-md-3 mb-3">
 							<input type="hidden" name="page" value="1">
 							<input type="submit" value="表示" class="remove-btn display-button">
 						</div>
 					</form>
 				</div>
-
 				<div class="d-none d-md-block">
 					<form th:if="${reviewList != null}" action="/SortStar" method="post" class="row">
 						<!--パソコン-->
@@ -161,7 +159,6 @@
 									ネガティブ</option>
 							</select>
 						</div>
-
 						<div class="col-12 col-md-4 mb-4 d-flex align-items-center">
 							<input type="date" id="startDate" name="startDate" th:value="${session.startDate}"
 								th:max="${session.now}" onchange="setMinEndDate()" class="me-2">
@@ -169,7 +166,6 @@
 							<input type="date" id="endDate" name="endDate" th:value="${session.endDate}"
 								th:max="${session.now}" onchange="setMaxStartDate()" class="ms-2">
 						</div>
-
 						<div class="col-12 col-md-3 mb-2 interval-sort">
 							<select name="sortBy">
 								<option value="">並び替え</option>
@@ -181,26 +177,19 @@
 								<option value="false" th:selected="${session.sortOrder == false}">降順</option>
 							</select>
 						</div>
-
 						<div class="col-12 col-md-1 mb-3">
 							<input type="hidden" name="page" value="1">
 							<input type="submit" value="表示" class="submit-btn display-button"><!--パソコン-->
 						</div>
 					</form>
 				</div>
-
 				<div th:if="${#lists.isEmpty(reviewList)}" class="centered">
 					<p>まだレビューがありません</p>
 				</div>
-
 				<!--sentiment:全レビューの各sentimentの合計個数,index:配列のindex数
 				sentimentSumListは、0:positive,1:neutral,2:negative-->
-
 				<span th:each="sentiment, index : ${sentimentSumList}">
-
-
 					<!--index=0のときpositiveの個数,平均評価と星表示。改行したくないのでspanで囲ってる-->
-
 					<span th:if="${index.index}==0">平均評価：
 						<span class="star-color filled">★</span>
 						<span th:text="${session.averageStars}"></span>
@@ -212,23 +201,18 @@
 							</svg></span>
 						<span th:text="  ${sentiment}"></span>
 					</span>
-
 					<!--index=1のときneutralの個数表示-->
 					<span th:if="${index.index}==1">
-
 						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
 								class="bi bi-emoji-neutral" viewBox="0 0 16 16">
 								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 								<path
 									d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
 							</svg></span>
-
 						<span th:text="${sentiment}"></span>
 					</span>
-
 					<!--index=1のときnegativeの個数表示-->
 					<span th:if="${index.index}==2">
-
 						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
 								class="bi bi-emoji-frown" viewBox="0 0 16 16">
 								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -237,13 +221,9 @@
 							</svg></span>
 						<span th:text="${sentiment}"></span>
 					</span>
-
-
 				</span>
-
-
-
 				<!--ここからパソコン-->
+
 				<!--2つの配列から一つずつ取り出す-->
 				<div class="d-none d-md-block">
 					<div th:each="review, index :${reviewList}" th:with="maxRate=${maxRateList[__${index.index}__]}"
@@ -277,8 +257,6 @@
 								<div class="col-6 d-flex align-items-center justify-content-end">
 									<div style="margin-right: 90px; margin-top: -60px;">
 										<div class="position-absolute bottom-right">
-
-
 											<!--えがお-->
 											<span th:if="${review.sentiment}=='positive'"><svg
 													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -290,7 +268,6 @@
 													<path
 														d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
 												</svg></span>
-
 											<!--ニュートラル-->
 											<span th:if="${review.sentiment}=='neutral'"><svg
 													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -301,7 +278,6 @@
 													<path
 														d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
 												</svg></span>
-
 											<!--ネガティブ-->
 											<span class="text-right" th:if="${review.sentiment}=='negative'"><svg
 													xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -313,17 +289,12 @@
 														d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
 												</svg></span>
 											<br>
-
-
 											<p style="position: relative; left: -40px;">
 												<!--感情パーセントの左に空白入れて位置を調整してる-->
 												<span th:text="${maxRate}"></span>
 											</p>
-
 										</div>
-
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -351,7 +322,6 @@
 										</div><!--消さないで、フォントサイズ変更-->
 										<span th:each="starNumber : ${#numbers.sequence(1, review.star)}"
 											class="left-align star-color filled" style="margin-right: 2px;">★</span>
-
 										<span class="left-align" style="font-size: 16px; font-weight: bold;"
 											th:text="${review.title}"></span><br>
 										<div style="font-size: 12px;">
@@ -365,8 +335,6 @@
 									style="margin-top: 85px;">
 									<div class="position-absolute bottom-right"
 										style="margin-left: 3px; text-align: center;">
-
-
 										<!--えがお-->
 										<span th:if="${review.sentiment}=='positive'"><svg
 												xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -377,7 +345,6 @@
 												<path
 													d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
 											</svg></span>
-
 										<!--ニュートラル-->
 										<span th:if="${review.sentiment}=='neutral'"><svg
 												xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -388,7 +355,6 @@
 												<path
 													d="M4 10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5zm3-4C7 5.672 6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8s1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5S9.448 8 10 8s1-.672 1-1.5z" />
 											</svg></span>
-
 										<!--ネガティブ-->
 										<span class="text-right" th:if="${review.sentiment}=='negative'"><svg
 												xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -399,14 +365,11 @@
 												<path
 													d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
 											</svg></span>
-
 										<p style="margin-top: 5px;"><!--感情パーセントの左に空白入れて位置を調整してる-->
 											<span th:text="${maxRate}"></span>
 										</p>
 										<br>
-
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -433,9 +396,7 @@
 				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
 			</small>
 		</div>
-
 	</div>
-
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
