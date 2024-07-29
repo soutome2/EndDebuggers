@@ -52,7 +52,8 @@
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title justify-content-center" id="formModalLabel" >レビュー情報の詳細</h5>
+													<h5 class="modal-title justify-content-center" id="formModalLabel">
+														レビュー情報の詳細</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
 												</div>
@@ -70,7 +71,20 @@
 															<th class="tableHead2">相談内容</th>
 															<td th:text="${reserve.detail}"></td>
 														</tr>
+														<tr>
+															<th class="tableHead2">キャンセル
+															</th>
+															<td>
+																<form action="/CancelComplete" method="post">
+																	<input type="hidden" name="reserveid"
+																		th:value="${reserve.reserveid}">
+																	<button type="submit"
+																		class="btn-cancel">キャンセル</button>
+																</form>
+															</td>
+														</tr>
 													</table>
+
 												</div>
 											</div>
 										</div>
