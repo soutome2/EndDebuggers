@@ -100,7 +100,7 @@ public class ApiController {
 	 * @return 説明文表示
 	 * @author kachi
 	 */
-	@GetMapping("/GetInsertReviewManual")
+	@GetMapping("/PostReviewManual")
 	public String InsertReviewManual() {
 		return"<html><body>"
 	            + "<p>レビュー書き込みのエンドポイント：/PostReview<br>"
