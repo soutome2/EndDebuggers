@@ -91,7 +91,7 @@ public class ApiController {
 	            + "並び替え条件 'sortBy' [date, star]<br>"
 	            + "昇降順 'order' [true, false]<br>"
 	            + "URLの例:<br>"
-	            + "https://aceconcierge.azurewebsites.net/GetReviewJson?ename=田中太郎";
+	            + "https://aceconcierge.azurewebsites.net/GetReviewJson?ename=田中太郎&sortBy=star";
 	}
 
 
