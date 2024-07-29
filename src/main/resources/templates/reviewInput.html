@@ -42,7 +42,6 @@
 							<span th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
 						</td>
 					</tr>
-
 					<tr>
 						<th class="tableHead1">星評価</th>
 						<!-- 星の選択と数を管理するフォーム -->
@@ -56,37 +55,29 @@
 								<span class="star" data-value="5">★</span>
 								<span id="selectedStars"></span>
 							</div>
-
 							<!-- 選択された星の数を表示する部分 -->
 							<span id="selectedStars"></span>
-
 							<!-- 隠しフィールドで星の数を送信 -->
 							<input id="starValue" name="star" type="hidden" th:value="*{star}">
 							<span th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></span>
 						</td>
-
-
 					</tr>
-
-
-
 					<tr>
 						<th class="tableHead1">タイトル</th>
 						<td><input name="title" type="text" id="titleInput" class="width-middle" th:value="*{title}"
 								maxlength="30">
 							<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-
-
 						</td>
 					</tr>
 					<tr>
 						<th class="tableHead1">コメント</th>
-						<td><textarea name="comment" type="text" class="width-middle" id="detailInput"
+						<td><textarea name="comment" type="text" class="width-middle" id="commentInput"
 								style=" height: 80px;" maxlength="100">[[*{comment}]]</textarea>
 							<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
 						</td>
 					</tr>
 				</table>
+				<p>文字数: <span id="charCount"></span>/100</p>
 				<div class="controlbox">
 					<input type="submit" value="送信" class="button-login">
 					<input type="reset" value="リセット" class="button-login">
@@ -96,7 +87,6 @@
 			<br>
 		</div>
 		<br>
-
 		<div class="footer_foot">
 			<small class="footer_copy">
 				Copyright ACE Co.,Ltd. 2024 All Rights reserved.
@@ -133,8 +123,17 @@
 				});
 			});
 		});
+		
+		document.addEventListener("DOMContentLoaded", function () {
+			const initialDetail = document.getElementById("commentInput").value;
+			const charCountElement = document.getElementById("charCount");
+			charCountElement.textContent = initialDetail.length;
 
-
+			// textarea の入力変更時に文字数を更新する
+			document.getElementById("commentInput").addEventListener("input", function () {
+				charCountElement.textContent = this.value.length;
+			});
+		});
 	</script>
 
 

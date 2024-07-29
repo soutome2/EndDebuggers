@@ -27,13 +27,15 @@
 					<table>
 						<tr>
 							<th class="tableHead2">担当者</th>
-							<th class="tableHead2">予約日時</th>
-							<th class="tableHead2">相談内容</th>
+							<td><span th:text="*{ename}"></span></td>
 						</tr>
 						<tr>
-							<th><span th:text="*{ename}"></span>
-							<th><span th:text="*{reservedate}+' '+*{reservetime}"></span></th>
-							<th><span th:text="*{detail}"></span></th>
+							<th class="tableHead2">予約日時</th>
+							<td><span th:text="*{reservedate}+' '+*{reservetime}"></span></td>
+						</tr>
+						<tr>
+							<th class="tableHead2">相談内容</th>
+							<td><span th:text="*{detail}"></span></td>
 						</tr>
 					</table>
 				</div>

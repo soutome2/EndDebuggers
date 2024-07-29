@@ -27,17 +27,23 @@
 					<table>
 						<tr>
 							<th class="tableHead1">担当者</th>
-							<th class="tableHead1">評価</th>
-							<th class="tableHead1">レビュー日時</th>
-							<th class="tableHead1">タイトル</th>
-							<th class="tableHead1">コメント</th>
+							<td><span th:text="*{ename}"></span></td>
 						</tr>
 						<tr>
-							<th><span th:text="*{ename}"></span>
-							<th><span th:text="*{star}"></span>
-							<th><span th:text="*{reviewdate}+' '+*{reviewtime}"></span></th>
-							<th><span th:text="*{title}"></span></th>
-							<th><span th:text="*{comment}"></span></th>
+							<th class="tableHead1">評価</th>
+							<td><span th:text="*{star}"></span></td>
+						</tr>
+						<tr>
+							<th class="tableHead1">レビュー日時</th>
+							<td><span th:text="*{reviewdate}+' '+*{reviewtime}"></span></td>
+						</tr>
+						<tr>
+							<th class="tableHead1">タイトル</th>
+							<td><span th:text="*{title}"></span></td>
+						</tr>
+						<tr>						
+							<th class="tableHead1">コメント</th>
+							<td><span th:text="*{comment}"></span></td>
 						</tr>
 					</table>
 				</div>
