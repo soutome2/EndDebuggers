@@ -64,7 +64,7 @@ public class ApiController {
 	}
 
 	/**
-	 * 
+	 *もっとも高い感情を求めるプログラムのデモ
 	 * @return
 	 * @author seino
 	 */
@@ -115,8 +115,8 @@ public class ApiController {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * httpリクエストによるリクエストのレビューデータベースの情報を返す
+	 * @return レビューデータベースの情報をJSON形式で返却
 	 * @author seino
 	 */
 	@CrossOrigin

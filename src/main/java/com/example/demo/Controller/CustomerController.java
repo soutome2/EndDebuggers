@@ -107,9 +107,9 @@ public class CustomerController {
 	}
 
 	/**
-	 * 
-	 * @param customerInputForm
-	 * @return
+	 * 顧客情報登録完了ページ
+	 * @param customerInputForm 顧客フォーム
+	 * @return customerComplete
 	 */
 	@GetMapping("/CustomerComplete")
 	public String GetCustomerComplete(@ModelAttribute CustomerInputForm customerInputForm) {
@@ -120,7 +120,13 @@ public class CustomerController {
 		customerRepository.saveAndFlush(customer);
 		return "customerComplete";
 	}
-
+	
+	/**
+	 * 顧客情報登録時の処理
+	 * @param customerInputForm 顧客フォーム
+	 * @return customerComplete　エラーがある場合は顧客登録ページにリダイレクト
+	 * @return redirect:/CustomerComplete　エラーがない場合顧客登録完了画面
+	 */
 	@PostMapping("/CustomerError")
 	public String PostCustomerError(@ModelAttribute @Validated CustomerInputForm customerInputForm,
 			BindingResult result,
@@ -134,7 +140,11 @@ public class CustomerController {
 			return "customerInput";
 		}
 	}
-
+	
+	/**
+	 * ログアウト時の処理
+	 * @return redirect:/ ホームページにリダイレクト
+	 */
 	@PostMapping("/Logout")
 	public String PostLogout() {
 		session.removeAttribute("cid");
