@@ -24,6 +24,7 @@ import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,7 @@ public class CustomerController {
 	private final ReserveCustomerRepository reserveCustomerRepository;
 	private final ReviewRepository reviewRepository;
 	private final CustomerService customerService;
+	private final ReviewService reviewService;
 	private final HttpSession session;
 
 	/**
@@ -81,8 +83,6 @@ public class CustomerController {
 			session.setAttribute("password", loginForm.getPassword());
 			session.setAttribute("cname", customer.getCname());
 			List<ReserveCustomer> list = reserveCustomerRepository.findAIIBycustomerId(loginForm.getCid());
-			List<Review> reviewlist = reviewRepository
-					.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
 			List<ReserveCustomerWithDateTime> combinedList = new ArrayList<>();
 			for (int i = 0; i < list.size(); i++) {
 				// LocalDateとLocalTimeをLocalDateTimeに変換
@@ -92,6 +92,10 @@ public class CustomerController {
 				// フォーマットして文字列に変換
 				combinedList.add(new ReserveCustomerWithDateTime(list.get(i), dateTime.format(formatter)));
 			}
+
+			List<Review> reviewlist = reviewRepository
+					.findAIIByCidOrderByReviewdateDescReviewtimeDesc(loginForm.getCid());
+
 			mv.addObject("reserveList", combinedList);
 			mv.addObject("reviewList", reviewlist);
 			mv.setViewName("customer");

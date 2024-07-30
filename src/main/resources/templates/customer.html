@@ -107,9 +107,9 @@
 						<p>まだレビューがありません</p>
 					</div>
 					<div th:each="review : ${reviewList}" class="row gray-background justify-content-center" id="count">
-						<div class="box col-12 col-md-8" th:data-ename="${review.ename}"
-							onclick="handleBoxClick(this.dataset.ename)" style="cursor: pointer;">
-							<div style="font-size: 12px;">
+						<div class="box col-12 col-md-8">
+							<div style="font-size: 12px; cursor: pointer;" th:data-ename="${review.ename}"
+								onclick="handleBoxClick(this.dataset.ename)">
 								<span class="left-align" th:text="${review.reviewdate}"></span>
 								<span class="left-align" th:text="${review.ename} + 'にレビュー済み'"></span>
 								<br>

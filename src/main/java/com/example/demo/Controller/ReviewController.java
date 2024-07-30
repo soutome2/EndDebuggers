@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.azure.ai.textanalytics.models.DocumentSentiment;
 import com.example.demo.Entity.ReserveCustomer;
 import com.example.demo.Entity.Review;
+import com.example.demo.Form.ReserveCustomerWithDateTime;
 import com.example.demo.Form.ReviewInputForm;
 import com.example.demo.Repository.ReserveCustomerRepository;
 import com.example.demo.Repository.ReviewRepository;
@@ -241,9 +244,18 @@ public class ReviewController {
 		reviewRepository.deleteById(reviewid);
 		List<ReserveCustomer> list = reserveCustomerRepository
 				.findAIIBycustomerId((String) session.getAttribute("cid"));
+		List<ReserveCustomerWithDateTime> combinedList = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			// LocalDateとLocalTimeをLocalDateTimeに変換
+			LocalDateTime dateTime = LocalDateTime.of(list.get(i).getReservedate(), list.get(i).getReservetime());
+			// 希望のフォーマットを指定
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd HH:mm");
+			// フォーマットして文字列に変換
+			combinedList.add(new ReserveCustomerWithDateTime(list.get(i), dateTime.format(formatter)));
+		}
 		List<Review> reviewlist = reviewRepository
 				.findAIIByCidOrderByReviewdateDescReviewtimeDesc((String) session.getAttribute("cid"));
-		mv.addObject("reserveList", list);
+		mv.addObject("reserveList", combinedList);
 		mv.addObject("reviewList", reviewlist);
 		mv.setViewName("customer");
 

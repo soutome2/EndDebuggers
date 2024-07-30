@@ -384,7 +384,7 @@
 				<form action="/Review" method="get">
 					<input type="hidden" name="page" th:value="${page}">
 					<button type="submit" class="btn btn-primary-custom" th:text="${page}"
-						　th:classappend="${session.page == page ? 'active-page' : ''}"
+						th:classappend="${session.page == page ? 'active-page' : ''}"
 						th:disabled="${session.page == page}">
 					</button>
 				</form>
